@@ -1,0 +1,129 @@
+\chapter{Inleiding Object georiënteerd programmeren}
+
+\section{Inleiding}\index{Inleiding}
+Alle moderne talen ondersteunen objectoriëntatie en daarmee de mogelijkheid tot objectgeoriënteerd programmeren (object oriented programming, OO), ook de Arduino-omgeving. Dat is te danken aan de onderliggen taal C++ met bijbehorende compiler, die geïntegreerd is in de Arduino IDE. Voor web- en server-applicatie en ook voor (phone)apps is deze objectbenadering, zowel in ontwerp als in uitwerking, de norm. Dat embedded omgevingen hierin achterliepen valt te verklaren uit de vaak relatief geringe omvang van embedded programma’s, met weinig functies per controller, de beperkte capaciteit van de controllers met geringe kloksnelheid, performance en weinig geheugen, die maakten, zeker gezien de overhead van de toenmalige compilers, dat OO- code niet populair was onder (embedded) programmeurs. Maar dat is verleden tijd! \newline 
+Het embedded landschap is de laatste jaren drastisch veranderd. Embedded controllers zijn veel krachtiger geworden en de geheugencapaciteit is enorm toegenomen. Slimme, krachtige compilers zijn in staat zeer efficiënte code te genereren, waarvan de geringe overhead geen noemenswaardig nadeel meer vormt. Dat moge blijken uit het feit dat de Arduino-compiler die, gebaseerd is op C/C++, processing en de (AVR) GCC-compiler, alle C++ eigenschappen met bijbehorende libraries, code kan genereren voor de 8 bits processor van de Arduino Uno (de \textit{AT Mega 328}, die, zoals onderhand bekend, slechts over 32 KB codegeheugen beschikt en 2 kB datageheugen en “loopt” op 16 MHz. Dat is een indrukwekkend resultaat.\newline 
+Natuurlijk zijn de grenzen bij dergelijke controllers snel bereikt, maar de code kan (relatief eenvoudig) worden “ge-port” naar andere (bijv. 32 bits) platforms, zoals de \textit{Arduino Due}, de \textit{ESP8266} of \textit{ESP32} of naar een \textit{STM Arm Cortex}. \newline \newline
+
+Bij objectgeoriënteerd programmeren wordt een (software) systeem opgebouwd uit 'objecten'. Het werken met objecten is, wellicht zonder dat je je dat realiseerde, ondertussen al flink geoefend. Denk maar aan de objecten $Serial$, $Servo$, $Ethernet$, $EthernetClient$, etc. Van deze objecten werden functies gebruikt, in OO-jargon methodes genoemd, waarmee je bepaalde functionaliteit kon aanspreken. Denk aan:
+
+\begin{lstlisting}[language=Arduino]
+Serial.begin(115200);
+Serial.print(n);  // Voer methode 'print' uit op object Serial
+
+// Maak 'object' myServo aan, van het type Servo:
+Servo myServo();  
+// Voer methode attach uit op myServo:
+myServo.attach(servoPin); 
+myServo.write(val);
+
+Ethernet.begin();
+EthernetClient myClient = server.available();
+myClient.println("GET /search?q=arduino HTTP/1.1");
+\end{lstlisting}
+
+De $.$ (punt) verbindt de methode met het object waar deze bij hoort. Aan methodes kun je, net als bij functies, parameters meegeven, die het gedrag van de methode mede bepalen. Over hoeveel en welke methodes een object beschikt kun je aan de “buitenkant” niet zondermeer zien. Sommige moderne ontwikkelomgevingen, zoals Visual Studio Code en ook de nieuwe Arduino (Pro) 2.0 IDE, beschikken over allerlei ondersteunende functies om daar inzage in te krijgen.\newline 
+Bij gebruik van de klassieke Arduino IDE (die bij de lectures van Programmeren 1 aan bod kwam) ben je aangewezen op de (online) documentatie. Niet alle methodes van een object hoeven beschikbaar te zijn voor de programmeur. Dat zijn alleen de publieke ($public$) methodes. De afgeschermde methodes ($private$) zijn voor intern gebruik. Dat geldt ook voor de varibelen die het object gebruikt. Het is een OO-uitgangspunt die variabelen zoveel mogelijk af te schermen (information hiding) voor de gebruiker van het object. Dat voorkomt namelijk veel ellende. Natuurlijk kun je object-variabelen aanpassen en daarmee ook de status van het object, maar het is gebruikelijk dat te doen met een aantal speciaal daarvoor ontworpen of gegenereerde methodes, de zogenaamde $getters$ en $setters$. Met onderstaande code kan een de status van een ($private$) objectvariabele worden opgevraagd of gewijzigd:
+
+\begin{lstlisting}[language=Arduino]
+float temp = myObject.getTemp();
+myObject.setTemp(20);
+\end{lstlisting}
+
+Dat ziet er wellicht wat omslachtig uit, maar het voorkomt dat je precies hoeft te weten hoe e.e.a. in de code van het object is ontworpen en gecodeerd. Bovendien kan de ontwerper van het object de (interne) code aanpassen zonder dat de gebruiker daar “last” van heeft, uiteraard met behoud van de afspraken die aan de buitenkant gelden (het $interface$). Een bijkomend voordeel is dat zo’n object een min of meer zelfstandig “ding” is dat eenvoudig hergebruikt kan worden. Een object verenigt code (functies) en data (variabelen) in één denkbeeldige huls. \newline \newline
+
+Met het declareren van een variabele van een bepaald type zijn we onderhand bekend:
+\begin{lstlisting}[language=Arduino]
+char c;
+int i = 1;
+float f;
+\end{lstlisting}
+
+In dezelfde stijl kan ook een variabele van het type object worden gedeclareerd:
+
+\begin{lstlisting}[language=Arduino]
+Servo myServo;
+EthernetClient myClient;
+ObjetType myObject;
+\end{lstlisting}
+
+Na deze declaratie kan het object worden gebruikt. Het bestaat dan immers in het geheugen. Bijvoorbeeld:
+\begin{lstlisting}[language=Arduino]
+myClient.available();
+Serial.println(Ethernet.localIP());
+myObject.myMethode();
+\end{lstlisting}
+
+Bij het tweede voorbeeld wordt het resultaat van de methode $localIP()$ van het object $Ethernet$ doorgegeven aan de methode $println()$ van het object $Serial$.
+De algemene afspraak is dat het type van een object begint met een hoofdletter ($Ethernet$, $Serial$, etc) en de variabelen met een kleine letter ($myClient$, $mySerial$, etc).\newline \newline
+
+Een belangrijke vraag die nu nog in de lucht hangt is: “maar wat is nu eigenlijk een Klasse (of Class)”, een woord dat onlosmakelijk met deze manier van programmeren verbonden is? Het antwoord op die vraag kan complex zijn, maar voor nu is het genoeg om te weten dat een Class feitelijk de blauwdruk van een object is. Anders gezegd: in de Class wordt het object gedefinieerd (let op: dat is niet hetzelfde als gedeclareerd). Tijdens runtime wordt er volgens het voorschrift uit deze Class-definitie een object gemaakt ($instantiate$). Je maakt een instantie van de klasse en dat noemen we een object.\newline \newline
+
+Nog meer conventies:\newline
+Het is gebruikelijk, althans in C/C++, de definities, type definities, class beschrijvingen en prototypes van functies en methodes in een .h-file te plaatsen en de bijbehorende implementatie in de .cpp-file. Daarmee creëer je feitelijk een scheiding tussen de code en het interface. Je kunt de .h-file importeren in je (Arduino) programma:
+\begin{lstlisting}[language=Arduino]
+#include <mysmartclass.h>
+\end{lstlisting}
+en vervolgens een object van het daarin gedefinieerde type maken en daarvan een methode aanroepen. De implementatie daarvan is beschreven in de bijbehorende .cpp-file ($mysmartclass.cpp$). \newline \newline
+
+Arduino libraries zijn volgens dit principe ontworpen en gebouwd. Kijk maar eens in de directory $library$ in de arduino-directory, bijvoorbeeld bij de directory $servo$. Daar vind je een beschrijving van de servo Class, met een $servo.h$ en een $servo.cpp$. Dit mechanisme stelt de programmeur instaat de servo component te gebruiken zonder dat alle in’s en out’s daarvan bekend hoeven te zijn. Het belangrijkste is een beschrijving van het bijbehorende interface, een soort van gebruikers handleiding. Bij de servo component is er nog wel een complex detail: deze is, i.v.m. met de hardware-afhankelijkheid, geïmplementeerd voor meerdere controller platvormen, maar dat terzijde.
+
+\section{Je eerste eigen klasse}
+Na deze inleiding wordt het tijd zelf met classes en objecten aan de slag te gaan, zowel met het ontwerp als de implementatie, om deze daarna te kunnen gebruiken in onze Arduino-code. \newline
+Gegeven is de inhoud van de volgende .h file met een eenvoudige Class-definitie:
+\begin{lstlisting}[language=Arduino]
+#ifndef MYFIRSTCLASS_H 
+#define MYFIRSTCLASS_H
+
+// #include <...> // eventuele includes van andere libraries
+
+class MyFirstClass {
+  public:
+    MyFirstClass(int pos); // de constructor methode
+    setPos(int p);
+    getPos(void);
+  
+  private:
+    int pos; 
+}
+
+#endif // MYFIRSTCLASS_H
+\end{lstlisting}
+
+Opnieuw enige conventies:\newline
+\begin{enumerate} 
+  \item[-] Class definities beginnen met eeen hoofdletter
+  \item[-] Geef de .h-file dezelfde naam als de Class (in sommige talen is dat verplicht). Hier: $myfirstclass.h$ Deze filenaam hoeft niet met hoofdletters, maar dat mag wel.
+  \item[-]Met compiler directives $\#ifndef$, $\#define$ en $\#endif$ wordt voorkomen dat een h-file, tijdens het compileren meerdere keren wordt geïnclude. Feitelijk definieer je een (unieke shell) variabele die je kunt testen en op grond daarvan actie kunt ondernemen.
+\end{enumerate} 
+
+Uitleg van de code:\newline
+De klasse bevat de prototypes van 3 methodes: de constructor, een get-methode en een set- methode. Voor de liefhebber: technische gesproken wordt hier het zogenoemde stackbeeld vastgelegd dat de compiler moet opbouwen en wat tijdens runtime gebruikt wordt.
+Een object, dat we straks aanroepen in de .ino-file, wordt gemaakt door de aanroep van de constructor, volgens de beschrijving in de Class defintie. De implementatie daarvan wordt, net als die van $setPos()$ en $getPos()$, beschreven in de bij de .h-file behorende .cpp-file.
+De variabele $pos$ is van het type int en private gedeclareerd. Dat laatste betekent dat deze niet bereikbaar is voor de buitenwereld dan alleen via de get- en de set-methode.
+
+\section{Opgaves}\index{Opgaves week 1}
+\begin{exercise}
+$\\$ Maak de bijbehorende .cpp file en definieer de 3 methodes conform de beschrijving.
+\end{exercise}
+
+\begin{exercise}
+$\\$ Creëer een Arduino .ino file met de naam classexp1.ino. Include je class-definitie (.h file) en declareer (en instantieer) een object van het type $MyFirstClass$. Uiteraard doe je dat met gebruikmaking van de constructor. Geef aan de constructor een parameter mee waarmee je de interne (private) variabele $pos$ op 4 definieert. \newline
+Controleer dit met de get-methode. \newline
+Geef $pos$ een andere waarde via de set-methode en controleer dit eveneens.
+\end{exercise}
+
+\begin{exercise}
+$\\$Koppel aan je Arduino-bordje een servo motor en een analoge sensor, bijvoorbeeld een potmeter, licht- of krachtsensor. \newline
+Pas je code aan, zowel voor de .h-file als de .cpp-file, zodanig dat je met $setPos$ de positie van de servo instelt (bijvoorbeeld van 0 .. 180 graden) en dat je met een nieuwe methode getVal(int channel) de waarde van de ad-convertor van kanaal channel kunt uitlezen. \newline 
+Initialiseer de stand van de servo, via de constructor, op 0. Ontwerp een herhaling, in je .ino-file, waarin je de $getVal$ en $setPos$ gebruikt en daarmee de positie van de potmeter (of de hoeveelheid licht van de lichtsensor) vertaalt naar de uitslag van de servo.
+\end{exercise}
+
+\begin{exercise}
+$\\$ Pas de files zodanig aan dat je gebruikt maakt van een pointer naar jouw object:
+\begin{lstlisting}[language=Arduino]
+myObject = new MyFirstClass();
+\end{lstlisting}
+Uiteraard moet $myObject$ als pointer (naar een “ding” van het type MyFirstClass) worden gedeclareerd in de .h-file. \newline
+Werk je programma verder uit op basis van dit uitgangspunt en controleer het op juiste werking.
+\end{exercise}

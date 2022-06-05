@@ -1,0 +1,2395 @@
+\documentclass[hidelinks, a4wide, 12pt,  twoside]{book}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{nicefrac}
+\usepackage{xcolor}
+\usepackage{cancel} 
+\usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{placeins}
+\usepackage{imakeidx}
+\usepackage{multicol}
+\usepackage{geometry}	% voor in de marge
+\usepackage{marginnote}[left]	% voor in de marge
+\usepackage{latexsym}
+\usepackage{mathtools} 
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{newtxtext, newtxmath}
+\usepackage{wasysym}
+\usepackage{sectsty}
+\usepackage{hyperref}  %moet het laatste pakket zijn
+
+\makeindex[name = definities, title=index van definities , intoc]
+\makeindex[name = eigenschappen, title=index van eigenschappen,  intoc]
+\makeindex[name = voorbeelden, title=index van voorbeelden,  intoc]
+
+\setcounter{secnumdepth}{0}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[font=small,labelfont=bf]{caption}
+\subsubsectionfont{\centering}
+
+\begin{document}
+	\title{Lineaire Algebra\\
+    }
+	\author{studiejaar '21-'22\\W. van der Ploeg en J. Foppele}
+	\date{augustus 2021 \\ \normalsize versie 4.15}
+	\maketitle
+   \thispagestyle{empty}
+
+% MACORO'S
+\newcommand{\mydef}[3] []{
+#1\index[definities]{#2}     \\
+	\marginnote{\textbf{\Large $ \Delta $}  
+		#2}[0cm] \quad #3   \\ \\}
+\newcommand{\figuur}[3][0.4]{	
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=#1\linewidth]{figuren/#2}
+		\caption{#3}
+		\label{fig:#2}
+		\index[figuren]{#3}
+\end{figure}
+\FloatBarrier	}
+\newcommand{\mycent}[1]{\begin{center} #1\end{center}}
+\newcommand{\mybv} [2][]{
+\index [voorbeelden]{#1}
+\marginnote{ {\LARGE $\nu$} #1}[0cm]
+#2\\ 
+}
+\newcommand{\myeig} [2][]{ 
+\index [eigenschappen]{#1}
+\marginnote{ \textit{{\LARGE $\epsilon$}} #1}[0cm]
+#2\\
+}
+\newcommand{\mytrans}[1]{$ #1^T $}
+\newcommand{\noteq}{ $ \ne $ }
+\newcommand{\RD}{${\rm I\!R^{3}} \ $}
+\newcommand{\RT}{${\rm I\!R^{2}} \ $}
+% COLORS
+\newcommand{\red}[1]{
+{\color{red}#1}}
+\newcommand{\blu}[1]{
+{\color{blue}#1}}
+\newcommand{\gre}[1]{
+{\color{green}#1}}
+\newcommand{\pur}[1]{
+{\color{purple}#1}}
+\newcommand{\bro}[1]{
+{\color{brown}#1}}
+% DETERMINANTEN
+\newcommand{\dettwee}[2]{
+\begin{vmatrix}
+	#1 \\
+	#2
+\end{vmatrix}
+}
+\newcommand{\detvier}[4]{
+\begin{vmatrix}
+	#1 \\
+	#2 \\
+	#3 \\
+	#4
+\end{vmatrix}
+}
+\newcommand{\detdrie}[3]{
+\begin{vmatrix}
+	#1 \\
+	#2 \\
+	#3 
+\end{vmatrix}
+}
+\newcommand{\mydet}[1]{ $ | #1 |$ }
+% VECTOREN
+\newcommand{\vecvijf}[5] {
+$$
+\begin{pmatrix} 
+#1  \\ 
+#2  \\ 
+#3 \\
+#4 \\
+#5
+\end{pmatrix}       $$}
+\newcommand{\vecdrie}[4][black] {
+$$
+\color{#1}
+\begin{pmatrix} 
+#2  \\ 
+#3  \\ 
+#4
+\end{pmatrix}       $$}
+\newcommand{\vecdriesnel}[1] {
+$$
+\begin{pmatrix} 
+#1_1  \\ 
+#1_2  \\ 
+#1_3
+\end{pmatrix}       $$}
+\newcommand{\vectwee}[3][black] {
+$$
+\color{#1}
+\begin{pmatrix} 
+#2  \\ 
+#3 
+\end{pmatrix}       $$}
+\newcommand{\vectweesnel}[1] {
+$$
+\begin{pmatrix} 
+#1_1  \\ 
+#1_2  
+\end{pmatrix}       $$}
+\newcommand{\vecvier}[4] {
+$$
+\begin{pmatrix} 
+#1  \\ 
+#2  \\ 
+#3  \\
+#4
+\end{pmatrix}       $$}
+\newcommand{\V}[1]{
+$ \vec{#1} $}
+% MATRICES
+\newcommand{\mattwee}[2]{
+\begin{pmatrix}
+#1 \\
+#2
+\end{pmatrix}}
+\newcommand{\matdrie}[3]{
+\begin{pmatrix}
+#1 \\
+#2 \\
+#3
+\end{pmatrix}}
+\newcommand{\matvier}[4]{
+\begin{pmatrix}
+#1 \\
+#2 \\
+#3 \\
+#4
+\end{pmatrix}}
+
+
+\tableofcontents
+
+\chapter{Algemene Informatie}
+
+\label{chap:algemeneinformatie}
+
+
+\subsubsection{doelgroep en instroomeisen}
+Dit diktaat is bedoeld voor 2e jaars studenten HBO-ICT die de specialisatie SE heben gekozen. Voor deze module gelden geen instroomeisen. Maar het is wel erg handig als je de wiskunde uit het eerste jaar onder de knie hebt.
+
+
+\subsubsection*{leeruitkomsten}
+De leeruitkomsten van dit vak zijn dat je
+\begin{itemize}
+        \setlength\itemsep{-1pt}
+        \item kunt rekenen met vectoren, matrices, lijnen en vlakken  in \RT en \RD
+        \item matrices van afbeeldingen in \RT en \RD kunt bepalen
+        \item een determinant kunt uitrekenen
+        \item kunt rekenen met quaternionen
+        \item begrip hebt van de mogelijkheden die bovenstaande zaken bieden voor grafische applicaties
+        \newline
+    \end{itemize}
+
+    
+
+
+\subsubsection{symbolen}
+In de wiskunde wordt veel gebruik gemaakt van (misschien onbekende) symbolen. Het is belangrijk om daar precies mee om te gaan. Bijvoorbeeld $ \vec{a} \ne \hat{a} $, wat in normale mensentaal betekent: de \textit{vector a} is iets anders dan de \textit{eenheidsvector a}. De meeste symbolen in dit diktaat worden algemeen gebruikt in de wiskunde maar er zijn drie speciale alleen voor dit diktaat.\\
+\marginnote{\textbf{{\Large $ \Delta $ } } definitie }[0cm]
+Met het teken {\Large $ \Delta $ }in de kantlijn wordt een definitie aangegeven.\\
+\marginnote{\textbf{{\LARGE $ \nu $ } } voorbeeld }[0cm]
+Met het teken {\LARGE $ \nu $ }  in de kantlijn wordt een voorbeeld aangegeven.\\
+\marginnote{\textbf{{\LARGE $ \epsilon $ } } eigenschap }[0cm]
+Met het teken {\LARGE $ \epsilon $ }  in de kantlijn wordt  een eigenschap aangegeven.\\
+Zoals normaal in de wiskunde gebruiken we letters uit het Griekse alfabet, bijvoorbeeld $ \alpha $ (alfa, de Griekse a) de letter die het alfabet z'n naam gegeven heeft, en  $ \lambda $ (lambda, de Griekse l)\\
+En toch zijn soms zelfs wiskundigen slordig. Bijvoorbeeld bij het verschil tussen punten en vectoren. Een punt is heel iets anders dan een vector  (zie figuur \ref{fig:vectorVB3}), en toch zullen de termen door elkaar gebruikt worden zolang er geen misverstand mogelijk is.
+
+\subsubsection{wiskunde lezen}
+Bij wiskundige teksten gaat het lezen veel langzamer  dan bij 'gewone' teksten. Het is niet raar als je een zin 3 keer moet lezen voor dat je hem snapt. (en dan nog kan het zijn dat je eerst de voorgaande zin nog een keer moet lezen). Kortom lezen en begrijpen van wiskunde kost tijd en oefening.
+
+In de wiskunde is het gebruikelijk om van alles wat je opschrijft ook het bewijs te leveren. Dat doen we in dit diktaat niet, omdat dat te veel zou afleiden, wel wordt zoveel mogelijk uitleg gegeven. Wil je nagaan of de dingen die hier instaan kloppen, dan kun je of het zelf proberen te bewijzen, of opzoeken op internet.
+
+\subsubsection {leeswijzer}
+Aan het einde van elk hoofdstuk staan opgaven èn 'extra opgaven'. Het idee is dat de gewone opgaven in principe genoeg oefening bieden om de stof te beheersen. Wil je toch nog meer oefenen of herhalen dan zijn daarvoor de extra opgaven. In hoofdstuk 2 wordt de basis van vectoren behandeld. Hoofdstuk 3, 4 en 5 gaan over matrices, de belangrijkste hulpmiddelen voor maken van grafische berekeningen, die in alle games en (bewegende) 3D-zaken gebruikt worden. Hoofdstuk 3 gaat over draaiingen en projecties, hoofdstuk 4 over spiegelen, translaties en samenstellingen. Hoofdstuk 5 gaat over een belangrijke eigenschap van matrices: determinanten. Hoofdstuk 6 gaat over een manier van rekenen, quaternionen, met behulp van complexe getallen, om de zogeheten 'Gimbal Lock' te vermijden. En in Hoofdstuk 7 tenslotte staan (korte) antwoorden op de opgaven bij elk hoofdstuk. \\
+Dit dictaat is geschreven in \LaTeX   \quad(spreek uit: lateg) met behulp van het programma TexStudio. In tegenstelling tot Word biedt  \LaTeX \   heel veel opmaak mogelijkheden.
+
+
+
+\chapter{Vector}
+\label{chap:vectoren}
+In dit hoofdstuk behandelen we vectoren en hoe vectoren in de wiskunde gebruikt worden.\\ \\
+
+\mydef[Een \textit{vector} is ] {vector} {een verzameling getallen die in een rij of kolom gerangschikt zijn.}
+
+In dit dictaat bestaat een vector alleen uit reële getallen (dwz gehele getallen, breuken en getallen als $  \pi $ of $ \sqrt{2} $ ). Alle reële getallen samen noemen we \rm I\!R, de twee-dimensionale ruimte met reële getallen \RT, en de drie-dimensionale ruimte \RD.
+Een vector wordt hier geschreven als een kleine letter met een pijltje erboven, bijvoorbeeld $\vec{b}$ en: \\
+
+\mybv[vector \RD, \RT]{  \qquad  
+	$\vec{x} = \vecdriesnel {x}   
+	\quad    \quad
+	\vec{v} = \vectwee {x}{y} 
+	\quad    \quad 
+	\vec{s} = \vecdrie {-3}{2}{4}  
+	\quad    \quad 
+	\vec{a} = \vectwee {1}{2} $ }
+
+$\vec{x}$ is een  vector in ${\rm I\!R^{3}}$,  een  vector in de drie-dimensionale ruimte, $ \vec{x} $  bestaat uit 3 getallen: $  x_{1},  x_{2} $  en  $ x_{3}$ .  $\vec{v}$  is een  vector in ${\rm I\!R^{2}}$, een twee-dimensionale vector in het platte vlak, $\vec{s}$ een concrete vector in  ${\rm I\!R^{3}}$ en $ \vec{a}  $ een concrete vector in \RT (zie figuur  \ref{fig:vectorVB3}).
+
+\figuur[0.9]{vectorVB3}{(a) De \textit{vector} $ \vec{a}  $ in \RT is het 'pijltje' vanuit O, de oorsprong, naar het punt (1,2) met een lengte en een richting. Het \textit{punt P(2,1)} heeft  \textit{geen} lengte of richting. (b) De vector $  \vec{s} $ in \RD loopt iets naar achter omhoog}
+
+
+\section{Rekenen met vectoren}
+Je kunt op verschillende manieren rekenen met vectoren.
+\subsubsection{optellen}
+Het optellen van vectoren doe je door de overeenkomstige elementen van de vectoren bij elkaar op te tellen. Als volgt:\\
+
+\mydef[De som van twee vectoren  \V{a}  en  \V{b} \  is:\\] {som}
+{\V{a}  +  \V{b} \  $ = \  \vecdriesnel {a}  \  +  \  \vecdriesnel {b} \   = \  \vecdrie {a_1+b_1}  {a_2+b_2}  {a_3+b_3}  $ \\
+	Je kunt 2 vectoren alleen maar bij elkaar optellen als ze dezelfde dimensie hebben, dat wil zeggen een gelijk aantal elementen.} \\ 
+
+\mybv[som \RD]{
+	$\quad \vecdrie {3}{-1}{2}  \  +  \  \vecdrie {0}{6}{-4}  \  =  
+	\ \vecdrie {3+0}  {-1+6}  {2+-4}  \ =
+	\ \vecdrie {3}  {5}  {-2} $ }\\
+
+\mybv[som \RT]{ 
+	$\quad \vectwee {-3}{6}  \ +  \  \vectwee {7}{2}  \  =  
+	\ \vectwee {-3+7}   {6+2}  \  =
+	\ \vectwee {4}  {8}   $  \qquad (zie figuur  \ref{fig:som2}).}
+
+\figuur[0.3]{som2}{De som van de vectoren $  \vec{a}  $       en $  \vec{b}   $ is weer een vector }
+
+\subsubsection{scalair product}
+Als je een vector vermenigvuldigt met een getal heet dat vermenigvuldigen met een scalar (scalair product). Bij scalaire vermenigvuldiging worden alle elementen van de vector met datzelfde getal vermenigvuldigd.\\
+
+\mydef[Het scalair product van een getal c en een vector  \V{a}  \ is:]
+{scalair  product} 
+{ \  $ c . \vec{a}  \   = \ c.    \vecdriesnel {a}  \  =  \ \vecdrie {c.a_1}  {c.a_2}  {c.a_3} $\\ \\}
+
+\mybv[scalair product]
+{Als $  \vec{a} =  \vectwee{-4}{-3} $  en $c= -2$ \quad dan is $ -2 . \vec{a} = -2 . \vectwee{-4}{-3}  \    
+	= \ \vectwee {-2.-4}{-2.-3}  \  
+	=  \ \vectwee  {8}  {6}. $  \quad (figuur  \ref{fig:scalair}) }
+
+\figuur[0.4]{scalair}{Het scalair product van -2 en $  \vec{a}  $ }
+
+\subsubsection{verschil}
+Vectoren van elkaar aftrekken doe je door de overeenkomstige elementen van elkaar af te trekken:\\
+
+\mydef[Het verschil tussen twee vectoren  \V{a}  en  \V{b} \ is:]{verschil}
+{ \V{a} \ - \ \V{b} \  \   $ = \  \ \vecdriesnel {a}  \  -  \ \  \vecdriesnel {b}  \ \  = \  \ \vecdrie {a_1-b_1}  {a_2-b_2}  {a_3-b_3} $\\}
+
+\mybv[verschil \RD]{
+	$\vecdrie {3}{-1}{2}  \ -  \ \vecdrie {0}{6}{-4}  \  =  
+	\ \vecdrie {3-0}  {-1-6}  {2--4}  \  =
+	\ \vecdrie {3}  {-7}  {6} $ }\\ \\
+
+\mybv[verschil \RT]{
+	$\vectwee {-3}{6}  \ - \  \vectwee {7}{2}  \  =  
+	\ \vectwee {-3 - 7}  {6-2}   \  =
+	\ \vectwee {-10}  {4}  $ \quad (figuur \ref{fig:verschil2})}\\
+
+Net zo als bij het  optellen van vectoren gedlt bij het aftrekken dat alleen vectoren met dezelfde dimensie van elkaar kunnen worden afgetrokken. 
+Zoals je in figuur \ref{fig:verschil2} kunt zien is het verschil van twee vectoren $  \vec{a}  $  en $  \vec{b}  $ hetzelfde als het optellen van de vectoren $  \vec{a}  $  en $ - \vec{b}  $. (vergelijk met figuur  \ref{fig:som2} )
+
+\figuur[0.5]{verschil2}{Het verschil van de vectoren $  \vec{a}  $  en $  \vec{b}  $ is $ \ 
+	\vec{a}\  - \ \vec{b} \  = \   \vec{a} \  + \ -\  \vec{b}$}
+
+\subsubsection{inproduct}
+Je kunt niet zomaar 2 vectoren met elkaar vermenigvuldigen. Maar er zijn toch twee manieren om iets te doen wat er op lijkt. 
+Het inproduct van twee vectoren is een getal(!), geen vector. We noteren het inproduct als: $(\vec{a}, \vec{b}) $ en we berekenen het als volgt: (We gebruiken hier stippeltjes . . .  en het subscript $_n$ om aan te geven dat het over òf 2 òf 3 òf nog meer dimensies kan gaan)\\ \\
+
+\mydef[Het inproduct van \V{a}  en  \V{b} \  is:]{inproduct}
+{ \  \quad $ (\vec{a}, \vec{b}) = a_1b_1 + a_2b_2 + . . . + a_nb_n$\\}
+
+\mybv[inproduct]{ als  $\vec{a} = \vecdrie {3}{-1}{2}  \ $ en  \ \  $\vec{b} = \vecdrie {0}{6}{-4}  \ $\\ \\
+	dan is $ (\vec{a}, \vec{b}) = 3.0 +-1.6 +2.-4 = 0-6-8=-14$}
+
+
+\subsubsection{loodrechte vectoren}
+Twee vectoren staan loodrecht op elkaar als de hoek tussen beide vectoren $ 90^{\circ} $ is. Dat leidt de volgende belangrijke eigenschap van het inproduct: \\ \\
+
+\myeig[inproduct]
+{
+	$(\vec{a}, \vec{b}) = 0   \quad      dan\  en \ slechts\  dan \ als \quad	\vec{a} $  loodrecht op $ \vec{b} $    
+	\quad \quad	($ \vec{a} \ne \vec{0} $ en   $ \vec{b} \ne \vec{0} $).
+}
+
+\figuur[0.3]{loodrecht}{de vectoren $  \vec{a}  $  en $  \vec{b}  $ staan loodrecht op elkaar}
+
+\mybv [loodrecht] 
+{Stel dat $ \vec{a} = \vectwee{1}{-2} $ en $ \   \vec{b} = \vectwee{2}{1} $ \ dan is $ (\vec{a}, \vec{b})  = 1.2 + -2.1 = 0 $ \ \ Zie figuur  \ref{fig:loodrecht} } 
+
+\subsubsection{uitproduct}
+De andere manier waarop je 2 vectoren kunt 'vermenigvuldigen' heet het uitproduct of kruisproduct. Het uitproduct van 2 vectoren levert weer een vector op. Het uitproduct is alleen maar gedefini"eerd in \RD.\\
+
+\mydef[Het uitproduct van \V{a}  en  \V{b} \  is:]{uitproduct}
+{$\vec{a} \times \vec{b} \ = \ \vecdriesnel{a}  \ \times  \ \vecdriesnel{b} \ 
+	= \ \vecdrie{a_2.b_3 -a_3. b_2}{-(a_1.b_3 -a_3.b_1)}{a_1.b_2 - a_2.b_1} $} \\
+
+\mybv[uitproduct]{ als $ \vec{a} =  \ \vecdrie{-1}{2}{4} $ en  $ \vec{b} =  \ \vecdrie{3}{-2}{1} $ 
+	\quad dan is \quad $ \vec{a}  \times  \vec{b} \ = \ \vecdrie{2.1 - 4.-2}{-(-1.1-4.3)}{-1.-2 - 2.3} = \ \vecdrie{10}{13}{-4} $}\\ \\
+
+\myeig[uitproduct]
+{ Een belangrijke eigenschap van het uitproduct is de volgende:\\
+	De vector $ \vec{c} \ = \ \vec{a} \times \vec{b} $ staat loodrecht op  $ \vec{a} $ en loodrecht op  $ \vec{b} $}\\
+
+\mybv[loodrecht]{ Neem $ \vec{a}, \   \vec{b} $   en   $ \vec{c} $ als hierboven.
+	dan is  $(\vec{c}, \vec{a}) = 10.-1 + 13.2 -4.4 = -10+26-16 =0 $ \\
+	en $(\vec{c}, \vec{b}) = 10.3 + 13.-2 -4.1 = 30-26-4=0 $}
+
+\figuur[0.4]{loodrecht3d}{de vector $  \vec{c}  $  staat loodrecht op $  \vec{a}  $  \textbf{\textit{en}} $  \vec{b} $}
+
+\section{Vectoren en meetkunde}
+Er bestaan een aantal meetkundige operaties die we op vectoren kunnen toepassen.
+Om  te beginnen, de norm, of lengte van een vector.
+
+\subsubsection{norm}
+De norm van een vector is de lengte daarvan. Dat is in \RD en \RT makkelijk  voor te stellen: je neemt gewoon de "lengte van het pijltje". De norm wordt geschreven met 2 verticale streepjes:\\
+
+\mydef[De norm van een vector \V{a} is:\\ ]{norm}
+{$|\vec{a}| = \sqrt{ {a_1}^{2} + {a_2}^{2} + . . . +{a_n}^{2}}$\\ \\}
+
+\mybv[norm]{
+	als \ $ \vec{v} = 	\vecvijf{3}{1}{-3}{4}{-1} \  $ 
+	dan is  $|\vec{v}| = \sqrt{ 3^{2} + 1^{2} +(-3)^{2} + 4^{2}  +(-1)^{2}} = 6$}
+
+\subsubsection{eenheidsvector}
+Soms is het nodig om vectoren met lengte 1 te hebben:
+\mydef[]
+{eenheidsvector}
+{Een eenheidsvector is een vector met lengte 1.}
+Een eenheidsvector wordt genoteerd met een accent circonflexe (\textasciicircum \ , dakje):\\ 
+
+\mybv[eenheidsvector]
+{\qquad  $\hat{e} = \vecdrie {0}{0}{1} $}\\ 
+Een willekeurige vector $ \vec{v} $  is te schalen naar een eenheidsvector door $ \vec{v} $   te vermenigvuldigen met $ \frac{1}{norm} =  \frac{1}{ |\vec{v}|} $. 
+Dat wil zeggen $\hat{v} =  \frac{1}{ |\vec{v}|}.\vec{v} $
+De berekening van een eenheidsvector in 5 dimensies gaat als volgt: \\ \\
+
+\mybv[eenheidsvector]{als \ $ \vec{v} =\  \vecvijf{3}{1}{-3}{4}{-1} $, \ dan is $  |\vec{v}| = 6$ (zie boven) 
+	en is $ \hat{v} =  \frac{1}{ |\vec{v}|}.\vec{v} = \frac{1}{6} .\vecvijf{3}{1}{-3}{4}{-1} \ = \  \vecvijf{\nicefrac{3}{6}}{\nicefrac{1}{6} }{-\nicefrac{3}{6}}{\nicefrac{4}{6}}{-\nicefrac{1}{6}}\ \  = \  \vecvijf{\nicefrac{1}{2}}{\nicefrac{1}{6}}{-\nicefrac{1}{2}}{\nicefrac{2}{3}}{-\nicefrac{1}{6}} $}
+
+\subsubsection{hoek tussen twee vectoren}
+We kunnen het inproduct gebruiken om de hoek tussen twee vectoren te berekenen. 
+\mydef[De formule voor de hoek tussen  vectoren \V{a}  en  \V{b} \  gebruikt het inproduct en  de norm:]{hoek}
+{\quad  
+	$\cos \alpha = \dfrac{(\vec{a}, \vec{b}) }{|\vec{a}| |\vec{b}|} $}
+Daarbij is $\alpha \ $ (\textit{alfa}) de hoek tussen de vectoren $\vec{a}$ en $\vec{b}.$ En cos staat voor cosinus, een maat voor de hoek, die je eenvoudig met je rekenmachine kunt uitrekenen. Zie figuur \ref{fig:hoek}  \\ \\
+
+\figuur[0.3]{hoek}{Met $ \alpha $ geven we de hoek tussen twee vectoren aan}
+
+\mybv[hoek]{De berekening van een  hoek tussen twee vectoren gaat als volgt:\\
+	Stel   
+	$ \vec{a} = \vecdrie {2}  {-2} {1}  $ \ en \  $ \vec{b} = \vecdrie {-3}  {0} {4}  $ 
+	\qquad dan is 
+	\qquad $ (\vec{a}, \vec{b}) = 2.-3 + -2.0  + 1.4 = -2 $.\\ 
+	De lengte van de vectoren is: 
+	$ |\vec{a}| = \sqrt{9} = 3, \ |\vec{b}| = \sqrt{25}=5 $. \\
+	Invullen in de formule levert: 
+	$\cos \alpha = \dfrac{-2}{3.5} = - \dfrac{2}{15}. $  \ Met de rekenmachine berekenen we het aantal graden van de hoek: 
+	$\alpha \ = \cos ^{-1}(- \dfrac{2}{15}) \ \approx \ ~ 97,7 ^{\circ} $ } 
+
+\section{Vectorvoorstelling van  lijn en  vlak}
+Uit de lessen Wiskunde Basis is bekend dat de vergelijking van een lijn in \RT in het algemeen $ y = ax + b $ is.  Daarnaast bestaan er vectorvoorstellingen en vergelijkingen van lijnen en vlakken. 
+
+\subsection{definities lijn}
+\mydef [De \textit{vergelijking} van een lijn $ l $ in \RT is: ] 
+{lijn \RT}  {$ y = ax + b $ 
+	\qquad \qquad \quad \quad met \textit{a} de richtingscoëffici"ent  en \textit{b} een constante.}
+
+\mybv[lijn \RT] 
+{$l: y = -\frac{1}{2}x +4. $   \ \ De richtingscoëfficiënt  van \textit{ l }   is $ - \ \frac{1}{2}. $ ( figuur  \ref{fig:lijn2d})
+}\\ \\
+
+\mydef  [De \textit{vectorvoorstellling} van een lijn $ l $ in \RT is: ]
+{lijn \RT}  
+{ $  \vectweesnel{x} \  = \ \vectweesnel{b} \  + \  \lambda \ \vectweesnel{r} $ 
+	\qquad  \qquad of: 
+	$ \vec{x}  =   \vec{b}  + \  \lambda \ \vec{r} $} 
+
+Met  $ \vec{x}  =  \vectweesnel{x} $ en 
+\ beginvector  $ \vec{b} =  \vectweesnel{b} $ ,  
+\  richtingsvector $ \vec{r} =  \vectweesnel{r} $  \ en
+$ \lambda $  (lambda) een variabel getal. Let op het verschil tussen een rcihtings\textit{vector} en een richtings\textit{coëfficiënt}.\\ 
+
+\mybv[lijn \RT]
+{Een voorbeeld van een vectorvoorstellling is:  
+	$ m: \vectweesnel{x} \ = \ \vectwee{-5}{0} \  + \ \lambda \ \vectwee{0}{-1}. $\\  Zie figuur  \ref{fig:lijn2d}. 
+	De richtingsvector van m is 
+	$  \overrightarrow{rv_m} =\vectwee{0}{-1} \ $ 
+	en de beginvector 
+	$  \vec{b} = \vectwee{-5}{0} \ $
+} 
+\figuur[0.5]{lijn2d}{de lijn  $ l: y = -\frac{1}{2}x +4. $ met  $ r.c.= -\frac{1}{2}$ en de lijn \textit{m} met de rode richtingsvector en zwarte beginvector.}
+
+\subsection{definities vlak}
+\mydef [De \textit{vergelijking} van een vlak $ V $ in \RD is: ]
+{vlak \RD} 
+{$ ax_1 + bx_2 + cx_3 = d $. \quad  \quad (a, b, c en d zijn constanten) } \\
+
+\mybv[vlak \RD]
+{Een voorbeeld van een vergelijking van een vlak $ V $ is: $ 2x_1 - 3x_2 +7x_3 = -5$ }\\  \\
+
+\mydef [De \textit{vectorvoorstellling} van een vlak $ V $ in \RD is: ]
+{vlak \RD}  
+{  $ \vecdriesnel{x} \ =\ \vecdriesnel{b}  \ +  \lambda. \vecdriesnel{v} \   + \  \mu. \vecdriesnel{w} $ \qquad \qquad  of:  $ \vec{x}  =   \vec{b}  + \  \lambda \ \vec{v} + \  \mu \ \vec{w}  $. }\\ 
+Met $ \vec{x}  = \   \vecdriesnel{x}  \quad    \vec{b} = \  \vecdriesnel{b} \quad    \vec{v} =  \  \vecdriesnel{v} \quad   \vec{w} =  \ \vecdriesnel{w} $  \\   $ \lambda $ en  $ \mu $ zijn variabele getallen ( $ \mu $, spreek uit: muu, is de Griekse letter m). En  $ \vec{b} $ is een constante beginvector en $ \vec{v}  $  en $ \vec{w}  $ zijn richtingsvectoren van vlak \textit{V}.\\ \\ \\ 
+
+\mybv[vlak \RD]
+{Een voorbeeld van een vectorvoorstellling van een vlak $ V $ is: \\
+	$ \qquad	
+	V: \   \vecdriesnel{x} \ = \ \vecdrie{1}{-3}{0} \ + 
+	\lambda.  \vecdrie{1}{2}{-2} \   + 
+	\  \mu. \vecdrie{-4}{1}{2} $ }
+
+Wat  $ \lambda $ (spreek uit: lambda) en  $ \mu $ (spreek uit: muu) zijn wordt verderop bij de berekeningen uitgelegd (zie ook figuur  \ref{fig:vlak}.).  In lineaire algebra heb je soms de vergelijking, soms de vectorvoorstelling nodig. In de rest van deze paragraaf wordt uitgelegd hoe je van een vergelijking een verctorvoorstelling maakt en omgekeerd, zowel voor een lijn in \RT \ als een vlak in \RD. 
+
+\figuur[1]{vlak}{Het vlak $ V $ heeft de beginvector $  \vec{s} $, en richtingsvectoren $  \vec{v} $ en $  \vec{w} $. Het punt P ligt op V en kun je vanuit \textit{\textbf{O}}, de oorsprong bereiken door  $  \vec{s} + \lambda. \vec{v} + \mu.\vec{w} $ met \ $  \lambda = 2 $ en$ \  \mu = 1,5 $. Elk punt van \textit{V} is op zo'n manier te bereiken. Met andere woorden $  V: \vec{x} =   \vec{s} \ + \  \lambda.\vec{v} \  +\  \mu.\vec{w}  $  }
+
+\subsection{berekeningen lijn}
+
+\subsubsection{van vectorvoorstelling lijn naar vergelijking lijn:} 
+Een voorbeeld van een  vectorvoorstelling van een lijn $ l $ in \RT  is:
+$ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $.   (zie figuur \ref{fig:lijnVV} ) Dat betekent dat de lijn\textit{ l} door het punt $ (1,2) $ gaat en als richtingsvector de vecotr $ \vectwee {2}{-1} $ heeft. $ \lambda $  is een parameter, dat wil zeggen dat om een punt op de lijn $ l $ te vinden mogen we een waarde voor $ \lambda $  kiezen (2, of 100, of $ -\frac{2}{5} $, of ...). Bijvoorbeeld bij  $ \lambda= 3 $ vinden we dat het punt  (7,-1) = (1 + 3.2 , 2 + 3.-1)   op $ l $ ligt. Hoe maken we een vergelijking van  $ l $? In een vergelijking komt geen $ \lambda $ voor, dus moeten we zorgen de $ \lambda $ uit de vectorvoorstelling "kwijt te raken". Als je goed naar de vectorvoorstelling van $ l $ kijkt, zie je dat het eigenlijk 2 vergelijkingen zijn, één voor de x-coördinaat en één voor de y-coördinaat:
+
+\[\begin{cases}
+x = 1 + 2\lambda\\
+y = 2 - \lambda 
+\end{cases}
+\] 
+Dit is een stelsel van 2 vergelijkingen  en kunnen we 'oplossen' door $ \lambda $ te elimineren ('weg te werken'):
+Uit de $ 2^{e}$ vergelijking $ y = 2 - \lambda $ volgt  dat $\lambda = 2 - y $. Invullen van  $ \lambda $ in de $ 1^{e}$ vergelijking levert $ x = 1 +2(2-y) $. Dan is $ x= 5 -2y $, oftewel $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $,  wat dus dezelfde lijn is als: $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waar we mee begonnen, zie de tekening in  figuur  \ref{fig:lijnVV}
+
+\figuur[0.6]{lijnVV}{De lijn  $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $. Let op de steunvector (\red{rood}) en de richtingsvector (zwart)}
+
+\subsubsection{van vergelijking lijn naar vectorvoorstelling lijn:}
+Als we, omgekeerd, van een vergelijking een vectorvoorstelling willen maken moeten we zorgen dat er een parameter $ \lambda $ in de vectorvoorstelling komt. Neem als voorbeeld de vergelijking $ y = 3x - 2 $. We weten dat we een $ \lambda $ moeten hebben (invoeren). Stel daarvoor dat $ y =  \lambda $ dan volgt uit de vergelijking  dat $ \lambda = 3x -2 $ dus $ x = \frac{1}{3}  \lambda  + \frac{2}{3} $. Dan hebben we  2 vergelijkingen, een voor y en een voor x:
+
+\[\begin{cases}
+x = \frac{2}{3} + \frac{1}{3} \lambda\\
+y =  \lambda 
+\end{cases}
+\] 
+Dat schrijven we dan met behulp van vectoren. 
+$ l: \  \vectwee {x}{y} \ = \ \vectwee {\frac{2}{3}}{0} \ +\  \lambda  \vectwee {1/3}{1}  $.\\
+Ga na dat dit precies dezelfde lijn is als:
+$ l: \  \vectwee {x}{y} \ = \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $.\\ (immers we kunnen voor $ \lambda $ 1 kiezen, daarmee een nieuw steupunt, (1,1), uitrekenen en vervolgens $ \lambda $ 3 keer zo groot kiezen)\\
+Nog anders geschreven:
+$  l: \  \vectweesnel{x} =  \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $ \qquad
+of: $ l: \ \vec{x} = \ \vectwee{1}{1} \ + \ \lambda \vectwee {1}{3} $
+
+\subsection{berekeningen vlak}
+\subsubsection{van vergelijking vlak naar vectorvoorstelling vlak:}
+We hebben gezien dat $ ax + by + cz = d $ een vergelijking van een vlak in \RD is. Net zo als bij een lijn moeten we om een vectorvoorstelling van een vergelijking te maken parameters invoeren (bij een vlak hebben we 2 parameters nodig omdat een vlak  twee-dimensionaal is). Die parameters noemen we $ \lambda $  en $ \mu $ . Neem als voorbeeld het vlak $ -x + 2y -2z = 6 $.  We stellen  nu dat $ x=  \lambda $ en $ y = \mu $. Dan kunnen we $ z$ uitdrukken in $ \lambda $  en $ \mu $. Immers we vullen  $ x=  \lambda $ en $ y = \mu $ in in de vergelijking $ -x + 2y -2z = 6 $. Dan geldt dus: $ -\lambda + 2\mu -2z = 6 $, oftewel $ z = -3 + \mu -   \frac{1}{2} \lambda $. In feite hebben we nu 3 vergelijkingen namelijk:
+
+\[\begin{cases}
+x =  \lambda\\
+y =  \mu\\
+z = -3 + \mu -   \frac{1}{2} \lambda 
+\end{cases}
+\] 
+anders geschreven:
+
+\[\begin{cases}
+x =  0 + \red{1}.\lambda +  \blu{0}.\mu\\
+y =  0 +  \red{0}.\lambda  + \blu{1}. \mu\\
+z = -3 \  \red{- \frac{1}{2}} .\lambda + \blu{1}.\mu 
+\end{cases}
+\] 
+en dat kunnen we weer schrijven als:
+$ V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{0}{0}{-3} \ + \ \lambda \  \vecdrie[red]{1}{0}{-\nicefrac{1} {2}}   \ + \ \mu \ \vecdrie[blue]{0}{1}{1} $ wat weer hetzelfde vlak is als waar we mee begonnen $ V: \ -x + 2y -2z = 6 $.
+De vectorvoorstelling van een vlak kent dus \textit{twee}  richtingsvectoren. 
+Zie  figuur  \ref{fig:vlak}.
+
+\subsubsection{van vectorvoorstelling vlak naar vergelijking vlak:}
+Omgekeerd nemen we de vectorvoorstelling van een vlak $ V $,\\ 
+bijvoorbeeld:
+$ V: \  \vec{x} =\  \vecdriesnel{x} \ = \  \ \vecdrie{1}{3}{6} \ + \ \lambda \ \vecdrie{0}{2}{1} \ + \ \mu \ \vecdrie{1}{1}{2} $.\\
+Om nu een vergelijking te krijgen moeten we $ \lambda $  en $ \mu $ wegwerken (elimineren). Dat kan als we zien dat de vectorvoorstelling van $ V $ eigenlijk 3 vergelijkingen bevat:
+
+\[\begin{cases}
+x_1 =  1 + 0\lambda + 1\mu\\
+x_2 =  3 + 2\lambda  + 1\mu\\
+x_3 = 6 + 1 \lambda + 2\mu  
+\end{cases}
+\] 
+Uit de $ 1^{e}$ vergelijking halen we $ \mu = x_1 -1 $ en dat vullen we in in de $ 2^{e}$ en $ 3^{e}$ vergelijking:
+
+\[\begin{cases}
+x_2 =  3 + 2\lambda  + ( x_1 -1)\\
+x_3 = 6 + 1 \lambda + 2( x_1 -1)
+\end{cases}
+\] 
+Uit de $ 2^{e}$ vergelijking halen we dat $ \lambda = x_3 - 4 - 2x_1 $ wat we in de $ 1^{e}$ vergelijking invullen:
+$ x_2 = 2 + 2(x_3 -4 -2x_1) + x_1 - 1$, anders geschreven: $ 3x_1 +x_2 - 2x_3 = -7
+$. En dat is precies de algemene vorm van de vergelijking van een vlak.
+
+
+\section{Normaalvectoren}
+\subsection{normaal van lijn}
+
+Om goed te kunnen rekenen met lijnen hebben we een normaalvector nodig.
+\mydef
+{normaalvector lijn}
+{De normaal of normaalvector van een lijn is: \\
+	de vector $ \vec{n} $  \ die loodrecht staat op de richtingsvector van de lijn.}
+
+\mybv[normaal]{Voorbeeld van een berekening van de normaal van een  lijn} 
+Stel we hebben de lijn $ l: \  \vectwee {x}{y} \ = \ \vectwee {2}{0} \ +\  \lambda  \vectwee {3}{2}  $. (Zie figuur  \ref{fig:lijnnormaal})
+Dan is de richtingsvector van $ l:  \overrightarrow{rv_{l}} =  \vectwee {3}{2} $. Misschien zie je meteen dat $ \vec{n} =  \vectwee {-2}{3} $ er loodrecht op staat? Ga na dat  $ (\overrightarrow{rv_{l} }, \vec{n}) = 3.-2 + 2.3  = 0 $. Als je dat niet meteen 'ziet', dan kun je het volgende doen: elke vector  $ \ne \vec{0} $ kun je schrijven als  $ \vec{n} = \vectwee {1}{c} $ waar c het getal is dat we zoeken. Er moet gelden dat  $ (\overrightarrow{rv_{l} }, \vec{n}) = 0 $, immers als twee vectoren loodrecht op elkaar staan moet het inproduct = 0 zijn. Dus $ 3.1 + 2.c = 0 $. Daaruit volgt $ c =  -\frac{3}{2}. $ en dus is $ \vectwee {1}{-3/2} $ de vector die we zoeken. Omdat voor het loodrecht zijn het niet uitmaakt hoe lang de vector is mogen we met -2 vermenigvuldigen om de breuk weg te halen: $ \vec{n} = -2.\vectwee {1}{\nicefrac{-3}{2}} \ = \  \vectwee {-2}{3} $. 
+
+\figuur[0.4]{lijnnormaal}{De normaal $  \vec{n}  $  staat loodrecht op de richtingsvector van $ l $ }	
+
+\subsection{normaal van vlak}
+
+Om goed te kunnen rekenen met vlakken hebben we een normaalvector nodig.
+\label{vlaknormaal}
+\mydef[]
+{normaalvector vlak}
+{De normaal of normaalvector van een vlak $\vec{n}$ of  $\overrightarrow{n_{V}}$ is:
+	\\ de vector $ \vec{n} $  \ die loodrecht staat op \textit{beide} richtingsvectoren van het vlak. \\ 
+	Gelukkig hebben we daarbij ook nog de volgende handige eigenschap:}
+
+\myeig[normaal vlak]
+{als $ V:  ax_1 + bx_2 +cx_3 = d $ \qquad dan is :  $ \vec{n} = \vecdrie{a}{b}{c} $ \ de normaalvector van 
+	$ V $ .}
+
+\mybv[normaal vlak]
+{als $ V: 7x_1 + 3x_2 - x_3 = -20 $ \qquad dan is 
+	$ \vec{n} = \vecdrie{7}{3}{-1} $ de normaalvector van $V$.\\}
+Maar wat als we niet de vergelijking maar de vectorvoorstelling van een vlak hebben? Dan kunnen we gebruik maken van de eigenschap dat  het uitproduct van 2 vectoren loodrecht staat staat op beide richtingsvectoren. 
+
+\mybv[normaal vlak]
+{als $ W: \vec{x}  = \vecdrie{0}{1}{-1}    + \  \lambda \  \vecdrie{2}{-3}{1} + \ \mu \ \vecdrie{0}{1}{2} $ 
+	\qquad dan zijn de richtingsvectoren $ \vecdrie{2}{-3}{1} \ $ en $  \vecdrie{0}{1}{2} $ \\
+	en hun  uitproduct is : 
+	$ \vecdrie{2}{-3}{1} \ \times \  \vecdrie{0}{1}{2}  \ = \ \vecdrie{-3.2-1.1}{-(2.2-1.0)}{-3.0-2.1} = \ \vecdrie{-7}{-3}{-2} $\\
+	en dus is $ \vec{n} = \vecdrie{-7}{-3}{-2}  $ de normaal vector van $ W $.  Zie figuur  \ref{fig:vlaknormaal}}.
+
+\figuur[0.8]{vlaknormaal}{De normaal van vlak \textit{W},  \ $  \vec{n}   \ = \ \vec{v} \times \vec{w} $ ,  staat loodrecht op de richtingsvectoren $  \vec{v}  $  en $  \vec{w} $}
+
+De vergelijking van $ W $ is dan  $ -7x-4y-2z = c $ De constante c weten nog niet maar kunnen we uitrekenen doordat we weten dat het punt (0,1,-1) op W ligt, want dat is de vaste vector. (dat kun je ook zien als je en $ \lambda $  en $ \mu $  beide 0 stelt: dan is het punt (0 +0.2 +0.0, 1 -3.0 +1.0, -1 + 1.0 + 2.0)= (0,1,-1)  ) .
+Vul de x, y en z-waarde van het vaste punt  in in de vergelijking $ -7x-4y-2z = c $ en er volgt dat c = -7.0-4.1-2.-1 = -2. Dus $ W: -7x-4y-2z = -2 $ , of, wat op hetzelfde neerkomt:  $ W: 7x+4y+2z = 2 $
+
+\section{Afstand van punt tot vlak}
+We hebben nu genoeg hulpmiddelen om in \RD de afstand van een punt tot een vlak uit te kunnen rekenen. Dat doen we   door een lijn \textit{l} loodrecht op \textit{V} te tekenen,\textit{ l }snijdt \textit{V} in\textit{ S} en dan is de afstand tussen \textit{P} en \textit{V} gelijk aan de afstand tussen P\textit{} en \textit{S}. Zie figuur   \ref{fig:afstand1}. en \ref{fig:afstand-2}.
+
+Dat gaat in een aantal stappen:
+\begin{enumerate}[label=(\alph*)]
+	\item de vergelijking van een vlak bepalen
+	\item de normaal van een vlak berekenen
+	\item de lijn berekenen die  loodrecht op het vlak staat  en door $ P $ gaat
+	\item x, y en z van de lijn $  l $  uitdrukken in \ $  \lambda $
+	\item het snijpunt $\it{S}$  van de lijn door $\it{P}$  en het vlak bepalen
+	\item  de afstand tussen $\it{P}$  en het snijpunt $\it{S}$  uitrekenen
+\end{enumerate}	
+
+\figuur[1]{afstand1}{Gevraagd: de afstand tussen $ P $ en $ V $, ( $ P $ is een punt dat boven het vlak 'zweeft')}
+\mybv[afstand]
+{ We nemen als voorbeeld voor de berekening \\het punt $ P: (3,6,7)  $ en het vlak 
+	$ V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{5}{0}{3} \ + \ \lambda \ \vecdrie{-1}{-1}{1} \  + \mu \ \vecdrie{3}{5}{-6} $ \ \ \ .
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item \subsubsection{de vergelijking van een vlak beplen}
+Omdat de vectorvoorstelling van het vlak gegeven is, moeten we daarvan eerst een vergelijking maken.
+We vinden met de methode van de paragraaf "normaal van vlak" \ 
+(blz. \pageref{vlaknormaal}) dat : $ V: -x + 3y +2z = 1 $.  Als de vergelijking van het vlak al gegeven is kun je deze stap overslaan natuurlijk. 
+\item \subsubsection{de normaal van een vlak berekenen}
+Als we de vergelijking van het vlak hebben is het berekenen van de normaal kinderspel. Immers de normaal wordt gegeven door de getallen die in de vergelijking van het vlak staan:
+$ \vec{n} = \vecdrie{-1}{3}{2}  $ de normaal vector van $ V $.\\
+NB: Let op: De normaal kun je alleen uit de vergelijking van het vlak aflezen als "\textit{de x, y en z aan de linkerkant van het = - teken staan}".  Dus als je als vergeijking $ 3x + z = 2 -y $ hebt, dan is de normaal NIET $  \vecdrie{3}{-1}{1}  $ maar  $ \vecdrie{3}{1}{1}  $, omdat uit $ 3x + z = 2 -y $ volgt dat $ 3x + y + z = 2 $ (x, y en z aan de linkerkant).
+\item \subsubsection{de lijn berekenen die  loodrecht op het vlak staat  en door $ P $ gaat}
+De lijn door het punt P die loodrecht op vlak V staat heeft als richtingsvector . . .  de normaal van het vlak. Immers de normaal staat loodrecht op dat vlak. Dus $ \overrightarrow{rv_{l}}  = \vec{n} $. En de lijn moet door $ P: (3,6,7)  $  gaan. Dat  betekent dat we $ \vecdrie{3}{6}{7} $ als steunvector voor de lijn kunnen gebruiken. Dus de vectorvoorstelling van de lijn is: $ l: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{3}{6}{7} \ + \ \lambda \ \vecdrie{-1}{3}{2} \ $
+\item \subsubsection{x, y en z van de lijn $  l $  uitdrukken in \ $  \lambda $}
+Net zoals bij een vlak in \RD bestaat de vectorvorstelling van de lijn $ l  $ eigenlijk uit 3 vergelijkingen:
+\[\begin{cases}
+x =  3 -\lambda \\
+y =  6 + 3\lambda\\
+z = 7 + 2\lambda
+\end{cases}
+\] 
+\item \subsubsection{het snijpunt van  het  vlak en de lijn door P bepalen}
+Voor het snijpunt van\textit{ l} en \textit{V} gedlt dat het snijpunt zowel op $  l $ ligt als op $ V $. Anders gezegd: De coordinaten  van het snijpunt moeten voldoen aan bovenstaande 3 vergelijingen van\textit{ l}, maar ook aan de vergelijking voor \textit{V}. Met andere woorden: we kunnen de x, y en z van hierboven invullen in de vergelijking van het vlak:\\
+$ -(3 -\lambda) + 3.(6 + 3\lambda) + 2.(7 + 2\lambda) = 1$ \\
+of $ 14\lambda + 29 = 1 $ \\of $  \lambda = -2 $
+
+\item \subsubsection{de afstand uitrekenen}
+We weten nu dat als $  \lambda = -2 $ we het snijpunt van $ l  $ en $ V $ hebben. Wat betekent dat? Dat betekent dat als we beginnen in punt P en -2 keer de richtingsvector van $  l $ er bij op tellen we op het vlak V terecht komen.
+Anders gezegd de afstand tussen P en V is 2 keer de lengte van die richtingsvector. Oftewel: 
+afstand $ = 2. |\overrightarrow{rv_{l}})| = 2. \sqrt{(-1)^{2} + (3)^{2} + (2)^{2} } = 2\sqrt{14} $ \. Zie  figuur  \ref{fig:afstand-2}
+\end{enumerate}	
+
+\figuur[1]{afstand-2}{We moeten vanuit $ P $ beginnend -2 keer de vector $\vec{n} =  \vec{rv_{l}} $   afpassen om op V te komen. Anders gezegd:  de normaal vector van $ V $ past  precies 2 keer tussen $ V $ en $ P $, en dus is de afstand $ 2.|\vec{n}| =  2.|\vec{rv_{l}}| = 2\sqrt{14} $.}
+
+
+\subsubsection{Opgaven}
+\begin{enumerate}
+	\item  Bereken \ $ \vec{a} + \vec{b} $, \quad $ \vec{a} - \vec{b} $, \ en \ $  (\vec{a} , \vec{b}) $  als $ \vec{a} = \vecvier{3}{-1}{2}{0}  $ \  en \  $  \vec{b} =  \vecvier{-2}{2}{4}{7} $
+	
+	\item  Bereken de hoek $\alpha$ die de  lijnen \ $  l $ en $ m $ met elkaar maken in één decimaal nauwkeurig:
+	$ l:  y = 2x +7  $ en $ m: \  \vectwee{x}{y} = \vectwee{-3}{7} + \lambda \vectwee{2}{-3}  $
+	
+	\item Wat is de lengte van de vector $  \vec{v} \ = (2, -3, 0, 2, -5) $ ?
+	% \ \vecvijf{2}{-3}{0}{2}{-5} $ ?
+	
+	\item Schaal de vector $  \vec{v} $ naar de eenheidsvector $\hat{v}$
+	als $  \vec{v} = (-1, 5, 7, 0, 5) $.
+	%\vecvijf{-1}{5}{7}{0}{5} $ 
+	
+	\item Bereken de afstand tussen  $  P = (7,0,-2)  $ en 
+	$ V: \ \vecdriesnel{x} \
+	=  \vecdrie {8} {-5} {3}  \
+	+  \ \lambda \ \vecdrie{3}{-2}{1} 
+	+ \mu \  \vecdrie{-5}{3}{-2} $ 
+	
+	\item   Bereken de afstand tussen  $  Q = (7,1,2)  $ en 
+	$ W:2x - 4y +2z \ = -2 $ .
+	
+\end{enumerate}
+
+\subsubsection{extra opgaven}
+\begin{enumerate}
+	\item Bereken 
+	\ $ \vec{d} + \vec{e} $, \ $ \vec{d} - \vec{e} $, en \ $  (\vec{d} , \vec{e}) $ \ als 
+	\quad $ \vec{d} = \vecvier{3}{-2}{0}{5}  $ \  en \  $  \vec{e} =  \vecvier{1}{7}{-2}{2} $ 	
+	
+	\item  Bereken de hoek $\alpha$ die de  lijnen \ $  m $ en $ l $ met elkaar maken in één decimaal nauwkeurig:
+	$ m:  y = 3x + 1  $ en $ l: \  \vectwee{x}{y} = \  \lambda \vectwee{4}{-3}  $
+	
+	\item Wat is de lengte van de vector $  \vec{w} \ = \ \vecvijf{4}{0}{7}{-4}{1} $ ?
+	
+	\item Bereken de afstand tussen  $  P = (-3,9,-3)  $ en 
+	$ V: \ \vecdriesnel{x} \ =  \ \lambda \ \vecdrie{4}{2}{4} + \mu \  \vecdrie{7}{-1}{-3} $	
+	
+	\item   Bereken de afstand tussen  $  Q = (-1,-4,-1)  $ en 
+	$ W: -2x + 9y + 6z \ = \nicefrac{1}{3} $ .
+\end{enumerate}
+
+
+
+ 
+\chapter{Matrix, rotatie en projectie}
+\label{chap: matrix, rotatie en projectie}
+
+Dit en het volgende hoofdstuk gaan over lineaire afbeeldingen. Lineaire afbeeldingen zijn afbeeldingen die de lineaire eigenschappen van  vectoren niet verstoren. Zulke afbeeelindingen worden veel gebruikt in vakgebieden als Computer Graphics en Robotica. Een lineaire afbeelding kan geschreven worden met behulp van een matrix. En met een matrix kun je in software makkelijk rekenen\\ \\
+\mydef [Een matrix is:]
+{matrix}
+{een verzameling getallen in een rechthoek, gerangschikt in rijen en kolommen.}\\
+Een matrix geven we aan met een hoofdletter:
+\mybv[matrix]{$  S = \mattwee{2&1}{3&4} $
+	\qquad $ M = \begin{pmatrix}
+	2 & -1 \\
+	4 & 5  \\
+	7 & 0
+	\end{pmatrix}$}
+Daarbij noemen we S een $ 2 \times 2 $ matrix, en M een $ 3 \times 2 $ matrix. \\ \\
+De algemene vorm van een $ m \times n $ matrix is:
+$$
+A = \begin{pmatrix}
+a_{11} &  a_{12}  & \ldots & a_{1n}\\
+a_{21}  &  a_{22} & \ldots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1}  &   a_{m2}       &\ldots & a_{mn}
+\end{pmatrix}
+$$
+Deze matrix heeft $ m $ rijen en $ n $ kolommmen. Meestal beperken we ons tot $ 2 \times 2 $ , \  $ 3 \times 3 $ of $ 4 \times 4 $ matrices.
+\section{Bijzondere matrices}
+\mydef [Een \textit{vector} is:]
+{vector}
+{een matrix die bestaat uit één rij of één  kolom, en wordt zoals je al weet, \textit{niet} met een hoofdletter aangeduid maar met een kleine en een pijltje erboven.}\\
+\mybv[vector]{$  \vec{v} = \vectwee{2}{3} $}\\ \\
+\mydef[]
+{vierkante matrix}
+{Een vierkante matrix is:
+	\\een matrix met evenveel rijen als kolommmen. We schrijven dat als een $ n \times n $ matrix:} 
+\mybv[vierkante matrix]
+{\quad  $ P = \matvier{6&2&0&7}{9&-1&-4&3} {0&3&1&5}{-2&8&3&2} $ \quad is een vierkante, $ 4 \times 4 $ matrix:}  \\ \\ \\
+\mydef []
+{hoofddiagonaal}
+{De hoofddiagonaal van een matrix is:
+	\\de diagonaal van linksboven naar rechtsonder}
+\mybv[hoofddiagonaal]
+{ bij $ A = \matdrie { {\red{-1}} & 2 & 3}
+	{0 & \red{4} & 1 }
+	{-3&2&\red{1}} $ 
+	\ staan de getalen -1, 4 en 1 op de hoofddiagonaal}\\ \\ 
+\mydef[]
+{diagonaalmatrix}
+{Een diagonaalmatrix is:\\een vierkante matrix waar alleen op de hoofddiagonaal getallen $\ne$ 0 staan. }
+\mybv[diagonaalmatrix]
+{ $ D = \matdrie{1&0&0}{0&3&0}{0&0&-1} $ }\\ \\ \\ \\
+\mydef[]
+{eenheidsmatrix}
+{Een eenheidsmatrix  is:\\een diagonaalmatrix waar  op de hoofddiagonaal alleen maar 1 -en  staan. }
+\mybv[eenheidsmatrix] 
+{ $ E = \matdrie{1&0&0}{0&1&0}{0&0&1} $ }\\ \\ \\
+\mydef []
+{nulmatrix}
+{Een nulmatrix  is: \\een matrix met alleen maar nullen. }
+\mybv[nulmatrix]
+{ $ N = \mattwee{0&0}{0&0} $ } \\ \\ \\
+\mydef []
+{getransponeerd}
+{De getransponeerde matrix $ A^{T}  $ van matrix A is:\\
+	een (andere) matrix waarbij de rijen en kolommen van A zijn verwisseld. } 
+\mybv[getransponeerde]
+{ Als $ A = \mattwee{2&-1&3}{5&6&4} $  dan is  $ A^{T} =   \matdrie{2&5}{-1&6}{3&4} $ } \\ \\ \\ \\
+\mydef[Een  symmetrische matrix is:]
+{symmetrisch}{een  matrix A waarbij $ A^{T} = A $ . \\In feite betekent dat dat de rechterbovenhoek van de matrix gespiegeld wordt in de linkeronderhoek. }  
+\mybv[symmetrisch]
+{ Als $ A = \mattwee{2&1}{1&6} $  \quad dan is  $ A^{T} =   \mattwee{2&1}{1&6} = A $ }\\
+\section{Matrixvermenigvuldiging}
+Matrixvermenigvuldiging is tamelijk ingewikkeld:
+\mydef []
+{matrixprodukt}
+{Het product van twee matrices is 
+	het op een speciale manier vermenigvuldigen van  alle elementen van de ene matrix met alle elementen van de andere matrix.} 
+Het eerste element van het product krijgen we door de getallen in de eerste \textit{\textbf{rij}} van de eerste matrix stuk voor stuk te vermenigvuldigen met de getallen van de eerste \textit{\textbf{kolom}} van de tweede matrix en dat op te tellen. Dat wordt het eerste getal van de productmatrix. En vervolgens hetzelfde te doen met de tweede rij van de eerste matrix en de eerste kolom van de tweede matrix enzovoort. \\ \\
+\mybv[matrixprodukt]
+{\begin{align*} 
+	Als \quad   A 
+	&=  \mattwee{3&-1&2}
+	{\gre{4}&\gre{-5}&\gre{0}}  
+	\quad en \quad B 
+	= \matdrie{ \red{-4}& \blu{5}}
+	{ \red{1}&\blu{7}}{\red{-2}&\blu{6}}   \\
+	dan \quad
+	A.B  
+	&=\mattwee{3&-1&2}
+	{\gre{4}&\gre{-5}&\gre{0}} . 
+	\matdrie{ \red{-4}& \blu{5}}
+	{ \red{1}&\blu{7}}{\red{-2}&\blu{6}}  \\
+	& =   \mattwee{3.\red{-4} + -1. \red{1} + 2. \red{-2} &  & 3. \blu{5} + -1. \blu{7} + 2. \blu{6}}
+	{\gre{4}. \red{-4} + \gre{-5}. \red{1} + \gre{0}. \red{-2} 
+		&  & \gre{4}. \blu{5} + \gre{-5}. \blu{7} + \gre{0}. \blu{6}}  \\
+	& = \mattwee{-17&20}
+	{-21&-15}
+	\end{align*} }
+
+Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal (3 met \red{-4}, daarna -1 met \red{1}  en vervolgens 2 met \red{-2}). Die vemenigvuldigingen  tel je bij elkaar  op met als uitkomst -17. Vervolgens doe je met de zwarte en blauwe getallen  hetzelfde om 20 te krijgen, daarna ook met de groene en rode getallen  (met -21 als uitkomst), en tot slot groen met blauw combineren met als uitkomst -15.
+
+\subsection{eigenschappen van matrixvermenigvuldiging}
+\myeig[ A.B \noteq B.A ]
+{ Anders dan bij gewone getallen is matrixvermenigvuldiging niet commutatief. Dat wil zeggen: $  2 \times 3  = 3 \times 2 $ , maar als A en B matrices zijn dan is meestal  $ A.B \ne B.A $! }\\
+\mybv[A.B \noteq B.A  ]
+{ \begin{align*}
+	A.B & =
+	\matdrie{ \red{-4}& \red{5}}
+	{ \blu{1}&\blu{7}}
+	{\bro{-2}&\bro{6}} .
+	\mattwee{3&\gre{-1}&\pur{2}}
+	{4&\gre{-5}&\pur{0}}\\
+	&=   \matdrie{\red{-4}.3 + \red{5}.4 &
+		\red{-4}. \gre{-1} +  \red{5}. \gre{-5} & 
+		\red{-4}. \pur{2}+\red{5}. \pur{0}}
+	{\blu{1}.3 + \blu{7}. 4 &
+		\blu{1}. \gre{-1} + \blu{7}. \gre{-5} &
+		\blu{1}.\pur{2}+ \blu{7}. \pur{0}}
+	{\bro{-2}.3 + \bro{6}.4&
+		\bro{-2}. \gre{-1} + \bro{6}. \gre{-5}&
+		\bro{-2}.\pur{2}+ \bro{6}. \pur{0}} \\
+	&= \matdrie{8&-21&-8}{31&-36&2}{18&-28&-4}\\
+	maar	\\
+	B.A & =  \mattwee{3&{-1}&{2}}
+	{4&{-5}&{0}} . 
+	\matdrie { {-4}& {5}}
+	{ {1}&{7}}
+	{{-2}&{6}} \\
+	& =  \mattwee{ -17 & 20  }
+	{ -21  & -15 }
+	\end{align*}
+} 
+\myeig[associatief]{Matrixvermenigvuldiging is wel associatief. Dat betekent: $ A.B.C = A.(B.C) = (A.B).C $}
+\section{De matrix van een afbeelding bepalen}
+Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te kunnen rekenen moeten we de matrix bepalen.  Jammer genoeg lukt dat niet simpelweg voor translaties, maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeeelding kunnen rekenen.\\ \\
+\mydef []
+{basisvector}
+{Basisvectoren zijn: \\ vectoren die gecombineerd alle andere vectoren kunnen genereren (maken)} \\ 
+\mybv[basis  \RT]
+{ Basisvectoren voor \RT zijn: $   \vectwee{1}{0} $ en $   \vectwee{0}{1} $  want met combinaties van deze twee vectoren kun je alle andere tweedimensionale vectoren maken. Bijv: $   \vectwee{3}{-4}  = 3.\vectwee{1}{0}  -4 .\vectwee{0}{1}  $}
+\mybv[basis \RD]
+{ Basisvectoren voor \RD zijn: $   \vecdrie{1}{0}{0}\ ,  \   \vecdrie{0}{1}{0} $   en $ \vecdrie{0}{0}{1} $  want met combinaties van deze drie vectoren kun je alle andere driedimensionale vectoren maken. Bijv:  $  \vecdrie{1}{-2}{5}= 1.\vecdrie{1}{0}{0} \   -2.\  \vecdrie{0}{1}{0}\ + \ 5.\vecdrie{0}{0}{1} $ } \\
+
+\myeig[matrix bepalen]
+{De matrix van een afbeelding bestaat uit: \quad   het beeld van de basisvectoren}\\
+Dus wat de afbeeelding doet met elke basisvector levert de matrix van een afbeelding
+Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te berekenen wat de afbeeelding doet met basisvectoren. \\ \\ \\
+\mybv[matrix bepalen  \RD]
+{ Stel we weten van afbeelding\textit{ A} alleen wat er met de basisvectoren gebeurt: 
+	
+	\begin{center}
+		$ \vecdrie{1}{0}{0}  \ \  \xrightarrow{A}  \  \  \vecdrie[red]{0}{3}{1} $ 
+		\qquad en  \qquad $ \vecdrie{0}{1}{0} \ \  \xrightarrow{A}  \ \ \vecdrie[blue]{2}{0}{1} $
+		\qquad en  \qquad $ \vecdrie{0}{0}{1} \ \  \xrightarrow{A}  \ \ \vecdrie[green]{-1}{0}{1} $\qquad \qquad	 .\\
+	\end{center}
+	Dan is de matrix van $ 
+	A= \matdrie{\red{0}& \blu{2} &  \gre{-1}}
+	{\red{3}&  \blu{0} &  \gre{0} }
+	{\red{1}&  \blu{1} &  \gre{1}} $}\\ \\
+
+\mybv[matrix bepalen \RT]
+{ Stel $ P $ is de projectie in \RT op de x-as, dat wil zeggen: alle punten in het vlak worden  geprojecteerd op de x-as (zie figuur \ref{fig:projectie2D}) .  \\Het beeld van de basisvector  $ \vectwee{1}{0} $ onder $ P $ is  $   \vectwee{1}{0} $.  En    $   \vectwee{0}{1} $ gaat  naar $   \vectwee{0}{0} $ \\
+	anders gezegd:\\ \\ \  
+	$ \vectwee{1}{0}  \  \xrightarrow{P}  \   \vectwee[red]{1}{0} $ 
+	\quad en  \quad $ \vectwee{0}{1} \  \xrightarrow{P}  \ \vectwee[blue]{0}{0} $\\
+	Dan mag je die uitkomsten naast elkaar zetten en is de matrix van 
+	$ P = \mattwee{\red{1}&\blu{0}}
+	{\red{0}&\blu{0}} $}
+\figuur[0.5]{projectie2D}{de projectie in \RT op de x-as; het punt (3,4) komt op het punt  (3,0)}
+\subsection{het resultaat berekenen}
+Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door de matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectweesnel{x} $  terecht komt op: 
+\begin{align*}
+P.\vec{x} 
+&= \mattwee{1&0}
+{0&0}   .
+\mattwee{x_1}{x_2} \\
+&= \ \mattwee{1.x_1 + 0.x_2}
+{0.x_1 + 0.x_2}  \\
+& = \ \mattwee{x_1}{0}  
+\end{align*}
+In woorden: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
+\begin{align*}
+P . \mattwee{3}{4}  \ 
+&= \ \mattwee{1&0}{0&0}  \ . \   \mattwee{3}{4}  \\
+&=  \ \mattwee{1.3 + 0.4}{0.3 + 0.4} \\
+&= \ \mattwee{3}{0}.  
+\end{align*}
+Op zo'n manier kun je ook voor  matrix A van de vorrige bladzij uitrekenen waar een willekeurig punt $ (v_1, v_2, v_3)  $ in \RD uitkomt, namelijk door de matrix van A te vermenigvuldigen met de vector $ \vec{v} $:
+\begin{align*}
+A.\vec{v} \ 
+&= \matdrie{0&2&-1}{3&0&0}{1&1&1}  
+. \ \matdrie{v_1}{v_2}{v_3}   \\
+&= \ \matdrie{0.v_1 + 3.v_2 + 1.v_3}{2.v_1 + 0.v_2+ 1.v_3}{-1.v_1 + 0.v_2 + 1.v_3}  \\
+&= \ \matdrie{3v_2 + v_3}{2v_1 +  v_3}{-v_1 +  v_3} 
+\end{align*}
+En zo kun je ook  uitrekenen waar het punt (3,2,-1) terecht komt als je A er op toepast: \\
+$ (v_1 = 3, v_2 = 2 ,  v_3=-1 ):  $ 
+\begin{align*}
+\quad \ A.\vec{v} \ 
+&= \ \matdrie{3.2 + -1}{2.3+  -1}{-3 +  -1} \\
+&= \  \matdrie{5}{5}{-4} \\
+en \ dus \ \ 
+\matdrie{3}{2}{1}  \ & \xrightarrow{A}  \   \matdrie{5}{5}{-4}
+\end{align*}
+\section{Rotatie}		
+\label{rotatie}
+\subsection{de matrix van een rotatie in \RT}
+Net zoals in de vorige voorbeelden hoeven we bij een rotatie alleen maar te bepalen wat er met de basisvectoren gebeurt om de matrix uit te rekenen. 
+
+\figuur[1]{rotatie2D-2}{Het resultaat ((a)\red{rood} en (b) \blu{blauw}) van de rotatie tegen de klok in over hoek $\theta $ van basisvectoren   $ \hat{b_x} = (1,0) $ en   $ \hat{b_y} = (0,1) $}
+
+Als we roteren in \RT gaat dat om de oorsprong \textit{O} over een hoek $\theta$ (spreek uit: "tèta"). Zie figuur  \ref{fig:rotatie2D-2}. In de tekening zien we een rotatie "tegen de klok in over hoek $\theta$". \\De basisvectoren zijn $ \vectwee{1}{0}   $ en   $ \vectwee{0}{1}   $. \\We moeten dus bepalen wat er gebeurt met $ \vectwee{1}{0}   $ en   $ \vectwee{0}{1}   $.\\
+Uit Wiskunde Basis weten we wat het beeld van de vector $\vectwee{1}{0} $ onder de afbeelding $R$ is: $ R \ \vectwee{1}{0}  \  = \  \vectwee{\cos \theta}{\sin \theta} $. \\ Anders gezegd:
+$ \vectwee{1}{0}   \  \xrightarrow{R}  \ \vectwee[red]{\cos \theta}{\sin \theta} $  \quad en  \quad 
+$ \vectwee{0}{1}   \  \xrightarrow{R}  \ \vectwee[blue]{-\sin \theta}{\cos \theta} $  \quad Let op het minteken!\\ \\
+En dus is de matrix van \textit{R} =  
+$  \mattwee { \red{\cos \theta} & \blu{-\sin \theta} }
+{ \red{\sin \theta} & \blu{\cos \theta}} $\\ \\ \\
+
+\mybv[rotatie 60]
+{Als $\theta = 60\degree$ dan is $ \cos\theta = \cos 60\degree = 0.5 $  en $ \sin 60\degree = \frac{1}{2} \sqrt{3} $  \ (reken uit met de rekenmachine) en dat betekent dat als je linksom draait over $ 60 \degree$ je matrix wordt:\\
+	$ R_{60} = \mattwee{ \frac{1}{2} &- \frac{1}{2} \sqrt{3}}{ \frac{1}{2} \sqrt{3}& \frac{1}{2} } 
+	= \frac{1}{2} . \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1}$ }
+
+Stel, je wil weten waar het punt (4,2) terecht komt als je over  $ 60 \degree$ linksom draait, dan is dat:
+\begin{align*}
+R_{60} . \mattwee{4}{2} 
+=\frac{1}{2} . \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1} \ . \  \mattwee{4}{2}  \ \ 
+& = \frac{1}{2}.\  \mattwee{4  - \sqrt{3}.2 }    { \sqrt{3}.4 + 2} \\ 
+& = \  \mattwee{2-\sqrt{3}}{2\sqrt{3}+1} \\ 
+& \approx \  \mattwee{2-1.73}{3.46+1}  \\ 
+&= \  \mattwee{0.27}{4.46}  
+\end{align*}
+of, op een andere manier opgeschreven: 
+$ \vectwee{4}{2}   \  \xrightarrow{R_{60}}  \ \vectwee{0.27}{4.46} $ \ (figuur \ref{fig:rotatie2D-VB}  )
+
+\figuur{rotatie2D-VB}{het beeld van (4,2) onder de rotatie $ R_{60} $}
+
+\myeig[matrix rotatie]
+{De matrix van een rotatie om \textit{O} over de hoek $\theta$ in \RT is altijd \\ \\òf  (tegen de klok in):\quad 
+	$  \mattwee { \cos \theta & -\sin \theta }
+	{ \sin \theta & \cos \theta} $  \\  \\òf  (met de klok mee):\quad 
+	$  \mattwee { \cos \theta & \sin \theta }
+	{ -\sin \theta & \cos \theta} $ }\\
+Met andere woorden: als je de hoek weet van een rotatie in \RT hoef je alleen nog de richting , met de klok mee of niet,  te bepalen om de matrix op te kunnen schrijven.
+
+\subsection{de matrix van een rotatie in \RD}
+In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je met een kurketrekker doet om een fles wijn te openen. Het is handig om je te realiseren dat draaien om een een as in \RD betekent dat één coördinaat niet verandert. Namelijk de coördinaat van de as waarom je draait.  De draaiing in de andere twee coördinaten is dan eigenlijk een rotatie in \RT. Voor de kritische lezer: Wat als je  om een willekeurige vector roteert? Dan geldt het volgende: Elke rotatie in \RD kun je uitvoeren door eerst een stukje om de x-as, dan om dey-as en daarna om de z-as te roteren.
+
+\figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in x en y waarbij de z-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de x-, y- en z-as   komen na de rotatie. }
+
+\figuur[0.4]{rotatie3D-3als2d}{De rotatie in \RD over hoek  $\theta.$ gezien als rotatoe in \RT, vergelijk figuur \ref{fig:rotatie3D-3} }
+
+\mybv[rotatie \RD] 
+{De rotatie rechtsom om de z-as over de hoek  $\theta.$ }
+
+We gaan weer bepalen waar de basisvectoren komen na de rotatie. De basisvector langs de x-as is $  \hat{b_x} \ = \ \vecdrie{1}{0}{0}. $ Zoals in figuur \ref{fig:rotatie3D-3} te zien is veranderen de z-coördinaten bij geen van de basisvectoren! Dus bij  $ \hat{b_x} $ en $  \hat{b_y} $  zijn en blijven z-coördinaten = 0, en de $ 3^e $ basisvector, $  \hat{b_z} $  verandert sowieso niet. Als de z-coördinaat van een willekeurig punt niet verandert, is het eigenlijk een rotatie in x en y, oftewel een rotatie in \RT.  Let op: we gaan nu met de klok mee dus het min-teken komt op een andere plaats dan bij het vorige voorbeeld van \RT: \\ \\
+$ \hat{b_x}  = \ \vecdrie{1}{0}{0}  \ \  \xrightarrow{R} \ \  \vecdrie[red]{\cos \theta}{- \sin \theta}{0}\ $  
+\qquad  $ \hat{b_y}  = \ \vecdrie{0}{1}{0}  \ \  \xrightarrow{R}  \ \ \vecdrie[blue]{\sin \theta}{ \cos \theta}{0}\ $  
+\qquad  $ \hat{b_z}  = \ \vecdrie{0}{0}{1}   \  \  \xrightarrow{R}  \ \ \vecdrie{0}{0}{1}\ $  \\ \\ \\
+En dus is $ R = 
+\matdrie{\red{\cos \theta} & \blu{\sin \theta} & {0} }
+{\red{- \sin \theta} & \blu{\cos \theta} & {0}}
+{\red{0} & \blu{0} & {1}} $ \\ NB: je ziet dat het 2x2 stukje linksboven in de matrix $ R $ hetzelfde is als  een rotatie in \RT.
+
+\section{Projectie}		
+\mydef[Projecteren is:]
+{projectie}{het afbeelden van een object in een lagere dimensie.}  Dus bijvoorbeeld het feit dat je een 3D spel kunt spelen op een tweedimensionaal beeldscherm! In \RT doe je dat door punten loodrecht op een lijn te verplaatsen naar die lijn (1-dimensionaal), zie figuur \ref{fig:projectie2D-2}. In \RD door punten loodrecht op een vlak te verplaatsen naar dat vlak, zie figuur \ref{fig:projectievlak}.
+\subsection{de matrix van een projectie in \RT}
+\label{projectie2D}
+In \RT is een projectie  het loodrecht verplaatsen van punten   naar een rechte lijn (zie figuur \ref{fig:projectie2D},  \ref{fig:projectie2D-2} en \ref{fig:projectie2D-3} ) \\ 
+
+\mybv[projectie  \RT] 
+{De projectie op de lijn $ y=x. $}	
+
+Om de matrix te bepalen moeten we kijken wat er gebeurt met de basisvectoren. 	
+Zoals je in figuur \ref{fig:projectie2D-2} kunt zien werkt de projectie zo dat beide basisvectoren op dezelfde (paars = rood + blauw) vector terecht komen:\\ \\
+$ \vectwee{1}{0}  \  \xrightarrow{P}  \   \vectwee[red]{0.5}{0.5} $ \quad en \quad 
+$ \vectwee{0}{1}  \  \xrightarrow{P}  \   \vectwee[blue]{0.5}{0.5}. $ 
+\quad Dat betekent dat $ P = \mattwee{\red{0.5}&\blu{0.5}}
+{\red{0.5}&\blu{0.5}} $
+
+\figuur[0.6]{projectie2D-2}{De projectie op de lijn $ l: y=x $ . Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
+
+\mybv[projectie \RT] 
+{De projectie op de lijn $ y = 4x. $}
+
+Bij de vorige projectie konden we aflezen wat het resultaat van de projectie was. In het algemeen is dat lastiger, en moeten we eerst loodlijnen uitrekenen. Zie figuur  \ref{fig:projectie2D-3}. De loodlijn $ m_{10} $ staat loodrecht op\textit{ l} en gaat door het punt (1,0), de loodlijn $ m_{01} $ staat ook loodrecht op \textit{l} maar gaat door het punt (0,1). De vraag is: hoe berekenen we de loodlijnen? \\ Daarvoor maken we gebruik van het volgende  (rc = richtingscoëfficiënt = \textit{a} in de algemene vergelijking van een lijn: $ y = ax + b $ )\\ \\ 
+
+\myeig[rc loodlijn]
+{$ rc_{loodlijn} = \dfrac{-1}{rc_{origineel}} $} \\ Anders gezegd: de richtingscoëfficiënt van een lijn loodrecht op een andere (het origineel) is het omgekeerde daarvan met een min ervoor. 
+Ook wel: $ rc_{loodlijn}\ . \ rc_{origineel} = -1 $\\ \\
+
+\mybv[rc loodlijn] 
+{Als $ l: y = 4x  $ dan is de richtingscoëfficiënt van \textit{l}: \ $  rc_l = 4 $ en de richtingscoëfficiënt van de loodlijn $ rc_{loodlijn} = - \frac{1}{4} $. 
+	Dan weten we dus dat $ m_{10}: y = - \frac{1}{4}x + b_{10} $ ($ b_{10} $ is een constante, vergelijk met de algemene vergelijking van een lijn hierboven). De constante $ b_{10} $ kunnen we uitrekenen doordat we weten dat het punt (1,0) op $ m_{10} $ ligt $ :  0 = - \frac{1}{4}.1 + b_{10} $  dus is $ b_{10} = \frac{1}{4} $ en $ m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $ \\ De andere loodlijn gaat op dezelfde manier: $ rc_{01}= - \frac{1}{4} $. Dus $ m_{01}: y = - \frac{1}{4}x + b_{01} $, en we weten dat (0,1) op $ m_{01}  $ ligt. Dus $ 1 = - \frac{1}{4}.0 + b_{01} \  dus \   b_{01} = 1 $ en dus $ m_{01}: y = - \frac{1}{4}x + 1. $ Als we snijpunten (rood en blauw in figuur \ref{fig:projectie2D-3} ) weten, weten we waar de basisvectoren terecht komen. }\\
+
+\figuur[0.8]{projectie2D-3}{De projectie op de lijn $ l:  y = 4x $ met loodlijnen  $ m_{10} $ door (1,0) en $ m_{01} $ door (0,1) }
+
+Voor het snijpunt (rood) van  \textit{l} en $ m_{10}: $ geldt:
+\[\begin{cases}
+$$ l: y = 4x   \\
+m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $$
+\end{cases}
+\] 
+En dus is $ 4x = - \frac{1}{4}x + \frac{1}{4} $ en dus $ x = \dfrac{1}{17}.  $ Daaruit volgt met $  y = 4.x $ dat: $  y = \dfrac{4}{17}.  $ Het rode snijpunt is dus $ (\red{\nicefrac{1}{17},\nicefrac{4}{17}  } ). $ \\ Op dezelfde manier reken je uit dat het blauwe snijpunt  $ (\blu{\nicefrac{4}{17},\nicefrac{16}{17}  } ). $ is. \\ \\Met andere woorden:
+$ \vectwee{1}{0}   \  \xrightarrow{P}  \ \vectwee[red]{ \nicefrac{1} {17}} {\nicefrac {4} {17}} $  \quad en  \quad 
+$ \vectwee{0}{1}   \  \xrightarrow{P}  \  \vectwee[blue]{\nicefrac{4}{17} } {\nicefrac{16}{17}} $ \\ \\ \\
+en dus is de matrix van 
+$ P = \mattwee{\red{\nicefrac{1}{17}}&\blu{\nicefrac{4}{17}}}
+{\red{\nicefrac{4}{17}}&\blu{\nicefrac{16}{17}}} 
+= \frac{1}{17}\mattwee{1&4}{4&16}$\\
+
+\subsection{de matrix van een projectie in \RD}\label{projectieR3}
+Voor het vinden van de matrix van de projectie \textit{P} op een vlak in \RD moeten we bepalen wat er met de drie basisvectoren langs de x-, y-, en z-as  gebeurt.
+ \mybv[projectie \RD] {
+	We nemen als voorbeeld de projectie op het vlak $ W:  2x-3y+z = 0. $ Het punt (1,0,0) komt op het 
+	blauwe punt in het vlak \textit{W} terecht, (0,1,0) komt op het rode punt in \textit{W} en  (0,0,1) komt op het groene punt in \textit{W}. Zie figuur \ref{fig:projectievlak}}
+
+\figuur[0.8]{projectievlak}{De projectie op het vlak $ W:  2x-3y+z = 0 $ door de oorsprong met de blauwe loodlijn  $ l_{100}, $  door (1,0,0) , de rode $ l_{010} $  door (0,1,0)  en de groene $ l_{001} $ door (0,0,1). NB: De snijpunten van de loodlijnen met het vlak \textit{W}, zijn met respectievelijk rood, groen en blauw aangegeven. Merk op dat de punten (1,0,0) en (0,0,1) 'omhoog' geprojecteerd worden en (0,1,0) 'naar beneden'.}	
+
+We moeten  de snijpunten van de 3 loodlijnen $ l_{100}, l_{010} $ en $ l_{001}  $ door respectievelijk de punten (1,0,0), (0,1,0) en (0,0,1) uitrekenen. We weten dat de richtingsvector van de loodlijnen gelijk is aan de normaalvector van \textit{W} : $\vec{n_W} = \vecdrie{2}{-3}{1}. $ \\ 
+Dus  $ l_{100}: \ \ \vecdriesnel{x} \ = \  \vec{c} + \lambda \vecdrie{2}{-3}{1}. $ is de eerste (blauwe) loodlijn. \\
+Voor $ \vec{c} $ mogen we elk punt  nemen dat op  $ l_{100} $ ligt, bv  (1,0,0), dus
+$ l_{100}: \ \ \vecdrie{x}{y}{z} \ = \ \vecdrie{1}{0}{0} \ + \ \lambda \ \vecdrie{2}{-3}{1} $. \\ 
+Het snijpunt (blauw) van $ l_{100} $ en\textit{ W}  ligt èn in het vlak  èn op de loodlijjn, dus geldt:
+\[\begin{cases}
+    x = 1 + 2\lambda  \\
+    y= -3\lambda   \qquad \qquad $ èn $ \qquad  2x-3y+z = 0 \\
+    z= \lambda 
+\end{cases}
+\] 
+door x, y en z in te  vullen in de $ 2^e $  vergelijking vinden we 
+$  2(1 + 2\lambda) - 3 (-3\lambda) + \lambda = 0 $   dus  
+$ 2+ 14\lambda  = 0 $ en dus is $  \lambda = -\frac{1}{7}   $. Dat betekent dat het snijpunt van $ l_{100} $ en W gelijk is aaan:$  (\frac{5}{7}, \frac{3}{7}, -\frac{1}{7} )  $   want we mogen $\lambda = -\frac{1}{7} $ invullen in  de vectorvoorstelling van de lijn $ l_{100} $ . Bijvoorbeeld voor  de x-coördinaat : $ x= 1+2. -\frac{1}{7}  = 1 -\frac{2}{7}  =  \frac{5}{7}.  $ \\ \\
+Met andere woorden:
+$ \ \vecdrie{1}{0}{0}   \  \xrightarrow{P}  \  \vecdrie[blue] {\nicefrac{5}{7} }{\nicefrac{3}{7} }{-\nicefrac{1}{7} }\ 
+\ = \   \blu{\frac{1}{7} } \vecdrie[blue] {5}{3}{-1}
+\ = \   \blu{\frac{1}{14} } \vecdrie[blue] {10}{6}{-2}. $  \\  \\
+Op dezelfde manier vinden we de snijpunten van $ l_{010} $ en  $ l_{001}  $ met  
+\textit{W}: \\ \\
+$ \ \vecdrie{0}{1}{0}   \  \xrightarrow{P}  \ \red{\frac{1}{14} }  \vecdrie[red]{ 6 }{5 }{-3 }\ $ 
+en \quad  
+$  \ \vecdrie{0}{0}{1}   \  \xrightarrow{P}  \  \gre{\frac{1}{14} } \vecdrie[green]{2 }{-3 }{15}. $  \\
+En dat betekent dat de matrix van $  r_1 $
+$ P = 
+\frac{1}{14} \matdrie{  \blu{10} &  \red{6} &   \gre{2} }
+{   \blu{6}   &   \red{5} &  \gre{-3} }
+{  \blu{-2} &   \red{-3}  &   \gre{15}}. $
+
+\subsubsection{Opgaven}
+\begin{enumerate}
+	\item Transponeer de matrix 
+	$ M = \matdrie{ 3 & 4 & 0 &  3} 
+	{ 2 &  0 & 7 & -4}
+	{-1 & 9 & 2 & 0 } $
+	
+	\item Wat is het product van deze  3 matrices
+	$ \mattwee{ 3 & 0 & 2 } 
+	{ 4 &  -1 & 1} .
+	\matdrie{ 2 & -1 & -2 } 
+	{ 1 &  3 & 1 }
+	{0 & 5 & 6 }  . 
+	\matdrie{ 1 & 2 } 
+	{ 2 &  4 }
+	{-1 & 2 } $	?
+	
+	\item Geef de matrix  \textit{R } van de rotatie over $ 62\degree \ $ met de klok mee rond de positieve x-as zodat (0,0,2) wordt afgebeeld op $ (0, 2\sin 62\degree , 2\cos 62\degree ). $ 
+	
+	\item Geef de matrix  \textit{$ P_1 $} van de projectie  in \RD op het vlak $  y=3x $. \\ \\
+	
+\end{enumerate}
+
+\subsubsection{extra opgaven}
+\begin{enumerate}
+	\item  Transponeer de matrix 
+	$ N = \matdrie{ 2 & 5 & -3 &  5} 
+	{ 1 &  0 & 4 & 0}
+	{4 & 9 & 6 & -1 }$
+	
+	\item Wat is het product van deze  3 matrices
+	$ \matdrie{ 1 & 2 } 
+	{ 2 &  4}
+	{ -1 & 2 } .
+	\mattwee{ 3 & 0 & 2 } 
+	{ 4 &  -1 & 1 }  . 
+	\matdrie{  2 & -1 & -2 } 
+	{ 1 &  3 & 1 }
+	{0 & 5 & 6  } $	?
+	
+	\item Geef de matrix  \textit{$ R_1  $} van de rotatie over $ 4\degree \  $  met de klok mee rond de  z-as zodat (1,0,-2) wordt afgebeeld op $ (\cos 4\degree , -\sin 4\degree , -2) . $ 
+	
+	\item Geef de matrix  \textit{$ R_2 $} van de rotatie over $ 42\degree \  $ tegen de klok in rond de  y-as zodat (3,0,0) wordt afgebeeld op $ (3\cos 42\degree , 0,  -3\sin 42\degree ). $ 
+	
+	\item Geef de matrix  \textit{$ R_3 $} van de rotatie over $ 126\degree \  $ tegen de klok in rond de  x-as zodat (3,0,1) wordt afgebeeld op $ (3, \cos 36\degree ,  -\sin 36\degree ). $ 
+	
+	\item Geef de matrix  \textit{$ P_2 $} van de projectie  in \RD op het vlak $  y=x $.
+\end{enumerate}
+
+\chapter{Spiegeling, translatie en samenstelling}
+\label{chap: Spiegeling, translatie en samenstelling}
+\section{Spiegeling}
+\subsection{de matrix van een spiegeling in \RT}
+Een spiegeling in \RT wordt uitgevoerd door vanuit een punt een loodlijn te trekken naar de lijn waarin je spiegelt, en vervolgens die loodlijn even lang door te trekken naar de andere kant van de spiegellijn om het beeld van het originele punt te vinden. Zie figuur \ref{fig:spiegeling2D}
+
+\figuur[0.8]{spiegeling2D}{De spiegeling in de lijn $ y=4x. $Het rode punt is het spiegelbeeld van (1,0), het blauwe het spiegelbeeld van (0,1)}
+
+\mybv[spiegeling \RT] {Als voorbeeld nemen we de spiegeling in de lijn $  y = 4x $ }  We kunnen bij een spiegeling gebruik maken van wat we bij een projectie uitgerekend hebben (zie 
+\textit{de matrix van een projectie in \RT} blz \pageref{projectie2D}). $ P_{10}  $ is het punt waarop (1,0) \textit{geprojecteerd} wordt, en $ S_{10}  $ het punt  waarnaar toe (1,0) \textit{gespiegeld} wordt. Verder stellen we dat 
+$\vec{p} = \overrightarrow{OP_{10} }. $\\ 
+Met behulp van figuur \ref{fig:spiegeling2Dvector} kun je zien dat 
+$  \red{ \overrightarrow{OS_{10} } }
+=  \blu{ \vec{p}  + - \hat{b}_x+  \vec{p} }
+= 2 \vec{p}  - \hat{b}_x. $ \\ \\
+Het zal je  niet verbazen dat de volgende regel geldt:\\
+Als $\vec{p} $ het beeld van een basisvector $ \hat{b}  $  bij een projectie is dan is $ 2 \vec{p}  - \hat{b} $ het beeld van de bijbehorende spiegeling. Nog korter: \\ \\
+\myeig[spiegeling]
+{als \quad $ \hat{b}  \  \xrightarrow{P}   \  \vec{p}  \quad  $
+	dan \qquad   $ \hat{b}  \  \xrightarrow{S}   \  2\vec{p} \ - \  \hat{b}  $ 
+	\qquad \qquad voor elke basisvector $  \hat{b}  $} 
+
+\figuur[1]{spiegeling2Dvector} { Het blauwe pad volgen is hetzelfde als  in één keer de rode vector.  
+	En dus geldt: als $  \vec{p} $ het beeld van een projectie is, dan is het spiegelbeeld $ =  2\vec{p} - \hat{b}.  $ \  (bij dit voorbeeld  is $ \hat{b} = \hat{b}_x , $ de basisvector langs de x-as). }  
+
+Van de projectie in \RT weten we dat 
+$ \vec{p} = \vectwee{ \nicefrac{1}{17} } { \nicefrac{4}{17} } \  $ \\ \\ \\dus is 
+$ 2.\vec{p} -  \hat{b}_x
+\  =  \   2.  \vectwee{ \nicefrac{1}{17} } { \nicefrac{4}{17} } \ - \ \vectwee{1}{0} 
+\ = \    \vectwee{ \nicefrac{2}{17} -1 } {\nicefrac{8}{17}} 
+\ = \    \vectwee{ -\nicefrac{15}{17} } {\nicefrac{8}{17}} 
+$ \\ \\ \\
+en dat betekent dat   $ \vectwee{1}{0}  \  \xrightarrow{S}   
+\  \vectwee[red]{ -\nicefrac{15}{17} } {\nicefrac{8}{17}} . $ \\ \\
+We passen deze eigenschap ook toe om te vinden wat het beeld van  $  \hat{b}_y\ = \ \vectwee{0}{1} $ onder onze spiegeling is:\\ \\
+Er gold:  $ \vectwee{0}{1}   \  \xrightarrow{P}  \ 
+\vectwee{\nicefrac{4} {17} } {\nicefrac {16} {17}} $
+\qquad  dan is $  \  2\vec{p} \ - \  \hat{b}_y \ 
+= 2 .\vectwee{ \nicefrac {4} {17} } { \nicefrac {16} {17}} \ - \ \vectwee{0}{1}  \ 
+= \  \vectwee{\nicefrac{8}{17} } {\nicefrac{15}{17}}  $. \\
+
+\quad dus  $ \vectwee{0}{1}   \  \xrightarrow{S}  \
+\vectwee[blue]{\nicefrac{8}{17} } {\nicefrac{15}{17} } $ 
+\quad \quad En dus is de matrix van 
+$ S = \mattwee{ 
+	\red{ - \nicefrac{15}{17}} & { \color{blue}\nicefrac{8}{17}} }
+{ \red{ \nicefrac{8}{17} } & { \color{blue} \nicefrac{15}{17} } } 
+ = \ \frac{1}{17} .  \mattwee{-15&8}{8&15} $\\ \\
+Misschien valt je op dat de getallen in de matrix niet toevallig lijken (linksonder en rechtsboven zijn hetzelfde en de andere twee elkaars negatief). Dat is ook niet toevallig. Als je dat handig vindt mag je de uitkomst van een spiegelberekening controleren met de volgende formule:\\
+
+\myeig[spiegeling]
+{Als \textit{S} een spiegeling is in de lijn $ y=a.x $, dan is de matirx van de spiegeling\\
+	$ S = \frac{1}{a^2+1}  \mattwee{ 
+		\red{ 1-a^2} & { \color{blue} 2a} }
+	{ \red{ 2a } & { \color{blue} a^2-1} } $ }
+
+\subsection{de matrix van een spiegeling in \RD}
+Net zoals we bij een spiegeling in \RT gebruik maken van de projectie (op dezelfde lijn waarin we spiegelen), kunnen we voor een spiegeling in \RD gebruik maken van de projectie op het vlak waarin we willen spiegelen. Want er geldt dezelfde regel als in \RT:\\ \\
+
+\myeig[spiegeling]
+{als $ \hat{b}  \  \xrightarrow{P}   \  \vec{p}  \quad  $
+	dan \qquad   $ \hat{b}  \  \xrightarrow{S}   \  2\vec{p} \ - \  \hat{b}  $  
+	\qquad \qquad voor elke basisvector $  \hat{b}  $ } \\ 
+
+\mybv[spiegeling  \RD] {Als voorbeeld nemen we de spiegeling in het vlak $ W:  2x-3y+z = 0. $ }
+Van de \textit{projectie op W}  (zie:  'matrix van een projectie in \RD' op blz.\pageref{projectieR3}) weten we dat:\\ \\
+$ \ \vecdrie{1}{0}{0}   \  \xrightarrow{P}  \  \frac{1}{7}\vecdrie {5 } {3}{-1} $
+\quad   $ \ \vecdrie{0}{1}{0}   \  \xrightarrow{P}  \ \frac{1}{14}  \vecdrie{ 6 }{5 }{-3 }\ $ 
+en \quad  
+$  \ \vecdrie{0}{0}{1}   \  \xrightarrow{P}  \  \frac{1}{14}  \vecdrie{2 }{-3 }{15}\ $\\ \\ \\
+dat betekent dat bij de spiegeling geldt:\\
+voor $ \hat{b}_x $ is \  
+$\vec{p} =  \frac{1}{7} \ \vecdrie {5 } {3}{-1} $\quad  en \quad 
+$ 2\vec{p}  -  \hat{b}_x  = 
+\ 2 . \frac{1}{7} \vecdrie {5 } {3}{-1} \  - \  \vecdrie{1}{0}{0}  \ =
+\   \frac{1}{7} \ \vecdrie {3 } {6}{-2} $ \\en dus 
+$ \ \vecdrie{1}{0}{0}   \  \xrightarrow{S}  \  { \color{red}\frac{1}{7}} \  \vecdrie[red] {3 } {6}{-2} $\\
+Voor $ \hat{b}_y  $ geldt:
+$ 2\vec{p}  -  \hat{b}_y  =  
+\ \frac{2}{14} \ \vecdrie {6 } {5}{-3} \  - \  \vecdrie{0}{1}{0}  \ = 
+\   \frac{1}{7} \ \vecdrie {6 } {-2}{-3} $  \\ en dus  \quad 
+$ \ \vecdrie{0}{1}{0}   \  \xrightarrow{S}  \  { \color{blue}\frac{1}{7}} \  \vecdrie[blue] {6 } {-2}{-3} $\\
+en voor $ \hat{b}_z  $ geldt:
+$ 2\vec{p}  -  \hat{b}_z  =  
+\ \frac{2}{14} \ \vecdrie {2 } {-3}{15} \  - \  \vecdrie{0}{0}{1}  \ = 
+\   \frac{1}{7} \ \vecdrie {2 } {-3}{8} $   \\ en dus 
+$ \ \vecdrie{0}{0}{1}   \  \rightarrow{S}  \  { \color{green}\frac{1}{7}} \  \vecdrie[green] {2} {-3}{8}. $\\
+Dan is de matrix van 
+$ S = 
+\frac{1}{7} \matdrie{  \red{3} &  \blu{6} &   \gre{2} }
+{   \red{6}   &   \blu{-2} &  \gre{-3} }
+{  \red{-2} &   \blu{-3}  &   \gre{8}} $
+
+\section{Translatie}		
+Transleren, anders gezegd verschuiven, is een afwijkende afbeelding. Zoals we zullen zien is transleren, in tegenstelling tot roteren, speiegelen en projecteren \textit{niet} lineair. Dat is belangrijk want daarom kunnen we er niet zomaar een matrix van maken. En alleen als we een matrix hebben kunnen we (beter gezegd software) er  goed mee rekenen. 
+\subsection{translatie niet lineair}
+\mybv[translatie \RT] {Als voorbeeld nemen we de translatie over de vector  $ \vec{t}=  \vectwee{2}{1}. $ }
+\figuur[0.8]{translatie2D2}{De translatie over de vector  $ \vec{t} $ }
+Je kunt de werking van deze translatie als volgt opschrijven:\\ neem een willekeurige vector $ \vectwee{x}{y} $ dan is het beeld daarvan $ T \vectwee{x}{y} = \vectwee{x+2}{y+1} $.\\ \\ \\
+Je kunt nu op verschillende manieren zien dat een matrix "niet werkt":\\ \\
+\textbf{ Ten eerste:} $ T \vectwee{1}{0} = \vectwee{1+2}{0+1} = \vectwee{3}{1} $ en dat \textit{\textbf{zou}} betekenen dat 
+$ \vectwee{1}{0}  \  \xrightarrow{T}   \   \vectwee[red]{ 3 } {1}. $ \\ Op dezelfde manier \textit{\textbf{zou}} je zien dat  
+$ \vectwee{0}{1}  \  \xrightarrow{T}   \   \vectwee[blue]{ 2 } {2}. $ \\ Dat \textbf{\textit{zou}} betekenen dat 
+$ T = \mattwee{ 3 & 2 }{ 1 & 2 } $ En \textbf{\textit{als}} dat zo zou zijn \textbf{\textit{zou}} 
+$  T \vectwee{0}{0} \ = \ 
+\ \vectwee{ 3.0 + 2.0 }{ 1.0 + 2.0 } \ 
+= \ \vectwee{0}{0} $ Dat \textbf{\textit{zou}} betekenen dat het de oorsprong (0,0) niet verschoven zou worden! Overigens heet zo'n redenering als deze  $"$een bewijs uit het ongerijmde".\\ \\ \\
+\textbf{Ten tweede:} als T lineair zou zijn zou moeten gelden\\ 
+$ T(\vec{a} \ + \ \vec{b} )  
+=  T(\vec{a}) \ + \ T(\vec{b}) $ \\ dus bijvoorbeeld voor $ \vec{a} = \vectwee{1}{0} $ en   
+$ \vec{b} \ = \ \vectwee{0}{1} $  is \\ 
+$ T(\vec{a} \ + \ \vec{b} ) \ 
+= \ T \ \vectwee{1+0}{0+1} \ 
+= \  \vectwee{1+2}{1+1} \ 
+= \ \vectwee{3}{2}  $ 
+\quad maar \\
+$ T(\vec{a}) \ + \ T(\vec{b}) 
+= \  \vectwee{1+2}{0+1} \  + \  \vectwee{0+2}{1+1} \ 
+= \  \vectwee{3}{1} \ + \  \vectwee{2}{2} \ 
+= \  \vectwee{5}{3} \ 
+$\\ \\
+Kortom 
+\myeig[translatie niet lineair]{\textbf{\textit{een translatie  is niet lineair}}} 
+
+\subsection{affiene  matrix van translatie in \RT}
+Maar er bestaat een truc om  toch met een translatie te kunnen rekenen. We voegen aan de translatie een dimensie toe. Dat wil zeggen voor een twee-dimensionale translatie maken we een drie-dimensionale matrix en voor een drie-dimensionale translatie maken we een  vier-dimensionale matrix:\\ \\ 
+\mydef [Gegeven  een translatie vector]
+{affiene  matrix \RT} { $\vec{t} = \vectweesnel{t} $  \quad  dan is 
+	$ T_a = \matdrie{ 1 & 0 & t_1 }
+	{ 0 & 1 & t_2 }
+	{0 & 0 & 1 } $ \quad de affiene matrix  } \\ \\
+\mybv[affiene  matrix \RT]{voor de translatie over $ \vec{t}=  \vectwee{2}{-3} $ is de affiene matrix 
+	$ T_a = \matdrie{ 1 & 0 & 2 }
+	{ 0 & 1 & -3 }
+	{0 & 0 & 1 } $  }
+\subsection{rekenen met een affiene  matrix in \RT}
+Om te kunnen rekenen met een affiene matrix moeten we aan alles een dimensie toevoegen: aan punten, vectoren en andere matrices. Dat doen we als volgt: 
+\mydef
+{affiene vector \RT}{Als  $\vec{v} = \ \vectweesnel{v} $ dan  is 
+	$\vec{v}_a = \  \vecdrie{v_1}{v_2}{1}  $ \quad de \textit{affiene} vector } \\
+\mybv[affiene  vector \RT]{Als $ \vec{t}=  \vectwee{-4}{7} $  dan is  de affiene vector 
+	$ t_a = \matdrie{ -4 }	{ 7 }	{1 }$ } \\
+Nu kunnen we  controleren of de affiene matrix voor\textit{ }T klopt. We nemen weer de basisvector langs de x-as $ \hat{b}_x $ en voegen ook daar een dimensie aan toe! \\
+$ \hat{b}_x \ = \ \vectwee{1}{0} $ en dus is  
+$ \hat{b}_{xa} \ = \  \vecdrie{1}{0}{1}. $ \\
+We kijken wat het beeld van $ \vecdrie{1}{0}{1} $ onder \textit{$ T_a $} is: \\
+$ T_a \ \vecdrie{1}{0}{1} \ 
+= \ \matdrie{ 1 & 0 &  2 }{ 0 & 1 & 1 }{0 & 0 & 1 }  \ \vecdrie{1}{0}{1} \ 
+=  \ \vecdrie{3}{1}{1} $  
+\quad  Anders gezegd: \quad $ \vectwee{1}{0}  \  \xrightarrow{T}   \ \   \vectwee{ 3 } {1}. $\\ \\ \\
+Wat is het beeld van de oorsprong onder \textit{$  T_a $}? Dan moeten we ook aan de oorsprong een dimensie toevoegen $ O_a = (0,0,1) $ Dan is \\ \\
+$ T_a \ \vecdrie{0}{0}{1} \ 
+= \ \matdrie{ 1 & 0 &  2 }{ 0 & 1 & 1 }{0 & 0 & 1 }  \ . \ \vecdrie{0}{0}{1} \ 
+=  \ \vecdrie{2}{1}{1} $ 
+\quad dat wil zeggen \quad
+$ \vectwee{0}{0}  \  \xrightarrow{T}   \   \vectwee{ 2 } {1}. $\\
+
+\subsection{een translatie in \RD}
+Ook in 3 dimensies is een translatie niet lineair. Dus ook hier voegen we een dimensie toe:
+\mydef []
+{affiene matrix \RD}{ Als $ \vec{t} = \vecdriesnel{t} $ \quad dan is  $ T_a = \matvier{ 1 & 0 & 0 & t_1 } 
+	{ 0 & 1 & 0 &  t_2 }  
+	{ 0 & 0 & 1 &  t_3 } 
+	{0 & 0 &  0 & 1 } $ \quad de affiene matrix }\\ \\
+\mybv[affiene  matrix \RD]{voor de translatie over $ \vec{t}=  \vecdrie{2}{3}{-4} $ \  is de affiene matrix $ T_a = \matvier{ 1 & 0 & 0 & 2} 
+	{ 0 & 1 & 0 &  3}  
+	{ 0 & 0 & 1 &  -4 } 
+	{0 & 0 &  0 & 1 } $  }\\          
+\mydef 
+{affiene vector \RD}
+{ Als $\vec{v} = \ \vecdriesnel{v} $ \quad dan is \quad 
+	$\vec{v}_a = \vecvier{v_1} {v_2} {v_3} {1}  $ \quad de affiene vector }\\
+\mybv[affiene vector \RD] 
+{ Als $\vec{a} = \ \vecdrie{2}{-4}{-1} $ \quad dan is \quad 
+	$\vec{a}_a = \vecvier{2} {-4} {-1} {1}  $ \quad de affiene vector }
+
+
+\subsection{rekenen met een affiene  matrix in \RD}
+Nu kunnen we rekenen met een drie-dimensionale translatie.
+Neem dezelfde translatie als hier vlak boven, over de vector $ \vec{t}=  \vecdrie{2}{3}{-4}. $ \\
+Neem een willekeurige  vector $\vec{v} = \ \vecdriesnel{v} $\\  Dan is de affiene vector  $\vec{v}_a = \  \vecvier{v_1} {v_2} {v_3} {1} . $\\ 
+Het beeld van $\vec{v} $ kunnen we nu uitrekenen:
+$ T_a  . \ \vec{v}_a \ 
+=   \matvier{ 1 & 0 & 0 & 2} 
+{ 0 & 1 & 0 &  3}  
+{ 0 & 0 & 1 &  -4 } 
+{0 & 0 &  0 & 1 } \ \  \vecvier{v_1} {v_2} {v_3} {1} \ \ 
+= \ \  \vecvier{v_1 + 2} {v_2 + 3 } {v_3 - 4 } {1} $ \\
+dus 
+\quad \quad \quad $ \vecdriesnel{v}  \  \xrightarrow{T}   \   \vecdrie{v_1+2} {v_2+3} {v_3-4} . $ 
+\\ \\ \\
+bijvoorbeeld 
+$ \vecdrie{1}{1}{1}  \  \xrightarrow{T}   \   \vecdrie{3} {4} {-3} $ \ \quad en \
+\quad $ \vecdrie{0}{1}{0}  \  \xrightarrow{T}   \   \vecdrie{2} {4} {-4} $ 
+
+\section{Samenstelling}		
+Bewegen bestaat natuurlijk niet alleen uit draaien (roteren), spiegelen enzovoort, maar vooral uit combinaties daarvan. Dus is het belangrijk dat we die combinaties ook uit kunnen rekenen (daarom was het belangrijk om ook matrices voor translaties te hebben). \\ 
+\mydef []
+{samenstelling}
+{Als $ A $ en $ B $  matrices zijn dan is:\\
+	de matrix\textit{ S }van de afbeelding A \textit{\textbf{gevolgd}} door  B 	gelijk aan:
+	\quad $ S\ = \ B . A $ \\ NB voor je gevoel draait de volgorde om! Maar als je goed kijkt zie je dat je eerst A uitvoert en daarna B.}
+\subsection{samenstelling in \RT}
+\mybv[samenstelling \RT] 
+{Stel dat de rotatie $ R 
+	=    \mattwee { 1 & -1 }
+	{ 1 & 1 } $ \quad en de projectie \quad 
+	$ P = \  \mattwee { 0.5 & 0.5 }
+	{ 0.5   & 0.5  } $ \\
+	en we willen \textit{eerst} roteren en \textit{daarna} projecteren, \\ dan is de matrix van die samenstelling: \\
+	$  S = P.R 
+	= \ \mattwee { 0.5 & 0.5 }
+	{ 0.5 & 0.5 } . 
+	\mattwee { 1 & -1 }
+	{ 1 & 1 } 
+	= \ \mattwee { 1 & 0 }
+	{ 1 & 0 }
+	$ } \\
+maar als we \textit{eerst} willen  projecteren en \textit{daarna}  roteren, \\ dan is de matrix van die samenstelling:\\
+$  S_2 = R.P
+= \mattwee { 1 & -1 }
+{ 1 & 1 } . 
+\ \mattwee { 0.5 & 0.5 }
+{ 0.5 & 0.5 } 
+= \ \mattwee { 0 & 0 }
+{ 1 & 1 }
+$ \\ \\ \\
+\mybv[samenstelling \RT] 
+{Stel dat de rotatie $ R 
+	=    \mattwee { \cos \theta & -\sin \theta }
+	{ \sin \theta & \cos \theta} $ \quad en de projectie \quad 
+	$ P = \ \frac{1}{17} \  \mattwee { 1 & 4 }
+	{ 4  & 16 } $ }
+en we willen \textit{eerst} projecteren  en \textit{daarna} roteren, \\
+dan is de matrix van die samenstelling: 
+\begin{align*} 
+S = R.P 
+&=	  \mattwee { \cos \theta & -\sin \theta }
+{ \sin \theta & \cos \theta}  \ . \ 
+\frac{1}{17} \  \mattwee { 1 & 4 }
+{ 4  & 16 }  \\
+& = \   \frac{1}{17} \  
+\mattwee { 1.\cos \theta + 4.-\sin \theta  & & 4.\cos \theta + 16.-\sin \theta  }
+{ 1.\sin \theta + 4.\cos \theta &  &4.\sin \theta + 16.\cos \theta}  \\  
+& = \   \frac{1}{17} \  
+\mattwee { \cos \theta - 4\sin \theta  & & 4\cos \theta - 16\sin \theta  }
+{ \sin \theta + 4\cos \theta & & 4\sin \theta + 16\cos \theta}                                                
+\end{align*} 
+
+\subsection{samenstelling met affiene matrices}
+Als we een translatie in \RT willen samenstellen met een andere afbeelding moeten we eerst aan alle afbeeldingen een dimensie toevoegen. \\ \\
+\mydef[Als
+$  A = \mattwee{a_{11} & a_{12} } 
+{ a_{21} & a_{22} } $]
+{affiene matrix \RT}{
+	dan is de affiene matrix daarvan, 
+	$  A_a = \matdrie{a_{11} & a_{12}  & 0 } 
+	{ a_{21} & a_{22}  & 0 }
+	{0 & 0 & 1 }  $  }  \\ \\ 
+\mybv[affiene samenstelling \RT]
+{ Stel \textit{T} is de translatie over $\vec{t} = \ \vectwee{4}{-3}. $ \  \   
+	$ R  =  \mattwee { 1 & -1 }
+	{ 1 & 1 } $  \ en 
+	$ S  =  \mattwee { 0 & 1 }
+	{ 1 & 0}.  $  \\ \\ Dan zijn de affiene matrices: \\}
+$ T_a = \matdrie{ 1 & 0 & 4 }
+{ 0 & 1 & -3 }
+{0 & 0 & 1 } $  \qquad
+$ R_a = \matdrie{ 1 & -1 & 0 }
+{ 1 & 1 & 0 }
+{0 & 0 & 1 } $ \qquad
+$ S_a = \matdrie{ 0 & 1 & 0 }  
+{ 1 & 0 & 0 }
+{0 & 0 & 1 } $ \\ \\ \\
+en dan is de samenstelling eerst spiegelen, dan transleren en tot slot roteren:
+\begin{align*} 
+R_a . T_a . S_a & = \ 
+\matdrie{ 1 & -1 & 0 }
+{ 1 & 1 & 0 }
+{0 & 0 & 1 } \ . \ 
+\matdrie{ 1 & 0 & 4 } 
+{ 0 & 1 & -3 }
+{0 & 0 & 1 } \ . \ 
+\matdrie{ 0 & 1 & 0 }  
+{ 1 & 0 & 0 }
+{0 & 0 & 1 }   \\
+& = \ 
+\matdrie{ 1 & -1 & 0 }
+{ 1 & 1 & 0 }
+{0 & 0 & 1 } \ . \ 
+\matdrie{ 0 & 1 & 4 }  
+{ 1 & 0 & -3 }
+{0 & 0 & 1 }   \\
+& = \ 
+\matdrie{ -1 & 1 & 7 }  
+{ 1 & 1 & 1 }
+{0 & 0 & 1 }   
+\end{align*} 
+\subsubsection{samenstelling met affiene matrices in \RD}
+Als we een translatie in \RD willen samenstellen met een andere afbeelding moeten we, net als in \RT eerst aan alle afbeeldingen een dimensie toevoegen. \\ 
+\mydef[]
+{affiene matrix \RD} {
+	Als $ 	A = \matdrie {{}a_{11} & a_{12} & a_{13} } 
+	{ a_{21} & a_{22}  &  a_{23}}
+	{ a_{31} & a_{32} & a_{33}} $ \ \ 
+	dan is \ \ 
+	$  
+	A_a = \matvier{a_{11} & a_{12} & a_{13} & 0 } 
+	{ a_{21} & a_{22}  & a_{23} & 0 }
+	{ a_{31} & a_{32} & a_{33} & 0}
+	{0 & 0 & 0 & 1 }  $ \ \  de affiene matrix van\textit{ A} } 
+\mybv[affiene samenstelling \RT] 
+{ Stel \textit{T} is de translatie over $\vec{t} = \ \vecdrie{4}{-3}{2}, $ \  en    
+	$ R  =  \matdrie { 1 & -1 & 0}
+	{ 1 & 1 & -1 } 
+	{ 0 & -1 & 1 }$ , \ en 
+	$ P  =  \matdrie { 0 & 1  & 0 }
+	{ 1 & 0 & 0}
+	{0 & 0 & 1}.  $  \\ Dan zijn de affiene matrices: }
+$ T_a = \matvier{ 1 & 0 & 0 & 4 }
+{ 0 & 1 & 0 &-3 }
+{ 0 & 0 & 1 & 2}
+{0 & 0 & 0 & 1 } $  \qquad
+$ R_a = \matvier{ 1 & -1 & 0 & 0 }
+{ 1 & 1 & -1 & 0}
+{ 0 & -1 & 1  & 0}
+{0 & 0 & 0 & 1 } $ \qquad
+$ P_a = \matvier{ 0 & 1 & 0  & 0 }  
+{ 1 & 0 & 0 & 0 }
+{ 0 & 0 & 1  & 0 } 
+{0 & 0 & 0 & 1 } $ \\ \\
+en dan is de samenstelling van eerst P, dan T en tot slot R:
+\begin{align*} 
+R_a . T_a . P_a & = \ 
+\matvier{ 1 & -1 & 0 & 0 }
+{ 1 & 1 & -1 & 0}
+{ 0 & -1 & 1  & 0}
+{0 & 0 & 0 & 1 }  \ . \ 
+\matvier{ 1 & 0 & 0 & 4 }
+{ 0 & 1 & 0 &-3 }
+{ 0 & 0 & 1 & 2}
+{0 & 0 & 0 & 1 }  \ . \ 
+\matvier{ 0 & 1 & 0  & 0 }  
+{ 1 & 0 & 0 & 0 }
+{ 0 & 0 & 1  & 0 } 
+{0 & 0 & 0 & 1 }  \\
+& = \ \matvier { 1 & -1 & 0 & 0 }
+{ 1 & 1 & -1 & 0}
+{ 0 & -1 & 1  & 0}
+{0 & 0 & 0 & 1 }  \ . \ 
+\matvier{ 0 & 1 & 0 & 4 }
+{ 1 & 0 & 0 &-3 }
+{ 0 & 0 & 1 & 2}
+{0 & 0 & 0 & 1 }   \\
+& = \ \matvier{ -1 & 1 & 0 & 7 }
+{ 1 & 1 & -1 & -1 }
+{ -1 & 0 & 1 & 5}
+{0 & 0 & 0 & 1 }  
+\end{align*} 
+Dit alles betekent tot slot dat als $\vec{v} = \vecdriesnel{v} $ een willekeurige vector in \RD is, \\dan is  het beeld van $ \vec{v} $ onder $  R_a. T_a . P_a $ :
+\begin{align*} 
+\vec{v}  \  \xrightarrow{R_a. T_a . P_a}   
+&   \matvier{ -1 & 1 & 0 & 7 }
+{ 1 & 1 & -1 & -1 }
+{ -1 & 0 & 1 & 5}
+{0 & 0 & 0 & 1 }  \ . \ 
+\matvier{v_1}{v_2}{v_3}{1}  \\ 
+=  & \matvier {-v_1+v_2+7} 
+{ v_1+v_2-v_3 -1 }
+{-v_1+v_3+ 5} {1} 
+\end{align*}                        
+Dus bijvoorbeeld $ \vecdrie{1}{1}{1}  \  \xrightarrow{R. T . P} \  \vecdrie{7}{0}{5}    $ \quad en  \quad 
+$ \vecdrie{1}{0}{0}  \  \xrightarrow{R. T . P}  \ \vecdrie{6}{0}{4}  $ 
+\quad en  \quad 
+$ \vecdrie{0}{0}{1}  \  \xrightarrow{R. T . P}  \ \vecdrie{7}{-2}{6}  $ 
+
+\subsubsection{Opgaven}
+\begin{enumerate}
+	\item Geef de affiene matrix van de translatie \textit{$ T $}  die punt (3,2) afbeeldt op (5,-2).	   
+	
+	\item Geef de matrix van de spiegeling  \textit{$ S_1 $} in \RD in de lijn $ x = 3 y $
+	
+	\item Gegeven de translatie \textit{$ T_{3} $}  die punt (1,2) afbeeldt op punt (3,-2) en de rotatie \\
+	$ R  =  \mattwee  {  \cos 62\degree & \sin 62\degree}
+	{ -\sin 62\degree & \cos 62\degree}.  $ \ \\
+	Geef de matrix van de samengestelde afbeelding \textit{B } die bestaat uit \textit{$ T_{3} $}  gevolgd door \textit{R}. NB: je moet eerst \textit{$ T_{3} $} en \textit{R} affien maken!
+	
+	\item Gegeven de translatie \textit{$ T_{4} $}  die punt (-1,0,3) afbeeldt op punt (2,-1,4) en de spiegeling 
+	$ S = \frac{1}{6} 
+	\matdrie{ 2& -1 &  2}{ 0& -1 & 2}{ -2 & -3 & -1}. $  \ 
+	Geef de matrix van de afbeelding \textit{C} die bestaat uit de translatie gevolgd door de spiegeling.
+\end{enumerate}
+
+\subsubsection{extra opgaven}
+\begin{enumerate}
+	\item Geef de matrix van de spiegeling \textit{$ S_2 $}  in \RD in het vlak $ y= 2x $
+	
+	\item Geef de matrix van de spiegeling \textit{$ S_3 $}  in \RD in het vlak $ z= -\frac{1}{3}y $
+	
+	\item Geef de affiene matrix van de translatie \textit{$ T_{1} $}  die punt (5,1,2) afbeeldt op (0,1,6).
+	
+	\item Geef de affiene matrix van de translatie \textit{$ T_{2} $}  die punt (9,0,-1) afbeeldt op (6,2,-2).	    
+	
+	\item Geef de matrix van de afbeelding \textit{A } die samengesteld is uit \textit{$ S_2 $}, gevolgd door \textit{$ T_1 $}, gevolgd door \textit{$ S_3 $} .  
+\end{enumerate}
+
+\chapter{Determinant}
+\label{chap: Determinant}
+De determinant van een matrix is binnen de lineaire algebra en meetkunde belangrijk begrip. De determinant is in de meetkunde een oppervlakte of inhoud van een ruimte. In de lineaire algebra geeft een determinant belangrijke informatie over een matrix.
+\section{Determinant van een 2x2 matrix}
+\mydef  [De determinant van]
+{determinant   \RT  }
+{ $ A = \mattwee{a & b} 
+	{c & d} $ 
+	\quad is \quad $ |A| = ad - bc $ }
+Dat mag je ook schrijven als \quad det(A), \quad of als 
+\quad $  \dettwee{a & b} 
+{c & d}.  $ \\ \\
+\mybv[determinant]
+{Als $ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\ \ dan is  \ \ $ |A| = -1.-3 \ - \ 2.5 = -7 $ 
+}
+\subsection{eigenschappen van determinanten}
+\textit{vierkante matrix}\\
+De determinant van \textit{niet} vierkante matrices (bv (2x3) of (5x4)) bestaat niet. \\ \\       
+\textit{eenheidsmatrix}\\
+De determinant van de eenheidsmatrix is = 1. \\ \\
+\textit{inverse matrix}\\
+De determinant wordt gebruikt om te bepalen of een matrix een inverse heeft. Anders gezegd: of je een beweging ook weer terug kunt draaien, ongedaan kunt maken. \\ \\
+\myeig[det(A) \noteq  0]
+{Als $ |A| \ne 0 $ dan heeft A een inverse (is omkeerbaar) } \\
+Je kunt zelfs de inverse van een matrix uitrekenen (als de determinant $\ne 0 $):\\
+\myeig[inverse berekenen]
+{Als $ |A| \ne 0 $ dan is in \RT
+	\begin{align*}
+	A^{-1} &=   \dfrac{1}{|A|} 
+	\mattwee{d & -b }
+	{-c & a }    \\
+	&=   \dfrac{1}{ad-bc}     
+	\mattwee{d & -b }
+	{-c & a }                    
+}
+\end{align*}
+\mybv[inverse berekenen]
+{Stel  $ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\quad dan is 	 $ |A|  = -7 $                            
+	\ en  \quad $ A^{-1} = \ -\frac{1}{7} \mattwee{-3 & -5} 
+	{-2 & -1} $
+}
+Nu kunnen we controleren of de inverse echt de omgekeerde is door A en $ A^{-1} $ met elkaar te vermenigvuldigen:
+\begin{align*}
+A . A^{-1}  
+& = \mattwee{-1 & 5} 
+{2 & -3} . 
+\ -\frac{1}{7} \mattwee{-3 & -5} 
+{-2 & -1} \\
+& = \ -\frac{1}{7} \mattwee{-1.-3  + 5.-2 & \ \ \ \ -1.-5+5.-1} 
+{2.-3+-3.-2 & \ \ \ \  2.-5+-3.-1} \\
+& = \ -\frac{1}{7} \mattwee{-7 & 0} 
+{0 & -7}\\
+& = \ \mattwee{1 & 0} 
+{0 & 1}
+\end{align*}                                            
+
+
+\myeig[det(\mytrans{A})= det(A)] {De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
+\mybv[det(\mytrans{A})= det(A)]
+{We nemen weer als voorbeeld de matrix 
+	$ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\  \ dan is $ A^T =  \mattwee{-1 & 2} 
+	{5 & -3} $ \\
+	en dus is  $  |A^T|  =  -1.-3-2.5 = -7 = |A|  $                                         	         
+}\\
+\textit\\
+\myeig[rijen gelijk]{Als een matrix twee of meer gelijke rijen (of kolommen) heeft dan is de determinant = 0:  } 
+\mybv[gelijke rijen ]
+{We nemen  als voorbeeld de matrix 
+	$ A = \mattwee{-1 & 5} 
+	{-1 & 5} $\\ 
+	en zien dat $ |A| = -1.5 - -1.5 = 0 $ 
+}
+\myeig[rij, kolom  = 0]{Als in een matrix een hele rij of kolom gelijk is 0 dan is |A| =0}
+\mybv[{kolom, rij = 0}]
+{
+	We nemen  als voorbeeld de matrix 
+	$ A = \mattwee{0 & 5} 
+	{0 & 2} $\\ 
+	en zien dat $ |A| = 0.2 - 0.5 = 0 $ 
+}
+\section{Ontwikkelen van een determinant}
+Natuurlijk willen we ook de determinant van 3x3 en 4x4 matrices (en hogere dimensies) uit kunnen rekenen. Daar bestaat een mooi recursief algoritme voor. Om te beginnen met een 3x3 determinant:\\ \\ \\
+\mydef [De determinnant van]
+{determinant  \RD}
+{ $  A  = \matdrie{ a_{11} & a_{12} & a_{13} }
+	{ a_{21} & a_{22} & a_{23} }
+	{ a_{31} & a_{32}& a_{33} }  $
+	\quad is   \quad 
+	$ |A|  = a_{11} .   \dettwee{a_{22} & a_{23}} 
+	{a_{32}& a_{33} } 
+	\  \red {-} \ a_{21} .   \dettwee{a_{12} & a_{13}} 
+	{a_{32}& a_{33} } 
+	+a_{31} .   \dettwee{a_{12} & a_{13}} 
+	{ a_{22} & a_{23} }  $ } \\
+In woorden: Je ontwikkelt de determinant naar de $ 1^{e} $ rij door voor $  a_{11} $ de rij en kolom waar $  a_{11} $ in staat 'door te strepen' en daarna $  a_{11}  $ te vermenigvuldigen met de determinant van de getallen die overblijven:
+$  \matdrie{  \red {a_{11}} & \cancel{a_{12}} & \cancel{a_{13} } }
+{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
+{ \cancel{a_{31}} & \red{a_{32}} & \red{a_{33}} }  $ \\ \\ \\
+voor  $  a_{21}  $ :
+\qquad \qquad \quad \ \ \ $  \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13 }} }
+{\red {a_{21}} & \cancel{a_{22}} & \cancel{a_{23}} }
+{ \cancel{a_{31}} & \red{a_{32}}  & \red{a_{33} }}   $
+\quad \textbf{NB bij $  a_{21}  $ komt er een min-teken bij!}\\ \\ \\
+en voor   $  a_{31} $  :
+\qquad \qquad \  \ $   \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13}}  }
+{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
+{ \red {a_{31}} & \cancel{a_{32}} & \cancel{a_{33} } }  $
+\\ \\
+\mybv[determinant  \RD ]
+{ Voorbeeld van een 3x3 determinant:
+	\begin{align*}
+	als \ 	 A & = \matdrie{-5 & 0 & 3} 
+	{4 & 2 & -1} 
+	{1 & 6 & 2} \qquad dan \ is\\ 
+	|A| & = -5.   \dettwee{2 & -1} 
+	{6 & 2 }  
+	\red{-} \ 4. \dettwee{0 & 3} 
+	{6 & 2 }
+	+1.   \dettwee{0 & 3} 
+	{2 & -1 }\\
+	& = -5.(2.2 \ -\  -1.6) \  \red{-} \  4.(0.2 \ - \ 3.6) +1.(0.-1 \ - \ 3.2)\\
+	& = -5.10 \ \red{-} \  4.-18 \ + \ 1.-6\\
+	& = 16
+	\end{align*} 
+}
+\mydef
+{determinant  ${\rm I\!R^{n}}$}
+{De formule voor de determinant van een \textit{nxn} matrix gaat natuurlijk ook recursief:   \begin{align*}
+	Als \quad A  = 
+	&\begin{pmatrix}
+	a_{11} &  a_{12}  & \ldots & a_{1n}\\
+	a_{21}  &  a_{22} & \ldots & a_{2n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n1}  &   a_{n2}       &\ldots & a_{nn}
+	\end{pmatrix} 	 \quad  dan \  is  \\ \\
+	|A| = a_{11} .   	 
+	&\begin{vmatrix}
+	a_{22}  &  a_{23} & \ldots & a_{2n}\\
+	a_{32}  &  a_{33} & \ldots & a_{3n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	\end{vmatrix} 
+	\ \red{-}  \ a_{21} .   	
+	\begin{vmatrix}
+	a_{12} &  a_{13}  & \ldots & a_{1n}\\
+	a_{32}  &  a_{33} & \ldots & a_{3n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	\end{vmatrix} \\ \\
+	&\textbf{+\red{-}  . \  . \ . }\\ \\
+	\red {\pm \ } a_{n1} .   
+	&\begin{vmatrix}
+	a_{12} &  a_{13}  & \ldots & a_{1n}\\
+	a_{22}  &  a_{23} & \ldots & a_{2n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n-1 \ 2}  &   a_{n-1 \ 3}       &\ldots & a_{n-1 \ n}
+	\end{vmatrix} 
+	\end{align*}
+}
+Oef! Daar kunnen we wel wat trucjes bij gebruiken die in de volgende paragraaf behandeld worden.
+\subsection{rekenhulpjes determinant}
+\myeig[ontwikkelen]
+{Je mag een determinant uitrekenen met behulp van de $ 1^e $ kolom, maar dat  mag ook met behulp van de $ 2^e  $ rij of de laatste kolom of ... }
+Je moet alleen wel rekening houden met minnen en plussen volgens onderstaand schema: \\ \\
+$ \begin{matrix}
++ &  -  & + &  -  &  + &  -  & \ldots \\
+-  & + &  -  &  + &  -  &  +& \ldots \\
++ &  -  & + &  -  &  + &  -  & \ldots \\
+-  & + &  -  &  + &  -  &  +& \ldots \\
++ &  -  & + &  -  &  + &  -  & \ldots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{matrix}  $\\ \\ \\
+\mybv[ontwikkelen naar  tweede rij ]
+{Dus als je bijvoorbeeld naar de $ 2^e  $ rij ontwikkelt dan begin je met een - , \\daarna + en je wisselt de - en +   af:
+	\begin{align*}
+	als \ 	 A & = \matdrie{-5 & 0 & 3} 
+	{4 & 2 & -1} 
+	{1 & 6 & 2} \qquad dan \ is\\ 
+	|A| & = \red{-}4.   \dettwee{0 & 3} 
+	{6 & 2 }  
+	\red{+}2. \dettwee{-5 & 3} 
+	{1 & 2 }
+	\red{--}1. \dettwee{-5 & 0} 
+	{1 & 6 }\\
+	& =  \red{-}4.(0.2  -  6.3) \  \red{+}2.(-5.2  -  1.3)    \red{+}1.(-5.6 - 1.0)\\
+	& = -4.-18 +2.-13 +1.-30\\
+	& = 16
+	\end{align*} }
+En dat is hetzelfde als we als antwoord kregen op de  vorige bladzij.\\ \\
+\myeig[optellen kolommen]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde; datzelfde geldt voor rijen} \\
+\mybv[optellen kolommen]
+{Stel we hebben de matrix
+	$ A = \matvier{ 1 & -2 & 3 & 2 }
+	{ 3 & -6 & 0 & 7 }
+	{ -2 & 4 & 1 & 5 } 
+	{ -1 & 2 & 2 & -4 } 
+	$. Dat ziet indrukwekkend uit, maar als we de $ 1^e $ kolom met 2 vermenigvuldigen en bij de $ 2^e  $kolom optellen dan is \\
+	\begin{align*}
+	|A|  \  & = \ \detvier{ 1 & & -2 &  & 3 & 2 }
+	{ 3 & & -6 & &  0 & 7 }
+	{ -2 & & 4 & &  1 & 5 }
+	{ -1 & & 2 & &  2 & -4} \\
+	\  & = \ \detvier{ 1 & -2+2.1 &  \ \ 3 & 2 }
+	{ 3 & -6+2.3 &  \ \ 0 & 7 }
+	{ -2 & \ \ 4+2.-2 &  \ \ 1 & 5 }
+	{ -1 & \ \  2+2.-1 &  \ \ 2 & -4} \\
+	\ & = \ \detvier{ 1 & 0 &  \ \ 3 & 2 }
+	{ 3 & 0 &  \ \ 0 & 7 }
+	{ -2 & 0 &  \ \ 1 & 5 }
+	{ -1 & 0 &  \ \ 2 & -4} 
+	\end{align*} 
+	En, als een hele kolom 0 is, dan is de determinant 0 dus $ |A| = 0 $ 	 \\   \\                    
+}
+\mybv[optellen  rijen]
+{Als een hele rij of kolom 0 maken niet lukt kunnen we het toch veel eenvoudiger maken. 
+	Stel we hebben 
+	$ A = \matvier{ 1 & -2 & 3 & 2 }
+	{ 4 & -6 & 9 & 6 }
+	{ -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } 
+	$. We trekken 3 keer de $ 1^e  $ rij van de  $ 2^e $ rij af. Dan is 
+	\begin{align*}
+	|A|  \ & = \ \detvier{1 & -2 & 3 & 2 }
+	{ 4 & -6 & 9 & 6  }
+	{  -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } \\
+	\   & = \ \detvier{1 & -2 & 3 & 2  }
+	{ 1 & 0 &  0 & 0 }
+	{  -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } \quad ontwikkelen \  naar \ de \ 2^e \ rij!\\
+	\  & = \ -1. \detdrie{ -2 & 3 & 2 }
+	{1 & 1 & 5 }
+	{ 2 & 2 & -4 }\quad de \ 2^e kolom \ van \ de 1^e aftrekken \\
+	\  & = \ -1. \detdrie{ -5 & 3 & 2 }
+	{0 & 1 & 5 }
+	{ 0 & 2 & -4 } 
+	\  = -1.-5.(1.-4 -2.5) = -70
+	\end{align*}
+}
+\subsubsection{Opgaven}
+Bereken de determinanten van de volgende matrices:\\
+\begin{enumerate}[label=\Alph*]
+	\item 
+	$  = \mattwee{1 & -1}
+	{ 2 & 3} $ \quad 
+	\item 
+	$  = \matdrie{2 & 0 & 4}
+	{1 & 1 & 2}
+	{4 & -1 & 8} $ \quad
+	\item 
+	$  =  \matdrie{3 & -1 & 0}
+	{2 & 1 & 4}
+	{5 & 0 & 4} $ \quad
+	\item 
+	$  =  \matdrie{-1 & 0 & 6}
+	{1 & 4 & 3}
+	{2 & 1 & 4} $ \quad 
+	\item 
+	$   = \matvier{-1 & 0 &  0 & 6}
+	{-1 & 6 & -1 & 4}
+	{1 & 4 & 0 & 3}
+	{2 & 1 & 0 & 4} $ \quad
+	\item 
+	$  =  \matvier{-1 & 2 &  5 & 3}
+	{6 & 4 & 1 & 0}
+	{1 & 0 & 2 & -4}
+	{5 & 6 & 6 & 3} $ \quad
+	\item 
+	$   = \matvier{-1 & 0 &  -2 & 1}
+	{3 & 6 & -1 & 0}
+	{4 & 6 & 5 & 1}
+	{1 & 8 & 3 & 4} $ \quad
+	\item 
+	$  =  \matvier{7 & 3 &  1 & 4}
+	{5 & 1 & 2 & -3}
+	{1 & 3 & 0 & 7}
+	{8 & 2 & 1 & 0} $ \quad
+\end{enumerate}
+
+\subsubsection{extra opgaven}
+Bereken de determinanten van de volgende matrices:\\
+
+\begin{enumerate}[label=\Alph*]
+	\item 
+	$   = \mattwee{1 & -2}
+	{ -3 & 6} $ \quad 
+	\item 
+	$  = \mattwee{3 & 2 }
+	{1 & 4 } $ \quad  \\
+	\item 
+	$ = \matdrie{2 & 0 & 1}
+	{-1 & 2 & 7} 
+	{3 & 0 & 2} $ \quad
+	\item  
+	$  = \matdrie{2 & 0 & 3}
+	{5 & 2 & 6}
+	{-1 & 4 & 3} $ \quad  
+	\item 
+	$   = \matdrie{3 & 9 &  -6 }
+	{-1 & 4 & 2 }
+	{2 & 0 & -4 }
+	$ \quad
+	\item 
+	$  =  \matvier{-2 & 2 &  0 & 3}
+	{-7 & 5 & 2 & 6}
+	{-1 & 4 & 0 & 3}
+	{5 & -2 & -2 & -1} $ \quad 
+	\item 
+	$ = \matvier{7 & 2 &  11 & 4}
+	{0 & 1 & 0 & 2}
+	{5 & -3 & 8 & -6}
+	{9 & 2 & 7 & 5} $ \quad
+	
+\end{enumerate}
+
+\chapter{Quaternion}
+\label{chap: Quaternion}
+In software voor 3D-applicaties wordt niet de rotatie gebruikt zoals in hoofdstuk \ref{chap: matrix, rotatie en projectie} beschreven. Daar wordt de methode van Euler gebruikt, maar die levert problemen op als je over 3 assen roteert. Dat probleem wordt de Gimbal Lock genoemd. Zoek even op you tube naar 'Gimbal Lock'. 
+Een oplossing voor deze problemen bieden de zogenaamde quaternionen. En daarvoor moeten we eerst even iets over complexe getallen uitleggen.
+\section{Complexe getallen}
+Complexe getallen zijn getallen waarvan je vroeger misschien geleerd hebt dat ze niet bestaan. Immers als je $ \sqrt{-1} $ opschreef zei je leraar waarschijnlijk: 'Dat kan niet'. Toch zijn complexe getallen (en quaternionen) zeer handige 'rekenhulpjes' in 3d simulaties en ook in electrotechniek. En ze zijn belangrijk in fractals, waarvan je vast de mooie Mandelbrot figuren kent. \\ \\
+\mydef[Het imaginaire getal \textit{i} is een getal zó dat:]
+{imaginair }{ $  i^2 = -1 $ }\\
+Dat is hetzelfde als $ i =\sqrt{-1} $ \\ \\
+\mydef[We definieren een complex getal z als:]
+{complex getal}{   $  z = a + bi $ \quad met a en b reële getallen}\\
+\mybv[complex getal]{$ z = 2+3i  $ is een complex getal en ook $ 1-i. $ \\Let op met rekenen: $ (1-i)^2 = (1-i).(1-i) = 1 - i - i -1 = -2i $ }
+We zeggen ook wel dat z bestaat uit een reëel deel \textit{a} en een imaginair deel \textit{bi} .  Je kunt met complexe getallen net zo rekenen als met reële getallen als je maar rekening houdt met $  i^2 = -1.$
+\section{Quaternion}
+Quaternionen zijn een uitbreiding van complexe getallen. In plaats van één imaginair deel heb je er drie:\\ \\
+\mydef[Een quaternion is:]
+{quaternion }{ $ q = a +bi + cj + dk $ 
+	\qquad a, b, c, d \textbf{\textit{reëel}}
+	\qquad  i, j, k  \textbf{\textit{imaginair}}\\ \\ i, j, k voldoen aan de volgende regels:}
+$ i^2 = -1 \qquad  \ j^2 = -1 \qquad k^2 = -1   \\
+i.j = k \qquad \ \ j.i = -k \\
+i.k = -j \qquad k.i = j \\
+j.k = i \qquad \ \ k.j = -i \\ $
+Met a, b, c en d kun je gewoon rekenen, omdat het reële getallen zijn.\\ \\
+\mybv[quaternion]{$ q_1 = 2 - i  + 2j - 3k $ is een quaternion net als $ q_2 = - j + k $ of  $ q_3 = 2i - j + \frac{1}{3}k. $}
+\subsection{rekenschema}
+Om een beetje vlot te kunnen rekenen met quaternionen heb je een schema nodig:
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		& 1 & i & j & k \\ \hline \hline
+		1 & 1 & i & j & k \\ \hline
+		i & i & -1 & k & -j\\ \hline
+		j & j & -k & -1 & i\\ \hline
+		k & k & j & -i & -1\\ 
+		\hline 
+	\end{tabular}
+\end{center}
+
+Je zoekt \textit{eerst} in de $ 1^e $ kolom welke van i, j of k je nodig hebt en \textit{daarna} het volgende  imaginaire getal in de $ 1^e $ rij.  Op het kruispunt staat het resultaat van de vermenigvuldiging (de volgorde is belangrijk omdat bv $  i.k = -j $ maar $ k.i = j  $ !) \\ \\
+\mybv[vermenigvuldiging quaternionen]{als $ q_1 = 6 + 3i - 5j + 2k $ en $ q_2 = 2 + i + 4j - 2k $ wat is dan $ q_1.q_2 $? }
+Daarvoor zijn er 2 manieren:\\
+
+\textbf{1. invullen in tabel} Dit is de handigste manier:  Schrijf de eerste quaternion in de eerste kolom en de tweede quaternion in de eerste rij. Vul op de kruispunten de 
+vermenigvuldigingen in met de  regels uit het schema. Bijvoorbeeld op het kruispunt van de $ 3^e $ rij en de $   5^e $ kolom: $  3i\times -2k = -6ik   $ en omdat $ ik = -j $ is de uitkomst $ --6j = +6j $. Tot slot verzamel je  alle i, j en k.
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_1.q_2 $& 2 & i & 4j & -2k \\ \hline \hline
+		6 & 12 & 6i & 24j & -12k  \\ \hline
+		3i & 6i & -3 & 12k & 6j\\ \hline
+		-5j & 10j &  5k & 20 & 10i\\ \hline
+		2k & 4k & 2j & -8i & 4\\ 
+		\hline 
+	\end{tabular}
+\end{center}
+en dus:
+\begin{align*}
+q_1.q_2 & = 12 - 3 + 20 + 4 \\
+& \ \ \ +(6 + 6 + 10 - 8)i \\
+& \ \ \ +(24 + 6 +10 +2)j \\
+& \ \ \ +(-12 + 12 + 5 +4 )k \\
+& = 33 +14i +42j +9k \\
+\end{align*}
+\textbf{2. Uitschrijven}: Je schrijft alle vermenigvuldigingen op en kijkt per vermenigvuldiging in de tabel wat er uit komt:
+\begin{align*}
+q_1.q_2 & = (6 + 3i - 5j + 2k) . (2 + i + 4j - 2k) \\
+& =   6.2 + 6i + 6.4j + 6.-2k \qquad  \qquad \qquad  'gewoon' \  vermenigvuldigen\\
+& \ \ \ + 3i.2 + 3i.i + 3i.4j + 3i.-2k \qquad \qquad  i\  in \ 1^e \  kolom  \ opzoeken\\
+& \ \ \ + -5j.2 + -5j.i + -5j.4j + -5j.-2k \qquad j \  in \ 1^e \ kolom \ opzoeken\\
+& \ \ \ + 2k.2 + 2k.i + 2k.4j + 2k.-2k \qquad \qquad k \  in \ 1^e \ kolom \ opzoeken\\
+& = 18 + 6i + 24j - 12k \\
+& \ \ \ + 6i - 3 + 12k -6.-j \\
+& \ \ \ -10j - 5.-k + 20 +10i \\
+& \ \ \  + 4k + 2j + 8.-i + 4 \qquad \qquad \qquad   nu \ alle \ i, \ j \ en \ k\ bij \ elkaar \  zoeken \\
+& = 18 - 3 + 20 + 4 + (6+6 + 10 -8)i + (24 + 1 - 10 + 2)j + (-12 + 12 + 5 + 4)k \\
+&  = 39 + 14i +17j +9k
+\end{align*}
+\mydef[ ]
+{geconjungeerd}
+{De geconjungerde van $ q = a +bi + cj + dk $  is: 
+	\quad	$ q^* = a - bi - cj - dk $ }\\ \\
+\mybv[geconjungeerde]{Stel $ q = 1 - 2i + 3j + k $  dan is $ q^* = 1 + 2i - 3j - k $ \\
+	Als $ q =   i - 3j  $  dan is $ q^* = -i + 3j  $}
+\section{Roteren met quaternionen}
+Het doel van quaternionen is dat we kunnen roteren. Daarvoor moeten we ook punten van \RD omzetten naar quaternionen.\\ \\
+\mydef
+{puntquaternion}
+{Als P = (x, y, z)  in \RD dan is\\
+	het puntquaternion dat er bij hoort: \quad	$ p = xi+yj+zk $  
+}\\ 
+\mybv[puntquaternion]
+{
+	Stel $ P = (1, 3, -2) $  \ \  dan is  \qquad $ p =0 + 1.i+3j-2k  \ \ = i+3j-2k $ \\ het puntquaternion dat er bij hoort
+}\\
+Voor het berekenen van een rotatie in \RD geldt de volgende formule: 
+\mydef
+{quaternionrotatie}
+{Als p een punt en $  q_r $ een rotatie is in \RD dan is:\\
+	het geroteerde punt \quad	$ p' = q_r.p.q^*_r $  \\ 
+}
+\mybv[quaternionrotatie]
+{Stel $ P = (3,0,1) $ en $ q_r = 2j-k $ wat is dan  $ q_r.p.q^*_r $ ?\\ \\
+	$ p = 3i+k  \ \ \ \ \quad = 0 + 3i + 0.j + k $ \\
+	$ q^*_r = -2j+k  \quad = 0 + 0.i -2j + k $ \\
+	dan is de tabel voor $  p.q^*_r: $ 
+	\quad (p in de $  1^e $ kolom, $  q^*_r: $ in de $ 1^e $ rij)
+	\begin{center}
+		\begin{tabular}{ | l || c | c |c |c |}
+			\hline
+			$ p.q^*_r $  & 0 & 0   & -2j & k \\ \hline \hline
+			0 & 0 & 0   & 0    & 0  \\ \hline
+			3i & 0 & 0 & -6k & -3j\\ \hline
+			0 & 0 &  0 & 0     & 0\\ \hline
+			k & 0 & 0   & 2i   & -1 \\
+			\hline 
+		\end{tabular}
+	\end{center}
+	en dus $ p.q^*_r  = -1+2i-3j-6k. $ } 
+Daarna met de tabel  $  q_r.(p.q^*_r) $ uitrekenen  
+\quad ($  q_r  $ in de $  1^e $ kolom, $  p.q^*_r: $ in de $ 1^e $ rij)\\
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_r.(p.q^*_r) $ & -1 & 2i   & -3j & -6k \\ \hline \hline
+		0    & 0 & 0   &   0        & 0  \\ \hline
+		0    & 0 & 0   &   0        & 0  \\ \hline
+		2j   & -2j &  -4k &   6     & -12i\\ \hline
+		-k    & k  & -2j   & -3i   & -6\\ 
+		\hline 
+	\end{tabular}
+\end{center}
+en dus is $ p' = q_r.(p.q^*_r) =  -15i -4j -3k. $ Dat betekent dat het punt $ P = (3,0,1) $  onder het quaternion  $ q_r = 2j-k $ afgebeeld wordt op het punt $ P' = (-15, -4, -3). $ Dat is een vreemde rotatie (want de afstand tot de oorsprong wordt ineens groter) . Dat komt omdat we voor $ q_r $ wat gemakkelijke waardes hebben genomen en dat is geen echt rotatiequaternion.\\
+Daarom hebben we de volgende definitie nodig:\\ \\
+\mydef
+{rotatie quaternion}
+{Gegeven de eenheidsvector $\hat{v} $  en de  hoek $\alpha $ dan is:\\
+	het rotatiequaternion \quad	
+	$ q_r = cos\frac{\alpha}{2} + sin\frac{\alpha}{2} .\hat{v}_1.i
+	+ sin\frac{\alpha}{2} .\hat{v}_2.j + sin\frac{\alpha}{2} .\hat{v}_3.k $.	    
+}\\
+\mybv[rotatiequaternion]
+{Stel $ \vec{v} = \vecdrie{-3}{0}{4}  $  dan is  
+	$\hat{v} \ = \ \frac{1}{5} \ \vecdrie{-3}{0}{4}   $  \quad (omdat $ |\vec{v}| = \sqrt{3^2+ 4^2} = 5  $ )\\
+	Stel verder dat we over $\alpha$ = 180\degree willen roteren, dan is $\frac{180\degree}{2} = 90\degree $ \\
+	We weten dat $  \cos 90\degree = 0 $ en  $ \sin 90\degree = 1 $ 
+	\ \ En dus is 
+	\begin{align*}
+	q_r &= \cos\frac{180}{2} \ + \ \sin\frac{180}{2} .-\frac{3}{5}.i
+	\ + \ \sin\frac{180}{2} .0.j \ + \ \sin\frac{180}{2} .\frac{4}{5}.k   \\
+	q_r  &=  \cos 90 - \frac{3}{5}.\sin 90 .i  \ + \ \frac{4}{5}. \sin 90 .k  \\
+	q_r  &=  - \frac{3}{5}i  + \frac{4}{5}k 
+	\end{align*}
+}\\
+\mybv[rotatie met quaternionen]
+{We nemen dezelfde vector en hoek als hierboven. \\Stel verder dat we $ P=(-1,-1,0)  $  willen roteren. \\Dan is $ p = - i - j $ het puntquaternion.
+	\\We hadden  $ q_r  =   - \frac{3}{5}i  + \frac{4}{5}k $  
+	\\en dus is  $ q^*_r  =    \frac{3}{5}i  - \frac{4}{5}k. $ 
+	\\Eerst moeten we $   p.q^*_r $  uitrekenen:}
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ p.q^*_r $  & 0 & $  \frac{3}{5}i  $  & 0 & $ - \frac{4}{5}k $  \\ \hline \hline
+		0                 & 0 & 0                          & 0    & 0  \\ \hline
+		-i                & 0 &  $  \frac{3}{5}  $  & 0   & $ - \frac{4}{5}j $\\ \hline
+		-j                & 0 &  $  \frac{3}{5}k $  & 0     & $  \frac{4}{5}i $\\ \hline
+		0                 & 0 & 0                          & 0   & 0 \\
+		\hline 
+	\end{tabular}
+\end{center}
+En dus is $ p.q^*_r = \frac{3}{5}  + \frac{4}{5}i - \frac{4}{5}j  + \frac{3}{5}k. $
+\\Anders geschreven:  $ p.q^*_r = \frac{1}{5}  (3 + 4i - 4j  + 3k). $ 
+\\Dit vullen we  in in de $ 1^e $ rij en $ q_r $ in de $ 1^e  $ kolom om $ q_r.(p.q^*_r) $ te berekenen:\\
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |l}
+		\hline
+		$ q_r.(p.q^*_r) $  & 3 & 4i   & -4j & 3k &  $ \times  \frac{1}{5} $\\ \hline \hline
+		0                         & 0    & 0    & 0       & 0 & \\ \hline
+		-3i                      & -9i   & 12  & 12k    & 9j & \\ \hline
+		0                         & 0    &  0   & 0       & 0&\\ \hline
+		4k                       & 12k & 16j  & 16i   & -12 & \\ 
+		\hline 
+		$ \times  \frac{1}{5} $
+	\end{tabular}
+\end{center}
+Om de berekening overzichtelijk te houden zijn de breuken 'buiten haakjes gehaald'. Zowel voor $ q_r $ als voor $ p.q^*_r $ is dat $  \frac{1}{5}. $ 
+\\Dat betekent dat we alles met $  \frac{1}{5} \times  \frac{1}{5}  =  \frac{1}{25} $ moeten vermenigvuldigen: 
+\begin{align*}
+p' &=  q_r.(p.q^*_r)  \\
+&=  \frac{1}{25}(-9i + 12 +12k + 9j + 12k + 16j + 16i -  12)  \\
+& = \frac{1}{25} (7i + 25j +  24k  )
+\end{align*}
+En dat betekent dat het punt $ P=(-1,-1,0)  $ waar we mee begonnen  geroteerd wordt naar $ P'=  (\frac{7}{25}, \frac{25}{25}, \frac{24}{25}) =(0.28,1,0.96)  $, zie  figuur \ref{fig:quatrotatie}.
+
+\figuur[0.6]{quatrotatie}{De rotatie om $ \vec{v} $ over 180\degree. $ P(-1,-1,0) $ rood, wordt geroteerd naar $ P'=(0.28,1,0.96)  $, blauw }
+\subsubsection{Opgaven}
+\begin{enumerate}
+	\item Gegeven $ P (-2, 2, 9) $ en de vector $\vec{v} = \vecdrie{-4}{0}{3} $. 
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	\item Gegeven $ P (23, -15, 7) $ en de vector $\vec{v} = \vecdrie{6}{-6}{7} $. 
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	
+	\item Gegeven $ a = 2i-4j+5k$ en   $ b = 7+2i+j $. 
+	Bereken het product \ $  a.b $.
+	\item Gegeven $ c = -16 -2i+3j+2k $ en   $ d = -1+4i+2k $. 
+	Bereken het product \ $  c.d $.
+	
+	\item Gegeven $ P (-2, 0, 5) $ en de vector $\vec{v} = \vecdrie{-3}{0}{0} $. 
+	We roteren over $ 60\degree. $ Gebruik quaternionen om het beeld van \textit{P }onder deze rotatie uit te rekenen.
+	
+\end{enumerate}
+
+\subsubsection{extra opgaven}
+
+\begin{enumerate}
+	\item Gegeven $ P (2,2,0) $ en de vector $\vec{v} = \vecdrie{4}{-2}{4} $. 
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	
+	\item Gegeven $ P (6,-2,3) $ en de vector $\vec{v} = \vecdrie{-12}{12}{6} $. 
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	
+	\item Gegeven $ e = 2i-4j+5k$ en   $ f = 7+2i+j $. 
+	Bereken het product \ $  e.f $.
+	
+	\item Gegeven $ g = -16 -2i+3j+2k $ en   $ h = -1+4i+2k $. 
+	Bereken het product \ $  g.h $.
+	
+	\item  Gegeven $ P (-2, 0, 0) $ en de vector $\vec{v} = \vecdrie{0}{7}{0} $. 
+	We roteren over $ 60\degree. $ Gebruik quaternionen om het beeld van \textit{P }onder deze rotatie uit te rekenen.   
+	
+	\item Schrijf een programma dat quaternionen kan vermenigvuldigen.   
+	
+	\item Schrijf een programma dat quaternionrotatie kan uitvoeren (dus gegeven een willekeurige vector $\vec{v} $ , hoek $ \alpha $ en punt P, kan uitrekenen waar P' onder de rotatie uitkomt).      
+	
+\end{enumerate}
+
+\chapter{Antwoorden}
+
+\section{antwoorden  hoofdstuk \ref{chap:vectoren}}
+\begin{enumerate}
+	\item   \ $ \vec{a} + \vec{b}  = \vecvier{1}{1}{6}{7} $   \qquad $ \vec{a} - \vec{b} = \vecvier{5}{-3}{-2}{-7} $,   \qquad $  (\vec{a} , \vec{b}) = 0 $ 
+	
+	
+	\item  $\alpha = \cos ^{-1} (\dfrac{-4}{\sqrt{5}.\sqrt{13}}) = 119,7 $ 
+	
+	
+	
+	\item De lengte van  $  \vec{v} \ $ is $ \ |\vec{v}| \  =  \sqrt{42}$
+	
+	
+	\item $|\vec{v}| = 10$ en dus $ \hat{v} = \frac{1}{10}\  \vecvijf{-1}{5}{-7}{0}{5} \  = \  \vecvijf{-0.1}{0.5}{-0.7}{0}{0.5} $
+	
+	\item afstand  $ = 3\sqrt{3} $
+	
+	
+\end{enumerate}
+
+\subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap:vectoren}}
+\begin{enumerate}
+	
+	\item  \ $ \vec{d} + \vec{e}  = \vecvier{4}{5}{-2}{7} $   \qquad $ \vec{d} - \vec{e} = \vecvier{2}{-9}{-2}{3} $,   \qquad $  (\vec{d} , \vec{e}) = 3-14+10 = -1 $ 
+	
+	\item $  (\vectwee{1}{3} , \vectwee{4}{-3}) = -5 $  en dus $\alpha = \cos ^{-1} (\dfrac{-5}{\sqrt{10}.\sqrt{25}})= \cos ^{-1} (\dfrac{-1}{\sqrt{10}}) = 108,4 $ 
+	
+	\item De lengte van  $  \vec{w} \ $ is $ \ |\vec{w}| \  =  \sqrt{81} = 9 $
+	
+	\item afstand  $ = \frac{579}{225}.\sqrt{99} = 2,65 . \sqrt{99} = 26,4 $
+	
+	\item    afstand  $ = \frac{2}{3}\sqrt{24} $
+\end{enumerate}	
+
+\section{antwoorden  hoofdstuk \ref{chap: matrix, rotatie en projectie}}
+\begin{enumerate}
+	\item  
+	$ M^{T} =	\begin{pmatrix}
+	3 & 2 & -1\\
+	4&0&9\\
+	0&7&2\\
+	3&-4&0 
+	\end{pmatrix} $
+	\item
+	het produkt is:  $ \mattwee {14&52} {6&0}  $
+	\item
+	de rotatie \textit{R} is:  
+	$ \matdrie 
+	{1&0&0}
+	{0&\cos  62 \degree  & \sin 62 \degree}
+	{0& -\sin 62 \degree & \cos 62 \degree}  $
+	\item
+	de projectie \textit{P} is:  
+	$ \matdrie 
+	{\nicefrac{1}{10}&\nicefrac{3}{10}&0}
+	{\nicefrac{3}{10}&\nicefrac{9}{10}  & 0}
+	{0& 0 & 1}  
+	= \frac{1}{10} .\matdrie 
+	{1&3&0}
+	{3&9  & 0}
+	{0& 0 & 10} $    
+	
+\end{enumerate}
+
+\subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap: matrix, rotatie en projectie}}
+\begin{enumerate}
+	\item
+	$ N^{T} =	\begin{pmatrix}
+	2 & 1 & 4\\
+	5&0&9\\
+	-3&4&6\\
+	5&0&-1 
+	\end{pmatrix} $
+	\item
+	het produkt is:  
+	$ \matdrie 
+	{20&3&0}
+	{40&6&0}  
+	{8&-11&-12} $
+	\item    de rotatie   \textit{$ R_1  $}  is:  
+	$ \matdrie  
+	{\cos  4 \degree  & \sin 4 \degree &0}
+	{ -\sin 4 \degree & \cos 4 \degree&0} 
+	{0&0&1} $
+	\item de rotatie   \textit{$ R_2  $}  is:  
+	$ \matdrie  
+	{\cos  42 \degree  & 0& \sin 42 \degree }
+	{0&1&0}
+	{ -\sin 42\degree &  0 &\cos 42 \degree} 
+	$
+	\item     de rotatie \textit{$ R_3  $} is:  
+	$ \matdrie {1&0&0}{0&\cos  126 \degree  & \sin 126 \degree}
+	{0& -\sin 126 \degree & \cos 126 \degree}  
+	= \matdrie {1&0&0}{0&-\sin  36 \degree  & \cos 36 \degree}
+	{0& -\cos 36 \degree & -\sin 36 \degree}  $ \\
+	(want $ \sin(90+\theta)  = \cos \theta \quad en \quad \cos(90+\theta)  = -\sin \theta $ )
+	\item   de projectie \textit{ $ P_2 $ } is:  
+	$ \matdrie 
+	{\nicefrac{1}{2}&\nicefrac{1}{2}&0}
+	{\nicefrac{1}{2}&\nicefrac{1}{2}  & 0}
+	{0& 0 & 1}  
+	= \frac{1}{2} .\matdrie 
+	{1&1&0}
+	{1&1  & 0}
+	{0& 0 & 2} $    
+	
+\end{enumerate}
+
+\section{antwoorden  hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}}
+\begin{enumerate}
+	\item $ T_a = \matdrie{1&0&2}{0&1&-4}{0&0&1} $ 
+	
+	\item $   S = \frac{1}{10} \matdrie{8&6&0}{6&-8&0}{0&0&1}  $ 
+	
+	\item $ T_{3a} = \matdrie{1&0&2}
+	{0&1&-4}
+	{0&0&1} $ 
+	\ en $ R_a= \matdrie{\cos 62 \degree &\sin 62 \degree&0}
+	{-\sin 62 \degree&\cos 62 \degree&0}
+	{0&0&1} $ 
+	\ dus $ B= \matdrie{\cos 62 \degree &\sin 62 \degree&2}
+	{-\sin 62 \degree&\cos 62 \degree&-4}
+	{0&0&1} $ 
+	
+	
+	\item $ T_{4a} = \matvier{1&0&0&3}
+	{0&1&0&-1}
+	{0&0&1&1} 
+	{0&0&0&1} $
+	\ en $ S_a= \frac{1}{6}.\matvier{2&-1&2&0}
+	{0&-1&2&0}
+	{-2&-3&-1&0} 
+	{0&0&0&6} $
+	\ dus $ C = \frac{1}{6}. \matvier{2&-1&2&9}
+	{0&-1&2&3}
+	{-2&-3&-1&-10} 
+	{0&0&0&6} $
+	
+	
+\end{enumerate}
+
+\subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}}
+\begin{enumerate}
+	\item $   S_1 = \frac{1}{5} .\matdrie{-3&4&0}
+	{4&3&0}
+	{0&0&5}  $ 
+	\item $   S_2 = \frac{1}{10} .\matdrie{10&0&0}
+	{0&8&-6}
+	{0&-6&-8}  
+	= \frac{1}{5} .\matdrie{5&0&0}
+	{0&4&-3}
+	{0&-3&-4}  $ 
+	
+	\item $ T_{1a} = \matvier{1&0&0&-5}
+	{0&1&0&0}
+	{0&0&1&8} 
+	{0&0&0&1} $
+	\item $ T_{2a} = \matvier{1&0&0&3}
+	{0&1&0&-1}
+	{0&0&1&1} 
+	{0&0&0&1} $
+	\item $ S_2 . T_{1a} . S_1 = \frac{1}{5} .\matvier{5&0&0&0}
+	{0&4&-3&0}
+	{0&-3&-4&0} 
+	{0&0&0&5} . 
+	\matvier{1&0&0&-5}
+	{0&1&0&0}
+	{0&0&1&8} 
+	{0&0&0&1} . 
+	\frac{1}{5} .	\matvier{-3&4&0&0}
+	{4&3&0&0}
+	{0&0&5&0} 
+	{0&0&0&5} \\
+	\quad	= \frac{1}{25} .	\matvier{-15&20&0&-125}
+	{16&12&-15&-120}
+	{-12&-9&-20&-160} 
+	{0&0&0&25} 
+	$
+	
+\end{enumerate}
+
+\section{antwoorden  hoofdstuk \ref{chap: Determinant}}
+\begin{enumerate}[label=\Alph*]
+	\item 5
+	\item 0
+	\item 0
+	\item -55
+	\item -55
+	\item 0
+	\item 100
+	\item 34
+\end{enumerate}
+\subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap: Determinant}}
+\begin{enumerate}[label=\Alph*]
+	\item 0
+	\item 10
+	\item 2
+	\item 30
+	\item 0
+	\item 18
+	\item 1
+\end{enumerate}
+\section{antwoorden  hoofdstuk \ref{chap: Quaternion}}
+\begin{enumerate}
+	\item 
+	$\hat{v} = \vecdrie{-\nicefrac{4}{5}}{0}{\nicefrac{3}{5}}
+	\quad p  = -2i +2j + 9k 
+	\quad q^*_r  =  \cos 42 \degree  + \frac{4 \sin 42 \degree}{5}i -
+	\frac{3 \sin 42 \degree}{5}k$
+	
+	\item 
+	$\hat{v} = \vecdrie{\nicefrac{6}{11}}{-\nicefrac{6}{11}}{-\nicefrac{7}{11}}
+	\quad p  = -23i +15j + 7k 
+	\quad q^*_r  =  \cos 21 \degree  + \frac{6 \sin 21 \degree}{11}i 
+	-\frac{6 \sin 21 \degree}{11}j
+	-\frac{7 \sin 21 \degree}{11}k$
+	
+	\item
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ a.b $ & 7 & 2i   & j & 0k \\ \hline \hline
+		0    & 0 & 0   &   0        & 0  \\ \hline
+		2i    & 14i & -4   &   2k        & 0  \\ \hline
+		-4j   & -28j &  8k &   4     & 0\\ \hline
+		5k    & 35k  & 10j   & -5i   & 0\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ a.b = -4 + 4 +14i -5i -28j +10j +2k + 8k + 35k =  9i -18j +45k $
+	
+	\item
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ c.d $ & -1 & 0i   & 4j & 2k \\ \hline \hline
+		-16    & 16 & 0   &   -64j        & -32k  \\ \hline
+		2i    & 2i & 0   &   -8k        & 4j  \\ \hline
+		3j   & -3j &  0 &   -12     & 6i\\ \hline
+		2k    & -2k  & 0   & -8i   & -4\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ c.d = 16 -12  -4  + 2i -8i +6i  -64j +4j -3j  -32k - 8k -2k =  -63j + 42k $
+	
+	\item
+	$\hat{v} = \vecdrie{-1}{0}{0} \quad p = -2i +5k   \\
+	\quad q_r = \cos 30 \degree -\sin 30 \degree i  =  \cos 30 \degree - 0,5i \\
+	\quad q^*_r =  \cos 30 \degree + \sin 30 \degree i  =  \cos 30 \degree + 0,5i $ \\ \\
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_r.p $ & 0 & -2i   & 0j & 5k \\ \hline \hline
+		$\cos 30 \degree   $  & 0 &  $-2\cos 30 \degree i  $
+		&   0    &  $5\cos 30 \degree k  $ \\ \hline
+		-0,5i   & 0 &  -1  &   0       & 2,5j  \\ \hline
+		0j   & 0 &  0 &   0    & 0\\ \hline
+		0k    & 0  & 0   & 0  & 0\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ q_r.p = -1 -2\cos 30 \degree i  + 2,5j + 5\cos 30 \degree k $\\ \\
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ (q_r.p).q^*_r $ & $ \cos 30 \degree  $ & 0,5i   & 0j & 0k \\ \hline \hline
+		$-1   $   &  $-\cos 30 \degree i  $ & -0,5i	&   0    &  0 \\ \hline
+		$ -2\cos 30 \degree i  $ & -1,5i &  $ \cos 30 \degree i  $  &0&0\\ \hline
+		2,5j   & $ 2,5\cos 30 \degree j  $ &  -1,25k &   0    & 0\\ \hline
+		$ 5\cos 30 \degree k  $    & 3,75k  & $ 2,5\cos 30 \degree j  $    & 0  & 0\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ p' = (q_r.p).q^*_r = -2i + 5\cos 30 \degree j  + 2,5k $\\
+	dwz het punt P komt terecht op $ P' = \vecdrie{-2}{5\cos 30 \degree}{2,5}
+	= \vecdrie{-2}{2\frac{1}{2}. \sqrt{3}}{2\frac{1}{2}} $
+	
+	
+	
+\end{enumerate}
+
+\subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap: Quaternion}}
+\begin{enumerate}
+	\item 
+	$\hat{v} = \vecdrie{-\nicefrac{2}{3}}{\nicefrac{2}{3}}{\nicefrac{1}{3}}
+	\quad p  = 6i - 2j + 3k  \\
+	\quad q_r  =  \cos 42 \degree  - \frac{2 }{3}\sin 42 \degree i 
+	+ \frac{2 }{3}\sin 42 \degree j + \frac{1 }{3}\sin 42 \degree k \\
+	q^*_r  =  \cos 42 \degree  + \frac{2 }{3}\sin 42 \degree i 
+	- \frac{2 }{3}\sin 42 \degree j - \frac{1 }{3}\sin 42 \degree k $
+	
+	\item 
+	$\hat{v} = \vecdrie{\nicefrac{2}{3}}{- \nicefrac{2}{3}}{\nicefrac{2}{3}}
+	\quad p  = 2i + 2j   \\
+	q_r  =  \cos 21 \degree  + \frac{2 }{3}\sin 21 \degree i 
+	- \frac{1}{3}\sin 21 \degree j
+	+ \frac{2 }{3 } \sin 21 \degree k   \\
+	q^*_r  =  \cos 21 \degree  - \frac{2 }{3}\sin 21 \degree i 
+	+ \frac{1}{3}\sin 21 \degree j
+	- \frac{2 }{3 } \sin 21 \degree k $
+	
+	\item
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ e.f $ &-1 & 2i   & -j & 2k \\ \hline \hline
+		2    & -2 & 4i     &  -2j   & 4k  \\ \hline
+		3i    & -3i & -6  &  -3k   & -6j  \\ \hline
+		0j   & 0 &  0 &   0     & 0\\ \hline
+		-5k    & 5k  & -10j   & -5i   & 10\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ e.f = 2  - 4i -18j + 5k $
+	
+	\item
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ g.h $ & 0 & 2i  & 3j       & 3k \\ \hline \hline
+		3          & 0 & 6i   &   9j    & 9k  \\ \hline
+		0i         & 0 & 0   &   0    & 0 \\ \hline
+		2j         & 0 &  -4k  &   -6     & 6i\\ \hline
+		-k         & 0  & -2j  & 3i      & 3\\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ g.h = -3 +15i + 7j + 5k $
+	
+	\item 
+	$\hat{v} = \vecdrie{0}{1}{0}
+	\quad p  = 2i   \\
+	q_r  =  \cos 30 \degree  + \sin 30 \degree j  =  \cos 30 \degree  + 0,5j \\
+	q^*_r  =  \cos 30 \degree  - \sin 30 \degree j  =  \cos 30 \degree  - 0,5j $ \\ \\
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_r.p $ & 0 & 2i  & 0j       & 0k \\ \hline \hline
+		$\cos 30 \degree $   & 0 & $ 2\cos 30 \degree i  $ &   0    & 0  \\ \hline
+		0i         & 0 & 0   &   0    & 0 \\ \hline
+		0,5j         & 0 &  -k  &   0     & 0\\ \hline
+		0k         & 0  & 0 & 0      & 0 \\ 
+		\hline 
+	\end{tabular} \\ \\
+	$ q_r.p = 2\cos 30 \degree i - k$\\
+	
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ (q_r.p).q^*_r $ & $\cos 30 \degree $  & 0i  & -0,5j   & 0k \\ \hline \hline
+		0  & 0 & 0 &   0    & 0  \\ \hline
+		$ 2\cos 30 \degree i  $   & $ 2\cos^2 30 \degree i  $ & 0   
+		&   $ - \cos 30 	\degree k $    & 0 \\ \hline
+		0j         & 0 &  0  &   0     & 0\\ \hline
+		-k         &  $ - \cos 30 	\degree k $     & 0 & -0,5i      & 0 \\ 
+		\hline 
+	\end{tabular} \\ \\
+	omdat  $ 2\cos^2 30 \degree   =  2.(\frac{1}{2}.\sqrt{3})^2 = 2.\frac{3}{4} = \frac{3}{2}$ is \\
+	$ p' = q_r.p.q^*_r  = i - 2\cos 30 \degree  k = i - \sqrt{3}k $ \\
+	en dus komt  punt $ P= \vecdrie{2}{0}{0} $  terecht op punt $ P'= \vecdrie{1}{0}{-\sqrt{3}} $ 
+	
+\end{enumerate}
+
+\printindex[definities]
+\printindex[eigenschappen]
+\printindex[voorbeelden]
+ 
+\end{document}

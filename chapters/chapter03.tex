@@ -1,0 +1,74 @@
+\chapter{(Optioneel) Object georiënteerde thermostaat}
+
+\section{Opdrachtomschrijving}\index{Opdracht2}
+
+In deze opdracht gaan we een (eenvoudige) thermostaat ontwerpen en bouwen, uiteraard met gebruik van classes en objecten. \par
+De functie van een thermostaat is het regelen van de temperatuur (in een ruimte, systeem of robot), door de actuele temperatuur te meten en op basis daarvan en op basis van de ingestelde temperatuur de output te regelen. Deze output zou een gasklep of een inductiespoel kunnen zijn, maar ook het schakelmechanisme van je kamerthermostaat, wat doorgaans een relay is waarmee de ketel/brander wordt geactiveerd. Om een reële (en wellicht zelf praktisch) bruikbare oplossing te ontwerpen gaan we in ons ontwerp uit van het gebruik van 2 relay’s, R1 en R2. Met R1 wordt de bestaande kamerthermostaat uitgeschakeld en de nieuwe Arduino-thermostaat geactiveerd. Met R2 kan vervolgens de brander van de ketel worden geschakeld (of met een duur woord, gemoduleerd). \par
+
+Om de zaken niet nodeloos ingewikkeld te maken en vooral het software perspectief voor ogen te houden, worden deze beide outputs hier gerealiseerd met min-of-meer standaard relay-module, die afzonderlijk kunnen worden aangestuurd met twee I/O-lijntjes. Een “1” betekent “relay aan” (bijv. verwarming); een “0” betekent “relay uit (bijv. geen verwarming). Goed beschouwd gaat het bij de aansturing van R2 om een regelalgoritme, waarbij de temperatuur wordt geregeld a.d.h.v. de actuele, gemeten temperatuur en de ingestelde temperatuur (het setpoint).\par
+Dergelijke regelalgoritmes kunnen vrij complex zijn. Denk aan de situatie waarbij je wilt voorkomen dat er “overshoot” optreedt en de ruimte (tijdelijke) warmer wordt dan gevraagd, of dat het erg lang duurt voordat deze ingestelde temperatuur wordt bereikt. Dit is het domein van de regeltechniek, waarbinnen met bijvoorbeeld een PID-regelaar een optimale regeling kan worden ontworpen (advies: google even naar PID). Een eenvoudige variant daarvan is die waarbij we gebruikmaken van een aan-uit-regeling. Dat betekent de verwarming aan of uit staat. Er zijn geen tussenstanden. Dat is vergelijkbaar met de meeste eenvoudige kamerthermostaten. De variaties zitten dus in de tijd dat de verwarming (brander, spoel, relay) aan staat. Bij de eerste poging om dit te realiseren wordt net zo lang “gas” gegeven (= relay aan), tot de gewenste temperatuur is bereikt. Op dat moment wordt het relay uitgezet. Het gaat pas weer aan als de actuele temperatuur onder ingestelde waarde komt. Kortom, er wordt niet geanticipeerd op het verwarmingsgedrag van de ruimte.
+
+Ontwerp een Class waarmee deze thermostaat gerealiseerd wordt. Sluit voor de input een temperatuursensor aan op je Arduino en voor de output 2 relay’s (dat mogen in de testsituatie ook twee ledjes zijn).
+\section{Opdrachten}
+\begin{exercise}
+$\\$ Schrijf een testprogrammaatje waarmee de interface-onderdelen (1 analog input, 2 digital outputs) getest kunnen worden, zodat we daarop straks onze class kunnen baseren. Ergo: je kunt een temperatuur meten en je kunt de beide relay’s (ledjes) onafhankelijk van elkaar aansturen. Behalve dan dat je deze devices als concreet object zou kunnen beschouwen is er vanuit de software nog geen sprake van enige objectoriëntatie.
+\end{exercise}
+
+\begin{exercise}
+$\\$ Maak de file $thermostaat.h$ aan en ontwerp daarin de class Thermostaat. Kies minimaal de volgende private variabelen:
+\begin{lstlisting}[language=Arduino]
+private:
+    uint8 R1pin = 8;       // default IO-pin R1
+    uint8 R1pin = 9;       // default IO-pin R2
+    bool mode = false      // default thermostaat mode 
+    bool R1State;          // status Relay R1
+    bool R2State;          // status Relay R2
+    uint8_t setPoint = 10  // temperatuur (in graden)
+\end{lstlisting}
+Het lijkt een logische keuze hier $0$ resp. $false$ als “uit” te beschouwen en $1$, resp. $true$ als “aan”. De variabele mode geeft aan in welke mode de thermostaat staat ($false$: bestaande kamerthermostaat, $true$: smart thermostaat).
+
+\begin{lstlisting}[language=Arduino]
+class Thermostaat {
+  public:
+    Thermostaat(uint8_t sP); // constructor 
+    Thermostaat(uint8_t sP, R1pin, R2pin); // constructor
+
+    void setThermostaatMode(); 
+    float readTemperature(); 
+    uint8_t getSetPoint(void); 
+    void setSetPoint(uint8_t temp); 
+    void incSetPoint(void);
+    void decSetPoint(void); 
+}
+\end{lstlisting}
+De class kent twee constructors, met twee verschillende sets aan parameters. Doe in dat verband even enig onderzoek naar het concept van constructor overloading. Met de eerste methode wordt, bij het instantiëren van een object van het type Thermostaat, het setpoint gedefinieerd. Dat gebeurt bij de twee ook, maar daarbij kunnen er ook twee pin-nummers worden doorgegeven, één voor R1 en één voor R2. De resterende methoden zijn “self explanatory”.
+\end{exercise}
+
+\begin{exercise}
+Maak de file $thermostaat.cpp$ aan en implementeer het interface zoals beschreven in de .h-file en de bovenstaande tekst. Extra info:
+\begin{enumerate}
+  \item[-] initialiseer de juiste I/O-pinnen, analoog en digitaal
+  \item[-] initialiseer de (private) variabelen overeenkomstig de meegegeven waarden in de constructors.
+  \item[-] Met de methode $setThermostaatMode(true);$ kan de smart thermostaat worden geactiveerd (R1 aan).
+  \item[-] $readTemperature();$ geeft de actuele (gemeten) temperatuur.
+\end{enumerate}
+Maak een file $thermostaat.ino.$ Maak daarin een variabele aan van het type $Thermostaat$ en geeft daarbij zowel het (initiële) setpoint mee, als de beide pinnen voor de relay’s.:
+\begin{lstlisting}[language=Arduino]
+myThermostaat = Thermostaat(relay1Pin, relay2Pin, 10);
+\end{lstlisting}
+Kies het setpoint voorlopig lager dan de actuele temperatuur, omdat je anders al actie moet ondernemen voor relay R2. Dat komt hierna.
+\end{exercise}
+
+\begin{exercise}
+$\\$ Voeg een ($public$) methode $setHeater(void)$ toe. De functie daarvan is dat deze na aanroep de actuele temperatuur bepaalt en op grond daarvan én van dat van het setpoint, R2 in de juiste stand zet (de brander aan of uit dus). Test je programma door deze methode (regelmatig) aan te roepen vanuit je testprogramma (ino-file).
+\end{exercise}
+
+\begin{exercise}
+$\\$ Een eigenschap van het in de vorige opdracht ontworpen algoritme is dat het schakelt op grond van een discrete statische overgang. Dat heeft nadelen. Stel het setpoint is 20 graden en R2 staat aan. Wanneer de temperatuur langzaam oploopt, wordt R2 uitgeschakeld wanneer de temperatuur (voor de eerste keer) >= 20 graden wordt. Als bij een vervolgmeting weer 19,9 wordt gemeten schakelt R2 weer aan. Kortom: rond het setpoint kan oscillatie ontstaan. Dat is niet gewenst.\par
+Pas je code aan om dit te voorkomen. \par
+\begin{enumerate}
+  \item[Tip 1:]  Hysteresis.
+  \item[Tip 2:]  Voeg een integrerende werking toe. Dat is een element uit het eerder genoemde PID- algorithme, waarmee snelle stijgingen en dalingen worden voorkomen. En dat mag ook, want temperaturen (zeker niet die in een woonkamer) kunnen nooit met 2 graden stijgen of dalen binnen je meetinterval (bijv. 10 seconden). Dat is fysisch onmogelijk (tenzij je een hele kleine “woonkamer” hebt van 1 cm3 ;)
+\end{enumerate}
+Pas je code aan en test je programma op goede en “prettige” werking.
+\end{exercise}
