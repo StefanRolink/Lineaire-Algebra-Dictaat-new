@@ -43,6 +43,9 @@
 %----------------------------------------------------------------------------------------
 \documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
 
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+	
 \input{structure.tex} % Insert the commands.tex file which contains the majority of the structure behind the template
 
 \hypersetup{pdftitle={Title},pdfauthor={Author}} % Uncomment and fill out to include PDF metadata for the author and title of the book
@@ -74,7 +77,7 @@
 ~\vfill
 \thispagestyle{empty}
 
-\noindent Copyright \copyright\ 2021 Stefan Rolink\\ % Copyright notice
+\noindent Copyright \copyright\ 2022 Wouter van de Ploeg \& Stefan Rolink\\ % Copyright notice
 
 \noindent \textsc{Published by NHL Stenden}\\ % Publisher
 
@@ -84,7 +87,7 @@
 
 \noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information, replace this with your own license (if any)
 
-\noindent \textit{Eerste editie, November 2021} % Printing/edition date
+\noindent \textit{Versie 4.16, juni 2022} % Printing/edition date
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -104,29 +107,17 @@
 \pagestyle{fancy} % Enable headers and footers again
 
 %----------------------------------------------------------------------------------------
-%	Week 1
+%	Chapters
 %----------------------------------------------------------------------------------------
-
-\part{Deel 1: Arduino \& C/C++}
 
 \chapterimage{NHL_head_2.pdf} % Chapter heading image
-\include{lin}
-%\include{chapters/chapter02}
-%\include{chapters/chapter03}
-
-%----------------------------------------------------------------------------------------
-%	Week 2
-%----------------------------------------------------------------------------------------
-
-\part{Deel 2: Raspberry Pi \& Python}
-
-\chapterimage{NHL_head_2.pdf} % Chapter heading image
-% \include{chapters/chapter04}
-% \include{chapters/chapter05}
-% \include{chapters/chapter06}
-% \include{chapters/chapter07}
-% \include{chapters/chapter08}
-
+\include{chapters/chapter01}
+\include{chapters/chapter02}
+\include{chapters/chapter03}
+\include{chapters/chapter04}
+\include{chapters/chapter05}
+\include{chapters/chapter06}
+\include{chapters/chapter07}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
@@ -151,12 +142,16 @@
 %	INDEX
 %----------------------------------------------------------------------------------------
 
-\cleardoublepage % Make sure the index starts on an odd (right side) page
-\phantomsection
-\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
-\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}} % Add an Index heading to the table of contents
-\printindex % Output the index
+%\cleardoublepage % Make sure the index starts on an odd (right side) page
+%\phantomsection
+%\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+%\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}} % Add an Index heading to the table of contents
+% \printindex % Output the index
 
+% \printindex[definities]
+\printindex[eigenschappen]
+% \printindex[voorbeelden]
+ 
 %----------------------------------------------------------------------------------------
 
 \end{document}

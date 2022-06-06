@@ -1,272 +1,320 @@
-\chapter{Week 3: Python op de Pi}
+\chapter{Determinant}
+\label{chap: Determinant}
+De determinant van een matrix is binnen de lineaire algebra en meetkunde belangrijk begrip. De determinant is in de meetkunde een oppervlakte of inhoud van een ruimte. In de lineaire algebra geeft een determinant belangrijke informatie over een matrix.
+\section{Determinant van een 2x2 matrix}
+\mydef  [De determinant van]
+{determinant   \RT  }
+{ $ A = \mattwee{a & b} 
+	{c & d} $ 
+	\quad is \quad $ |A| = ad - bc $ }
+Dat mag je ook schrijven als \quad det(A), \quad of als 
+\quad $  \dettwee{a & b} 
+{c & d}.  $ \\ \\
+\mybv[determinant]
+{Als $ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\ \ dan is  \ \ $ |A| = -1.-3 \ - \ 2.5 = -7 $ 
+}
+\subsection{eigenschappen van determinanten}
+\textit{vierkante matrix}\\
+De determinant van \textit{niet} vierkante matrices (bv (2x3) of (5x4)) bestaat niet. \\ \\       
+\textit{eenheidsmatrix}\\
+De determinant van de eenheidsmatrix is = 1. \\ \\
+\textit{inverse matrix}\\
+De determinant wordt gebruikt om te bepalen of een matrix een inverse heeft. Anders gezegd: of je een beweging ook weer terug kunt draaien, ongedaan kunt maken. \\ \\
+\myeig[det(A) \noteq  0]
+{Als $ |A| \ne 0 $ dan heeft A een inverse (is omkeerbaar) } \\
+Je kunt zelfs de inverse van een matrix uitrekenen (als de determinant $\ne 0 $):\\
+\myeig[inverse berekenen]
+{Als $ |A| \ne 0 $ dan is in \RT
+	\begin{align*}
+	A^{-1} &=   \dfrac{1}{|A|} 
+	\mattwee{d & -b }
+	{-c & a }    \\
+	&=   \dfrac{1}{ad-bc}     
+	\mattwee{d & -b }
+	{-c & a }                    
+}
+\end{align*}
+\mybv[inverse berekenen]
+{Stel  $ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\quad dan is 	 $ |A|  = -7 $                            
+	\ en  \quad $ A^{-1} = \ -\frac{1}{7} \mattwee{-3 & -5} 
+	{-2 & -1} $
+}
+Nu kunnen we controleren of de inverse echt de omgekeerde is door A en $ A^{-1} $ met elkaar te vermenigvuldigen:
+\begin{align*}
+A . A^{-1}  
+& = \mattwee{-1 & 5} 
+{2 & -3} . 
+\ -\frac{1}{7} \mattwee{-3 & -5} 
+{-2 & -1} \\
+& = \ -\frac{1}{7} \mattwee{-1.-3  + 5.-2 & \ \ \ \ -1.-5+5.-1} 
+{2.-3+-3.-2 & \ \ \ \  2.-5+-3.-1} \\
+& = \ -\frac{1}{7} \mattwee{-7 & 0} 
+{0 & -7}\\
+& = \ \mattwee{1 & 0} 
+{0 & 1}
+\end{align*}                                            
 
-Nu we enige basis van \textit{Python} bezitten, en wat ervaring hebben met de taal in combinatie op je laptop/pc, gaan we deze week aan de slag met de \textit{Raspberry Pi}. We gaan er deze week voor zorgen dat je je een beetje wegwijs maakt op dit kleine machientje, en dan gaan we aan de slag met de \textit{GPIO}-poorten van de \textit{Pi} in \textit{Python}. Maar voordat we dat doen, gaan we eerst kijken naar een ander belangrijk concept: \textit{loops}. 
 
-\section{Loops}\index{Loops}
-Als we bepaalde onderdelen van onze code vaker uit willen voeren, kunnen we dat doen aan de hand van \textit{loops}. In \textit{C} hadden we al kennisgemaakt met de \pyth{for}-loop. Deze zit gelukkig ook in \textit{Python}, maar werkt wel een beetje anders. We gebruiken deze vaak in combinatie met de funtie \pyth{range()}:
-\begin{python}
-for x in range(0, 10, 1):
-	print(x)
-\end{python}
-In het bovenstaande voorbeeld roepen we de functie \pyth{range()} aan met 3 argumenten($0$, $10$ en $1$). De eerste geeft het startgetal voor $x$ aan, de tweede bij welke waarde van $x$ de loop moet stoppen, en de derde en laatste met welke hoeveel we $x$ we moeten verhogen bij elke nieuwe iteratie. Dit voorbeeld print dus de getallen $0$ t/m $9$ op het scherm:
-\begin{python}
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-\end{python}
-
-\begin{remark}
-De functie \pyth{range()} kun je op $3$ verschillende manieren aanroepen:
-\begin{enumerate}
-\item[-] \pyth{range(stop)}: Met enkel $1$ argument, de stop waarde. $start=0, step=1$.
-\item[-] \pyth{range(start, stop)}: Met $2$ argumenten, voor start en stop. $step=1$.
-\item[-] \pyth{range(start, stop, stap)}: En $3$, zoals in het voorbeeld.
+\myeig[det(\mytrans{A})= det(A)] {De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
+\mybv[det(\mytrans{A})= det(A)]
+{We nemen weer als voorbeeld de matrix 
+	$ A = \mattwee{-1 & 5} 
+	{2 & -3} $
+	\  \ dan is $ A^T =  \mattwee{-1 & 2} 
+	{5 & -3} $ \\
+	en dus is  $  |A^T|  =  -1.-3-2.5 = -7 = |A|  $                                         	         
+}\\
+\textit\\
+\myeig[rijen gelijk]{Als een matrix twee of meer gelijke rijen (of kolommen) heeft dan is de determinant = 0:  } 
+\mybv[gelijke rijen ]
+{We nemen  als voorbeeld de matrix 
+	$ A = \mattwee{-1 & 5} 
+	{-1 & 5} $\\ 
+	en zien dat $ |A| = -1.5 - -1.5 = 0 $ 
+}
+\myeig[rij, kolom  = 0]{Als in een matrix een hele rij of kolom gelijk is 0 dan is |A| =0}
+\mybv[{kolom, rij = 0}]
+{
+	We nemen  als voorbeeld de matrix 
+	$ A = \mattwee{0 & 5} 
+	{0 & 2} $\\ 
+	en zien dat $ |A| = 0.2 - 0.5 = 0 $ 
+}
+\section{Ontwikkelen van een determinant}
+Natuurlijk willen we ook de determinant van 3x3 en 4x4 matrices (en hogere dimensies) uit kunnen rekenen. Daar bestaat een mooi recursief algoritme voor. Om te beginnen met een 3x3 determinant:\\ \\ \\
+\mydef [De determinnant van]
+{determinant  \RD}
+{ $  A  = \matdrie{ a_{11} & a_{12} & a_{13} }
+	{ a_{21} & a_{22} & a_{23} }
+	{ a_{31} & a_{32}& a_{33} }  $
+	\quad is   \quad 
+	$ |A|  = a_{11} .   \dettwee{a_{22} & a_{23}} 
+	{a_{32}& a_{33} } 
+	\  \red {-} \ a_{21} .   \dettwee{a_{12} & a_{13}} 
+	{a_{32}& a_{33} } 
+	+a_{31} .   \dettwee{a_{12} & a_{13}} 
+	{ a_{22} & a_{23} }  $ } \\
+In woorden: Je ontwikkelt de determinant naar de $ 1^{e} $ rij door voor $  a_{11} $ de rij en kolom waar $  a_{11} $ in staat 'door te strepen' en daarna $  a_{11}  $ te vermenigvuldigen met de determinant van de getallen die overblijven:
+$  \matdrie{  \red {a_{11}} & \cancel{a_{12}} & \cancel{a_{13} } }
+{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
+{ \cancel{a_{31}} & \red{a_{32}} & \red{a_{33}} }  $ \\ \\ \\
+voor  $  a_{21}  $ :
+\qquad \qquad \quad \ \ \ $  \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13 }} }
+{\red {a_{21}} & \cancel{a_{22}} & \cancel{a_{23}} }
+{ \cancel{a_{31}} & \red{a_{32}}  & \red{a_{33} }}   $
+\quad \textbf{NB bij $  a_{21}  $ komt er een min-teken bij!}\\ \\ \\
+en voor   $  a_{31} $  :
+\qquad \qquad \  \ $   \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13}}  }
+{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
+{ \red {a_{31}} & \cancel{a_{32}} & \cancel{a_{33} } }  $
+\\ \\
+\mybv[determinant  \RD ]
+{ Voorbeeld van een 3x3 determinant:
+	\begin{align*}
+	als \ 	 A & = \matdrie{-5 & 0 & 3} 
+	{4 & 2 & -1} 
+	{1 & 6 & 2} \qquad dan \ is\\ 
+	|A| & = -5.   \dettwee{2 & -1} 
+	{6 & 2 }  
+	\red{-} \ 4. \dettwee{0 & 3} 
+	{6 & 2 }
+	+1.   \dettwee{0 & 3} 
+	{2 & -1 }\\
+	& = -5.(2.2 \ -\  -1.6) \  \red{-} \  4.(0.2 \ - \ 3.6) +1.(0.-1 \ - \ 3.2)\\
+	& = -5.10 \ \red{-} \  4.-18 \ + \ 1.-6\\
+	& = 16
+	\end{align*} 
+}
+\mydef
+{determinant  ${\rm I\!R^{n}}$}
+{De formule voor de determinant van een \textit{nxn} matrix gaat natuurlijk ook recursief:   \begin{align*}
+	Als \quad A  = 
+	&\begin{pmatrix}
+	a_{11} &  a_{12}  & \ldots & a_{1n}\\
+	a_{21}  &  a_{22} & \ldots & a_{2n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n1}  &   a_{n2}       &\ldots & a_{nn}
+	\end{pmatrix} 	 \quad  dan \  is  \\ \\
+	|A| = a_{11} .   	 
+	&\begin{vmatrix}
+	a_{22}  &  a_{23} & \ldots & a_{2n}\\
+	a_{32}  &  a_{33} & \ldots & a_{3n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	\end{vmatrix} 
+	\ \red{-}  \ a_{21} .   	
+	\begin{vmatrix}
+	a_{12} &  a_{13}  & \ldots & a_{1n}\\
+	a_{32}  &  a_{33} & \ldots & a_{3n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	\end{vmatrix} \\ \\
+	&\textbf{+\red{-}  . \  . \ . }\\ \\
+	\red {\pm \ } a_{n1} .   
+	&\begin{vmatrix}
+	a_{12} &  a_{13}  & \ldots & a_{1n}\\
+	a_{22}  &  a_{23} & \ldots & a_{2n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	a_{n-1 \ 2}  &   a_{n-1 \ 3}       &\ldots & a_{n-1 \ n}
+	\end{vmatrix} 
+	\end{align*}
+}
+Oef! Daar kunnen we wel wat trucjes bij gebruiken die in de volgende paragraaf behandeld worden.
+\subsection{rekenhulpjes determinant}
+\myeig[ontwikkelen]
+{Je mag een determinant uitrekenen met behulp van de $ 1^e $ kolom, maar dat  mag ook met behulp van de $ 2^e  $ rij of de laatste kolom of ... }
+Je moet alleen wel rekening houden met minnen en plussen volgens onderstaand schema: \\ \\
+$ \begin{matrix}
++ &  -  & + &  -  &  + &  -  & \ldots \\
+-  & + &  -  &  + &  -  &  +& \ldots \\
++ &  -  & + &  -  &  + &  -  & \ldots \\
+-  & + &  -  &  + &  -  &  +& \ldots \\
++ &  -  & + &  -  &  + &  -  & \ldots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{matrix}  $\\ \\ \\
+\mybv[ontwikkelen naar  tweede rij ]
+{Dus als je bijvoorbeeld naar de $ 2^e  $ rij ontwikkelt dan begin je met een - , \\daarna + en je wisselt de - en +   af:
+	\begin{align*}
+	als \ 	 A & = \matdrie{-5 & 0 & 3} 
+	{4 & 2 & -1} 
+	{1 & 6 & 2} \qquad dan \ is\\ 
+	|A| & = \red{-}4.   \dettwee{0 & 3} 
+	{6 & 2 }  
+	\red{+}2. \dettwee{-5 & 3} 
+	{1 & 2 }
+	\red{--}1. \dettwee{-5 & 0} 
+	{1 & 6 }\\
+	& =  \red{-}4.(0.2  -  6.3) \  \red{+}2.(-5.2  -  1.3)    \red{+}1.(-5.6 - 1.0)\\
+	& = -4.-18 +2.-13 +1.-30\\
+	& = 16
+	\end{align*} }
+En dat is hetzelfde als we als antwoord kregen op de  vorige bladzij.\\ \\
+\myeig[optellen kolommen]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde; datzelfde geldt voor rijen} \\
+\mybv[optellen kolommen]
+{Stel we hebben de matrix
+	$ A = \matvier{ 1 & -2 & 3 & 2 }
+	{ 3 & -6 & 0 & 7 }
+	{ -2 & 4 & 1 & 5 } 
+	{ -1 & 2 & 2 & -4 } 
+	$. Dat ziet indrukwekkend uit, maar als we de $ 1^e $ kolom met 2 vermenigvuldigen en bij de $ 2^e  $kolom optellen dan is \\
+	\begin{align*}
+	|A|  \  & = \ \detvier{ 1 & & -2 &  & 3 & 2 }
+	{ 3 & & -6 & &  0 & 7 }
+	{ -2 & & 4 & &  1 & 5 }
+	{ -1 & & 2 & &  2 & -4} \\
+	\  & = \ \detvier{ 1 & -2+2.1 &  \ \ 3 & 2 }
+	{ 3 & -6+2.3 &  \ \ 0 & 7 }
+	{ -2 & \ \ 4+2.-2 &  \ \ 1 & 5 }
+	{ -1 & \ \  2+2.-1 &  \ \ 2 & -4} \\
+	\ & = \ \detvier{ 1 & 0 &  \ \ 3 & 2 }
+	{ 3 & 0 &  \ \ 0 & 7 }
+	{ -2 & 0 &  \ \ 1 & 5 }
+	{ -1 & 0 &  \ \ 2 & -4} 
+	\end{align*} 
+	En, als een hele kolom 0 is, dan is de determinant 0 dus $ |A| = 0 $ 	 \\   \\                    
+}
+\mybv[optellen  rijen]
+{Als een hele rij of kolom 0 maken niet lukt kunnen we het toch veel eenvoudiger maken. 
+	Stel we hebben 
+	$ A = \matvier{ 1 & -2 & 3 & 2 }
+	{ 4 & -6 & 9 & 6 }
+	{ -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } 
+	$. We trekken 3 keer de $ 1^e  $ rij van de  $ 2^e $ rij af. Dan is 
+	\begin{align*}
+	|A|  \ & = \ \detvier{1 & -2 & 3 & 2 }
+	{ 4 & -6 & 9 & 6  }
+	{  -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } \\
+	\   & = \ \detvier{1 & -2 & 3 & 2  }
+	{ 1 & 0 &  0 & 0 }
+	{  -2 & 1 & 1 & 5 }
+	{ -1 & 2 & 2 & -4 } \quad ontwikkelen \  naar \ de \ 2^e \ rij!\\
+	\  & = \ -1. \detdrie{ -2 & 3 & 2 }
+	{1 & 1 & 5 }
+	{ 2 & 2 & -4 }\quad de \ 2^e kolom \ van \ de 1^e aftrekken \\
+	\  & = \ -1. \detdrie{ -5 & 3 & 2 }
+	{0 & 1 & 5 }
+	{ 0 & 2 & -4 } 
+	\  = -1.-5.(1.-4 -2.5) = -70
+	\end{align*}
+}
+\subsubsection{Opgaven}
+Bereken de determinanten van de volgende matrices:\\
+\begin{enumerate}[label=\Alph*]
+	\item 
+	$  = \mattwee{1 & -1}
+	{ 2 & 3} $ \quad 
+	\item 
+	$  = \matdrie{2 & 0 & 4}
+	{1 & 1 & 2}
+	{4 & -1 & 8} $ \quad
+	\item 
+	$  =  \matdrie{3 & -1 & 0}
+	{2 & 1 & 4}
+	{5 & 0 & 4} $ \quad
+	\item 
+	$  =  \matdrie{-1 & 0 & 6}
+	{1 & 4 & 3}
+	{2 & 1 & 4} $ \quad 
+	\item 
+	$   = \matvier{-1 & 0 &  0 & 6}
+	{-1 & 6 & -1 & 4}
+	{1 & 4 & 0 & 3}
+	{2 & 1 & 0 & 4} $ \quad
+	\item 
+	$  =  \matvier{-1 & 2 &  5 & 3}
+	{6 & 4 & 1 & 0}
+	{1 & 0 & 2 & -4}
+	{5 & 6 & 6 & 3} $ \quad
+	\item 
+	$   = \matvier{-1 & 0 &  -2 & 1}
+	{3 & 6 & -1 & 0}
+	{4 & 6 & 5 & 1}
+	{1 & 8 & 3 & 4} $ \quad
+	\item 
+	$  =  \matvier{7 & 3 &  1 & 4}
+	{5 & 1 & 2 & -3}
+	{1 & 3 & 0 & 7}
+	{8 & 2 & 1 & 0} $ \quad
 \end{enumerate}
-In het bovenstaande stukje voorbeeldcode kan dus \pyth{range(0, 10, 1)} worden vervangen door \pyth{range(10)}, want die levert dezelfde functionaliteit.
-\end{remark}
 
-Als tweede voorbeeld een loop die van $2$ t/m $25$ loopt, met stapjes van $3$:
-\begin{python}
-for x in range(2, 25, 3):
-	print(x)
-\end{python}
-Dit print het volgende uit: $2, 5, 8, 11, 14, 17, 20, 23$. De \pyth{for}-loop stopt na $23$, omdat $23+3 = 26$, wat hoger is dan $25$, de stop waarde. \newline
+\subsubsection{extra opgaven}
+Bereken de determinanten van de volgende matrices:\\
 
-Naast de \pyth{for}-loop, bestaat er ook de \pyth{while}-loop. Deze zit ook in \textit{C}, maar hebben we destijds niet gebruikt. Wellicht is het handig om te weten dat hij bestaat, en te snappen hoe je 'm gebruikt:
-\begin{python}
-i = 1
-while i < 6:
-	print(i)
-	i += 1
-\end{python}
-In het bovenstaand voorbeeld wordt de code in de \pyth{while}-loop uitgevoerd \textit{zolang} de conditie \pyth{i < 6} gelijk is aan \pyth{True}. We beginnen met \pyth{i = 1}, en tellen er elke keer \pyth{1} bij op, waardoor de uitvoer van het programma $1$ t/m $5$ is. \newline
-
-Met een \pyth{while}-loop is ook vrij makkelijk een oneindige loop te maken, vergelijkbaar met de \textit{loop()}-functie bij de \textit{Arduino}:
-\begin{python}
-while True:
-	print('en door..')
-\end{python}
-
-\begin{remark}
-Het is bij zo'n loop wel handig om te weten hoe je 'm weer stopt. Want in de meeste gevallen maak je 'm per ongeluk. Bij een \textit{IDE} heb je naast een run knopt (groen driehoekje), vaak ook een stop knop (rood vierkantje). In de terminal kun je de toetscombinatie \text{Ctrl+C} gebruiken. 
-\end{remark}
-
-\newpage
-
-\section{Editor}\index{Editor}
-Nu het concept van loops ook bekend is in \textit{Python} gaan we ons richtin op de \textit{Raspberry Pi}. Allereerst, is net als bij je laptop ook op de \textit{Pi} handiger om een \textit{IDE} te gebruiken. Dus daar gaan we eerst voor zorgen. Als het goed is staat \textit{Thonny} standaard geïnstalleerd, maar ook hier mag je alles gebruiken wat je zelf prettig vindt. Tijdens de lessen wordt zoals eerder vermeld met Thonny gewerkt. \newline
-
-Mocht \textit{Thonny} of je favoriete editor nog niet geïnstalleerd zijn, is dit een mooi moment om te kijken dat eigenlijk gaat onder \textit{Linux}. Je kunt hiervoor de grafische \textit{Add/Remove Software}-tool voor gebruiken:
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.25]{Pictures/chapter05/add_remove_software.png}
-\caption{\textit{Add/Remove Software} tool}
-\label{fig:addremovesoftware} % Unique label used for referencing the figure in-text
-%\addcontentsline{toc}{figure}{Figure \ref{fig:webserver}} % Uncomment to add the figure to the table of contents
-\end{figure}
-
-\begin{remark}
-Een beetje hacker doet dit vaak via de \textit{Terminal}. Ook omdat de \textit{Pi} niet altijd aangesloten is op een scherm, is het ook handig om te weten hoe dit werkt. Allereerst zorg je ervoor dat alle lijsten met software die je kunt installeren up-to-date is:
-\begin{lstlisting}[language=bash]
-sudo apt update
-\end{lstlisting}
-
-Daarna installeer je het programma in kwestie:
-\begin{lstlisting}[language=bash]
-sudo apt install thonny
-\end{lstlisting}
-Als dit klaar is, is je vers geïnstalleerde programma te vinden in het \textit{Pi-menu} linksboven.
-\end{remark}
-
-\newpage 
-
-\section{Pi header}\index{Pi header}
-Zoals je wellicht al gezien had, heeft de \textit{Pi} een $40$-pins header aan boord, die sinds \textit{Model 2B} altijd hetzelfde is gebleven. Deze header maakt dat de \textit{Pi} niet alleen een 'leuk klein, maar relatief snel computertje' is, maar ook gemakkelijk hardware kan aansturen en sensors kan uitlezen. Een combinatie die het een krachtig data analyse platform maakt. In afbeelding \ref{fig:pi_header}, is te zien wat er allemaal op de header zit: \newline
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.30]{Pictures/chapter05/pi_pinout.png}
-\caption{Pinout van de \textit{Raspberry Pi}, bron: \url{https://www.raspberrypi.org/documentation/usage/gpio/}}
-\label{fig:pi_header} % Unique label used for referencing the figure in-text
-%\addcontentsline{toc}{figure}{Figure \ref{fig:webserver}} % Uncomment to add the figure to the table of contents
-\end{figure}
-
-Als het goed komen de meeste pin-fucnties bekend voor, want deze zijn vergelijkbaar met de \textit{Arduino}. Zo heeft de \textit{Pi}:
-\begin{enumerate}
-	\item[-] $28$ digitale \textit{GPIO}-pinnen, vergelijkbaar met de digitale pinnen op de \textit{Arduino}.
-	\item[-] $2$ \textit{PWM}-pinnen, om analoge signalen mee na te bootsen.
-	\item[-] Een \textit{SPI}-bus (\textit{MOSI, MISO, SCLK}).
-	\item[-] Een \textit{$I^2C$}-bus (\textit{SDA, SCL}) (ook wel: \textit{TWI}-bus genoemd). 
-	\item[-] Een \textit{UART} (\textit{TXD, RXD}), vergelijkbaar met de \textit{Serial} op de \textit{Arduino}.
+\begin{enumerate}[label=\Alph*]
+	\item 
+	$   = \mattwee{1 & -2}
+	{ -3 & 6} $ \quad 
+	\item 
+	$  = \mattwee{3 & 2 }
+	{1 & 4 } $ \quad  \\
+	\item 
+	$ = \matdrie{2 & 0 & 1}
+	{-1 & 2 & 7} 
+	{3 & 0 & 2} $ \quad
+	\item  
+	$  = \matdrie{2 & 0 & 3}
+	{5 & 2 & 6}
+	{-1 & 4 & 3} $ \quad  
+	\item 
+	$   = \matdrie{3 & 9 &  -6 }
+	{-1 & 4 & 2 }
+	{2 & 0 & -4 }
+	$ \quad
+	\item 
+	$  =  \matvier{-2 & 2 &  0 & 3}
+	{-7 & 5 & 2 & 6}
+	{-1 & 4 & 0 & 3}
+	{5 & -2 & -2 & -1} $ \quad 
+	\item 
+	$ = \matvier{7 & 2 &  11 & 4}
+	{0 & 1 & 0 & 2}
+	{5 & -3 & 8 & -6}
+	{9 & 2 & 7 & 5} $ \quad
+	
 \end{enumerate}
-
-\begin{exercise}
-Geen zin om de functie van elk pinnetje te onthouden? Open op je \textit{Pi} een \textit{Terminal}-venster en typ '\textit{pinout}'.
-\end{exercise}
-
-\newpage
-
-\section{GPIO}\index{GPIO}
-Tijd om de pinnen daadwerkelijk te gaan gebruiken. We beginnen maar eens door de \textit{GPIO}-poorten te gebruiken als output, met het aansturen van een LED.
-\subsection{GPIO: output}\index{GPIO: output}
-Sluit een \textit{LED} en een weerstand (van ongeveer $300 \Omega$) aan op \textit{GPIO17}. Zie ook afbeelding \ref{fig:pi_led}, hieronder:
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.45]{Pictures/chapter05/pi_led_01.jpg}
-\caption{LED aangesloten op \textit{GPIO17}}
-\label{fig:pi_led} % Unique label used for referencing the figure in-text
-%\addcontentsline{toc}{figure}{Figure \ref{fig:webserver}} % Uncomment to add the figure to the table of contents
-\end{figure}
-
-Zoals altijd met programmeren, kan elk probleem opgelost worden op meerdere manieren. We gaan eerst even kijken naar de 'klassieke' manier om \textit{GPIO}-poorten aan te sturen. Open je editor en voer de onderstaande code in, sla het bestand op als een \textit{*.py}-bestand.
-
-\begin{python}
-import RPi.GPIO  # Nodig voor pinnen te kunnen besturen
-import time      # Nodig voor sleep()-functie
-
-led_pin = 17     # LED zit op GPIO17.
-
-RPi.GPIO.setmode(RPi.GPIO.BCM)         # Benader pinnen a.h.v. hun GPIO-nummer.
-RPi.GPIO.setup(led_pin, RPi.GPIO.OUT)  # Set led_pin als OUPUT
-
-while True:
-    RPi.GPIO.output(led_pin, True)   # LED aan!
-    time.sleep(1)                    # Wacht 1 seconde.
-    RPi.GPIO.output(led_pin, False)  # LED uit!
-    time.sleep(1)                    # Wacht 1 seconde.
-\end{python}
-
-\begin{remark}
-Bij het runnen krijg je nu waarschijnlijk een warning. Deze is te onderdrukken door \pyth{RPi.GPIO.setwarnings(False)} toe te voegen voordat de \pyth{setmode()}-functie wordt aangeroepen op regel $6$.
-\end{remark}
-
-Het programma heeft qua opbouw veel weg van wat we gewend waren bij de \textit{Arduino}. Met de eerste twee regels (\pyth{import}) zorgen we dat we gebruik kunnen maken van de functies in de \pyth{RPi.GPIO}- en de \pyth{time}-module. Op regel $6$ en $7$ worden de module en de poort geconfigureert (dit is vergelijkbaar wat er in de \textit{void setup()} had gestaan). Daarna begint een oneindige lus, die het daadwerkelijke lampje laat knipperen (Dit had bij de \textit{Arduino} in de \textit{void loop()} gestaan). \newline
-
-Tot zover de 'klassieke' manier, tegenwoordig zie je steeds meer dat er gebruikt wordt gemaakt van de \pyth{gpiozero}-module. En dat ziet er dan als volgt uit:
-\begin{python}
-import gpiozero
-import time
-
-led = gpiozero.LED(17)  # LED aangesloten op GPIO17
- 
-while True: 
-    led.on()       # LED aan!
-    time.sleep(1)  # Wacht 1 seconde.
-    led.off()      # LED uit!
-    time.sleep(1)  # Wacht 1 seconde
-\end{python}
-
-De \pyth{gpiozero}-module regelt alle configuratie verder voor je, wat een stuk compactere en meer leesbare code oplevert. 
-\begin{remark}
-\label{sec:piledobj}
-Vind je het vervelend om steeds \pyth{time.sleep()} te typen? Vervang dan regel $2$ door: 
-\begin{python}
-from time import sleep
-\end{python}
-Je kunt nu gewoon \pyth{sleep()} gebruiken, zonder '\pyth{time.}' ervoor te hoeven typen. Hetzelfde principe gaat ook op voor \pyth{gpiozero.LED()}.
-\end{remark}
-
-\newpage
-
-\subsection{GPIO: input}\index{GPIO: input}
-Het eerstvolgende wat je zou willen doen met de \textit{GPIO}-pinnen is deze natuurlijk gebruiken als input. Dat kan door er een sensor aan te hangen. Let op, de \textit{Raspberry Pi} heeft in tegenstelling tot de \textit{Arduino} geen analoge ingangen, dus de sensor moet een digitaal (hoog of laag) signaal terug geven. In z'n meest basale vorm komt dit overeen met een knopje. Zie Figuur \ref{fig:pi_button}. 
-
-\begin{figure}[h!]
-\centering\includegraphics[scale=0.45]{Pictures/chapter05/pi_button_01.jpg}
-\caption{Een drukknop aangesloten op \textit{GPIO2}}
-\label{fig:pi_button} % Unique label used for referencing the figure in-text
-%\addcontentsline{toc}{figure}{Figure \ref{fig:webserver}} % Uncomment to add the figure to the table of contents
-\end{figure}
-
-Ook hier gaan we eerst maar even kijken naar de 'klassieke' manier. Ook omdat dit het meest overeen komt met hoe het op de \textit{Arduino} werkt. Typ het onderstaande programma over en sla het op als een \textit{*.py} bestandd:
-\begin{python}
-import RPi.GPIO  # Nodig voor pinnen te kunnen besturen
-from time import sleep
-
-button_pin = 2  # Drukknop zit aangesloten op GPIO2.
-
-# Configureer button_pin als input:
-RPi.GPIO.setwarnings(False)
-RPi.GPIO.setmode(RPi.GPIO.BCM)
-RPi.GPIO.setup(button_pin, RPi.GPIO.IN)
-
-while True:
-    if not RPi.GPIO.input(button_pin):  # De knop is omgekeerd, vandaar 'not'.
-        print('Knop ingedrukt!')
-        sleep(0.25)                     # Wacht 250ms.
-\end{python}
-
-% \begin{remark}
-% In plaats van de \pyth{not} in de \pyth{if}-statement zetten, zou je ook regel $9$ aan kunnen passen naar:
-% \begin{python}
-% RPi.GPIO.setup(button_pin, RPi.GPIO.IN, RPi.GPIO.PUD_DOWN)
-% \end{python}
-% Zodat er een \textit{pull-down} weerstand intern wordt gebruikt.
-% \end{remark}
-
-Zodra de knop wordt ingedrukt (we lezen de status uit door \pyth{Rpi.GPIO.input()} aan te roepen op regel $12$), wordt er iets naar het scherm geschreven dat het gelukt is.
-
-\begin{exercise}
-Wat gebeurt er als je de knop ingedrukt blijft houden? En wat als je de \pyth{sleep()} regel verwijderd?
-\end{exercise}
-
-Precies hetzelfde kunnen we ook bereiken door de \pyth{gpiozero}-module te gebruiken:
-\begin{python}
-from gpiozero import Button
-from time import sleep 
-
-button = Button(2)  # Drukknop zit aangesloten op GPIO2.
-
-while True: 
-    if button.is_pressed: 
-        print("Knop ingedrukt!") 
-        sleep(0.25)
-\end{python}
-
-Wederom een stuk compacter en to-the-point. Met deze \pyth{gpiozero}-module zijn nog veel meer mooie dingen te doen, we komen er later op terug als we leren hoe functies werken in \textit{Python}. Merk op dat we op dit moment nog steeds alles in een eindeloze \pyth{while}-loop hebben staan, dat betekend dat de \textit{Pi} enorm druk is met het draaien van ons kleine scriptje, dat kan veel efficiënter!
-
-\newpage
-
-\section{Huiswerkopdrachten}\index{Huiswerkopdrachten}
-\begin{exercise}
-Schrijf een programma waarin je met een \pyth{while}-loop de eerste $10$ getallen van de tafel van $5$ print.
-\end{exercise}
-
-\begin{exercise}
-Schrijf een programma waarin je de gebruiker vraagt om een getal, en geef daarna de eerste $10$ getallen van de tafel voor dat getal. Gebruik hiervoor een \pyth{for}-loop.
-\end{exercise}
-
-\begin{exercise}
-Schrijf een programma die de getallen van $-10$ t/m $-1$ op scherm print. Gebruik hiervoor alleen de \pyth{range()}-functie in de \pyth{for}-loop (en natuurlijk een \pyth{print()} ;) ).
-\end{exercise}
-
-\begin{exercise}\label{exc5:exc4}
-Vraag aan de gebruiker een getal $l$, en print daarna een rij van sterretjes. Dus bij $l=7$, geeft het de volgende output:
-\begin{python}
-*******
-\end{python}
-\textbf{TIP:} Als je niet wilt dat een \pyth{print}-functie elke keer een nieuwe regel begint, kun je dit veranderen door het \textit{end}-argument te gebruiken: \pyth{print('*', end='')}. 
-\end{exercise}
-
-
-\begin{exercise}
-Breid Vraag \ref{exc4:exc1} uit. Vraag aan de gebruiker nu $2$ getallen: $h$ en $l$. Print daarna een vierkant van sterretjes ter grootte van $h \times l$. Dus bij $h=3$ en $l=5$, geeft het de volgende output:
-\begin{python}
-*****
-*****
-*****
-\end{python}
-\textbf{TIP:} Je kunt loops in loops zetten. 
-\end{exercise}
-
-\begin{exercise}
-Sluit een LED aan op \textit{GPIO17} en een op \textit{GPIO18}. Zorg ervoor dat de ene $1$ keer per seconde knippert en de andere $2$ keer per seconde. \newline
-\textbf{TIP:} De \pyth{sleep()}-functie accepteerd ook argumenten die kleiner zijn dan $1$ (oftewel: \textit{floats}), zodat je deze ook kunt gebruiken voor delays van minder dan 1 seconde.
-\end{exercise}
-
-\begin{exercise}
-Sluit een LED aan op \textit{GPIO17} en een knop op \textit{GPIO19}. Zorg ervoor dat als de knop wordt ingedrukt, de LED $10$ keer gaat knipperen. 
-\end{exercise}

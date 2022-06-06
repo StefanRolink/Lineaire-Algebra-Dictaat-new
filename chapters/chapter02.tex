@@ -1,129 +1,451 @@
-\chapter{Inleiding Object georiënteerd programmeren}
+\chapter{Vector}
+\label{chap:vectoren}
+In dit hoofdstuk behandelen we vectoren en hoe vectoren in de wiskunde gebruikt worden.\\ \\
 
-\section{Inleiding}\index{Inleiding}
-Alle moderne talen ondersteunen objectoriëntatie en daarmee de mogelijkheid tot objectgeoriënteerd programmeren (object oriented programming, OO), ook de Arduino-omgeving. Dat is te danken aan de onderliggen taal C++ met bijbehorende compiler, die geïntegreerd is in de Arduino IDE. Voor web- en server-applicatie en ook voor (phone)apps is deze objectbenadering, zowel in ontwerp als in uitwerking, de norm. Dat embedded omgevingen hierin achterliepen valt te verklaren uit de vaak relatief geringe omvang van embedded programma’s, met weinig functies per controller, de beperkte capaciteit van de controllers met geringe kloksnelheid, performance en weinig geheugen, die maakten, zeker gezien de overhead van de toenmalige compilers, dat OO- code niet populair was onder (embedded) programmeurs. Maar dat is verleden tijd! \newline 
-Het embedded landschap is de laatste jaren drastisch veranderd. Embedded controllers zijn veel krachtiger geworden en de geheugencapaciteit is enorm toegenomen. Slimme, krachtige compilers zijn in staat zeer efficiënte code te genereren, waarvan de geringe overhead geen noemenswaardig nadeel meer vormt. Dat moge blijken uit het feit dat de Arduino-compiler die, gebaseerd is op C/C++, processing en de (AVR) GCC-compiler, alle C++ eigenschappen met bijbehorende libraries, code kan genereren voor de 8 bits processor van de Arduino Uno (de \textit{AT Mega 328}, die, zoals onderhand bekend, slechts over 32 KB codegeheugen beschikt en 2 kB datageheugen en “loopt” op 16 MHz. Dat is een indrukwekkend resultaat.\newline 
-Natuurlijk zijn de grenzen bij dergelijke controllers snel bereikt, maar de code kan (relatief eenvoudig) worden “ge-port” naar andere (bijv. 32 bits) platforms, zoals de \textit{Arduino Due}, de \textit{ESP8266} of \textit{ESP32} of naar een \textit{STM Arm Cortex}. \newline \newline
+\mydef[Een \textit{vector} is ] {vector} {een verzameling getallen die in een rij of kolom gerangschikt zijn.}
+In dit dictaat bestaat een vector alleen uit reële getallen (dwz gehele getallen, breuken en getallen als $  \pi $ of $ \sqrt{2} $ ). Alle reële getallen samen noemen we \rm I\!R, de twee-dimensionale ruimte met reële getallen \RT, en de drie-dimensionale ruimte \RD.
+Een vector wordt hier geschreven als een kleine letter met een pijltje erboven, bijvoorbeeld $\vec{b}$ en: \\
 
-Bij objectgeoriënteerd programmeren wordt een (software) systeem opgebouwd uit 'objecten'. Het werken met objecten is, wellicht zonder dat je je dat realiseerde, ondertussen al flink geoefend. Denk maar aan de objecten $Serial$, $Servo$, $Ethernet$, $EthernetClient$, etc. Van deze objecten werden functies gebruikt, in OO-jargon methodes genoemd, waarmee je bepaalde functionaliteit kon aanspreken. Denk aan:
+\mybv[vector \RD, \RT]{  \qquad  
+	$\vec{x} = \vecdriesnel {x}   
+	\quad    \quad
+	\vec{v} = \vectwee {x}{y} 
+	\quad    \quad 
+	\vec{s} = \vecdrie {-3}{2}{4}  
+	\quad    \quad 
+	\vec{a} = \vectwee {1}{2} $ }
 
-\begin{lstlisting}[language=Arduino]
-Serial.begin(115200);
-Serial.print(n);  // Voer methode 'print' uit op object Serial
+$\vec{x}$ is een  vector in ${\rm I\!R^{3}}$,  een  vector in de drie-dimensionale ruimte, $ \vec{x} $  bestaat uit 3 getallen: $  x_{1},  x_{2} $  en  $ x_{3}$ .  $\vec{v}$  is een  vector in ${\rm I\!R^{2}}$, een twee-dimensionale vector in het platte vlak, $\vec{s}$ een concrete vector in  ${\rm I\!R^{3}}$ en $ \vec{a}  $ een concrete vector in \RT (zie figuur  \ref{fig:vectorVB3}).
 
-// Maak 'object' myServo aan, van het type Servo:
-Servo myServo();  
-// Voer methode attach uit op myServo:
-myServo.attach(servoPin); 
-myServo.write(val);
+\figuur[0.9]{vectorVB3}{(a) De \textit{vector} $ \vec{a}  $ in \RT is het 'pijltje' vanuit O, de oorsprong, naar het punt (1,2) met een lengte en een richting. Het \textit{punt P(2,1)} heeft  \textit{geen} lengte of richting. (b) De vector $  \vec{s} $ in \RD loopt iets naar achter omhoog}
 
-Ethernet.begin();
-EthernetClient myClient = server.available();
-myClient.println("GET /search?q=arduino HTTP/1.1");
-\end{lstlisting}
 
-De $.$ (punt) verbindt de methode met het object waar deze bij hoort. Aan methodes kun je, net als bij functies, parameters meegeven, die het gedrag van de methode mede bepalen. Over hoeveel en welke methodes een object beschikt kun je aan de “buitenkant” niet zondermeer zien. Sommige moderne ontwikkelomgevingen, zoals Visual Studio Code en ook de nieuwe Arduino (Pro) 2.0 IDE, beschikken over allerlei ondersteunende functies om daar inzage in te krijgen.\newline 
-Bij gebruik van de klassieke Arduino IDE (die bij de lectures van Programmeren 1 aan bod kwam) ben je aangewezen op de (online) documentatie. Niet alle methodes van een object hoeven beschikbaar te zijn voor de programmeur. Dat zijn alleen de publieke ($public$) methodes. De afgeschermde methodes ($private$) zijn voor intern gebruik. Dat geldt ook voor de varibelen die het object gebruikt. Het is een OO-uitgangspunt die variabelen zoveel mogelijk af te schermen (information hiding) voor de gebruiker van het object. Dat voorkomt namelijk veel ellende. Natuurlijk kun je object-variabelen aanpassen en daarmee ook de status van het object, maar het is gebruikelijk dat te doen met een aantal speciaal daarvoor ontworpen of gegenereerde methodes, de zogenaamde $getters$ en $setters$. Met onderstaande code kan een de status van een ($private$) objectvariabele worden opgevraagd of gewijzigd:
+\section{Rekenen met vectoren}
+Je kunt op verschillende manieren rekenen met vectoren.
+\subsubsection{Optellen}
+Het optellen van vectoren doe je door de overeenkomstige elementen van de vectoren bij elkaar op te tellen. Als volgt:\\
 
-\begin{lstlisting}[language=Arduino]
-float temp = myObject.getTemp();
-myObject.setTemp(20);
-\end{lstlisting}
+\mydef[De som van twee vectoren  \V{a}  en  \V{b} \  is:\\] {som}
+{\V{a}  +  \V{b} \  $ = \  \vecdriesnel {a}  \  +  \  \vecdriesnel {b} \   = \  \vecdrie {a_1+b_1}  {a_2+b_2}  {a_3+b_3}  $ \\
+	Je kunt 2 vectoren alleen maar bij elkaar optellen als ze dezelfde dimensie hebben, dat wil zeggen een gelijk aantal elementen.} \\ 
 
-Dat ziet er wellicht wat omslachtig uit, maar het voorkomt dat je precies hoeft te weten hoe e.e.a. in de code van het object is ontworpen en gecodeerd. Bovendien kan de ontwerper van het object de (interne) code aanpassen zonder dat de gebruiker daar “last” van heeft, uiteraard met behoud van de afspraken die aan de buitenkant gelden (het $interface$). Een bijkomend voordeel is dat zo’n object een min of meer zelfstandig “ding” is dat eenvoudig hergebruikt kan worden. Een object verenigt code (functies) en data (variabelen) in één denkbeeldige huls. \newline \newline
+\mybv[som \RD]{
+	$\quad \vecdrie {3}{-1}{2}  \  +  \  \vecdrie {0}{6}{-4}  \  =  
+	\ \vecdrie {3+0}  {-1+6}  {2+-4}  \ =
+	\ \vecdrie {3}  {5}  {-2} $ }\\
 
-Met het declareren van een variabele van een bepaald type zijn we onderhand bekend:
-\begin{lstlisting}[language=Arduino]
-char c;
-int i = 1;
-float f;
-\end{lstlisting}
+\mybv[som \RT]{ 
+	$\quad \vectwee {-3}{6}  \ +  \  \vectwee {7}{2}  \  =  
+	\ \vectwee {-3+7}   {6+2}  \  =
+	\ \vectwee {4}  {8}   $  \qquad (zie figuur  \ref{fig:som2}).}
 
-In dezelfde stijl kan ook een variabele van het type object worden gedeclareerd:
+\figuur[0.3]{som2}{De som van de vectoren $  \vec{a}  $       en $  \vec{b}   $ is weer een vector }
 
-\begin{lstlisting}[language=Arduino]
-Servo myServo;
-EthernetClient myClient;
-ObjetType myObject;
-\end{lstlisting}
+\subsubsection{Scalair product}
+Als je een vector vermenigvuldigt met een getal heet dat vermenigvuldigen met een scalar (scalair product). Bij scalaire vermenigvuldiging worden alle elementen van de vector met datzelfde getal vermenigvuldigd.\\
 
-Na deze declaratie kan het object worden gebruikt. Het bestaat dan immers in het geheugen. Bijvoorbeeld:
-\begin{lstlisting}[language=Arduino]
-myClient.available();
-Serial.println(Ethernet.localIP());
-myObject.myMethode();
-\end{lstlisting}
+\mydef[Het scalair product van een getal c en een vector  \V{a}  \ is:]
+{scalair  product} 
+{ \  $ c . \vec{a}  \   = \ c.    \vecdriesnel {a}  \  =  \ \vecdrie {c.a_1}  {c.a_2}  {c.a_3} $\\ \\}
 
-Bij het tweede voorbeeld wordt het resultaat van de methode $localIP()$ van het object $Ethernet$ doorgegeven aan de methode $println()$ van het object $Serial$.
-De algemene afspraak is dat het type van een object begint met een hoofdletter ($Ethernet$, $Serial$, etc) en de variabelen met een kleine letter ($myClient$, $mySerial$, etc).\newline \newline
+\mybv[scalair product]
+{Als $  \vec{a} =  \vectwee{-4}{-3} $  en $c= -2$ \quad dan is $ -2 . \vec{a} = -2 . \vectwee{-4}{-3}  \    
+	= \ \vectwee {-2.-4}{-2.-3}  \  
+	=  \ \vectwee  {8}  {6}. $  \quad (figuur  \ref{fig:scalair}) }
 
-Een belangrijke vraag die nu nog in de lucht hangt is: “maar wat is nu eigenlijk een Klasse (of Class)”, een woord dat onlosmakelijk met deze manier van programmeren verbonden is? Het antwoord op die vraag kan complex zijn, maar voor nu is het genoeg om te weten dat een Class feitelijk de blauwdruk van een object is. Anders gezegd: in de Class wordt het object gedefinieerd (let op: dat is niet hetzelfde als gedeclareerd). Tijdens runtime wordt er volgens het voorschrift uit deze Class-definitie een object gemaakt ($instantiate$). Je maakt een instantie van de klasse en dat noemen we een object.\newline \newline
+\figuur[0.4]{scalair}{Het scalair product van -2 en $  \vec{a}  $ }
 
-Nog meer conventies:\newline
-Het is gebruikelijk, althans in C/C++, de definities, type definities, class beschrijvingen en prototypes van functies en methodes in een .h-file te plaatsen en de bijbehorende implementatie in de .cpp-file. Daarmee creëer je feitelijk een scheiding tussen de code en het interface. Je kunt de .h-file importeren in je (Arduino) programma:
-\begin{lstlisting}[language=Arduino]
-#include <mysmartclass.h>
-\end{lstlisting}
-en vervolgens een object van het daarin gedefinieerde type maken en daarvan een methode aanroepen. De implementatie daarvan is beschreven in de bijbehorende .cpp-file ($mysmartclass.cpp$). \newline \newline
+\subsubsection{Verschil}
+Vectoren van elkaar aftrekken doe je door de overeenkomstige elementen van elkaar af te trekken:\\
 
-Arduino libraries zijn volgens dit principe ontworpen en gebouwd. Kijk maar eens in de directory $library$ in de arduino-directory, bijvoorbeeld bij de directory $servo$. Daar vind je een beschrijving van de servo Class, met een $servo.h$ en een $servo.cpp$. Dit mechanisme stelt de programmeur instaat de servo component te gebruiken zonder dat alle in’s en out’s daarvan bekend hoeven te zijn. Het belangrijkste is een beschrijving van het bijbehorende interface, een soort van gebruikers handleiding. Bij de servo component is er nog wel een complex detail: deze is, i.v.m. met de hardware-afhankelijkheid, geïmplementeerd voor meerdere controller platvormen, maar dat terzijde.
-\newpage
-\section{Je eerste eigen klasse}
-Na deze inleiding wordt het tijd zelf met classes en objecten aan de slag te gaan, zowel met het ontwerp als de implementatie, om deze daarna te kunnen gebruiken in onze Arduino-code. \newline
-Gegeven is de inhoud van de volgende .h file met een eenvoudige Class-definitie:
-\begin{lstlisting}[language=Arduino]
-#ifndef MYFIRSTCLASS_H 
-#define MYFIRSTCLASS_H
+\mydef[Het verschil tussen twee vectoren  \V{a}  en  \V{b} \ is:]{verschil}
+{ \V{a} \ - \ \V{b} \  \   $ = \  \ \vecdriesnel {a}  \  -  \ \  \vecdriesnel {b}  \ \  = \  \ \vecdrie {a_1-b_1}  {a_2-b_2}  {a_3-b_3} $\\}
 
-// #include <...> // eventuele includes van andere libraries
+\mybv[verschil \RD]{
+	$\vecdrie {3}{-1}{2}  \ -  \ \vecdrie {0}{6}{-4}  \  =  
+	\ \vecdrie {3-0}  {-1-6}  {2--4}  \  =
+	\ \vecdrie {3}  {-7}  {6} $ }\\ \\
 
-class MyFirstClass {
-  public:
-    MyFirstClass(int pos); // de constructor methode
-    setPos(int p);
-    getPos(void);
-  
-  private:
-    int pos; 
+\mybv[verschil \RT]{
+	$\vectwee {-3}{6}  \ - \  \vectwee {7}{2}  \  =  
+	\ \vectwee {-3 - 7}  {6-2}   \  =
+	\ \vectwee {-10}  {4}  $ \quad (figuur \ref{fig:verschil2})}\\
+
+Net zo als bij het  optellen van vectoren gedlt bij het aftrekken dat alleen vectoren met dezelfde dimensie van elkaar kunnen worden afgetrokken. 
+Zoals je in figuur \ref{fig:verschil2} kunt zien is het verschil van twee vectoren $  \vec{a}  $  en $  \vec{b}  $ hetzelfde als het optellen van de vectoren $  \vec{a}  $  en $ - \vec{b}  $. (vergelijk met figuur  \ref{fig:som2} )
+
+\figuur[0.5]{verschil2}{Het verschil van de vectoren $  \vec{a}  $  en $  \vec{b}  $ is $ \ 
+	\vec{a}\  - \ \vec{b} \  = \   \vec{a} \  + \ -\  \vec{b}$}
+
+\subsubsection{Inproduct}
+Je kunt niet zomaar 2 vectoren met elkaar vermenigvuldigen. Maar er zijn toch twee manieren om iets te doen wat er op lijkt. 
+Het inproduct van twee vectoren is een getal(!), geen vector. We noteren het inproduct als: $(\vec{a}, \vec{b}) $ en we berekenen het als volgt: (We gebruiken hier stippeltjes . . .  en het subscript $_n$ om aan te geven dat het over òf 2 òf 3 òf nog meer dimensies kan gaan)\\ \\
+
+\mydef[Het inproduct van \V{a}  en  \V{b} \  is:]{inproduct}
+{ \  \quad $ (\vec{a}, \vec{b}) = a_1b_1 + a_2b_2 + . . . + a_nb_n$\\}
+
+\mybv[inproduct]{ als  $\vec{a} = \vecdrie {3}{-1}{2}  \ $ en  \ \  $\vec{b} = \vecdrie {0}{6}{-4}  \ $\\ \\
+	dan is $ (\vec{a}, \vec{b}) = 3.0 +-1.6 +2.-4 = 0-6-8=-14$}
+
+
+\subsubsection{Loodrechte vectoren}
+Twee vectoren staan loodrecht op elkaar als de hoek tussen beide vectoren $ 90^{\circ} $ is. Dat leidt de volgende belangrijke eigenschap van het inproduct: \\ \\
+
+\myeig[inproduct]
+{
+	$(\vec{a}, \vec{b}) = 0   \quad      dan\  en \ slechts\  dan \ als \quad	\vec{a} $  loodrecht op $ \vec{b} $    
+	\quad \quad	($ \vec{a} \ne \vec{0} $ en   $ \vec{b} \ne \vec{0} $).
 }
 
-#endif // MYFIRSTCLASS_H
-\end{lstlisting}
+\figuur[0.3]{loodrecht}{de vectoren $  \vec{a}  $  en $  \vec{b}  $ staan loodrecht op elkaar}
 
-Opnieuw enige conventies:\newline
-\begin{enumerate} 
-  \item[-] Class definities beginnen met eeen hoofdletter
-  \item[-] Geef de .h-file dezelfde naam als de Class (in sommige talen is dat verplicht). Hier: $myfirstclass.h$ Deze filenaam hoeft niet met hoofdletters, maar dat mag wel.
-  \item[-]Met compiler directives $\#ifndef$, $\#define$ en $\#endif$ wordt voorkomen dat een h-file, tijdens het compileren meerdere keren wordt geïnclude. Feitelijk definieer je een (unieke shell) variabele die je kunt testen en op grond daarvan actie kunt ondernemen.
-\end{enumerate} 
+\mybv [loodrecht] 
+{Stel dat $ \vec{a} = \vectwee{1}{-2} $ en $ \   \vec{b} = \vectwee{2}{1} $ \ dan is $ (\vec{a}, \vec{b})  = 1.2 + -2.1 = 0 $ \ \ Zie figuur  \ref{fig:loodrecht} } 
 
-Uitleg van de code:\newline
-De klasse bevat de prototypes van 3 methodes: de constructor, een get-methode en een set- methode. Voor de liefhebber: technische gesproken wordt hier het zogenoemde stackbeeld vastgelegd dat de compiler moet opbouwen en wat tijdens runtime gebruikt wordt.
-Een object, dat we straks aanroepen in de .ino-file, wordt gemaakt door de aanroep van de constructor, volgens de beschrijving in de Class defintie. De implementatie daarvan wordt, net als die van $setPos()$ en $getPos()$, beschreven in de bij de .h-file behorende .cpp-file.
-De variabele $pos$ is van het type int en private gedeclareerd. Dat laatste betekent dat deze niet bereikbaar is voor de buitenwereld dan alleen via de get- en de set-methode.
+\subsubsection{Uitproduct}
+De andere manier waarop je 2 vectoren kunt 'vermenigvuldigen' heet het uitproduct of kruisproduct. Het uitproduct van 2 vectoren levert weer een vector op. Het uitproduct is alleen maar gedefini"eerd in \RD.\\
 
-\section{Opgaves}\index{Opgaves week 1}
-\begin{exercise}
-$\\$ Maak de bijbehorende .cpp file en definieer de 3 methodes conform de beschrijving.
-\end{exercise}
+\mydef[Het uitproduct van \V{a}  en  \V{b} \  is:]{uitproduct}
+{$\vec{a} \times \vec{b} \ = \ \vecdriesnel{a}  \ \times  \ \vecdriesnel{b} \ 
+	= \ \vecdrie{a_2.b_3 -a_3. b_2}{-(a_1.b_3 -a_3.b_1)}{a_1.b_2 - a_2.b_1} $} \\
 
-\begin{exercise}
-$\\$ Creëer een Arduino .ino file met de naam classexp1.ino. Include je class-definitie (.h file) en declareer (en instantieer) een object van het type $MyFirstClass$. Uiteraard doe je dat met gebruikmaking van de constructor. Geef aan de constructor een parameter mee waarmee je de interne (private) variabele $pos$ op 4 definieert. \newline
-Controleer dit met de get-methode. \newline
-Geef $pos$ een andere waarde via de set-methode en controleer dit eveneens.
-\end{exercise}
+\mybv[uitproduct]{ als $ \vec{a} =  \ \vecdrie{-1}{2}{4} $ en  $ \vec{b} =  \ \vecdrie{3}{-2}{1} $ 
+	\quad dan is \quad $ \vec{a}  \times  \vec{b} \ = \ \vecdrie{2.1 - 4.-2}{-(-1.1-4.3)}{-1.-2 - 2.3} = \ \vecdrie{10}{13}{-4} $}\\ \\
 
-\begin{exercise}
-$\\$Koppel aan je Arduino-bordje een servo motor en een analoge sensor, bijvoorbeeld een potmeter, licht- of krachtsensor. \newline
-Pas je code aan, zowel voor de .h-file als de .cpp-file, zodanig dat je met $setPos$ de positie van de servo instelt (bijvoorbeeld van 0 .. 180 graden) en dat je met een nieuwe methode getVal(int channel) de waarde van de ad-convertor van kanaal channel kunt uitlezen. \newline 
-Initialiseer de stand van de servo, via de constructor, op 0. Ontwerp een herhaling, in je .ino-file, waarin je de $getVal$ en $setPos$ gebruikt en daarmee de positie van de potmeter (of de hoeveelheid licht van de lichtsensor) vertaalt naar de uitslag van de servo.
-\end{exercise}
+\myeig[uitproduct]
+{ Een belangrijke eigenschap van het uitproduct is de volgende:\\
+	De vector $ \vec{c} \ = \ \vec{a} \times \vec{b} $ staat loodrecht op  $ \vec{a} $ en loodrecht op  $ \vec{b} $}\\
 
-\begin{exercise}
-$\\$ Pas de files zodanig aan dat je gebruikt maakt van een pointer naar jouw object:
-\begin{lstlisting}[language=Arduino]
-myObject = new MyFirstClass();
-\end{lstlisting}
-Uiteraard moet $myObject$ als pointer (naar een “ding” van het type MyFirstClass) worden gedeclareerd in de .h-file. \newline
-Werk je programma verder uit op basis van dit uitgangspunt en controleer het op juiste werking.
-\end{exercise}
+\mybv[loodrecht]{ Neem $ \vec{a}, \   \vec{b} $   en   $ \vec{c} $ als hierboven.
+	dan is  $(\vec{c}, \vec{a}) = 10.-1 + 13.2 -4.4 = -10+26-16 =0 $ \\
+	en $(\vec{c}, \vec{b}) = 10.3 + 13.-2 -4.1 = 30-26-4=0 $}
+
+\figuur[0.4]{loodrecht3d}{de vector $  \vec{c}  $  staat loodrecht op $  \vec{a}  $  \textbf{\textit{en}} $  \vec{b} $}
+
+\section{Vectoren en meetkunde}
+Er bestaan een aantal meetkundige operaties die we op vectoren kunnen toepassen.
+Om  te beginnen, de norm, of lengte van een vector.
+
+\subsubsection{Norm}
+De norm van een vector is de lengte daarvan. Dat is in \RD en \RT makkelijk  voor te stellen: je neemt gewoon de "lengte van het pijltje". De norm wordt geschreven met 2 verticale streepjes:\\
+
+\mydef[De norm van een vector \V{a} is:\\ ]{norm}
+{$|\vec{a}| = \sqrt{ {a_1}^{2} + {a_2}^{2} + . . . +{a_n}^{2}}$\\ \\}
+
+\mybv[norm]{
+	als \ $ \vec{v} = 	\vecvijf{3}{1}{-3}{4}{-1} \  $ 
+	dan is  $|\vec{v}| = \sqrt{ 3^{2} + 1^{2} +(-3)^{2} + 4^{2}  +(-1)^{2}} = 6$}
+
+\subsubsection{Eenheidsvector}
+Soms is het nodig om vectoren met lengte 1 te hebben:
+\mydef[]
+{eenheidsvector}
+{Een eenheidsvector is een vector met lengte 1.}
+Een eenheidsvector wordt genoteerd met een accent circonflexe (\textasciicircum \ , dakje):\\ 
+
+\mybv[eenheidsvector]
+{\qquad  $\hat{e} = \vecdrie {0}{0}{1} $}\\ 
+Een willekeurige vector $ \vec{v} $  is te schalen naar een eenheidsvector door $ \vec{v} $   te vermenigvuldigen met $ \frac{1}{norm} =  \frac{1}{ |\vec{v}|} $. 
+Dat wil zeggen $\hat{v} =  \frac{1}{ |\vec{v}|}.\vec{v} $
+De berekening van een eenheidsvector in 5 dimensies gaat als volgt: \\ \\
+
+\mybv[eenheidsvector]{als \ $ \vec{v} =\  \vecvijf{3}{1}{-3}{4}{-1} $, \ dan is $  |\vec{v}| = 6$ (zie boven) 
+	en is $ \hat{v} =  \frac{1}{ |\vec{v}|}.\vec{v} = \frac{1}{6} .\vecvijf{3}{1}{-3}{4}{-1} \ = \  \vecvijf{\nicefrac{3}{6}}{\nicefrac{1}{6} }{-\nicefrac{3}{6}}{\nicefrac{4}{6}}{-\nicefrac{1}{6}}\ \  = \  \vecvijf{\nicefrac{1}{2}}{\nicefrac{1}{6}}{-\nicefrac{1}{2}}{\nicefrac{2}{3}}{-\nicefrac{1}{6}} $}
+
+\subsubsection{Hoek tussen twee vectoren}
+We kunnen het inproduct gebruiken om de hoek tussen twee vectoren te berekenen. 
+\mydef[De formule voor de hoek tussen  vectoren \V{a}  en  \V{b} \  gebruikt het inproduct en  de norm:]{hoek}
+{\quad  
+	$\cos \alpha = \dfrac{(\vec{a}, \vec{b}) }{|\vec{a}| |\vec{b}|} $}
+Daarbij is $\alpha \ $ (\textit{alfa}) de hoek tussen de vectoren $\vec{a}$ en $\vec{b}.$ En cos staat voor cosinus, een maat voor de hoek, die je eenvoudig met je rekenmachine kunt uitrekenen. Zie figuur \ref{fig:hoek}  \\ \\
+
+\figuur[0.3]{hoek}{Met $ \alpha $ geven we de hoek tussen twee vectoren aan}
+
+\mybv[hoek]{De berekening van een  hoek tussen twee vectoren gaat als volgt:\\
+	Stel   
+	$ \vec{a} = \vecdrie {2}  {-2} {1}  $ \ en \  $ \vec{b} = \vecdrie {-3}  {0} {4}  $ 
+	\qquad dan is 
+	\qquad $ (\vec{a}, \vec{b}) = 2.-3 + -2.0  + 1.4 = -2 $.\\ 
+	De lengte van de vectoren is: 
+	$ |\vec{a}| = \sqrt{9} = 3, \ |\vec{b}| = \sqrt{25}=5 $. \\
+	Invullen in de formule levert: 
+	$\cos \alpha = \dfrac{-2}{3.5} = - \dfrac{2}{15}. $  \ Met de rekenmachine berekenen we het aantal graden van de hoek: 
+	$\alpha \ = \cos ^{-1}(- \dfrac{2}{15}) \ \approx \ ~ 97,7 ^{\circ} $ } 
+
+\section{Vectorvoorstelling van  lijn en  vlak}
+Uit de lessen Wiskunde Basis is bekend dat de vergelijking van een lijn in \RT in het algemeen $ y = ax + b $ is.  Daarnaast bestaan er vectorvoorstellingen en vergelijkingen van lijnen en vlakken. 
+
+\subsection{Definities lijn}
+\mydef [De \textit{vergelijking} van een lijn $ l $ in \RT is: ] 
+{lijn \RT}  {$ y = ax + b $ 
+	\qquad \qquad \quad \quad met \textit{a} de richtingscoëffici"ent  en \textit{b} een constante.}
+
+\mybv[lijn]% \RT] 
+{$l: y = -\frac{1}{2}x +4. $   \ \ De richtingscoëfficiënt  van \textit{ l }   is $ - \ \frac{1}{2}. $ ( figuur  \ref{fig:lijn2d})
+}\\ \\
+
+\mydef  [De \textit{vectorvoorstellling} van een lijn $ l $ in \RT is: ]
+{lijn \RT}  
+{ $  \vectweesnel{x} \  = \ \vectweesnel{b} \  + \  \lambda \ \vectweesnel{r} $ 
+	\qquad  \qquad of: 
+	$ \vec{x}  =   \vec{b}  + \  \lambda \ \vec{r} $} 
+
+Met  $ \vec{x}  =  \vectweesnel{x} $ en 
+\ beginvector  $ \vec{b} =  \vectweesnel{b} $ ,  
+\  richtingsvector $ \vec{r} =  \vectweesnel{r} $  \ en
+$ \lambda $  (lambda) een variabel getal. Let op het verschil tussen een rcihtings\textit{vector} en een richtings\textit{coëfficiënt}.\\ 
+
+\mybv[lijn \RT]
+{Een voorbeeld van een vectorvoorstellling is:  
+	$ m: \vectweesnel{x} \ = \ \vectwee{-5}{0} \  + \ \lambda \ \vectwee{0}{-1}. $\\  Zie figuur  \ref{fig:lijn2d}. 
+	De richtingsvector van m is 
+	$  \overrightarrow{rv_m} =\vectwee{0}{-1} \ $ 
+	en de beginvector 
+	$  \vec{b} = \vectwee{-5}{0} \ $
+} 
+\figuur[0.5]{lijn2d}{de lijn  $ l: y = -\frac{1}{2}x +4. $ met  $ r.c.= -\frac{1}{2}$ en de lijn \textit{m} met de rode richtingsvector en zwarte beginvector.}
+
+\subsection{Definities vlak}
+\mydef [De \textit{vergelijking} van een vlak $ V $ in \RD is: ]
+{vlak \RD} 
+{$ ax_1 + bx_2 + cx_3 = d $. \quad  \quad (a, b, c en d zijn constanten) } \\
+
+\mybv[vlak \RD]
+{Een voorbeeld van een vergelijking van een vlak $ V $ is: $ 2x_1 - 3x_2 +7x_3 = -5$ }\\  \\
+
+\mydef [De \textit{vectorvoorstellling} van een vlak $ V $ in \RD is: ]
+{vlak \RD}  
+{  $ \vecdriesnel{x} \ =\ \vecdriesnel{b}  \ +  \lambda. \vecdriesnel{v} \   + \  \mu. \vecdriesnel{w} $ \qquad \qquad  of:  $ \vec{x}  =   \vec{b}  + \  \lambda \ \vec{v} + \  \mu \ \vec{w}  $. }\\ 
+Met $ \vec{x}  = \   \vecdriesnel{x}  \quad    \vec{b} = \  \vecdriesnel{b} \quad    \vec{v} =  \  \vecdriesnel{v} \quad   \vec{w} =  \ \vecdriesnel{w} $  \\   $ \lambda $ en  $ \mu $ zijn variabele getallen ( $ \mu $, spreek uit: muu, is de Griekse letter m). En  $ \vec{b} $ is een constante beginvector en $ \vec{v}  $  en $ \vec{w}  $ zijn richtingsvectoren van vlak \textit{V}.\\ \\ \\ 
+
+\mybv[vlak \RD]
+{Een voorbeeld van een vectorvoorstellling van een vlak $ V $ is: \\
+	$ \qquad	
+	V: \   \vecdriesnel{x} \ = \ \vecdrie{1}{-3}{0} \ + 
+	\lambda.  \vecdrie{1}{2}{-2} \   + 
+	\  \mu. \vecdrie{-4}{1}{2} $ }
+
+Wat  $ \lambda $ (spreek uit: lambda) en  $ \mu $ (spreek uit: muu) zijn wordt verderop bij de berekeningen uitgelegd (zie ook figuur  \ref{fig:vlak}.).  In lineaire algebra heb je soms de vergelijking, soms de vectorvoorstelling nodig. In de rest van deze paragraaf wordt uitgelegd hoe je van een vergelijking een verctorvoorstelling maakt en omgekeerd, zowel voor een lijn in \RT \ als een vlak in \RD. 
+
+\figuur[1]{vlak}{Het vlak $ V $ heeft de beginvector $  \vec{s} $, en richtingsvectoren $  \vec{v} $ en $  \vec{w} $. Het punt P ligt op V en kun je vanuit \textit{\textbf{O}}, de oorsprong bereiken door  $  \vec{s} + \lambda. \vec{v} + \mu.\vec{w} $ met \ $  \lambda = 2 $ en$ \  \mu = 1,5 $. Elk punt van \textit{V} is op zo'n manier te bereiken. Met andere woorden $  V: \vec{x} =   \vec{s} \ + \  \lambda.\vec{v} \  +\  \mu.\vec{w}  $  }
+
+\subsection{Berekeningen lijn}
+
+\subsubsection{Van vectorvoorstelling lijn naar vergelijking lijn:} 
+Een voorbeeld van een  vectorvoorstelling van een lijn $ l $ in \RT  is:
+$ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $.   (zie figuur \ref{fig:lijnVV} ) Dat betekent dat de lijn\textit{ l} door het punt $ (1,2) $ gaat en als richtingsvector de vecotr $ \vectwee {2}{-1} $ heeft. $ \lambda $  is een parameter, dat wil zeggen dat om een punt op de lijn $ l $ te vinden mogen we een waarde voor $ \lambda $  kiezen (2, of 100, of $ -\frac{2}{5} $, of ...). Bijvoorbeeld bij  $ \lambda= 3 $ vinden we dat het punt  (7,-1) = (1 + 3.2 , 2 + 3.-1)   op $ l $ ligt. Hoe maken we een vergelijking van  $ l $? In een vergelijking komt geen $ \lambda $ voor, dus moeten we zorgen de $ \lambda $ uit de vectorvoorstelling "kwijt te raken". Als je goed naar de vectorvoorstelling van $ l $ kijkt, zie je dat het eigenlijk 2 vergelijkingen zijn, één voor de x-coördinaat en één voor de y-coördinaat:
+
+\[\begin{cases}
+x = 1 + 2\lambda\\
+y = 2 - \lambda 
+\end{cases}
+\] 
+Dit is een stelsel van 2 vergelijkingen  en kunnen we 'oplossen' door $ \lambda $ te elimineren ('weg te werken'):
+Uit de $ 2^{e}$ vergelijking $ y = 2 - \lambda $ volgt  dat $\lambda = 2 - y $. Invullen van  $ \lambda $ in de $ 1^{e}$ vergelijking levert $ x = 1 +2(2-y) $. Dan is $ x= 5 -2y $, oftewel $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $,  wat dus dezelfde lijn is als: $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waar we mee begonnen, zie de tekening in  figuur  \ref{fig:lijnVV}
+
+\figuur[0.6]{lijnVV}{De lijn  $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $. Let op de steunvector (\red{rood}) en de richtingsvector (zwart)}
+
+\subsubsection{Van vergelijking lijn naar vectorvoorstelling lijn:}
+Als we, omgekeerd, van een vergelijking een vectorvoorstelling willen maken moeten we zorgen dat er een parameter $ \lambda $ in de vectorvoorstelling komt. Neem als voorbeeld de vergelijking $ y = 3x - 2 $. We weten dat we een $ \lambda $ moeten hebben (invoeren). Stel daarvoor dat $ y =  \lambda $ dan volgt uit de vergelijking  dat $ \lambda = 3x -2 $ dus $ x = \frac{1}{3}  \lambda  + \frac{2}{3} $. Dan hebben we  2 vergelijkingen, een voor y en een voor x:
+
+\[\begin{cases}
+x = \frac{2}{3} + \frac{1}{3} \lambda\\
+y =  \lambda 
+\end{cases}
+\] 
+Dat schrijven we dan met behulp van vectoren. 
+$ l: \  \vectwee {x}{y} \ = \ \vectwee {\frac{2}{3}}{0} \ +\  \lambda  \vectwee {1/3}{1}  $.\\
+Ga na dat dit precies dezelfde lijn is als:
+$ l: \  \vectwee {x}{y} \ = \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $.\\ (immers we kunnen voor $ \lambda $ 1 kiezen, daarmee een nieuw steupunt, (1,1), uitrekenen en vervolgens $ \lambda $ 3 keer zo groot kiezen)\\
+Nog anders geschreven:
+$  l: \  \vectweesnel{x} =  \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $ \qquad
+of: $ l: \ \vec{x} = \ \vectwee{1}{1} \ + \ \lambda \vectwee {1}{3} $
+
+\subsection{Berekeningen vlak}
+\subsubsection{Van vergelijking vlak naar vectorvoorstelling vlak:}
+We hebben gezien dat $ ax + by + cz = d $ een vergelijking van een vlak in \RD is. Net zo als bij een lijn moeten we om een vectorvoorstelling van een vergelijking te maken parameters invoeren (bij een vlak hebben we 2 parameters nodig omdat een vlak  twee-dimensionaal is). Die parameters noemen we $ \lambda $  en $ \mu $ . Neem als voorbeeld het vlak $ -x + 2y -2z = 6 $.  We stellen  nu dat $ x=  \lambda $ en $ y = \mu $. Dan kunnen we $ z$ uitdrukken in $ \lambda $  en $ \mu $. Immers we vullen  $ x=  \lambda $ en $ y = \mu $ in in de vergelijking $ -x + 2y -2z = 6 $. Dan geldt dus: $ -\lambda + 2\mu -2z = 6 $, oftewel $ z = -3 + \mu -   \frac{1}{2} \lambda $. In feite hebben we nu 3 vergelijkingen namelijk:
+
+\[\begin{cases}
+x =  \lambda\\
+y =  \mu\\
+z = -3 + \mu -   \frac{1}{2} \lambda 
+\end{cases}
+\] 
+anders geschreven:
+
+\[\begin{cases}
+x =  0 + \red{1}.\lambda +  \blu{0}.\mu\\
+y =  0 +  \red{0}.\lambda  + \blu{1}. \mu\\
+z = -3 \  \red{- \frac{1}{2}} .\lambda + \blu{1}.\mu 
+\end{cases}
+\] 
+en dat kunnen we weer schrijven als:
+$ V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{0}{0}{-3} \ + \ \lambda \  \vecdrie[red]{1}{0}{-\nicefrac{1} {2}}   \ + \ \mu \ \vecdrie[blue]{0}{1}{1} $ wat weer hetzelfde vlak is als waar we mee begonnen $ V: \ -x + 2y -2z = 6 $.
+De vectorvoorstelling van een vlak kent dus \textit{twee}  richtingsvectoren. 
+Zie  figuur  \ref{fig:vlak}.
+
+\subsubsection{Van vectorvoorstelling vlak naar vergelijking vlak:}
+Omgekeerd nemen we de vectorvoorstelling van een vlak $ V $,\\ 
+bijvoorbeeld:
+$ V: \  \vec{x} =\  \vecdriesnel{x} \ = \  \ \vecdrie{1}{3}{6} \ + \ \lambda \ \vecdrie{0}{2}{1} \ + \ \mu \ \vecdrie{1}{1}{2} $.\\
+Om nu een vergelijking te krijgen moeten we $ \lambda $  en $ \mu $ wegwerken (elimineren). Dat kan als we zien dat de vectorvoorstelling van $ V $ eigenlijk 3 vergelijkingen bevat:
+
+\[\begin{cases}
+x_1 =  1 + 0\lambda + 1\mu\\
+x_2 =  3 + 2\lambda  + 1\mu\\
+x_3 = 6 + 1 \lambda + 2\mu  
+\end{cases}
+\] 
+Uit de $ 1^{e}$ vergelijking halen we $ \mu = x_1 -1 $ en dat vullen we in in de $ 2^{e}$ en $ 3^{e}$ vergelijking:
+
+\[\begin{cases}
+x_2 =  3 + 2\lambda  + ( x_1 -1)\\
+x_3 = 6 + 1 \lambda + 2( x_1 -1)
+\end{cases}
+\] 
+Uit de $ 2^{e}$ vergelijking halen we dat $ \lambda = x_3 - 4 - 2x_1 $ wat we in de $ 1^{e}$ vergelijking invullen:
+$ x_2 = 2 + 2(x_3 -4 -2x_1) + x_1 - 1$, anders geschreven: $ 3x_1 +x_2 - 2x_3 = -7
+$. En dat is precies de algemene vorm van de vergelijking van een vlak.
+
+
+\section{Normaalvectoren}
+\subsection{Normaal van lijn}
+
+Om goed te kunnen rekenen met lijnen hebben we een normaalvector nodig.
+\mydef
+{normaalvector lijn}
+{De normaal of normaalvector van een lijn is: \\
+	de vector $ \vec{n} $  \ die loodrecht staat op de richtingsvector van de lijn.}
+
+\mybv[normaal]{Voorbeeld van een berekening van de normaal van een  lijn} 
+Stel we hebben de lijn $ l: \  \vectwee {x}{y} \ = \ \vectwee {2}{0} \ +\  \lambda  \vectwee {3}{2}  $. (Zie figuur  \ref{fig:lijnnormaal})
+Dan is de richtingsvector van $ l:  \overrightarrow{rv_{l}} =  \vectwee {3}{2} $. Misschien zie je meteen dat $ \vec{n} =  \vectwee {-2}{3} $ er loodrecht op staat? Ga na dat  $ (\overrightarrow{rv_{l} }, \vec{n}) = 3.-2 + 2.3  = 0 $. Als je dat niet meteen 'ziet', dan kun je het volgende doen: elke vector  $ \ne \vec{0} $ kun je schrijven als  $ \vec{n} = \vectwee {1}{c} $ waar c het getal is dat we zoeken. Er moet gelden dat  $ (\overrightarrow{rv_{l} }, \vec{n}) = 0 $, immers als twee vectoren loodrecht op elkaar staan moet het inproduct = 0 zijn. Dus $ 3.1 + 2.c = 0 $. Daaruit volgt $ c =  -\frac{3}{2}. $ en dus is $ \vectwee {1}{-3/2} $ de vector die we zoeken. Omdat voor het loodrecht zijn het niet uitmaakt hoe lang de vector is mogen we met -2 vermenigvuldigen om de breuk weg te halen: $ \vec{n} = -2.\vectwee {1}{\nicefrac{-3}{2}} \ = \  \vectwee {-2}{3} $. 
+
+\figuur[0.4]{lijnnormaal}{De normaal $  \vec{n}  $  staat loodrecht op de richtingsvector van $ l $ }	
+
+\subsection{Normaal van vlak}
+
+Om goed te kunnen rekenen met vlakken hebben we een normaalvector nodig.
+\label{vlaknormaal}
+\mydef[]
+{normaalvector vlak}
+{De normaal of normaalvector van een vlak $\vec{n}$ of  $\overrightarrow{n_{V}}$ is:
+	\\ de vector $ \vec{n} $  \ die loodrecht staat op \textit{beide} richtingsvectoren van het vlak. \\ 
+	Gelukkig hebben we daarbij ook nog de volgende handige eigenschap:}
+
+\myeig[normaal vlak]
+{als $ V:  ax_1 + bx_2 +cx_3 = d $ \qquad dan is :  $ \vec{n} = \vecdrie{a}{b}{c} $ \ de normaalvector van 
+	$ V $ .}
+
+\mybv[normaal vlak]
+{als $ V: 7x_1 + 3x_2 - x_3 = -20 $ \qquad dan is 
+	$ \vec{n} = \vecdrie{7}{3}{-1} $ de normaalvector van $V$.\\}
+Maar wat als we niet de vergelijking maar de vectorvoorstelling van een vlak hebben? Dan kunnen we gebruik maken van de eigenschap dat  het uitproduct van 2 vectoren loodrecht staat staat op beide richtingsvectoren. 
+
+\mybv[normaal vlak]
+{als $ W: \vec{x}  = \vecdrie{0}{1}{-1}    + \  \lambda \  \vecdrie{2}{-3}{1} + \ \mu \ \vecdrie{0}{1}{2} $ 
+	\qquad dan zijn de richtingsvectoren $ \vecdrie{2}{-3}{1} \ $ en $  \vecdrie{0}{1}{2} $ \\
+	en hun  uitproduct is : 
+	$ \vecdrie{2}{-3}{1} \ \times \  \vecdrie{0}{1}{2}  \ = \ \vecdrie{-3.2-1.1}{-(2.2-1.0)}{-3.0-2.1} = \ \vecdrie{-7}{-3}{-2} $\\
+	en dus is $ \vec{n} = \vecdrie{-7}{-3}{-2}  $ de normaal vector van $ W $.  Zie figuur  \ref{fig:vlaknormaal}}.
+
+\figuur[0.8]{vlaknormaal}{De normaal van vlak \textit{W},  \ $  \vec{n}   \ = \ \vec{v} \times \vec{w} $ ,  staat loodrecht op de richtingsvectoren $  \vec{v}  $  en $  \vec{w} $}
+
+De vergelijking van $ W $ is dan  $ -7x-4y-2z = c $ De constante c weten nog niet maar kunnen we uitrekenen doordat we weten dat het punt (0,1,-1) op W ligt, want dat is de vaste vector. (dat kun je ook zien als je en $ \lambda $  en $ \mu $  beide 0 stelt: dan is het punt (0 +0.2 +0.0, 1 -3.0 +1.0, -1 + 1.0 + 2.0)= (0,1,-1)  ) .
+Vul de x, y en z-waarde van het vaste punt  in in de vergelijking $ -7x-4y-2z = c $ en er volgt dat c = -7.0-4.1-2.-1 = -2. Dus $ W: -7x-4y-2z = -2 $ , of, wat op hetzelfde neerkomt:  $ W: 7x+4y+2z = 2 $
+
+\section{Afstand van punt tot vlak}
+We hebben nu genoeg hulpmiddelen om in \RD de afstand van een punt tot een vlak uit te kunnen rekenen. Dat doen we   door een lijn \textit{l} loodrecht op \textit{V} te tekenen,\textit{ l }snijdt \textit{V} in\textit{ S} en dan is de afstand tussen \textit{P} en \textit{V} gelijk aan de afstand tussen P\textit{} en \textit{S}. Zie figuur   \ref{fig:afstand1}. en \ref{fig:afstand-2}.
+
+Dat gaat in een aantal stappen:
+\begin{enumerate}[label=(\alph*)]
+	\item de vergelijking van een vlak bepalen
+	\item de normaal van een vlak berekenen
+	\item de lijn berekenen die  loodrecht op het vlak staat  en door $ P $ gaat
+	\item x, y en z van de lijn $  l $  uitdrukken in \ $  \lambda $
+	\item het snijpunt $\it{S}$  van de lijn door $\it{P}$  en het vlak bepalen
+	\item  de afstand tussen $\it{P}$  en het snijpunt $\it{S}$  uitrekenen
+\end{enumerate}	
+
+\figuur[1]{afstand1}{Gevraagd: de afstand tussen $ P $ en $ V $, ( $ P $ is een punt dat boven het vlak 'zweeft')}
+\mybv[afstand]
+{ We nemen als voorbeeld voor de berekening \\het punt $ P: (3,6,7)  $ en het vlak 
+	$ V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{5}{0}{3} \ + \ \lambda \ \vecdrie{-1}{-1}{1} \  + \mu \ \vecdrie{3}{5}{-6} $ \ \ \ .
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item \subsubsection{de vergelijking van een vlak beplen}
+Omdat de vectorvoorstelling van het vlak gegeven is, moeten we daarvan eerst een vergelijking maken.
+We vinden met de methode van de paragraaf "normaal van vlak" \ 
+(blz. \pageref{vlaknormaal}) dat : $ V: -x + 3y +2z = 1 $.  Als de vergelijking van het vlak al gegeven is kun je deze stap overslaan natuurlijk. 
+\item \subsubsection{de normaal van een vlak berekenen}
+Als we de vergelijking van het vlak hebben is het berekenen van de normaal kinderspel. Immers de normaal wordt gegeven door de getallen die in de vergelijking van het vlak staan:
+$ \vec{n} = \vecdrie{-1}{3}{2}  $ de normaal vector van $ V $.\\
+NB: Let op: De normaal kun je alleen uit de vergelijking van het vlak aflezen als "\textit{de x, y en z aan de linkerkant van het = - teken staan}".  Dus als je als vergeijking $ 3x + z = 2 -y $ hebt, dan is de normaal NIET $  \vecdrie{3}{-1}{1}  $ maar  $ \vecdrie{3}{1}{1}  $, omdat uit $ 3x + z = 2 -y $ volgt dat $ 3x + y + z = 2 $ (x, y en z aan de linkerkant).
+\item \subsubsection{de lijn berekenen die  loodrecht op het vlak staat  en door $ P $ gaat}
+De lijn door het punt P die loodrecht op vlak V staat heeft als richtingsvector . . .  de normaal van het vlak. Immers de normaal staat loodrecht op dat vlak. Dus $ \overrightarrow{rv_{l}}  = \vec{n} $. En de lijn moet door $ P: (3,6,7)  $  gaan. Dat  betekent dat we $ \vecdrie{3}{6}{7} $ als steunvector voor de lijn kunnen gebruiken. Dus de vectorvoorstelling van de lijn is: $ l: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{3}{6}{7} \ + \ \lambda \ \vecdrie{-1}{3}{2} \ $
+\item \subsubsection{x, y en z van de lijn $  l $  uitdrukken in \ $  \lambda $}
+Net zoals bij een vlak in \RD bestaat de vectorvorstelling van de lijn $ l  $ eigenlijk uit 3 vergelijkingen:
+\[\begin{cases}
+x =  3 -\lambda \\
+y =  6 + 3\lambda\\
+z = 7 + 2\lambda
+\end{cases}
+\] 
+\item \subsubsection{het snijpunt van  het  vlak en de lijn door P bepalen}
+Voor het snijpunt van\textit{ l} en \textit{V} gedlt dat het snijpunt zowel op $  l $ ligt als op $ V $. Anders gezegd: De coordinaten  van het snijpunt moeten voldoen aan bovenstaande 3 vergelijingen van\textit{ l}, maar ook aan de vergelijking voor \textit{V}. Met andere woorden: we kunnen de x, y en z van hierboven invullen in de vergelijking van het vlak:\\
+$ -(3 -\lambda) + 3.(6 + 3\lambda) + 2.(7 + 2\lambda) = 1$ \\
+of $ 14\lambda + 29 = 1 $ \\of $  \lambda = -2 $
+
+\item \subsubsection{de afstand uitrekenen}
+We weten nu dat als $  \lambda = -2 $ we het snijpunt van $ l  $ en $ V $ hebben. Wat betekent dat? Dat betekent dat als we beginnen in punt P en -2 keer de richtingsvector van $  l $ er bij op tellen we op het vlak V terecht komen.
+Anders gezegd de afstand tussen P en V is 2 keer de lengte van die richtingsvector. Oftewel: 
+afstand $ = 2. |\overrightarrow{rv_{l}})| = 2. \sqrt{(-1)^{2} + (3)^{2} + (2)^{2} } = 2\sqrt{14} $ \. Zie  figuur  \ref{fig:afstand-2}
+\end{enumerate}	
+
+\figuur[1]{afstand-2}{We moeten vanuit $ P $ beginnend -2 keer de vector $\vec{n} =  \vec{rv_{l}} $   afpassen om op V te komen. Anders gezegd:  de normaal vector van $ V $ past  precies 2 keer tussen $ V $ en $ P $, en dus is de afstand $ 2.|\vec{n}| =  2.|\vec{rv_{l}}| = 2\sqrt{14} $.}
+
+
+\subsubsection{Opgaven}
+\begin{enumerate}
+	\item  Bereken \ $ \vec{a} + \vec{b} $, \quad $ \vec{a} - \vec{b} $, \ en \ $  (\vec{a} , \vec{b}) $  als $ \vec{a} = \vecvier{3}{-1}{2}{0}  $ \  en \  $  \vec{b} =  \vecvier{-2}{2}{4}{7} $
+	
+	\item  Bereken de hoek $\alpha$ die de  lijnen \ $  l $ en $ m $ met elkaar maken in één decimaal nauwkeurig:
+	$ l:  y = 2x +7  $ en $ m: \  \vectwee{x}{y} = \vectwee{-3}{7} + \lambda \vectwee{2}{-3}  $
+	
+	\item Wat is de lengte van de vector $  \vec{v} \ = (2, -3, 0, 2, -5) $ ?
+	% \ \vecvijf{2}{-3}{0}{2}{-5} $ ?
+	
+	\item Schaal de vector $  \vec{v} $ naar de eenheidsvector $\hat{v}$
+	als $  \vec{v} = (-1, 5, 7, 0, 5) $.
+	%\vecvijf{-1}{5}{7}{0}{5} $ 
+	
+	\item Bereken de afstand tussen  $  P = (7,0,-2)  $ en 
+	$ V: \ \vecdriesnel{x} \
+	=  \vecdrie {8} {-5} {3}  \
+	+  \ \lambda \ \vecdrie{3}{-2}{1} 
+	+ \mu \  \vecdrie{-5}{3}{-2} $ 
+	
+	\item   Bereken de afstand tussen  $  Q = (7,1,2)  $ en 
+	$ W:2x - 4y +2z \ = -2 $ .
+	
+\end{enumerate}
+
+\subsubsection{Extra opgaven}
+\begin{enumerate}
+	\item Bereken 
+	\ $ \vec{d} + \vec{e} $, \ $ \vec{d} - \vec{e} $, en \ $  (\vec{d} , \vec{e}) $ \ als 
+	\quad $ \vec{d} = \vecvier{3}{-2}{0}{5}  $ \  en \  $  \vec{e} =  \vecvier{1}{7}{-2}{2} $ 	
+	
+	\item  Bereken de hoek $\alpha$ die de  lijnen \ $  m $ en $ l $ met elkaar maken in één decimaal nauwkeurig:
+	$ m:  y = 3x + 1  $ en $ l: \  \vectwee{x}{y} = \  \lambda \vectwee{4}{-3}  $
+	
+	\item Wat is de lengte van de vector $  \vec{w} \ = \ \vecvijf{4}{0}{7}{-4}{1} $ ?
+	
+	\item Bereken de afstand tussen  $  P = (-3,9,-3)  $ en 
+	$ V: \ \vecdriesnel{x} \ =  \ \lambda \ \vecdrie{4}{2}{4} + \mu \  \vecdrie{7}{-1}{-3} $	
+	
+	\item   Bereken de afstand tussen  $  Q = (-1,-4,-1)  $ en 
+	$ W: -2x + 9y + 6z \ = \nicefrac{1}{3} $ .
+\end{enumerate}
+

@@ -1,331 +1,237 @@
-\chapter{Week 4: Diepere duik}
-Deze week gaan kijken naar enkele concepten die ons leven als programmeur een stukje makkelijker kunnen gaan maken. We gaan eerst een blik werpen op verzamelingen in de vorm van \textit{lijsten}. Daarna de robuustheid van onze code aanzienlijk verbeteren met \pyth{Try} / \pyth{Except}-blokken en ten slotte meer structuur aanbrengen met de introductie van \textit{functies}. 
-% , \textit{Dictionaries} en \textit{tuples}
+\chapter{Quaternion}
+\label{chap: Quaternion}
+In software voor 3D-applicaties wordt niet de rotatie gebruikt zoals in hoofdstuk \ref{chap: matrix, rotatie en projectie} beschreven. Daar wordt de methode van Euler gebruikt, maar die levert problemen op als je over 3 assen roteert. Dat probleem wordt de Gimbal Lock genoemd. Zoek even op you tube naar 'Gimbal Lock'. 
+Een oplossing voor deze problemen bieden de zogenaamde quaternionen. En daarvoor moeten we eerst even iets over complexe getallen uitleggen.
+\section{Complexe getallen}
+Complexe getallen zijn getallen waarvan je vroeger misschien geleerd hebt dat ze niet bestaan. Immers als je $ \sqrt{-1} $ opschreef zei je leraar waarschijnlijk: 'Dat kan niet'. Toch zijn complexe getallen (en quaternionen) zeer handige 'rekenhulpjes' in 3d simulaties en ook in electrotechniek. En ze zijn belangrijk in fractals, waarvan je vast de mooie Mandelbrot figuren kent. \\ \\
+\mydef[Het imaginaire getal \textit{i} is een getal zó dat:]
+{imaginair }{ $  i^2 = -1 $ }\\
+Dat is hetzelfde als $ i =\sqrt{-1} $ \\ \\
+\mydef[We definieren een complex getal z als:]
+{complex getal}{   $  z = a + bi $ \quad met a en b reële getallen}\\
+\mybv[complex getal]{$ z = 2+3i  $ is een complex getal en ook $ 1-i. $ \\Let op met rekenen: $ (1-i)^2 = (1-i).(1-i) = 1 - i - i -1 = -2i $ }
+We zeggen ook wel dat z bestaat uit een reëel deel \textit{a} en een imaginair deel \textit{bi} .  Je kunt met complexe getallen net zo rekenen als met reële getallen als je maar rekening houdt met $  i^2 = -1.$
+\section{Quaternion}
+Quaternionen zijn een uitbreiding van complexe getallen. In plaats van één imaginair deel heb je er drie:\\ \\
+\mydef[Een quaternion is:]
+{quaternion }{ $ q = a +bi + cj + dk $ 
+	\qquad a, b, c, d \textbf{\textit{reëel}}
+	\qquad  i, j, k  \textbf{\textit{imaginair}}\\ \\ i, j, k voldoen aan de volgende regels:}
+$ i^2 = -1 \qquad  \ j^2 = -1 \qquad k^2 = -1   \\
+i.j = k \qquad \ \ j.i = -k \\
+i.k = -j \qquad k.i = j \\
+j.k = i \qquad \ \ k.j = -i \\ $
+Met a, b, c en d kun je gewoon rekenen, omdat het reële getallen zijn.\\ \\
+\mybv[quaternion]{$ q_1 = 2 - i  + 2j - 3k $ is een quaternion net als $ q_2 = - j + k $ of  $ q_3 = 2i - j + \frac{1}{3}k. $}
+\subsection{rekenschema}
+Om een beetje vlot te kunnen rekenen met quaternionen heb je een schema nodig:
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		& 1 & i & j & k \\ \hline \hline
+		1 & 1 & i & j & k \\ \hline
+		i & i & -1 & k & -j\\ \hline
+		j & j & -k & -1 & i\\ \hline
+		k & k & j & -i & -1\\ 
+		\hline 
+	\end{tabular}
+\end{center}
 
-\section{Lijsten}\index{Lijsten}
-De lijsten in \textit{Python} zijn vergelijkbaar met de array's in \textit{C}, maar dan veel flexibeler in te zetten. Het voordeel van een lijst te gebruiken, is dat je data die bij elkaar hoort mooi kunt groeperen. Maar je kunt ook handige operaties op een lijst uitvoeren, zo kun je 'm bijvoorbeeld sorteren, omkeren, of elementen eruit filteren. Eerst gaan we kijken naar het aanmaken ervan, hieronder volgen een aantal willekeurige lijsten:
+Je zoekt \textit{eerst} in de $ 1^e $ kolom welke van i, j of k je nodig hebt en \textit{daarna} het volgende  imaginaire getal in de $ 1^e $ rij.  Op het kruispunt staat het resultaat van de vermenigvuldiging (de volgorde is belangrijk omdat bv $  i.k = -j $ maar $ k.i = j  $ !) \\ \\
+\mybv[vermenigvuldiging quaternionen]{als $ q_1 = 6 + 3i - 5j + 2k $ en $ q_2 = 2 + i + 4j - 2k $ wat is dan $ q_1.q_2 $? }
+Daarvoor zijn er 2 manieren:\\
 
-\begin{python}
-# Lijsten met getallen:
-cijfers = [1, 2, 3, 5, 10, 15] 
-frac = [0.5, 0.25, 0.2, 0.1, 0.001, 0.0005] 
+\textbf{1. invullen in tabel} Dit is de handigste manier:  Schrijf de eerste quaternion in de eerste kolom en de tweede quaternion in de eerste rij. Vul op de kruispunten de 
+vermenigvuldigingen in met de  regels uit het schema. Bijvoorbeeld op het kruispunt van de $ 3^e $ rij en de $   5^e $ kolom: $  3i\times -2k = -6ik   $ en omdat $ ik = -j $ is de uitkomst $ --6j = +6j $. Tot slot verzamel je  alle i, j en k.
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_1.q_2 $& 2 & i & 4j & -2k \\ \hline \hline
+		6 & 12 & 6i & 24j & -12k  \\ \hline
+		3i & 6i & -3 & 12k & 6j\\ \hline
+		-5j & 10j &  5k & 20 & 10i\\ \hline
+		2k & 4k & 2j & -8i & 4\\ 
+		\hline 
+	\end{tabular}
+\end{center}
+en dus:
+\begin{align*}
+q_1.q_2 & = 12 - 3 + 20 + 4 \\
+& \ \ \ +(6 + 6 + 10 - 8)i \\
+& \ \ \ +(24 + 6 +10 +2)j \\
+& \ \ \ +(-12 + 12 + 5 +4 )k \\
+& = 33 +14i +42j +9k \\
+\end{align*}
+\textbf{2. Uitschrijven}: Je schrijft alle vermenigvuldigingen op en kijkt per vermenigvuldiging in de tabel wat er uit komt:
+\begin{align*}
+q_1.q_2 & = (6 + 3i - 5j + 2k) . (2 + i + 4j - 2k) \\
+& =   6.2 + 6i + 6.4j + 6.-2k \qquad  \qquad \qquad  'gewoon' \  vermenigvuldigen\\
+& \ \ \ + 3i.2 + 3i.i + 3i.4j + 3i.-2k \qquad \qquad  i\  in \ 1^e \  kolom  \ opzoeken\\
+& \ \ \ + -5j.2 + -5j.i + -5j.4j + -5j.-2k \qquad j \  in \ 1^e \ kolom \ opzoeken\\
+& \ \ \ + 2k.2 + 2k.i + 2k.4j + 2k.-2k \qquad \qquad k \  in \ 1^e \ kolom \ opzoeken\\
+& = 18 + 6i + 24j - 12k \\
+& \ \ \ + 6i - 3 + 12k -6.-j \\
+& \ \ \ -10j - 5.-k + 20 +10i \\
+& \ \ \  + 4k + 2j + 8.-i + 4 \qquad \qquad \qquad   nu \ alle \ i, \ j \ en \ k\ bij \ elkaar \  zoeken \\
+& = 18 - 3 + 20 + 4 + (6+6 + 10 -8)i + (24 + 1 - 10 + 2)j + (-12 + 12 + 5 + 4)k \\
+&  = 39 + 14i +17j +9k
+\end{align*}
+\mydef[ ]
+{geconjungeerd}
+{De geconjungerde van $ q = a +bi + cj + dk $  is: 
+	\quad	$ q^* = a - bi - cj - dk $ }\\ \\
+\mybv[geconjungeerde]{Stel $ q = 1 - 2i + 3j + k $  dan is $ q^* = 1 + 2i - 3j - k $ \\
+	Als $ q =   i - 3j  $  dan is $ q^* = -i + 3j  $}
+\section{Roteren met quaternionen}
+Het doel van quaternionen is dat we kunnen roteren. Daarvoor moeten we ook punten van \RD omzetten naar quaternionen.\\ \\
+\mydef
+{puntquaternion}
+{Als P = (x, y, z)  in \RD dan is\\
+	het puntquaternion dat er bij hoort: \quad	$ p = xi+yj+zk $  
+}\\ 
+\mybv[puntquaternion]
+{
+	Stel $ P = (1, 3, -2) $  \ \  dan is  \qquad $ p =0 + 1.i+3j-2k  \ \ = i+3j-2k $ \\ het puntquaternion dat er bij hoort
+}\\
+Voor het berekenen van een rotatie in \RD geldt de volgende formule: 
+\mydef
+{quaternionrotatie}
+{Als p een punt en $  q_r $ een rotatie is in \RD dan is:\\
+	het geroteerde punt \quad	$ p' = q_r.p.q^*_r $  \\ 
+}
+\mybv[quaternionrotatie]
+{Stel $ P = (3,0,1) $ en $ q_r = 2j-k $ wat is dan  $ q_r.p.q^*_r $ ?\\ \\
+	$ p = 3i+k  \ \ \ \ \quad = 0 + 3i + 0.j + k $ \\
+	$ q^*_r = -2j+k  \quad = 0 + 0.i -2j + k $ \\
+	dan is de tabel voor $  p.q^*_r: $ 
+	\quad (p in de $  1^e $ kolom, $  q^*_r: $ in de $ 1^e $ rij)
+	\begin{center}
+		\begin{tabular}{ | l || c | c |c |c |}
+			\hline
+			$ p.q^*_r $  & 0 & 0   & -2j & k \\ \hline \hline
+			0 & 0 & 0   & 0    & 0  \\ \hline
+			3i & 0 & 0 & -6k & -3j\\ \hline
+			0 & 0 &  0 & 0     & 0\\ \hline
+			k & 0 & 0   & 2i   & -1 \\
+			\hline 
+		\end{tabular}
+	\end{center}
+	en dus $ p.q^*_r  = -1+2i-3j-6k. $ } 
+Daarna met de tabel  $  q_r.(p.q^*_r) $ uitrekenen  
+\quad ($  q_r  $ in de $  1^e $ kolom, $  p.q^*_r: $ in de $ 1^e $ rij)\\
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ q_r.(p.q^*_r) $ & -1 & 2i   & -3j & -6k \\ \hline \hline
+		0    & 0 & 0   &   0        & 0  \\ \hline
+		0    & 0 & 0   &   0        & 0  \\ \hline
+		2j   & -2j &  -4k &   6     & -12i\\ \hline
+		-k    & k  & -2j   & -3i   & -6\\ 
+		\hline 
+	\end{tabular}
+\end{center}
+en dus is $ p' = q_r.(p.q^*_r) =  -15i -4j -3k. $ Dat betekent dat het punt $ P = (3,0,1) $  onder het quaternion  $ q_r = 2j-k $ afgebeeld wordt op het punt $ P' = (-15, -4, -3). $ Dat is een vreemde rotatie (want de afstand tot de oorsprong wordt ineens groter) . Dat komt omdat we voor $ q_r $ wat gemakkelijke waardes hebben genomen en dat is geen echt rotatiequaternion.\\
+Daarom hebben we de volgende definitie nodig:\\ \\
+\mydef
+{rotatie quaternion}
+{Gegeven de eenheidsvector $\hat{v} $  en de  hoek $\alpha $ dan is:\\
+	het rotatiequaternion \quad	
+	$ q_r = cos\frac{\alpha}{2} + sin\frac{\alpha}{2} .\hat{v}_1.i
+	+ sin\frac{\alpha}{2} .\hat{v}_2.j + sin\frac{\alpha}{2} .\hat{v}_3.k $.	    
+}\\
+\mybv[rotatiequaternion]
+{Stel $ \vec{v} = \vecdrie{-3}{0}{4}  $  dan is  
+	$\hat{v} \ = \ \frac{1}{5} \ \vecdrie{-3}{0}{4}   $  \quad (omdat $ |\vec{v}| = \sqrt{3^2+ 4^2} = 5  $ )\\
+	Stel verder dat we over $\alpha$ = 180\degree willen roteren, dan is $\frac{180\degree}{2} = 90\degree $ \\
+	We weten dat $  \cos 90\degree = 0 $ en  $ \sin 90\degree = 1 $ 
+	\ \ En dus is 
+	\begin{align*}
+	q_r &= \cos\frac{180}{2} \ + \ \sin\frac{180}{2} .-\frac{3}{5}.i
+	\ + \ \sin\frac{180}{2} .0.j \ + \ \sin\frac{180}{2} .\frac{4}{5}.k   \\
+	q_r  &=  \cos 90 - \frac{3}{5}.\sin 90 .i  \ + \ \frac{4}{5}. \sin 90 .k  \\
+	q_r  &=  - \frac{3}{5}i  + \frac{4}{5}k 
+	\end{align*}
+}\\
+\mybv[rotatie met quaternionen]
+{We nemen dezelfde vector en hoek als hierboven. \\Stel verder dat we $ P=(-1,-1,0)  $  willen roteren. \\Dan is $ p = - i - j $ het puntquaternion.
+	\\We hadden  $ q_r  =   - \frac{3}{5}i  + \frac{4}{5}k $  
+	\\en dus is  $ q^*_r  =    \frac{3}{5}i  - \frac{4}{5}k. $ 
+	\\Eerst moeten we $   p.q^*_r $  uitrekenen:}
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |}
+		\hline
+		$ p.q^*_r $  & 0 & $  \frac{3}{5}i  $  & 0 & $ - \frac{4}{5}k $  \\ \hline \hline
+		0                 & 0 & 0                          & 0    & 0  \\ \hline
+		-i                & 0 &  $  \frac{3}{5}  $  & 0   & $ - \frac{4}{5}j $\\ \hline
+		-j                & 0 &  $  \frac{3}{5}k $  & 0     & $  \frac{4}{5}i $\\ \hline
+		0                 & 0 & 0                          & 0   & 0 \\
+		\hline 
+	\end{tabular}
+\end{center}
+En dus is $ p.q^*_r = \frac{3}{5}  + \frac{4}{5}i - \frac{4}{5}j  + \frac{3}{5}k. $
+\\Anders geschreven:  $ p.q^*_r = \frac{1}{5}  (3 + 4i - 4j  + 3k). $ 
+\\Dit vullen we  in in de $ 1^e $ rij en $ q_r $ in de $ 1^e  $ kolom om $ q_r.(p.q^*_r) $ te berekenen:\\
+\begin{center}
+	\begin{tabular}{ | l || c | c |c |c |l}
+		\hline
+		$ q_r.(p.q^*_r) $  & 3 & 4i   & -4j & 3k &  $ \times  \frac{1}{5} $\\ \hline \hline
+		0                         & 0    & 0    & 0       & 0 & \\ \hline
+		-3i                      & -9i   & 12  & 12k    & 9j & \\ \hline
+		0                         & 0    &  0   & 0       & 0&\\ \hline
+		4k                       & 12k & 16j  & 16i   & -12 & \\ 
+		\hline 
+		$ \times  \frac{1}{5} $
+	\end{tabular}
+\end{center}
+Om de berekening overzichtelijk te houden zijn de breuken 'buiten haakjes gehaald'. Zowel voor $ q_r $ als voor $ p.q^*_r $ is dat $  \frac{1}{5}. $ 
+\\Dat betekent dat we alles met $  \frac{1}{5} \times  \frac{1}{5}  =  \frac{1}{25} $ moeten vermenigvuldigen: 
+\begin{align*}
+p' &=  q_r.(p.q^*_r)  \\
+&=  \frac{1}{25}(-9i + 12 +12k + 9j + 12k + 16j + 16i -  12)  \\
+& = \frac{1}{25} (7i + 25j +  24k  )
+\end{align*}
+En dat betekent dat het punt $ P=(-1,-1,0)  $ waar we mee begonnen  geroteerd wordt naar $ P'=  (\frac{7}{25}, \frac{25}{25}, \frac{24}{25}) =(0.28,1,0.96)  $, zie  figuur \ref{fig:quatrotatie}.
 
-# Lijsten met strings:
-namen = ['Piet', 'Jan', 'Klaas']
-dagen = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo']
-
-# Een lijst met verschillende datatypes in een, kan ook:
-mix = [13, 'robotica', 3, 2, 'analyse', 3.14, cijfers]
-\end{python}
-
-Lijsten hebben zoals je hierboven kunt zien een naam en een verzameling aan elementen. De elementen staan tussen de blokhaken $[\ ]$, en zijn gescheiden door een komma. Lijsten kunnen elk data type bevatten (er kunnen zelfs verschillende datatypes - en dus ook weer lijsten - in een lijst staan, wat we verder in dit vak niet meer gaan behandelen).
-
-\newpage
-
-Lijsten zijn bijv. heel krachtige dingen om in te zetten in combinatie met \pyth{for}-loops:
-\begin{python}
-kleuren = ['geel', 'rood', 'groen', 'oranje']
-
-for kleur in kleuren:
-	print(f'He, nu issie weer {kleur}!')
-\end{python}
-
-In deze \pyth{for}-loop worden alle elementen van \textit{kleuren} een voor een opgeslagen in de variabele \textit{kleur} (regel $3$). En die wordt dan weer gebruikt op regel $4$. De output van het bovenstaande stukje code is als volgt:
-
-\begin{python}
-He, nu issie weer geel
-He, nu issie weer rood
-He, nu issie weer groen
-He, nu issie weer oranje
-\end{python}
-
-Zoals is gezegd, zijn er een aantal handige operaties uit te voeren op een lijst:
-\begin{python}
->>> a = [3,2,4,1]
->>> len(a)
-4
->>> a.append(5)
->>> a
-[3, 2, 4, 1, 5]
->>> len(a)
-5
->>> a.reverse()
->>> a
-[5, 1, 4, 2, 3]
->>> a.sort()
->>> a
-[1, 2, 3, 4, 5]
-\end{python}
-
-\begin{exercise}
-Maak zelf een lijst aan. Ga na wat de functies \pyth{count()}, \pyth{pop()} en \pyth{remove()} doen. 
-\end{exercise}
-
-% \section{Tuples}\index{Tuples}
-
-% \section{Dictionaries}\index{Dictionaries}
-
-\section{Try ... Except}\index{Try ... Except}
-Je bent ze inmiddels ongetwijfeld tijdens het maken van de huiswerkopdrachten (of elders) tegengekomen: \textit{errors}. Bijv. bij het opvragen van gegevens bij de gebruiker, via de \pyth{input()}-functie:
-\begin{python}
-x = input('Geef een cijfer: ')
-x = int(x)  # Zet de input-string om naar een int, en sla dit weer op in 'x'.
-x += 1  # Tel er 1 bij op
-print(f'Een hoger: {x}')
-\end{python}
-Deze code runt doorgaans prima:
-\begin{python}
-Geef een cijfer: 12
-Een hoger: 13
-\end{python}
-Maar wat nu als de gebruiker iets verkeerds intypt? Bijv. een letter:
-\begin{python}
-Geef een cijfer: q
-Traceback (most recent call last):
-  File "/Users/stefan/Code/Python/err_test.py", line 2, in <module>
-    x = int(x)  # Zet de input-string om naar een int, en sla dit weer op in 'x'.
-ValueError: invalid literal for int() with base 10: 'q'
-\end{python}
-Dan krijg je dus een \textit{error} voor je kiezen, in dit geval een \pyth{ValueError}. Bijkomend nadeel: het programma sluit direct af (crasht). Gelukkig geeft \pyth{Python} bij errors vaak genoeg informatie waarmee je de bug je in je code kunt oplossen. Hierboven kun je lezen dat er iets mis gaat op regel $2$: \pyth{x = int(x)}, op het moment dat we de \pyth{str} $q$ om proberen te zetten naar een \pyth{int}. En dat is best te verklaren natuurlijk, $q$ is domweg geen getal. 
-
-\begin{remark}
-\textbf{Tip: } Mocht je nu op zoek zijn naar de \textit{ASCII}-waarde van een karakter, gebruik dan de \pyth{ord()}-functie:
-\begin{python}
->>> ord('a')
-97
->>> ord('b')
-98
-\end{python}
-\end{remark}
-
-Een gebruiker kan nou eenmaal iets verkeerds intypen en het zou vrij suf zijn als dan elke keer je programma crasht. Vandaar dat er in \textit{Python} functionaliteit zit om dit soort fouten van buitenaf af te vangen en op te reageren. Dit doen we door onze kritische code (in dit geval het omzetten van een \pyth{str} naar een \pyth{int}: \pyth{x = int(x)}) in een \pyth{try} / \pyth{except} blok te zetten. En dat ziet er als volgt uit:
-
-\begin{python}
-x = input('Geef een cijfer: ')
-try:
-	x = int(x)  # Zet de input-string om naar een int, en sla dit weer op in 'x'.
-	x += 1  # Tel er 1 bij op
-	print(f'Een hoger: {x}')
-except ValueError:
-    print('Dat was geen getal, probeer het nog eens')
-\end{python}
-
-Hier 'proberen' we de \pyth{str} te interpreteren als een \pyth{int}. Gaat dat goed, dan wordt er netjes de rest van de code uitgevoerd. Krijg je een error, dan wordt het stuk code na de \pyth{except} uitgevoerd, en wordt de gebruiker vriendelijk verzocht 'even normaal te doen' en het nog eens te proberen. \newline
-
-Elke error die je tegenkomt kun je op deze manier afvangen. Let daar wel bij op, dat niet elke error afgevangen hoeft te worden. Fouten die je zelf als programmeur maakt horen daar vaak niet bij, het gaat meer om fouten van 'buitenaf'. Bijv. je probeert connectie te maken met een server, maar die is op het moment uit de lucht. Dan zul je wellicht iets in de trant van een \pyth{ConnectionError} of een \pyth{TimeOutError} krijgen, die zijn handig om af te vangen. Je wilt niet dat door iets van buitenaf je programma crasht. Voor de liefhebber: hier is een lijstje te zien van de errors die standaard te vinden zijn in \textit{Python}: \url{https://docs.python.org/3/library/exceptions.html}.
-
-\newpage
-
-\section{Functies}\index{Functies}
-\textit{Functies} waren we ook al tegengekomen in \textit{C}, in \textit{Python} is de opzet ervan hetzelfde: Een blok aan code, die alleen wordt uitgevoerd als de functie wordt 'aangeroepen'. Je maakt ze aan ('definieert' ze) met \pyth{def}, zie ook het onderstaande voorbeeld:
-
-\begin{python}
-def my_function():
-    print('Hallo vanuit een functie!') 
-
-my_function()
-print('Hallo vanuit het hoofdprogramma!')
-my_function()
-\end{python}
-
-Dit produceert de volgende output:
-
-\begin{python}
-Hallo vanuit een functie!
-Hallo vanuit het hoofdprogramma!
-Hallo vanuit een functie!
-\end{python}
-
-Je ziet in het programma op de eerste $2$ regels de gemaakte functie, na het woordje \pyth{def}. De naam van de functie is \textit{my\_function}, alle regels die daarna volgen en ingesprongen zijn (tab), horen bij deze functie. 
-In dit geval is dit maar $1$ regel, namelijk een \pyth{print()}. \newline
-
-Daarna wordt deze functie 'aangeroepen', dat gebeurt voor het eerst op regel $4$. Dat doe je dus door de naam van de functie te typen, gevolgd door $2$ haakjes $( )$. Even later op regel $6$ gebeurt hetzelfde nog eens. \newline
-
-Dit was een voorbeeld van een functie zonder argumenten. Vaak zul je ook functies zien en maken die dat juist wel hebben. Een argument is iets wat je meegeeft met de functie. Dat kunnen er zoveel zijn als je wilt, en ook van elk datatype. Hieronder een voorbeeld met $2$ argumenten, van het type \pyth{str}:
-
-\begin{python}
-def my_function(naam, vraag):
-    print(f'Hallo {naam}! {vraag}?') 
-
-my_function('Henk', 'Hoe gaat het')
-my_function('Piet', 'Waddup')
-\end{python}
-De uitoer zal in dit geval zijn:
-\begin{python}
-Hallo Henk! Hoe gaat het?
-Hallo Piet! Waddup?
-\end{python}
-
-Valt je op je dat nog steeds nergens het datatype hoeft aan te geven? \textit{Python} snapt dat het om \pyth{str} gaat, omdat je ze als zodanig meegeeft op regel $4$ en $5$. 
-
-\begin{remark}
-De functie zal het ook prima doen als je 'm aanroept met bijv. getallen: \newline 
-\pyth{my_fucntion(1, 2)}
-\begin{python}
-Hallo 1! 2?
-\end{python}
-\textit{Python} gaat heel flexibel met om datatypes. Omdat alles wat in de functie \textit{my\_function} gebeurt met de argumenten \textit{naam} en \textit{vraag} ook prima gedaan kan worden met getallen, krijg je geen errors. In \textit{C} vlogen nu de errors en warnings om je oren.
-\end{remark}
-
-\newpage
-
-Dan rest ons nog een ding om in te duiken, functies die iets teruggeven. Het kan zijn dat een functie een bepaalde operatie uitvoerd, en dat je het resultaat daarvan graag wil gebruiken verderop in je programma. Dat kan, net als in \textit{C} met \pyth{return}. Zie ook het volgende voorbeeld:
-
-\begin{python}
-import math 
-
-def oppervlakte(r):
-    # Berekend de oppervlakte van een cirkel ahv de straal.
-    opp = r**2 * math.pi
-    return opp
-
-o5 = oppervlakte(r=5)
-print(f'Oppervlakte cirkel, bij straal=5:  {o5}')
-
-o10 = oppervlakte(10)
-print(f'Oppervlakte cirkel, bij straal=10: {o10}')
-
-print(f'Oppervlakte cirkel, bij straal=15: {oppervlakte(15)}')
-
-o20 = oppervlakte(20)
-print(f'Oppervlakte cirkel, bij straal=20: {o20:.2f}')
-\end{python}
-
-In tegenstelling tot \textit{C} hoef je ook hier geen datatype op te geven, dat wordt voor je geregeld. Enkel de functie afsluiten met een \pyth{return}-statement is voldoende om de functie een waarde terug te laten geven. \newline
-
-
-De functie \pyth{oppervlakte()} berekend de oppervlakte van een cirkel a.h.v. de meegegeven straal \pyth{r}. En hij wordt op vier verschillende manieren aangeroepen:
+\figuur[0.6]{quatrotatie}{De rotatie om $ \vec{v} $ over 180\degree. $ P(-1,-1,0) $ rood, wordt geroteerd naar $ P'=(0.28,1,0.96)  $, blauw }
+\subsubsection{Opgaven}
 \begin{enumerate}
-	\item[-] Allereerst op regel $8$ met een straal van $r=5$, hier wordt ook de naam van het argument ($r$) meegegeven, dat leest makkelijker, maar is niet nodig. Het antwoord van de functie wordt opgeslagen in variabele $o5$ en naar het scherm gescreven. \newline
-
-	\item[-] Daarna wordt de functie aangeroepen met een straal van $r=10$, het antwoord hiervan wordt daarna opgeslagen in de variabele $o10$, die dan geprint wordt op het scherm. \newline
-
-	\item[-] Daarna op regel $14$, wordt het aanroepen van de functie (met $r=15$) en het printen van de teruggegeven waarde gecombineerd tot een regel code. \newline
-
-	\item[-] En tenslotte wordt de functie nog een keer aangeroepen voor $r=20$ op regel $16$. Bij het printen (regel $17$) gebeurt iets bijzonders, daar wordt namelijk aangegeven dat de uitvoer maar $2$ kommagetallen moet laten zien (dit komt door de \pyth{:.2f} in \pyth{print}). 
+	\item Gegeven $ P (-2, 2, 9) $ en de vector $\vec{v} = \vecdrie{-4}{0}{3} $. 
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	\item Gegeven $ P (23, -15, 7) $ en de vector $\vec{v} = \vecdrie{6}{-6}{7} $. 
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	
+	\item Gegeven $ a = 2i-4j+5k$ en   $ b = 7+2i+j $. 
+	Bereken het product \ $  a.b $.
+	\item Gegeven $ c = -16 -2i+3j+2k $ en   $ d = -1+4i+2k $. 
+	Bereken het product \ $  c.d $.
+	
+	\item Gegeven $ P (-2, 0, 5) $ en de vector $\vec{v} = \vecdrie{-3}{0}{0} $. 
+	We roteren over $ 60\degree. $ Gebruik quaternionen om het beeld van \textit{P }onder deze rotatie uit te rekenen.
+	
 \end{enumerate}
 
-De uitvoer van het programma is dan ook:
-\begin{python}
-Oppervlakte cirkel, bij straal=5:  78.53981633974483
-Oppervlakte cirkel, bij straal=10: 314.1592653589793
-Oppervlakte cirkel, bij straal=15: 706.8583470577034
-Oppervlakte cirkel, bij straal=20: 1256.64
-\end{python}
+\subsubsection{extra opgaven}
 
-\newpage
-Zoals ik vorige week stelde, kun je met functies in combinatie met de \pyth{gpiozero}-module leuke dingen doen. Zo kun je dus bijv. functies aanroepen, als er een bepaalde actie wordt uitgevoerd word, zoals het indrukken en het loslaten van een knop:
-\begin{python}
-from gpiozero import Buttons
-from signal import pause
+\begin{enumerate}
+	\item Gegeven $ P (2,2,0) $ en de vector $\vec{v} = \vecdrie{4}{-2}{4} $. 
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	
+	\item Gegeven $ P (6,-2,3) $ en de vector $\vec{v} = \vecdrie{-12}{12}{6} $. 
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	
+	\item Gegeven $ e = 2i-4j+5k$ en   $ f = 7+2i+j $. 
+	Bereken het product \ $  e.f $.
+	
+	\item Gegeven $ g = -16 -2i+3j+2k $ en   $ h = -1+4i+2k $. 
+	Bereken het product \ $  g.h $.
+	
+	\item  Gegeven $ P (-2, 0, 0) $ en de vector $\vec{v} = \vecdrie{0}{7}{0} $. 
+	We roteren over $ 60\degree. $ Gebruik quaternionen om het beeld van \textit{P }onder deze rotatie uit te rekenen.   
+	
+	\item Schrijf een programma dat quaternionen kan vermenigvuldigen.   
+	
+	\item Schrijf een programma dat quaternionrotatie kan uitvoeren (dus gegeven een willekeurige vector $\vec{v} $ , hoek $ \alpha $ en punt P, kan uitrekenen waar P' onder de rotatie uitkomt).      
+	
+\end{enumerate}
 
-def ingedrukt():
-	print('knop ingedrukt!')
 
-def losgelaten():
-	print('knop weer losgelaten!')
-
-btn = Button(2)  # Drukknop zit op GPIO2
-
-btn.when_pressed = ingedrukt    # Koppel functie bij het indrukken.
-btn.when_released = losgelaten  # Koppel functie bij het loslaten.
-pause()                         # Doe verder niets meer, maar sluit niet af.
-\end{python}
-
-\begin{exercise}
-Voor het programma uit, en ga voor jezelf na wat er precies gebeurt.
-\end{exercise}
-
-\begin{remark}
-Weet je nog uit Programmeren $1$, dat knoppen last kunnen hebben van het zogeheten \textit{bouncen}, waardoor het lijkt dat ze veel vaker ingedrukt worden, dan ze daadwerkelijk worden. Mocht je daar nu ook last van hebben, dan kun je met \pyth{gpiozero} vrij makkelijk de bounce-tijd instellen. Vervang regel $10$ door:
-\begin{python}
-# Drukknop zit op GPIO2 met 100ms bounce time:
-btn = Button(2, bounce_time=0.1)  
-\end{python}
-\end{remark}
-
-De laatste regel \pyth{pause()}, zorgt dat het programma verder niets meer uitvoert, (behalve het afhandelen van de knop) maar ook niet afsluit. In tegenstelling tot de \pyth{while True:} uit het vorige hoofdstuk, waardoor de \textit{Raspberry Pi} intensief gebruikt werd, kan hij in dit geval rustig andere taken doen. 
-
-\begin{remark}
-Het mooie van het kunnen koppelen van functies aan gebeurtenissen van een sensor (zoals hier in het geval van de drukknop), is dat dat ook functies kunnen zijn die gebruikt worden door actuatoren, zoals bijv. een LED. Een LED heeft een \pyth{on()}- en een \pyth{off()}-functie. Dus het koppelen van een LED aan een drukknop kan zo:
-
-\begin{python}
-from gpiozero import Button, LED
-from signal import pause
-
-btn = Button(2)  # Drukknop zit op GPIO2
-led = LED(17)    # LED zit op GPIO17
-
-# Koppel het indrukken van de knop met led.on():
-btn.when_pressed = led.on    
-# Koppel het loslaten van de knop met led.off():
-btn.when_released = led.off  
-
-# Doe verder niets meer, maar sluit niet af:
-pause()                      
-\end{python}
-\end{remark}
-
-\newpage
-Afsluitend aan dit hoofdstuk gaan we eens wat dingen combineren die we geleerd hebben. Je kunt namelijk elementen uit een lijst filteren, als je daarvoor een filter-functie voor aanmaakt. Bijv. je hebt een bepaalde temperatuursensor, waar je elk uur de temperatuur mee meet, maar deze geeft af en toe een foute waarde (bijv. +$100^\circ C$ op een winterdag). 
-
-\begin{python}
-def temp_filter(temp):
-    # Filter-functie, voor temp groter dan 90 graden.
-    if (temp > 90):
-        return False
-    else:
-        return True
-
-# Lijst met gemeten temperatuur in celcius:  
-gemeten_temp = [15.2, 14.4, 14.2, 99.9, 13.8, 12.6, 100.1]
-
-# Pas filter toe:
-gefilterde_temp = filter(temp_filter, gemeten_temp)
-
-# Print de overgebleven waardes op het scherm:
-print('De gefilterde temperaturen zijn:')
-for t in gefilterde_temp:
-    print(t)                    
-\end{python}
-
-In het bovenstaande voorbeeld, wordt een filter-functie aangemaakt \pyth{temp_filter(temp)}. Die een \pyth{False} teruggeeft als de meegegeven temperatuur \pyth{temp} groter is dan $90$, en anders \pyth{True}. \newline
-
-Op regel $12$ wordt die filterfunctie daadwerkelijk toegepast op de lijst \pyth{gemeten_temp} en de nieuwe lijst die dat opleverd wordt opgelsagen in \pyth{gefilterde_temp}
-
-\newpage
-
-\section{Huiswerkopdrachten}\index{Huiswerkopdrachten}
-
-\begin{exercise}\label{exc6:exc1}
-Maak een lege lijst aan, en vul deze daarna met de getallen $1$ t/m $100$.
-Gebruik hiervoor een loop en de \pyth{append()} functie. \newline
-\textbf{Tip:} Een lege lijst maak je als volgt aan: \pyth{lijst = []}
-\end{exercise}
-
-\begin{exercise}
-Maak een filter-functie waarmee je alle getallen onder de $30$ uit een lijst kunt filteren. Pas deze toe op de lijst die je gemaakt hebt bij opdracht \ref{exc6:exc1}.
-\end{exercise}
-
-\begin{exercise}
-Maak een filter-functie waarmee je oneven getallen uit een lijst kunt filteren. Pas deze toe op de lijst die je gemaakt hebt bij opdracht \ref{exc6:exc1}.
-\end{exercise}
-
-\begin{exercise}
-\label{exc6:exc4}
-Maak een functie \pyth{schreeuw} die een meegegeven str omzet naar hoofdletters, en deze daarna weer terug geeft met \pyth{return}. 
-\end{exercise}
-
-\begin{exercise}
-Wat als je nu de functie die net gemaakt hebt bij \ref{exc6:exc4}, aanroept met een getal (bijv. \pyth{schreeuw(5)})? \newline
-Breidt de functie uit met een \pyth{try} / \pyth{except}, zodat deze niet langer crasht. 
-\end{exercise}
-
-\begin{exercise}
-Sluit $4$ LEDs aan op de \textit{GPIO17}, \textit{GPIO18}, \textit{GPIO3} en \textit{GPIO5} pins. Configureer ze, en zet ze daarna in een lijst. Ga met een loop door de lijst heen, en zet ze een voor een $1$ seconde aan, en dan weer uit.
-\end{exercise}
-
-\begin{exercise}
-Maak een programma dat $10$ keer aan de gebruiker vraagt om een dier in te voeren. Voeg elk van deze dieren toe aan een lijst. Filter alle diernamen die minder dan $3$ letters hebben en print daarna de lijst in alfabetische volgorde op het scherm. \newline
-\textbf{Tip:} Je bepaalt de lengte van een string (of lijst) met de functie: \pyth{len(mijn_string)}.
-\end{exercise}

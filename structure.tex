@@ -33,10 +33,17 @@
 
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 
+\usepackage{marginnote} % Required for creating margin notes with \marginpar[]{}
+
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{38, 100, 168} % Define the bluecolor used for highlighting throughout the book
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{nicefrac}
+\usepackage{placeins}
+\usepackage{imakeidx}
+\usepackage{gensymb}
+\usepackage{cancel} 
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
@@ -47,8 +54,8 @@
 	paper=a4paper, % Paper size, change to letterpaper for US letter size
 	top=3cm, % Top margin
 	bottom=3cm, % Bottom margin
-	left=3cm, % Left margin
-	right=3cm, % Right margin
+	left=3.5cm, % Left margin
+	right=3.5cm, % Right margin
 	headheight=14pt, % Header height
 	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
 	headsep=10pt, % Space from the top margin to the baseline of the header
@@ -772,3 +779,146 @@ addtohook={%
 % \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
 \usepackage{pythonhighlight}
+
+%----------------------------------------------------------------------------------------
+% Lineaire Algebra macro's	
+%----------------------------------------------------------------------------------------
+\newcommand{\mytrans}[1]{$ #1^T $}
+\newcommand{\noteq}{ $ \ne $ }
+\newcommand{\RD}{${\rm I\!R^{3}} \ $}
+\newcommand{\RT}{${\rm I\!R^{2}} \ $}
+% COLORS
+\newcommand{\red}[1]{
+{\color{red}#1}}
+\newcommand{\blu}[1]{
+{\color{blue}#1}}
+\newcommand{\gre}[1]{
+{\color{green}#1}}
+\newcommand{\pur}[1]{
+{\color{purple}#1}}
+\newcommand{\bro}[1]{
+{\color{brown}#1}}
+% DETERMINANTEN
+\newcommand{\dettwee}[2]{
+\begin{vmatrix}
+	#1 \\
+	#2
+\end{vmatrix}
+}
+\newcommand{\detvier}[4]{
+\begin{vmatrix}
+	#1 \\
+	#2 \\
+	#3 \\
+	#4
+\end{vmatrix}
+}
+\newcommand{\detdrie}[3]{
+\begin{vmatrix}
+	#1 \\
+	#2 \\
+	#3 
+\end{vmatrix}
+}
+\newcommand{\mydet}[1]{ $ | #1 |$ }
+% VECTOREN
+\newcommand{\vecvijf}[5] {
+$$
+\begin{pmatrix} 
+#1  \\ 
+#2  \\ 
+#3 \\
+#4 \\
+#5
+\end{pmatrix}       $$}
+\newcommand{\vecdrie}[4][black] {
+$$
+\color{#1}
+\begin{pmatrix} 
+#2  \\ 
+#3  \\ 
+#4
+\end{pmatrix}       $$}
+\newcommand{\vecdriesnel}[1] {
+$$
+\begin{pmatrix} 
+#1_1  \\ 
+#1_2  \\ 
+#1_3
+\end{pmatrix}       $$}
+\newcommand{\vectwee}[3][black] {
+$$
+\color{#1}
+\begin{pmatrix} 
+#2  \\ 
+#3 
+\end{pmatrix}       $$}
+\newcommand{\vectweesnel}[1] {
+$$
+\begin{pmatrix} 
+#1_1  \\ 
+#1_2  
+\end{pmatrix}       $$}
+\newcommand{\vecvier}[4] {
+$$
+\begin{pmatrix} 
+#1  \\ 
+#2  \\ 
+#3  \\
+#4
+\end{pmatrix}       $$}
+\newcommand{\V}[1]{
+$ \vec{#1} $}
+% MATRICES
+\newcommand{\mattwee}[2]{
+\begin{pmatrix}
+#1 \\
+#2
+\end{pmatrix}}
+\newcommand{\matdrie}[3]{
+\begin{pmatrix}
+#1 \\
+#2 \\
+#3
+\end{pmatrix}}
+\newcommand{\matvier}[4]{
+\begin{pmatrix}
+#1 \\
+#2 \\
+#3 \\
+#4
+\end{pmatrix}}
+
+\makeindex[name = definities, title=Index van definities , intoc]
+\makeindex[name = eigenschappen, title=Index van eigenschappen,  intoc]
+\makeindex[name = voorbeelden, title=Index van voorbeelden,  intoc]
+
+% Macro's:
+\newcommand{\mydef}[3] []{
+  #1\index[definities]{#2} \\
+	\marginnote{\textbf{\Large $ \Delta $} #2} [0cm] \quad #3 \\ \\
+}
+
+\newcommand{\figuur}[3][0.4]{	
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=#1\linewidth]{figuren/#2}
+		\caption{#3}
+    \label{fig:#2}
+		\index[figuren]{#3}
+\end{figure}
+\FloatBarrier	}
+
+\newcommand{\mycent}[1]{\begin{center} #1\end{center}}
+
+\newcommand{\mybv} [2][]{
+  \index [voorbeelden]{#1} 
+  \marginnote{ {\LARGE $\nu$} #1}[0cm] #2\\ 
+}
+
+\newcommand{\myeig} [2][]{ 
+\index [eigenschappen]{#1}
+\marginnote{ \textit{{\LARGE $\epsilon$}} #1}[0cm]
+#2\\
+}
+
