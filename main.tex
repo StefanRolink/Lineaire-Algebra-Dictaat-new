@@ -61,7 +61,7 @@
 \begingroup
 \thispagestyle{empty} % Suppress headers and footers on the title page
 \begin{tikzpicture}[remember picture,overlay]
-\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{NHL_cover_P2.pdf}};
+\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{pictures/NHL_cover_P2.pdf}};
 % \draw (current page.center) node [fill=ocre!30!white,fill opacity=0,text opacity=1,inner sep=1cm]{\Huge\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\\[15pt] % Book title
 % {\huge }\\[20pt] % Subtitle
 % {\Large }}}; % Author name
@@ -95,7 +95,7 @@
 
 %\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
-\chapterimage{NHL_head_2.pdf} % Table of contents heading image
+\chapterimage{pictures/NHL_head_2.pdf} % Table of contents heading image
 
 \pagestyle{empty} % Disable headers and footers for the following pages
 
@@ -110,7 +110,7 @@
 %	Chapters
 %----------------------------------------------------------------------------------------
 
-\chapterimage{NHL_head_2.pdf} % Chapter heading image
+\chapterimage{pictures/NHL_head_2.pdf} % Chapter heading image
 \include{chapters/chapter01}
 \include{chapters/chapter02}
 \include{chapters/chapter03}
@@ -142,15 +142,15 @@
 %	INDEX
 %----------------------------------------------------------------------------------------
 
-%\cleardoublepage % Make sure the index starts on an odd (right side) page
-%\phantomsection
-%\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+\cleardoublepage % Make sure the index starts on an odd (right side) page
+\phantomsection
+\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
 %\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}} % Add an Index heading to the table of contents
 % \printindex % Output the index
 
-% \printindex[definities]
+\printindex[definities]
 \printindex[eigenschappen]
-% \printindex[voorbeelden]
+\printindex[voorbeelden]
  
 %----------------------------------------------------------------------------------------
 

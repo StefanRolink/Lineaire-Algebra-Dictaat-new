@@ -509,7 +509,7 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 \renewcommand\UrlFont{\color{blue}\rmfamily\itshape} 
 \usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false}
+\hypersetup{hidelinks,colorlinks=false,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false}
 
 \usepackage{bookmark}
 \bookmarksetup{
@@ -785,8 +785,8 @@ addtohook={%
 %----------------------------------------------------------------------------------------
 \newcommand{\mytrans}[1]{$ #1^T $}
 \newcommand{\noteq}{ $ \ne $ }
-\newcommand{\RD}{${\rm I\!R^{3}} \ $}
-\newcommand{\RT}{${\rm I\!R^{2}} \ $}
+\newcommand{\RD}{$\rm I\!R^{3}\ $}
+\newcommand{\RT}{$\rm I\!R^{2}\ $}
 % COLORS
 \newcommand{\red}[1]{
 {\color{red}#1}}
@@ -902,7 +902,7 @@ $ \vec{#1} $}
 \newcommand{\figuur}[3][0.4]{	
 \begin{figure}[h]
 		\centering
-		\includegraphics[width=#1\linewidth]{figuren/#2}
+		\includegraphics[width=#1\linewidth]{pictures/figuren/#2}
 		\caption{#3}
     \label{fig:#2}
 		\index[figuren]{#3}
