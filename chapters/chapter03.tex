@@ -22,7 +22,7 @@ a_{21}  &  a_{22} & \ldots & a_{2n}\\
 a_{m1}  &   a_{m2}       &\ldots & a_{mn}
 \end{pmatrix}
 $$
-Deze matrix heeft $ m $ rijen en $ n $ kolommmen. Meestal beperken we ons tot $ 2 \times 2 $ , \  $ 3 \times 3 $ of $ 4 \times 4 $ matrices.
+Deze matrix heeft $ m $ rijen en $ n $ kolommen. Meestal beperken we ons tot $ 2 \times 2 $ , \  $ 3 \times 3 $ of $ 4 \times 4 $ matrices.
 \section{Bijzondere matrices}
 \mydef [Een \textit{vector} is:]
 {vector}
@@ -96,7 +96,7 @@ Het eerste element van het product krijgen we door de getallen in de eerste \tex
 	{-21&-15}
 	\end{align*} }
 
-Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal (3 met \red{-4}, daarna -1 met \red{1}  en vervolgens 2 met \red{-2}). Die vemenigvuldigingen  tel je bij elkaar  op met als uitkomst -17. Vervolgens doe je met de zwarte en blauwe getallen  hetzelfde om 20 te krijgen, daarna ook met de groene en rode getallen  (met -21 als uitkomst), en tot slot groen met blauw combineren met als uitkomst -15.
+Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal (3 met \red{-4}, daarna -1 met \red{1}  en vervolgens 2 met \red{-2}). Die vermenigvuldigingen  tel je bij elkaar  op met als uitkomst -17. Vervolgens doe je met de zwarte en blauwe getallen  hetzelfde om 20 te krijgen, daarna ook met de groene en rode getallen  (met -21 als uitkomst), en tot slot groen met blauw combineren met als uitkomst -15.
 
 \subsection{eigenschappen van matrixvermenigvuldiging}
 \myeig[ A.B \noteq B.A ]
@@ -131,7 +131,7 @@ Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal
 } 
 \myeig[associatief]{Matrixvermenigvuldiging is wel associatief. Dat betekent: $ A.B.C = A.(B.C) = (A.B).C $}
 \section{De matrix van een afbeelding bepalen}
-Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te kunnen rekenen moeten we de matrix bepalen.  Jammer genoeg lukt dat niet simpelweg voor translaties, maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeeelding kunnen rekenen.\\ \\
+Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te kunnen rekenen moeten we de matrix bepalen.  Jammer genoeg lukt dat niet simpelweg voor translaties, maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeelding kunnen rekenen.\\ \\
 \mydef []
 {basisvector}
 {Basisvectoren zijn: \\ vectoren die gecombineerd alle andere vectoren kunnen genereren (maken)} \\ 
@@ -142,7 +142,7 @@ Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te
 
 \myeig[matrix bepalen]
 {De matrix van een afbeelding bestaat uit: \quad   het beeld van de basisvectoren}\\
-Dus wat de afbeeelding doet met elke basisvector levert de matrix van een afbeelding
+Dus wat de afbeelding doet met elke basisvector levert de matrix van een afbeelding
 Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te berekenen wat de afbeeelding doet met basisvectoren. \\ \\ \\
 \mybv[matrix bepalen  \RD]
 { Stel we weten van afbeelding\textit{ A} alleen wat er met de basisvectoren gebeurt: 
@@ -177,7 +177,7 @@ P.\vec{x}
 {0.x_1 + 0.x_2}  \\
 & = \ \mattwee{x_1}{0}  
 \end{align*}
-In woorden: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
+In woorden: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
 \begin{align*}
 P . \mattwee{3}{4}  \ 
 &= \ \mattwee{1&0}{0&0}  \ . \   \mattwee{3}{4}  \\
@@ -244,7 +244,7 @@ $ \vectwee{4}{2}   \  \xrightarrow{R_{60}}  \ \vectwee{0.27}{4.46} $ \ (figuur \
 Met andere woorden: als je de hoek weet van een rotatie in \RT hoef je alleen nog de richting , met de klok mee of niet,  te bepalen om de matrix op te kunnen schrijven.
 
 \subsection{de matrix van een rotatie in \RD}
-In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je met een kurketrekker doet om een fles wijn te openen. Het is handig om je te realiseren dat draaien om een een as in \RD betekent dat één coördinaat niet verandert. Namelijk de coördinaat van de as waarom je draait.  De draaiing in de andere twee coördinaten is dan eigenlijk een rotatie in \RT. Voor de kritische lezer: Wat als je  om een willekeurige vector roteert? Dan geldt het volgende: Elke rotatie in \RD kun je uitvoeren door eerst een stukje om de x-as, dan om dey-as en daarna om de z-as te roteren.
+In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je met een kurkentrekker doet om een fles wijn te openen. Het is handig om je te realiseren dat draaien om een een as in \RD betekent dat één coördinaat niet verandert. Namelijk de coördinaat van de as waarom je draait.  De draaiing in de andere twee coördinaten is dan eigenlijk een rotatie in \RT. Voor de kritische lezer: Wat als je  om een willekeurige vector roteert? Dan geldt het volgende: Elke rotatie in \RD kun je uitvoeren door eerst een stukje om de x-as, dan om dey-as en daarna om de z-as te roteren.
 
 \figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in x en y waarbij de z-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de x-, y- en z-as   komen na de rotatie. }
 

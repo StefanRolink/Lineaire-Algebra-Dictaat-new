@@ -3,11 +3,11 @@
 In software voor 3D-applicaties wordt niet de rotatie gebruikt zoals in hoofdstuk \ref{chap: matrix, rotatie en projectie} beschreven. Daar wordt de methode van Euler gebruikt, maar die levert problemen op als je over 3 assen roteert. Dat probleem wordt de Gimbal Lock genoemd. Zoek even op you tube naar 'Gimbal Lock'. 
 Een oplossing voor deze problemen bieden de zogenaamde quaternionen. En daarvoor moeten we eerst even iets over complexe getallen uitleggen.
 \section{Complexe getallen}
-Complexe getallen zijn getallen waarvan je vroeger misschien geleerd hebt dat ze niet bestaan. Immers als je $ \sqrt{-1} $ opschreef zei je leraar waarschijnlijk: 'Dat kan niet'. Toch zijn complexe getallen (en quaternionen) zeer handige 'rekenhulpjes' in 3d simulaties en ook in electrotechniek. En ze zijn belangrijk in fractals, waarvan je vast de mooie Mandelbrot figuren kent. \\ \\
+Complexe getallen zijn getallen waarvan je vroeger misschien geleerd hebt dat ze niet bestaan. Immers als je $ \sqrt{-1} $ opschreef zei je leraar waarschijnlijk: 'Dat kan niet'. Toch zijn complexe getallen (en quaternionen) zeer handige 'rekenhulpjes' in 3d simulaties en ook in elektrotechniek. En ze zijn belangrijk in fractals, waarvan je vast de mooie Mandelbrot figuren kent. \\ \\
 \mydef[Het imaginaire getal \textit{i} is een getal zó dat:]
 {imaginair }{ $  i^2 = -1 $ }\\
 Dat is hetzelfde als $ i =\sqrt{-1} $ \\ \\
-\mydef[We definieren een complex getal z als:]
+\mydef[We definiëren een complex getal z als:]
 {complex getal}{   $  z = a + bi $ \quad met a en b reële getallen}\\
 \mybv[complex getal]{$ z = 2+3i  $ is een complex getal en ook $ 1-i. $ \\Let op met rekenen: $ (1-i)^2 = (1-i).(1-i) = 1 - i - i -1 = -2i $ }
 We zeggen ook wel dat z bestaat uit een reëel deel \textit{a} en een imaginair deel \textit{bi} .  Je kunt met complexe getallen net zo rekenen als met reële getallen als je maar rekening houdt met $  i^2 = -1.$
@@ -77,10 +77,10 @@ q_1.q_2 & = (6 + 3i - 5j + 2k) . (2 + i + 4j - 2k) \\
 &  = 39 + 14i +17j +9k
 \end{align*}
 \mydef[ ]
-{geconjungeerd}
-{De geconjungerde van $ q = a +bi + cj + dk $  is: 
+{geconjugeerd}
+{De geconjugeerde van $ q = a +bi + cj + dk $  is: 
 	\quad	$ q^* = a - bi - cj - dk $ }\\ \\
-\mybv[geconjungeerde]{Stel $ q = 1 - 2i + 3j + k $  dan is $ q^* = 1 + 2i - 3j - k $ \\
+\mybv[geconjugeerde]{Stel $ q = 1 - 2i + 3j + k $  dan is $ q^* = 1 + 2i - 3j - k $ \\
 	Als $ q =   i - 3j  $  dan is $ q^* = -i + 3j  $}
 \section{Roteren met quaternionen}
 Het doel van quaternionen is dat we kunnen roteren. Daarvoor moeten we ook punten van \RD omzetten naar quaternionen.\\ \\
@@ -196,9 +196,9 @@ En dat betekent dat het punt $ P=(-1,-1,0)  $ waar we mee begonnen  geroteerd wo
 \subsubsection{Opgaven}
 \begin{enumerate}
 	\item Gegeven $ P (-2, 2, 9) $ en de vector $\vec{v} = \vecdrie{-4}{0}{3} $. 
-	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjugeerde rotatiequaternion  $  q_r^* $.
 	\item Gegeven $ P (23, -15, 7) $ en de vector $\vec{v} = \vecdrie{6}{-6}{7} $. 
-	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $.
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjugeerde rotatiequaternion  $  q_r^* $.
 	
 	\item Gegeven $ a = 2i-4j+5k$ en   $ b = 7+2i+j $. 
 	Bereken het product \ $  a.b $.
@@ -214,10 +214,10 @@ En dat betekent dat het punt $ P=(-1,-1,0)  $ waar we mee begonnen  geroteerd wo
 
 \begin{enumerate}
 	\item Gegeven $ P (2,2,0) $ en de vector $\vec{v} = \vecdrie{4}{-2}{4} $. 
-	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	We roteren over $ 42\degree. $ Geef het puntquaternion \textit{p} en het geconjugeerde rotatiequaternion  $  q_r^* $. 
 	
 	\item Gegeven $ P (6,-2,3) $ en de vector $\vec{v} = \vecdrie{-12}{12}{6} $. 
-	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjungeerde rotatiequaternion  $  q_r^* $. 
+	We roteren over $ 84\degree. $ Geef het puntquaternion \textit{p} en het geconjugeerde rotatiequaternion  $  q_r^* $. 
 	
 	\item Gegeven $ e = 2i-4j+5k$ en   $ f = 7+2i+j $. 
 	Bereken het product \ $  e.f $.
