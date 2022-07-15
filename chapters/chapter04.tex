@@ -25,8 +25,8 @@ Als $\vec{p} $ het beeld van een basisvector $ \hat{b}  $  bij een projectie is 
 
 Van de projectie in \RT weten we dat 
 $ \vec{p} = \vectwee{ \nicefrac{1}{17} } { \nicefrac{4}{17} } \  $ \\ \\ \\dus is 
-$ 2.\vec{p} -  \hat{b}_x
-\  =  \   2.  \vectwee{ \nicefrac{1}{17} } { \nicefrac{4}{17} } \ - \ \vectwee{1}{0} 
+$ 2\cdot \vec{p} -  \hat{b}_x
+\  =  \   2\cdot \vectwee{ \nicefrac{1}{17} } { \nicefrac{4}{17} } \ - \ \vectwee{1}{0} 
 \ = \    \vectwee{ \nicefrac{2}{17} -1 } {\nicefrac{8}{17}} 
 \ = \    \vectwee{ -\nicefrac{15}{17} } {\nicefrac{8}{17}} 
 $ \\ \\ \\
@@ -36,7 +36,7 @@ We passen deze eigenschap ook toe om te vinden wat het beeld van  $  \hat{b}_y\ 
 Er gold:  $ \vectwee{0}{1}   \  \xrightarrow{P}  \ 
 \vectwee{\nicefrac{4} {17} } {\nicefrac {16} {17}} $
 \qquad  dan is $  \  2\vec{p} \ - \  \hat{b}_y \ 
-= 2 .\vectwee{ \nicefrac {4} {17} } { \nicefrac {16} {17}} \ - \ \vectwee{0}{1}  \ 
+= 2 \cdot \vectwee{ \nicefrac {4} {17} } { \nicefrac {16} {17}} \ - \ \vectwee{0}{1}  \ 
 = \  \vectwee{\nicefrac{8}{17} } {\nicefrac{15}{17}}  $. \\
 
 \quad dus  $ \vectwee{0}{1}   \  \xrightarrow{S}  \
@@ -45,11 +45,11 @@ Er gold:  $ \vectwee{0}{1}   \  \xrightarrow{P}  \
 $ S = \mattwee{ 
 	\red{ - \nicefrac{15}{17}} & { \color{blue}\nicefrac{8}{17}} }
 { \red{ \nicefrac{8}{17} } & { \color{blue} \nicefrac{15}{17} } } 
- = \ \frac{1}{17} .  \mattwee{-15&8}{8&15} $\\ \\
+ = \ \frac{1}{17} \cdot   \mattwee{-15&8}{8&15} $\\ \\
 Misschien valt je op dat de getallen in de matrix niet toevallig lijken (linksonder en rechtsboven zijn hetzelfde en de andere twee elkaars negatief). Dat is ook niet toevallig. Als je dat handig vindt mag je de uitkomst van een spiegelberekening controleren met de volgende formule:\\
 
 \myeig[spiegeling]
-{Als \textit{S} een spiegeling is in de lijn $ y=a.x $, dan is de matirx van de spiegeling\\
+{Als \textit{S} een spiegeling is in de lijn $ y=a\cdot x $, dan is de matirx van de spiegeling\\
 	$ S = \frac{1}{a^2+1}  \mattwee{ 
 		\red{ 1-a^2} & { \color{blue} 2a} }
 	{ \red{ 2a } & { \color{blue} a^2-1} } $ }
@@ -72,7 +72,7 @@ dat betekent dat bij de spiegeling geldt:\\
 voor $ \hat{b}_x $ is \  
 $\vec{p} =  \frac{1}{7} \ \vecdrie {5 } {3}{-1} $\quad  en \quad 
 $ 2\vec{p}  -  \hat{b}_x  = 
-\ 2 . \frac{1}{7} \vecdrie {5 } {3}{-1} \  - \  \vecdrie{1}{0}{0}  \ =
+\ 2 \cdot  \frac{1}{7} \vecdrie {5 } {3}{-1} \  - \  \vecdrie{1}{0}{0}  \ =
 \   \frac{1}{7} \ \vecdrie {3 } {6}{-2} $ \\en dus 
 $ \ \vecdrie{1}{0}{0}   \  \xrightarrow{S}  \  { \color{red}\frac{1}{7}} \  \vecdrie[red] {3 } {6}{-2} $\\
 Voor $ \hat{b}_y  $ geldt:
@@ -103,7 +103,7 @@ $ \vectwee{1}{0}  \  \xrightarrow{T}   \   \vectwee[red]{ 3 } {1}. $ \\ Op dezel
 $ \vectwee{0}{1}  \  \xrightarrow{T}   \   \vectwee[blue]{ 2 } {2}. $ \\ Dat \textbf{\textit{zou}} betekenen dat 
 $ T = \mattwee{ 3 & 2 }{ 1 & 2 } $ En \textbf{\textit{als}} dat zo zou zijn \textbf{\textit{zou}} 
 $  T \vectwee{0}{0} \ = \ 
-\ \vectwee{ 3.0 + 2.0 }{ 1.0 + 2.0 } \ 
+\ \vectwee{ 3\cdot 0 + 2\cdot 0 }{ 1\cdot 0 + 2\cdot 0 } \ 
 = \ \vectwee{0}{0} $ Dat \textbf{\textit{zou}} betekenen dat het de oorsprong (0,0) niet verschoven zou worden! Overigens heet zo'n redenering als deze  $"$een bewijs uit het ongerijmde".\\ \\ \\
 \textbf{Ten tweede:} als T lineair zou zijn zou moeten gelden\\ 
 $ T(\vec{a} \ + \ \vec{b} )  
@@ -150,7 +150,7 @@ $ T_a \ \vecdrie{1}{0}{1} \
 \quad  Anders gezegd: \quad $ \vectwee{1}{0}  \  \xrightarrow{T}   \ \   \vectwee{ 3 } {1}. $\\ \\ \\
 Wat is het beeld van de oorsprong onder \textit{$  T_a $}? Dan moeten we ook aan de oorsprong een dimensie toevoegen $ O_a = (0,0,1) $ Dan is \\ \\
 $ T_a \ \vecdrie{0}{0}{1} \ 
-= \ \matdrie{ 1 & 0 &  2 }{ 0 & 1 & 1 }{0 & 0 & 1 }  \ . \ \vecdrie{0}{0}{1} \ 
+= \ \matdrie{ 1 & 0 &  2 }{ 0 & 1 & 1 }{0 & 0 & 1 }  \ \cdot \ \vecdrie{0}{0}{1} \ 
 =  \ \vecdrie{2}{1}{1} $ 
 \quad dat wil zeggen \quad
 $ \vectwee{0}{0}  \  \xrightarrow{T}   \   \vectwee{ 2 } {1}. $\\
@@ -199,7 +199,7 @@ Bewegen bestaat natuurlijk niet alleen uit draaien (roteren), spiegelen enzovoor
 {samenstelling}
 {Als $ A $ en $ B $  matrices zijn dan is:\\
 	de matrix\textit{ S }van de afbeelding A \textit{\textbf{gevolgd}} door  B 	gelijk aan:
-	\quad $ S\ = \ B . A $ \\ NB voor je gevoel draait de volgorde om! Maar als je goed kijkt zie je dat je eerst A uitvoert en daarna B.}
+	\quad $ S\ = \ B \cdot A $ \\ NB voor je gevoel draait de volgorde om! Maar als je goed kijkt zie je dat je eerst A uitvoert en daarna B.}
 \subsection{samenstelling in \RT}
 \mybv[samenstelling \RT] 
 {Stel dat de rotatie $ R 
@@ -208,18 +208,18 @@ Bewegen bestaat natuurlijk niet alleen uit draaien (roteren), spiegelen enzovoor
 	$ P = \  \mattwee { 0.5 & 0.5 }
 	{ 0.5   & 0.5  } $ \\
 	en we willen \textit{eerst} roteren en \textit{daarna} projecteren, \\ dan is de matrix van die samenstelling: \\
-	$  S = P.R 
+	$  S = P\cdot R 
 	= \ \mattwee { 0.5 & 0.5 }
-	{ 0.5 & 0.5 } . 
+	{ 0.5 & 0.5 } \cdot 
 	\mattwee { 1 & -1 }
 	{ 1 & 1 } 
 	= \ \mattwee { 1 & 0 }
 	{ 1 & 0 }
 	$ } \\
 maar als we \textit{eerst} willen  projecteren en \textit{daarna}  roteren, \\ dan is de matrix van die samenstelling:\\
-$  S_2 = R.P
+$  S_2 = R\cdot P
 = \mattwee { 1 & -1 }
-{ 1 & 1 } . 
+{ 1 & 1 } \cdot 
 \ \mattwee { 0.5 & 0.5 }
 { 0.5 & 0.5 } 
 = \ \mattwee { 0 & 0 }
@@ -234,14 +234,14 @@ $ \\ \\ \\
 en we willen \textit{eerst} projecteren  en \textit{daarna} roteren, \\
 dan is de matrix van die samenstelling: 
 \begin{align*} 
-S = R.P 
+S = R\cdot P 
 &=	  \mattwee { \cos \theta & -\sin \theta }
-{ \sin \theta & \cos \theta}  \ . \ 
+{ \sin \theta & \cos \theta}  \ \cdot  \ 
 \frac{1}{17} \  \mattwee { 1 & 4 }
 { 4  & 16 }  \\
 & = \   \frac{1}{17} \  
-\mattwee { 1.\cos \theta + 4.-\sin \theta  & & 4.\cos \theta + 16.-\sin \theta  }
-{ 1.\sin \theta + 4.\cos \theta &  &4.\sin \theta + 16.\cos \theta}  \\  
+\mattwee { 1\cdot \cos \theta + 4\cdot -\sin \theta  & & 4\cdot \cos \theta + 16\cdot -\sin \theta  }
+{ 1\cdot \sin \theta + 4\cdot \cos \theta &  &4\cdot \sin \theta + 16\cdot \cos \theta}  \\  
 & = \   \frac{1}{17} \  
 \mattwee { \cos \theta - 4\sin \theta  & & 4\cos \theta - 16\sin \theta  }
 { \sin \theta + 4\cos \theta & & 4\sin \theta + 16\cos \theta}                                                
@@ -331,15 +331,15 @@ $ P_a = \matvier{ 0 & 1 & 0  & 0 }
 {0 & 0 & 0 & 1 } $ \\ \\
 en dan is de samenstelling van eerst P, dan T en tot slot R:
 \begin{align*} 
-R_a . T_a . P_a & = \ 
+R_a \cdot  T_a \cdot  P_a & = \ 
 \matvier{ 1 & -1 & 0 & 0 }
 { 1 & 1 & -1 & 0}
 { 0 & -1 & 1  & 0}
-{0 & 0 & 0 & 1 }  \ . \ 
+{0 & 0 & 0 & 1 }  \ \cdot  \ 
 \matvier{ 1 & 0 & 0 & 4 }
 { 0 & 1 & 0 &-3 }
 { 0 & 0 & 1 & 2}
-{0 & 0 & 0 & 1 }  \ . \ 
+{0 & 0 & 0 & 1 }  \ \cdot  \ 
 \matvier{ 0 & 1 & 0  & 0 }  
 { 1 & 0 & 0 & 0 }
 { 0 & 0 & 1  & 0 } 
@@ -347,7 +347,7 @@ R_a . T_a . P_a & = \
 & = \ \matvier { 1 & -1 & 0 & 0 }
 { 1 & 1 & -1 & 0}
 { 0 & -1 & 1  & 0}
-{0 & 0 & 0 & 1 }  \ . \ 
+{0 & 0 & 0 & 1 }  \ \cdot  \ 
 \matvier{ 0 & 1 & 0 & 4 }
 { 1 & 0 & 0 &-3 }
 { 0 & 0 & 1 & 2}
@@ -357,22 +357,23 @@ R_a . T_a . P_a & = \
 { -1 & 0 & 1 & 5}
 {0 & 0 & 0 & 1 }  
 \end{align*} 
-Dit alles betekent tot slot dat als $\vec{v} = \vecdriesnel{v} $ een willekeurige vector in \RD is, \\dan is  het beeld van $ \vec{v} $ onder $  R_a. T_a . P_a $ :
+Dit alles betekent tot slot dat als $\vec{v} = \vecdriesnel{v} $ een willekeurige vector in \RD is, \\dan is  het beeld van $ \vec{v} $ onder $  R_a \cdot  T_a \cdot  P_a $ :
 \begin{align*} 
-\vec{v}  \  \xrightarrow{R_a. T_a . P_a}   
+\vec{v}  \  \xrightarrow{R_a \cdot  T_a \cdot  P_a}   
 &   \matvier{ -1 & 1 & 0 & 7 }
 { 1 & 1 & -1 & -1 }
 { -1 & 0 & 1 & 5}
-{0 & 0 & 0 & 1 }  \ . \ 
+{0 & 0 & 0 & 1 }  \ \cdot  \ 
 \matvier{v_1}{v_2}{v_3}{1}  \\ 
 =  & \matvier {-v_1+v_2+7} 
 { v_1+v_2-v_3 -1 }
 {-v_1+v_3+ 5} {1} 
 \end{align*}                        
-Dus bijvoorbeeld $ \vecdrie{1}{1}{1}  \  \xrightarrow{R. T . P} \  \vecdrie{7}{0}{5}    $ \quad en  \quad 
-$ \vecdrie{1}{0}{0}  \  \xrightarrow{R. T . P}  \ \vecdrie{6}{0}{4}  $ 
+Dus bijvoorbeeld: \\
+$ \vecdrie{1}{1}{1}  \  \xrightarrow{R\cdot  T\cdot  P} \  \vecdrie{7}{0}{5}    $ \quad en  \quad 
+$ \vecdrie{1}{0}{0}  \  \xrightarrow{R\cdot T\cdot P}  \ \vecdrie{6}{0}{4}  $ 
 \quad en  \quad 
-$ \vecdrie{0}{0}{1}  \  \xrightarrow{R. T . P}  \ \vecdrie{7}{-2}{6}  $ 
+$ \vecdrie{0}{0}{1}  \  \xrightarrow{R\cdot T\cdot P}  \ \vecdrie{7}{-2}{6}  $ 
 
 \subsubsection{Opgaven}
 \begin{enumerate}

@@ -86,12 +86,12 @@ Het eerste element van het product krijgen we door de getallen in de eerste \tex
 	dan \quad
 	A.B  
 	&=\mattwee{3&-1&2}
-	{\gre{4}&\gre{-5}&\gre{0}} . 
+	{\gre{4}&\gre{-5}&\gre{0}} \cdot  
 	\matdrie{ \red{-4}& \blu{5}}
 	{ \red{1}&\blu{7}}{\red{-2}&\blu{6}}  \\
-	& =   \mattwee{3.\red{-4} + -1. \red{1} + 2. \red{-2} &  & 3. \blu{5} + -1. \blu{7} + 2. \blu{6}}
-	{\gre{4}. \red{-4} + \gre{-5}. \red{1} + \gre{0}. \red{-2} 
-		&  & \gre{4}. \blu{5} + \gre{-5}. \blu{7} + \gre{0}. \blu{6}}  \\
+	& =   \mattwee{3\cdot \red{-4} + -1\cdot \red{1} + 2\cdot  \red{-2} &  & 3\cdot  \blu{5} + -1\cdot \blu{7} + 2\cdot \blu{6}}
+	{\gre{4}\cdot \red{-4} + \gre{-5}\cdot \red{1} + \gre{0}\cdot \red{-2} 
+		&  & \gre{4}\cdot \blu{5} + \gre{-5}\cdot \blu{7} + \gre{0}\cdot \blu{6}}  \\
 	& = \mattwee{-17&20}
 	{-21&-15}
 	\end{align*} }
@@ -106,22 +106,22 @@ Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal
 	A.B & =
 	\matdrie{ \red{-4}& \red{5}}
 	{ \blu{1}&\blu{7}}
-	{\bro{-2}&\bro{6}} .
+	{\bro{-2}&\bro{6}} \cdot
 	\mattwee{3&\gre{-1}&\pur{2}}
 	{4&\gre{-5}&\pur{0}}\\
-	&=   \matdrie{\red{-4}.3 + \red{5}.4 &
-		\red{-4}. \gre{-1} +  \red{5}. \gre{-5} & 
-		\red{-4}. \pur{2}+\red{5}. \pur{0}}
-	{\blu{1}.3 + \blu{7}. 4 &
-		\blu{1}. \gre{-1} + \blu{7}. \gre{-5} &
-		\blu{1}.\pur{2}+ \blu{7}. \pur{0}}
-	{\bro{-2}.3 + \bro{6}.4&
-		\bro{-2}. \gre{-1} + \bro{6}. \gre{-5}&
-		\bro{-2}.\pur{2}+ \bro{6}. \pur{0}} \\
+	&=   \matdrie{\red{-4}\cdot 3 + \red{5}\cdot 4 &
+		\red{-4}\cdot \gre{-1} +  \red{5}\cdot \gre{-5} & 
+		\red{-4}\cdot \pur{2}+\red{5}\cdot \pur{0}}
+	{\blu{1}\cdot 3 + \blu{7}\cdot 4 &
+		\blu{1}\cdot \gre{-1} + \blu{7}\cdot \gre{-5} &
+		\blu{1}\cdot \pur{2}+ \blu{7}\cdot \pur{0}}
+	{\bro{-2}\cdot 3 + \bro{6}\cdot 4&
+		\bro{-2}\cdot \gre{-1} + \bro{6}\cdot \gre{-5}&
+		\bro{-2}\cdot \pur{2}+ \bro{6}\cdot \pur{0}} \\
 	&= \matdrie{8&-21&-8}{31&-36&2}{18&-28&-4}\\
 	maar	\\
 	B.A & =  \mattwee{3&{-1}&{2}}
-	{4&{-5}&{0}} . 
+	{4&{-5}&{0}} \cdot 
 	\matdrie { {-4}& {5}}
 	{ {1}&{7}}
 	{{-2}&{6}} \\
@@ -129,16 +129,16 @@ Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal
 	{ -21  & -15 }
 	\end{align*}
 } 
-\myeig[associatief]{Matrixvermenigvuldiging is wel associatief. Dat betekent: $ A.B.C = A.(B.C) = (A.B).C $}
+\myeig[associatief]{Matrixvermenigvuldiging is wel associatief. Dat betekent: $ A\cdot B\cdot C = A\cdot (B\cdot C) = (A\cdot B)\cdot C $}
 \section{De matrix van een afbeelding bepalen}
 Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te kunnen rekenen moeten we de matrix bepalen.  Jammer genoeg lukt dat niet simpelweg voor translaties, maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeelding kunnen rekenen.\\ \\
 \mydef []
 {basisvector}
 {Basisvectoren zijn: \\ vectoren die gecombineerd alle andere vectoren kunnen genereren (maken)} \\ 
 \mybv[basis  \RT]
-{ Basisvectoren voor \RT zijn: $   \vectwee{1}{0} $ en $   \vectwee{0}{1} $  want met combinaties van deze twee vectoren kun je alle andere tweedimensionale vectoren maken. Bijv: $   \vectwee{3}{-4}  = 3.\vectwee{1}{0}  -4 .\vectwee{0}{1}  $}
+{ Basisvectoren voor \RT zijn: $   \vectwee{1}{0} $ en $   \vectwee{0}{1} $  want met combinaties van deze twee vectoren kun je alle andere tweedimensionale vectoren maken. Bijv: $   \vectwee{3}{-4}  = 3\cdot \vectwee{1}{0}  -4\cdot\vectwee{0}{1}  $}
 \mybv[basis \RD]
-{ Basisvectoren voor \RD zijn: $   \vecdrie{1}{0}{0}\ ,  \   \vecdrie{0}{1}{0} $   en $ \vecdrie{0}{0}{1} $  want met combinaties van deze drie vectoren kun je alle andere driedimensionale vectoren maken. Bijv:  $  \vecdrie{1}{-2}{5}= 1.\vecdrie{1}{0}{0} \   -2.\  \vecdrie{0}{1}{0}\ + \ 5.\vecdrie{0}{0}{1} $ } \\
+{ Basisvectoren voor \RD zijn: $   \vecdrie{1}{0}{0}\ ,  \   \vecdrie{0}{1}{0} $   en $ \vecdrie{0}{0}{1} $  want met combinaties van deze drie vectoren kun je alle andere driedimensionale vectoren maken. Bijv:  $  \vecdrie{1}{-2}{5}= 1\cdot \vecdrie{1}{0}{0} \   -2\cdot \vecdrie{0}{1}{0}\ + \ 5\cdot\vecdrie{0}{0}{1} $ } \\
 
 \myeig[matrix bepalen]
 {De matrix van een afbeelding bestaat uit: \quad   het beeld van de basisvectoren}\\
@@ -169,34 +169,34 @@ Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te be
 \subsection{het resultaat berekenen}
 Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door de matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectweesnel{x} $  terecht komt op: 
 \begin{align*}
-P.\vec{x} 
+P\cdot \vec{x} 
 &= \mattwee{1&0}
-{0&0}   .
+{0&0}   \cdot 
 \mattwee{x_1}{x_2} \\
-&= \ \mattwee{1.x_1 + 0.x_2}
-{0.x_1 + 0.x_2}  \\
+&= \ \mattwee{1\cdot x_1 + 0\cdot x_2}
+{0\cdot x_1 + 0\cdot x_2}  \\
 & = \ \mattwee{x_1}{0}  
 \end{align*}
 In woorden: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
 \begin{align*}
-P . \mattwee{3}{4}  \ 
-&= \ \mattwee{1&0}{0&0}  \ . \   \mattwee{3}{4}  \\
-&=  \ \mattwee{1.3 + 0.4}{0.3 + 0.4} \\
+P \cdot  \mattwee{3}{4}  \ 
+&= \ \mattwee{1&0}{0&0}  \ \cdot \   \mattwee{3}{4}  \\
+&=  \ \mattwee{1\cdot 3 + 0\cdot 4}{0\cdot 3 + 0\cdot 4} \\
 &= \ \mattwee{3}{0}.  
 \end{align*}
 Op zo'n manier kun je ook voor  matrix A van de vorrige bladzij uitrekenen waar een willekeurig punt $ (v_1, v_2, v_3)  $ in \RD uitkomt, namelijk door de matrix van A te vermenigvuldigen met de vector $ \vec{v} $:
 \begin{align*}
-A.\vec{v} \ 
+A\cdot \vec{v} \ 
 &= \matdrie{0&2&-1}{3&0&0}{1&1&1}  
-. \ \matdrie{v_1}{v_2}{v_3}   \\
-&= \ \matdrie{0.v_1 + 3.v_2 + 1.v_3}{2.v_1 + 0.v_2+ 1.v_3}{-1.v_1 + 0.v_2 + 1.v_3}  \\
+\cdot  \ \matdrie{v_1}{v_2}{v_3}   \\
+&= \ \matdrie{0\cdot v_1 + 3\cdot v_2 + 1\cdot v_3}{2\cdot v_1 + 0\cdot v_2+ 1\cdot v_3}{-1\cdot v_1 + 0\cdot v_2 + 1\cdot v_3}  \\
 &= \ \matdrie{3v_2 + v_3}{2v_1 +  v_3}{-v_1 +  v_3} 
 \end{align*}
 En zo kun je ook  uitrekenen waar het punt (3,2,-1) terecht komt als je A er op toepast: \\
 $ (v_1 = 3, v_2 = 2 ,  v_3=-1 ):  $ 
 \begin{align*}
-\quad \ A.\vec{v} \ 
-&= \ \matdrie{3.2 + -1}{2.3+  -1}{-3 +  -1} \\
+\quad \ A\cdot \vec{v} \ 
+&= \ \matdrie{3\cdot 2 + -1}{2\cdot 3+  -1}{-3 +  -1} \\
 &= \  \matdrie{5}{5}{-4} \\
 en \ dus \ \ 
 \matdrie{3}{2}{1}  \ & \xrightarrow{A}  \   \matdrie{5}{5}{-4}
@@ -219,13 +219,13 @@ $  \mattwee { \red{\cos \theta} & \blu{-\sin \theta} }
 \mybv[rotatie 60]
 {Als $\theta = 60\degree$ dan is $ \cos\theta = \cos 60\degree = 0.5 $  en $ \sin 60\degree = \frac{1}{2} \sqrt{3} $  \ (reken uit met de rekenmachine) en dat betekent dat als je linksom draait over $ 60 \degree$ je matrix wordt:\\
 	$ R_{60} = \mattwee{ \frac{1}{2} &- \frac{1}{2} \sqrt{3}}{ \frac{1}{2} \sqrt{3}& \frac{1}{2} } 
-	= \frac{1}{2} . \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1}$ }
+	= \frac{1}{2} \cdot  \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1}$ }
 
 Stel, je wil weten waar het punt (4,2) terecht komt als je over  $ 60 \degree$ linksom draait, dan is dat:
 \begin{align*}
-R_{60} . \mattwee{4}{2} 
-=\frac{1}{2} . \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1} \ . \  \mattwee{4}{2}  \ \ 
-& = \frac{1}{2}.\  \mattwee{4  - \sqrt{3}.2 }    { \sqrt{3}.4 + 2} \\ 
+R_{60} \cdot  \mattwee{4}{2} 
+=\frac{1}{2} \cdot  \mattwee{1 & -\sqrt{3} }{\sqrt{3} & 1} \ \cdot  \  \mattwee{4}{2}  \ \ 
+& = \frac{1}{2}\cdot \  \mattwee{4  - \sqrt{3}\cdot 2 }    { \sqrt{3}\cdot 4 + 2} \\ 
 & = \  \mattwee{2-\sqrt{3}}{2\sqrt{3}+1} \\ 
 & \approx \  \mattwee{2-1.73}{3.46+1}  \\ 
 &= \  \mattwee{0.27}{4.46}  
@@ -279,7 +279,7 @@ $ \vectwee{0}{1}  \  \xrightarrow{P}  \   \vectwee[blue]{0.5}{0.5}. $
 \quad Dat betekent dat $ P = \mattwee{\red{0.5}&\blu{0.5}}
 {\red{0.5}&\blu{0.5}} $
 
-\figuur[0.6]{projectie2D-2}{De projectie op de lijn $ l: y=x $ . Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
+\figuur[0.6]{projectie2D-2}{De projectie op de lijn $ l: y=x $. Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
 
 \mybv[projectie \RT] 
 {De projectie op de lijn $ y = 4x. $}
@@ -288,11 +288,11 @@ Bij de vorige projectie konden we aflezen wat het resultaat van de projectie was
 
 \myeig[rc loodlijn]
 {$ rc_{loodlijn} = \dfrac{-1}{rc_{origineel}} $} \\ Anders gezegd: de richtingscoëfficiënt van een lijn loodrecht op een andere (het origineel) is het omgekeerde daarvan met een min ervoor. 
-Ook wel: $ rc_{loodlijn}\ . \ rc_{origineel} = -1 $\\ \\
+Ook wel: $ rc_{loodlijn}\ \cdot  \ rc_{origineel} = -1 $\\ \\
 
 \mybv[rc loodlijn] 
 {Als $ l: y = 4x  $ dan is de richtingscoëfficiënt van \textit{l}: \ $  rc_l = 4 $ en de richtingscoëfficiënt van de loodlijn $ rc_{loodlijn} = - \frac{1}{4} $. 
-	Dan weten we dus dat $ m_{10}: y = - \frac{1}{4}x + b_{10} $ ($ b_{10} $ is een constante, vergelijk met de algemene vergelijking van een lijn hierboven). De constante $ b_{10} $ kunnen we uitrekenen doordat we weten dat het punt (1,0) op $ m_{10} $ ligt $ :  0 = - \frac{1}{4}.1 + b_{10} $  dus is $ b_{10} = \frac{1}{4} $ en $ m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $ \\ De andere loodlijn gaat op dezelfde manier: $ rc_{01}= - \frac{1}{4} $. Dus $ m_{01}: y = - \frac{1}{4}x + b_{01} $, en we weten dat (0,1) op $ m_{01}  $ ligt. Dus $ 1 = - \frac{1}{4}.0 + b_{01} \  dus \   b_{01} = 1 $ en dus $ m_{01}: y = - \frac{1}{4}x + 1. $ Als we snijpunten (rood en blauw in figuur \ref{fig:projectie2D-3} ) weten, weten we waar de basisvectoren terecht komen. }\\
+	Dan weten we dus dat $ m_{10}: y = - \frac{1}{4}x + b_{10} $ ($ b_{10} $ is een constante, vergelijk met de algemene vergelijking van een lijn hierboven). De constante $ b_{10} $ kunnen we uitrekenen doordat we weten dat het punt (1,0) op $ m_{10} $ ligt $ :  0 = - \frac{1}{4}\cdot 1 + b_{10} $  dus is $ b_{10} = \frac{1}{4} $ en $ m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $ \\ De andere loodlijn gaat op dezelfde manier: $ rc_{01}= - \frac{1}{4} $. Dus $ m_{01}: y = - \frac{1}{4}x + b_{01} $, en we weten dat (0,1) op $ m_{01}  $ ligt. Dus $ 1 = - \frac{1}{4}\cdot 0 + b_{01} \  dus \   b_{01} = 1 $ en dus $ m_{01}: y = - \frac{1}{4}x + 1. $ Als we snijpunten (rood en blauw in figuur \ref{fig:projectie2D-3} ) weten, weten we waar de basisvectoren terecht komen. }\\
 
 \figuur[0.8]{projectie2D-3}{De projectie op de lijn $ l:  y = 4x $ met loodlijnen  $ m_{10} $ door (1,0) en $ m_{01} $ door (0,1) }
 
@@ -356,10 +356,10 @@ $ P =
 	
 	\item Wat is het product van deze  3 matrices
 	$ \mattwee{ 3 & 0 & 2 } 
-	{ 4 &  -1 & 1} .
+	{ 4 &  -1 & 1} \cdot 
 	\matdrie{ 2 & -1 & -2 } 
 	{ 1 &  3 & 1 }
-	{0 & 5 & 6 }  . 
+	{0 & 5 & 6 }  \cdot 
 	\matdrie{ 1 & 2 } 
 	{ 2 &  4 }
 	{-1 & 2 } $	?
@@ -380,9 +380,9 @@ $ P =
 	\item Wat is het product van deze  3 matrices
 	$ \matdrie{ 1 & 2 } 
 	{ 2 &  4}
-	{ -1 & 2 } .
+	{ -1 & 2 } \cdot 
 	\mattwee{ 3 & 0 & 2 } 
-	{ 4 &  -1 & 1 }  . 
+	{ 4 &  -1 & 1 }  \cdot  
 	\matdrie{  2 & -1 & -2 } 
 	{ 1 &  3 & 1 }
 	{0 & 5 & 6  } $	?
