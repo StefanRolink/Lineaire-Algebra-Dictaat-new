@@ -84,7 +84,7 @@ Het inproduct van twee vectoren is een getal(!), geen vector. We noteren het inp
 \mydef[Het inproduct van \V{a}  en  \V{b} \  is:]{inproduct}
 { \  \quad $ (\vec{a}, \vec{b}) = a_1b_1 + a_2b_2 + . . . + a_nb_n$\\}
 
-\mybv[inproduct]{ als  $\vec{a} = \vecdrie {3}{-1}{2}  \ $ en  \ \  $\vec{b} = \vecdrie {0}{6}{-4}  \ $\\ \\
+\mybv[inproduct]{ bijvoorbeeld, als  $\vec{a} = \vecdrie {3}{-1}{2}  \ $ en  \ \  $\vec{b} = \vecdrie {0}{6}{-4}  \ $\\ \\
 	dan is $ (\vec{a}, \vec{b}) = 3\cdot0 +-1\cdot6 +2\cdot-4 = 0-6-8=-14$}
 
 
@@ -260,7 +260,7 @@ y =  \lambda
 \end{cases}
 \] 
 Dat schrijven we dan met behulp van vectoren. 
-$ l: \  \vectwee {x}{y} \ = \ \vectwee {\frac{2}{3}}{0} \ +\  \lambda  \vectwee {1/3}{1}  $.\\
+$ l: \  \vectwee {x}{y} \ = \ \vectwee {\frac{2}{3}}{0} \ +\  \lambda  \vectwee {\frac{1}{3}}{1}  $.\\
 Ga na dat dit precies dezelfde lijn is als:
 $ l: \  \vectwee {x}{y} \ = \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $.\\ (immers we kunnen voor $ \lambda $ 1 kiezen, daarmee een nieuw steunpunt, (1,1), uitrekenen: $\vectwee{\frac{2}{3}}{0}+1\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{1} $ en vervolgens $ \lambda $ 3 keer zo groot kiezen: $3\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{3} $)\\
 Nog anders geschreven:
@@ -321,7 +321,7 @@ Om goed te kunnen rekenen met lijnen en vlakken hebben we zogeheten normaalvecto
 \mydef
 {normaal lijn}
 {De normaal of normaalvector van een lijn is: 
-	de vector $ \vec{n} $  \ die loodrecht staat op de richtingsvector van de lijn.}
+	de vector $ \vec{n} $  \ die loodrecht staat op de richtingsvector van de lijn.} Voor het bepalen van de normaalvector zijn het inproduct en uitproduct handige gereedschappen. \\
 
 \mybv[normaal lijn]{Voorbeeld van een berekening van de normaal van een  lijn} 
 Stel we hebben de lijn $ l: \  \vectwee {x}{y} \ = \ \vectwee {2}{0} \ +\  \lambda  \vectwee {3}{2}  $. (Zie figuur  \ref{fig:lijnnormaal})
@@ -350,15 +350,15 @@ Maar wat als we niet de vergelijking maar de vectorvoorstelling van een vlak heb
 
 \mybv[normaal vlak]
 {als $ W: \vec{x}  = \vecdrie{0}{1}{-1}    + \  \lambda \  \vecdrie{2}{-3}{1} + \ \mu \ \vecdrie{0}{1}{2} $ 
-	\qquad dan zijn de richtingsvectoren $ \vecdrie{2}{-3}{1} \ $ en $  \vecdrie{0}{1}{2} $ \\
+	\\ dan zijn de richtingsvectoren: $ \vecdrie{2}{-3}{1} \ $ en $  \vecdrie{0}{1}{2} $ \\
 	en hun  uitproduct is : 
-	$ \vecdrie{2}{-3}{1} \ \times \  \vecdrie{0}{1}{2}  \ = \ \vecdrie{-3\cdot2-1\cdot1}{-(2\cdot2-1\cdot0)}{-3\cdot0-2\cdot1} = \ \vecdrie{-7}{-3}{-2} $\\
-	en dus is $ \vec{n} = \vecdrie{-7}{-3}{-2}  $ de normaal vector van $ W $.  Zie figuur  \ref{fig:vlaknormaal}}.
+	$ \vecdrie{2}{-3}{1} \ \times \  \vecdrie{0}{1}{2}  \ = \ \vecdrie{-3\cdot2-1\cdot1}{-(2\cdot2-1\cdot0)}{2\cdot1--3\cdot0} = \ \vecdrie{-7}{-4}{2} $\\
+	en dus is $ \vec{n} = \vecdrie{-7}{-4}{2}  $ de normaal vector van $ W $.  Zie figuur  \ref{fig:vlaknormaal}}.
 
 \figuur[0.8]{vlaknormaal}{De normaal van vlak \textit{W},  \ $  \vec{n}   \ = \ \vec{v} \times \vec{w} $ ,  staat loodrecht op de richtingsvectoren $  \vec{v}  $  en $  \vec{w} $}
 
-De vergelijking van $ W $ is dan  $ -7x-3y-2z = c $ De constante c weten nog niet maar kunnen we uitrekenen doordat we weten dat het punt (0,1,-1) op W ligt, want dat is de vaste vector. (dat kun je ook zien als je en $ \lambda $  en $ \mu $  beide 0 stelt: dan is het punt $\vecdrie{0 +2\cdot0 +0\cdot0}{1 -3\cdot0 +1\cdot0}{-1 + 1\cdot0 + 2\cdot0} = \vecdrie{0}{1}{-1} $.
-Vul de x, y en z-waarde van het vaste punt  in in de vergelijking $ -7x-3y-2z = c $ en er volgt dat $c = -7\cdot0-3\cdot1-2\cdot-1 = -1$. Dus $ W: -7x-3y-2z = -1 $ , of, wat op hetzelfde neerkomt:  $ W: 7x+3y+2z = 1 $
+De vergelijking van $ W $ is dan  $ -7x-4y+2z = c $ De constante c weten nog niet maar kunnen we uitrekenen doordat we weten dat het punt (0,1,-1) op W ligt, want dat is de vaste vector. (dat kun je ook zien als je en $ \lambda $  en $ \mu $  beide 0 stelt: dan is het punt $\vecdrie{0 +2\cdot0 +0\cdot0}{1 -3\cdot0 +1\cdot0}{-1 + 1\cdot0 + 2\cdot0} = \vecdrie{0}{1}{-1} $.
+Vul de x, y en z-waarde van het vaste punt  in in de vergelijking $ -7x-4y+2z = c $ en er volgt dat $c = -7\cdot0-4\cdot1+2\cdot-1 = -6$. Dus $ W: -7x-4y+2z = -6 $ , of, wat op hetzelfde neerkomt:  $ W: 7x+4y-2z = 6 $
 
 \section{Afstand van punt tot vlak}
 We hebben nu genoeg hulpmiddelen om in \RD de afstand van een punt tot een vlak uit te kunnen rekenen. Dat doen we   door een lijn \textit{l} loodrecht op het vlak \textit{V} te tekenen,\textit{ l }snijdt \textit{V} in\textit{ S} en dan is de afstand tussen \textit{P} en \textit{V} gelijk aan de afstand tussen P\textit{} en \textit{S}. Zie figuur   \ref{fig:afstand1}. en \ref{fig:afstand-2}.
@@ -406,12 +406,57 @@ of $ 14\lambda + 29 = 1 $ \\of $  \lambda = -2 $
 \item \subsubsection{de afstand uitrekenen}
 We weten nu dat als $  \lambda = -2 $ we het snijpunt van $ l  $ en $ V $ hebben. Wat betekent dat? Dat betekent dat als we beginnen in punt P en -2 keer de richtingsvector van $  l $ er bij op tellen we op het vlak V terecht komen.
 Anders gezegd de afstand tussen P en V is 2 keer de lengte van die richtingsvector. Oftewel: 
-afstand $ = 2\cdot |\overrightarrow{rv_{l}})| = 2\cdot \sqrt{(-1)^{2} + (3)^{2} + (2)^{2} } = 2\sqrt{14} $ \. Zie  figuur  \ref{fig:afstand-2}
+afstand $ = 2\cdot |\overrightarrow{rv_{l}}| = 2\cdot \sqrt{(-1)^{2} + (3)^{2} + (2)^{2} } = 2\sqrt{14} $ \. Zie  figuur  \ref{fig:afstand-2}
 \end{enumerate}	
 
 \figuur[1]{afstand-2}{We moeten vanuit $ P $ beginnend -2 keer de vector $\vec{n} =  \vec{rv_{l}} $   afpassen om op V te komen. Anders gezegd:  de normaal vector van $ V $ past  precies 2 keer tussen $ V $ en $ P $, en dus is de afstand $ 2\cdot |\vec{n}| =  2\cdot |\vec{rv_{l}}| = 2\sqrt{14} $.}
 
+\subsection{Extra voorbeel}
+Omdat het berekenen van de afstand van een punt naar een vlak vaak lastig word gevonden, is hieronder nog een extra voorbeeld gegeven: \\
 
+\mybv[afstand]
+{ In dit voorbeeld berekenen we wederom de afstand van vlak $V$ en punt $P$. Hierbij is het volgende gegeven: \\
+	$V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{-1}{-2}{0} \ + \ \lambda \ \vecdrie{-5}{-8}{3} \  + \mu \ \vecdrie{2}{3}{-1} $ \ \ \ en $P: (-3,1,7)$. 
+}
+Omdat het vlak als vectorvoorstelling is gegeven moet deze eerst worden omgeschreven naar vergelijking. Dit is te doen door in het stelsel vergelijkingen $\lambda$ en $\mu$ weg te werken.
+Eerst zetten we de vectorvoorstelling in een stelsel:
+\[\begin{cases}
+x = -1 -5\lambda + 2\mu\\
+y = -2 + 8\lambda + 3\mu\\
+z = 3\lambda - \mu  
+\end{cases}
+\] 
+Als we nu de laatste vergelijking omschrijven naar $\mu = 3\lambda-z$ kunnen we $\mu$ substitueren. Dan krijgen we:
+\[\begin{cases}
+x = -1 -5\lambda + 2(3\lambda-z) = -1 + \lambda -2z\\
+y = -2 + 8\lambda + 3(3\lambda-z) = -2 + \lambda - 3z\\
+\end{cases}
+\] 
+Nu schrijven we de eerste vergelijking om tot $\lambda = x + 1 + 2z$ en substitueren we dit in de tweede. We vinden nu de vergelijking: 
+\begin{align*}
+    y &= -2+(x+1+2z) -3z \\
+    y &= -1 + x - z \\
+\end{align*}
+Dit kunnen we weer omschrijven naar: $x-y-z=1$. Dit gebruiken we om de normaal van het vlak op te stellen, deze wordt gebruikt als richtingsvector van de lijn $l$: \\
+    $ \vec{n} = \vecdrie{1}{-1}{-1}  $  
+    
+Dan kunnen we de vectorvoorstelling van de lijn $l$ door punt $P$ loodrecht op vlak $V$ maken: \\
+$l: \vecdrie{x}{y}{z} = \vecdrie{-3}{1}{7} + \lambda \vecdrie{1}{-1}{-1} $ \\
+Deze 3 vergelijkingen vullen we nu in, in de gevonden vergelijking zodat we $\lambda$ kunnen uitrekenen:
+\begin{align*}
+    (-3 + \lambda) - (1-\lambda) - (7-\lambda) &= 1 \\
+    -11 + 3\lambda &= 1 \\
+    3\lambda &= 12 \\ 
+    \lambda &= 4
+\end{align*}
+Nu bereken we de afstand door de gevonden $\lambda$ te vermenigvuldigen met de lengte van de normaal: 
+\begin{align*}
+    \text{afstand} &= 4\cdot |\overrightarrow{rv_{l}}| \\
+    &= 4\cdot \sqrt{1^{2} + (-1)^{2} + (-1)^{2} } \\
+    &= 4\sqrt{3} \approx 6.93
+\end{align*}
+
+\newpage
 \subsubsection{Opgaven}
 \begin{enumerate}
 	\item  Bereken \ $ \vec{a} + \vec{b} $, \quad $ \vec{a} - \vec{b} $, \ en \ $  (\vec{a} , \vec{b}) $  als $ \vec{a} = \vecvier{3}{-1}{2}{0}  $ \  en \  $  \vec{b} =  \vecvier{-2}{2}{4}{7} $
