@@ -57,7 +57,7 @@ Deze matrix heeft $ m $ rijen en $ n $ kolommen. Meestal beperken we ons tot $ 2
 {nulmatrix}
 {Een nulmatrix  is: \\een matrix met alleen maar nullen. }
 \mybv[nulmatrix]
-{ $ N = \mattwee{0&0}{0&0} $ } \\ \\ \\
+{ $ N = \mattwee{0&0}{0&0} $ } \\ 
 \mydef []
 {getransponeerd}
 {De getransponeerde matrix $ A^{T}  $ van matrix A is:\\
@@ -131,7 +131,11 @@ Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal
 } 
 \myeig[associatief]{Matrixvermenigvuldiging is wel associatief. Dat betekent: $ A\cdot B\cdot C = A\cdot (B\cdot C) = (A\cdot B)\cdot C $}
 \section{De matrix van een afbeelding bepalen}
-Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te kunnen rekenen moeten we de matrix bepalen.  Jammer genoeg lukt dat niet simpelweg voor translaties, maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeelding kunnen rekenen.\\ \\
+We gaan het nu hebben over lineaire afbeeldingen. Een afbeelding binnen dit vak (en binnen de wiskunde) kun je zien als een functie, die de ene verzameling 'af kan beelden' in de andere. Stel je voor je hebt een functie $f$ die ervoor zorgt dat matrix $A = \vecdrie{1}{2}{3} $ afgebeeld (of omgezet) kan worden naar matrix $B = \vecdrie{4}{5}{6} $, dan kunnen we dit noteren als: $A \xrightarrow{f} B$. \\
+\mydef[]
+{Lin. afbeelding} 
+{Lineaire afbeeldingen zijn: \\ afbeeldingen die de 'lineaire combinaties' tussen beide matrices bewaren, voorbeelden hiervan zijn bijvoorbeeld spiegeling, projectie, rotatie.} \\
+Om met lineaire afbeeldingen te kunnen rekenen moeten we de matrix bepalen. Jammer genoeg lukt dat niet simpelweg voor translaties (verplaatsingen), maar daarvoor zullen we een oplossing zien in hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}, zodat ook een translatie als matrix geschreven kan worden, en we met elke afbeelding kunnen rekenen. Voor het bepalen van de matrix van een afbeelding, gaan we gebruik maken van basisvectoren. \\
 \mydef []
 {basisvector}
 {Basisvectoren zijn: \\ vectoren die gecombineerd alle andere vectoren kunnen genereren (maken)} \\ 
@@ -144,7 +148,7 @@ Om met een lineaire afbeelding (bijvoorbeeld spiegeling, projectie, rotatie)  te
 {De matrix van een afbeelding bestaat uit: \quad   het beeld van de basisvectoren}\\
 Dus wat de afbeelding doet met elke basisvector levert de matrix van een afbeelding
 Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te berekenen wat de afbeeelding doet met basisvectoren. \\ \\ \\
-\mybv[matrix bepalen  \RD]
+\mybv[matrix \RD]
 { Stel we weten van afbeelding\textit{ A} alleen wat er met de basisvectoren gebeurt: 
 	
 	\begin{center}
@@ -157,34 +161,31 @@ Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te be
 	{\red{3}&  \blu{0} &  \gre{0} }
 	{\red{1}&  \blu{1} &  \gre{1}} $}\\ \\
 
-\mybv[matrix bepalen \RT]
-{ Stel $ P $ is de projectie in \RT op de x-as, dat wil zeggen: alle punten in het vlak worden  geprojecteerd op de x-as (zie figuur \ref{fig:projectie2D}) .  \\Het beeld van de basisvector  $ \vectwee{1}{0} $ onder $ P $ is  $   \vectwee{1}{0} $.  En    $   \vectwee{0}{1} $ gaat  naar $   \vectwee{0}{0} $ \\
-	anders gezegd:\\ \\ \  
+\newpage
+\subsection{Voorbeeld matrix bepalen van afbeelding (projectie)}
+\mybv[matrix \RT]
+{ Stel $ P $ is de projectie in \RT op de x-as, dat wil zeggen: alle punten in het vlak worden geprojecteerd op de x-as. Dus de punten uit een tweedimensionale ruimte worden dan terug gebracht naar een eendimensionale ruimte. (zie figuur \ref{fig:projectie2D}). 
+\figuur[0.5]{projectie2D}{De projectie in \RT op de x-as; het punt (3,4) komt bijvoorbeeld uit op het punt  (3,0).}
+\\Het beeld van de basisvector  $ \vectwee{1}{0} $ onder $ P $ is  $   \vectwee{1}{0} $ en $ \vectwee{0}{1} $ gaat naar $   \vectwee{0}{0} $, anders gezegd:\\ \\ \  
 	$ \vectwee{1}{0}  \  \xrightarrow{P}  \   \vectwee[red]{1}{0} $ 
 	\quad en  \quad $ \vectwee{0}{1} \  \xrightarrow{P}  \ \vectwee[blue]{0}{0} $\\
 	Dan mag je die uitkomsten naast elkaar zetten en is de matrix van 
 	$ P = \mattwee{\red{1}&\blu{0}}
 	{\red{0}&\blu{0}} $}
-\figuur[0.5]{projectie2D}{de projectie in \RT op de x-as; het punt (3,4) komt op het punt  (3,0)}
-\subsection{het resultaat berekenen}
-Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door de matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectweesnel{x} $  terecht komt op: 
+\subsection{Het resultaat berekenen}
+Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door deze matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectweesnel{x} $  terecht komt op: 
 \begin{align*}
-P\cdot \vec{x} 
-&= \mattwee{1&0}
-{0&0}   \cdot 
-\mattwee{x_1}{x_2} \\
-&= \ \mattwee{1\cdot x_1 + 0\cdot x_2}
-{0\cdot x_1 + 0\cdot x_2}  \\
-& = \ \mattwee{x_1}{0}  
+    P\cdot \vec{x} &= \mattwee{1&0}{0&0}   \cdot \mattwee{x_1}{x_2} \\
+    &= \ \mattwee{1\cdot x_1 + 0\cdot x_2} {0\cdot x_1 + 0\cdot x_2}  \\
+    & = \ \mattwee{x_1}{0}  
 \end{align*}
-In woorden: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
+Dus: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
 \begin{align*}
-P \cdot  \mattwee{3}{4}  \ 
-&= \ \mattwee{1&0}{0&0}  \ \cdot \   \mattwee{3}{4}  \\
-&=  \ \mattwee{1\cdot 3 + 0\cdot 4}{0\cdot 3 + 0\cdot 4} \\
-&= \ \mattwee{3}{0}.  
+    P \cdot \mattwee{3}{4}  \ &= \ \mattwee{1&0}{0&0}  \ \cdot \   \mattwee{3}{4}  \\
+    &=  \ \mattwee{1\cdot 3 + 0\cdot 4}{0\cdot 3 + 0\cdot 4} \\
+    &= \ \mattwee{3}{0}.  
 \end{align*}
-Op zo'n manier kun je ook voor  matrix A van de vorrige bladzij uitrekenen waar een willekeurig punt $ (v_1, v_2, v_3)  $ in \RD uitkomt, namelijk door de matrix van A te vermenigvuldigen met de vector $ \vec{v} $:
+Op zo'n manier kun je ook voor  matrix A van hierboven uitrekenen waar een willekeurig punt $ (v_1, v_2, v_3)  $ in \RD uitkomt, namelijk door de matrix van A te vermenigvuldigen met de vector $ \vec{v} $:
 \begin{align*}
 A\cdot \vec{v} \ 
 &= \matdrie{0&2&-1}{3&0&0}{1&1&1}  
@@ -192,24 +193,21 @@ A\cdot \vec{v} \
 &= \ \matdrie{0\cdot v_1 + 3\cdot v_2 + 1\cdot v_3}{2\cdot v_1 + 0\cdot v_2+ 1\cdot v_3}{-1\cdot v_1 + 0\cdot v_2 + 1\cdot v_3}  \\
 &= \ \matdrie{3v_2 + v_3}{2v_1 +  v_3}{-v_1 +  v_3} 
 \end{align*}
-En zo kun je ook  uitrekenen waar het punt (3,2,-1) terecht komt als je A er op toepast: \\
-$ (v_1 = 3, v_2 = 2 ,  v_3=-1 ):  $ 
+En zo kun je ook  uitrekenen waar het punt (3,2,-1) terecht komt als je A er op toepast: $ (v_1 = 3, v_2 = 2 ,  v_3=-1 ):  $ 
 \begin{align*}
-\quad \ A\cdot \vec{v} \ 
-&= \ \matdrie{3\cdot 2 + -1}{2\cdot 3+  -1}{-3 +  -1} \\
-&= \  \matdrie{5}{5}{-4} \\
-en \ dus \ \ 
-\matdrie{3}{2}{1}  \ & \xrightarrow{A}  \   \matdrie{5}{5}{-4}
+\quad \ A\cdot \vec{v} \ &= \ \matdrie{3\cdot 2 + -1}{2\cdot 3+  -1}{-3 +  -1} \\
+    &= \  \matdrie{5}{5}{-4} \\
+    \text{en dus:} \ \ \matdrie{3}{2}{1}  \ & \xrightarrow{A}  \   \matdrie{5}{5}{-4}
 \end{align*}
 \section{Rotatie}		
+In dit stuk gaan we uitleggen hoe we vergelijkbare matrix-vermenigvuldigen als hierboven kunnen gebruiken om bijv. vectoren te roteren om een bepaald punt.
+
 \label{rotatie}
-\subsection{de matrix van een rotatie in \RT}
+\subsection{De matrix van een rotatie in \RT}
 Net zoals in de vorige voorbeelden hoeven we bij een rotatie alleen maar te bepalen wat er met de basisvectoren gebeurt om de matrix uit te rekenen. 
-
-\figuur[1]{rotatie2D-2}{Het resultaat ((a)\red{rood} en (b) \blu{blauw}) van de rotatie tegen de klok in over hoek $\theta $ van basisvectoren   $ \hat{b_x} = (1,0) $ en   $ \hat{b_y} = (0,1) $}
-
+\figuur[1]{rotatie2D-2}{Het resultaat ((a)\red{rood} en (b) \blu{blauw}) van de rotatie tegen de klok in over hoek $\theta $ van basisvectoren   $ \hat{b_x} = (1,0) $ en   $ \hat{b_y} = (0,1) $.}
 Als we roteren in \RT gaat dat om de oorsprong \textit{O} over een hoek $\theta$ (spreek uit: "tèta"). Zie figuur  \ref{fig:rotatie2D-2}. In de tekening zien we een rotatie "tegen de klok in over hoek $\theta$". \\De basisvectoren zijn $ \vectwee{1}{0}   $ en   $ \vectwee{0}{1}   $. \\We moeten dus bepalen wat er gebeurt met $ \vectwee{1}{0}   $ en   $ \vectwee{0}{1}   $.\\
-Uit Wiskunde Basis weten we wat het beeld van de vector $\vectwee{1}{0} $ onder de afbeelding $R$ is: $ R \ \vectwee{1}{0}  \  = \  \vectwee{\cos \theta}{\sin \theta} $. \\ Anders gezegd:
+Uit het vak Logica weten we wat het beeld van de vectoren $\vectwee{1}{0} $ en $\vectwee{0}{1} $ onder de afbeelding $R$ is: $ R \cdot \vectwee{1}{0}  \  = \  \vectwee{\cos \theta}{\sin \theta} \ \ \text{ en } \ \  R \cdot \vectwee{0}{1}  \  = \  \vectwee{-\sin \theta}{\cos \theta} $. \\ Anders gezegd: 
 $ \vectwee{1}{0}   \  \xrightarrow{R}  \ \vectwee[red]{\cos \theta}{\sin \theta} $  \quad en  \quad 
 $ \vectwee{0}{1}   \  \xrightarrow{R}  \ \vectwee[blue]{-\sin \theta}{\cos \theta} $  \quad Let op het minteken!\\ \\
 En dus is de matrix van \textit{R} =  
@@ -233,7 +231,7 @@ R_{60} \cdot  \mattwee{4}{2}
 of, op een andere manier opgeschreven: 
 $ \vectwee{4}{2}   \  \xrightarrow{R_{60}}  \ \vectwee{0.27}{4.46} $ \ (figuur \ref{fig:rotatie2D-VB}  )
 
-\figuur{rotatie2D-VB}{het beeld van (4,2) onder de rotatie $ R_{60} $}
+\figuur{rotatie2D-VB}{Het beeld van (4,2) onder de rotatie $ R_{60} $.}
 
 \myeig[matrix rotatie]
 {De matrix van een rotatie om \textit{O} over de hoek $\theta$ in \RT is altijd \\ \\òf  (tegen de klok in):\quad 
@@ -241,36 +239,43 @@ $ \vectwee{4}{2}   \  \xrightarrow{R_{60}}  \ \vectwee{0.27}{4.46} $ \ (figuur \
 	{ \sin \theta & \cos \theta} $  \\  \\òf  (met de klok mee):\quad 
 	$  \mattwee { \cos \theta & \sin \theta }
 	{ -\sin \theta & \cos \theta} $ }\\
-Met andere woorden: als je de hoek weet van een rotatie in \RT hoef je alleen nog de richting , met de klok mee of niet,  te bepalen om de matrix op te kunnen schrijven.
+Met andere woorden: als je de hoek weet van een rotatie in \RT hoef je alleen nog de richting, met de klok mee of niet,  te bepalen om de matrix op te kunnen schrijven.
 
-\subsection{de matrix van een rotatie in \RD}
-In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je met een kurkentrekker doet om een fles wijn te openen. Het is handig om je te realiseren dat draaien om een een as in \RD betekent dat één coördinaat niet verandert. Namelijk de coördinaat van de as waarom je draait.  De draaiing in de andere twee coördinaten is dan eigenlijk een rotatie in \RT. Voor de kritische lezer: Wat als je  om een willekeurige vector roteert? Dan geldt het volgende: Elke rotatie in \RD kun je uitvoeren door eerst een stukje om de x-as, dan om dey-as en daarna om de z-as te roteren.
-
-\figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in x en y waarbij de z-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de x-, y- en z-as   komen na de rotatie. }
-
-\figuur[0.4]{rotatie3D-3als2d}{De rotatie in \RD over hoek  $\theta.$ gezien als rotatoe in \RT, vergelijk figuur \ref{fig:rotatie3D-3} }
+\subsection{De matrix van een rotatie in \RD}
+In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je met een kurkentrekker doet om een fles wijn te openen. Het is handig om je te realiseren dat draaien om een een as in \RD betekent dat één coördinaat niet verandert. Namelijk de coördinaat van de as waarom je draait.  De draaiing in de andere twee coördinaten is dan eigenlijk een rotatie in \RT. Voor de kritische lezer: Wat als je om een willekeurige vector roteert? Dan geldt het volgende: Elke rotatie in \RD kun je uitvoeren door eerst een stukje om de x-as, dan om de y-as en daarna om de z-as te roteren.
 
 \mybv[rotatie \RD] 
-{De rotatie rechtsom om de z-as over de hoek  $\theta.$ }
+{Als voorbeeld gaan we een rotatie rechtsom om de z-as over de hoek $\theta$ uitrekenen. }
 
-We gaan weer bepalen waar de basisvectoren komen na de rotatie. De basisvector langs de x-as is $  \hat{b_x} \ = \ \vecdrie{1}{0}{0}. $ Zoals in figuur \ref{fig:rotatie3D-3} te zien is veranderen de z-coördinaten bij geen van de basisvectoren! Dus bij  $ \hat{b_x} $ en $  \hat{b_y} $  zijn en blijven z-coördinaten = 0, en de $ 3^e $ basisvector, $  \hat{b_z} $  verandert sowieso niet. Als de z-coördinaat van een willekeurig punt niet verandert, is het eigenlijk een rotatie in x en y, oftewel een rotatie in \RT.  Let op: we gaan nu met de klok mee dus het min-teken komt op een andere plaats dan bij het vorige voorbeeld van \RT: \\ \\
+We gaan weer bepalen waar de basisvectoren komen na de rotatie. De basisvectoren langs de assen zijn: \\
+$ \hat{b_x} \ &= \ \vecdrie{1}{0}{0}, \quad \hat{b_y} \ &= \ \vecdrie{0}{1}{0},  \quad \hat{b_z} \ &= \ \vecdrie{0}{0}{1} $ \\
+Zoals in figuur \ref{fig:rotatie3D-3} te zien is veranderen de z-coördinaten bij geen van de basisvectoren! 
+\newpage
+\figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in x en y waarbij de z-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de x-, y- en z-as   komen na de rotatie. }
+
+Dus bij  $ \hat{b_x} $ en $  \hat{b_y} $  zijn en blijven z-coördinaten = 0, en de $ 3^e $ basisvector, $  \hat{b_z} $  verandert sowieso niet. Als de z-coördinaat van een willekeurig punt niet verandert, is het eigenlijk een rotatie in x en y, oftewel een rotatie in \RT (zie figuur \ref{fig:rotatie3D-3als2d}).  
+\figuur[0.3]{rotatie3D-3als2d}{De rotatie in \RD over hoek  $\theta$, gezien als rotatie in \RT. Vergelijk met figuur \ref{fig:rotatie3D-3}. }
+
+Let op: we gaan nu met de klok mee dus het min-teken komt op een andere plaats dan bij het vorige voorbeeld van \RT: \\ \\
 $ \hat{b_x}  = \ \vecdrie{1}{0}{0}  \ \  \xrightarrow{R} \ \  \vecdrie[red]{\cos \theta}{- \sin \theta}{0}\ $  
 \qquad  $ \hat{b_y}  = \ \vecdrie{0}{1}{0}  \ \  \xrightarrow{R}  \ \ \vecdrie[blue]{\sin \theta}{ \cos \theta}{0}\ $  
 \qquad  $ \hat{b_z}  = \ \vecdrie{0}{0}{1}   \  \  \xrightarrow{R}  \ \ \vecdrie{0}{0}{1}\ $  \\ \\ \\
 En dus is $ R = 
 \matdrie{\red{\cos \theta} & \blu{\sin \theta} & {0} }
 {\red{- \sin \theta} & \blu{\cos \theta} & {0}}
-{\red{0} & \blu{0} & {1}} $ \\ NB: je ziet dat het 2x2 stukje linksboven in de matrix $ R $ hetzelfde is als  een rotatie in \RT.
+{\red{0} & \blu{0} & {1}} $ \\ 
+NB: Het 2x2 stukje linksboven in de matrix $ R $ is hetzelfde als bij een rotatie in \RT.
 
 \section{Projectie}		
 \mydef[Projecteren is:]
 {projectie}{het afbeelden van een object in een lagere dimensie.}  Dus bijvoorbeeld het feit dat je een 3D spel kunt spelen op een tweedimensionaal beeldscherm! In \RT doe je dat door punten loodrecht op een lijn te verplaatsen naar die lijn (1-dimensionaal), zie figuur \ref{fig:projectie2D-2}. In \RD door punten loodrecht op een vlak te verplaatsen naar dat vlak, zie figuur \ref{fig:projectievlak}.
-\subsection{de matrix van een projectie in \RT}
+\subsection{De matrix van een projectie in \RT}
 \label{projectie2D}
 In \RT is een projectie  het loodrecht verplaatsen van punten   naar een rechte lijn (zie figuur \ref{fig:projectie2D},  \ref{fig:projectie2D-2} en \ref{fig:projectie2D-3} ) \\ 
 
 \mybv[projectie  \RT] 
 {De projectie op de lijn $ y=x. $}	
+\figuur[0.6]{projectie2D-2}{De projectie op de lijn $ l: y=x $. Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
 
 Om de matrix te bepalen moeten we kijken wat er gebeurt met de basisvectoren. 	
 Zoals je in figuur \ref{fig:projectie2D-2} kunt zien werkt de projectie zo dat beide basisvectoren op dezelfde (paars = rood + blauw) vector terecht komen:\\ \\
@@ -279,30 +284,48 @@ $ \vectwee{0}{1}  \  \xrightarrow{P}  \   \vectwee[blue]{0.5}{0.5}. $
 \quad Dat betekent dat $ P = \mattwee{\red{0.5}&\blu{0.5}}
 {\red{0.5}&\blu{0.5}} $
 
-\figuur[0.6]{projectie2D-2}{De projectie op de lijn $ l: y=x $. Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
-
+\newpage
 \mybv[projectie \RT] 
 {De projectie op de lijn $ y = 4x. $}
+\figuur[0.6]{projectie2D-3}{De projectie op de lijn $ l:  y = 4x $ met loodlijnen  $ m_{10} $ door (1,0) en $ m_{01} $ door (0,1). }
 
-Bij de vorige projectie konden we aflezen wat het resultaat van de projectie was. In het algemeen is dat lastiger, en moeten we eerst loodlijnen uitrekenen. Zie figuur  \ref{fig:projectie2D-3}. De loodlijn $ m_{10} $ staat loodrecht op\textit{ l} en gaat door het punt (1,0), de loodlijn $ m_{01} $ staat ook loodrecht op \textit{l} maar gaat door het punt (0,1). De vraag is: hoe berekenen we de loodlijnen? \\ Daarvoor maken we gebruik van het volgende  (rc = richtingscoëfficiënt = \textit{a} in de algemene vergelijking van een lijn: $ y = ax + b $ )\\ \\ 
+Bij de vorige projectie konden we aflezen wat het resultaat van de projectie was. In het algemeen is dat lastiger, en moeten we eerst loodlijnen uitrekenen. Zie figuur  \ref{fig:projectie2D-3}. De loodlijn $ m_{10} $ staat loodrecht op $l$ en gaat door het punt (1,0), de loodlijn $ m_{01} $ staat ook loodrecht op $l$ maar gaat door het punt (0,1). De vraag is: hoe berekenen we de loodlijnen? Daarvoor maken we gebruik van het volgende eigenschap: \\
 
 \myeig[rc loodlijn]
-{$ rc_{loodlijn} = \dfrac{-1}{rc_{origineel}} $} \\ Anders gezegd: de richtingscoëfficiënt van een lijn loodrecht op een andere (het origineel) is het omgekeerde daarvan met een min ervoor. 
-Ook wel: $ rc_{loodlijn}\ \cdot  \ rc_{origineel} = -1 $\\ \\
+{$ rc_{loodlijn} = \dfrac{-1}{rc_{origineel}} $} \\ Waarbij  $rc$ de richtingscoëfficiënt is, oftwel de $a$ in de algemene vergelijking van een lijn: $ y = ax + b $.\\ \\ Anders gezegd: de richtingscoëfficiënt van een lijn loodrecht op een andere (het origineel) is het omgekeerde daarvan met een min ervoor. Uit het vak logica komt misschien deze nog wel bekend voor: Als $2$ rechte lijnen loodrecht op elkaar staan dan geldt er $ rc_{\text{lijn}1}\ \cdot  \ rc_{\text{lijn}2} = -1 $\\ \\
 
 \mybv[rc loodlijn] 
-{Als $ l: y = 4x  $ dan is de richtingscoëfficiënt van \textit{l}: \ $  rc_l = 4 $ en de richtingscoëfficiënt van de loodlijn $ rc_{loodlijn} = - \frac{1}{4} $. 
+{Als $ l: y = 4x  $ dan is de richtingscoëfficiënt van $l$: \ $  rc_l = 4 $ en de richtingscoëfficiënt van de loodlijn $ rc_{loodlijn} = - \frac{1}{4} $. 
 	Dan weten we dus dat $ m_{10}: y = - \frac{1}{4}x + b_{10} $ ($ b_{10} $ is een constante, vergelijk met de algemene vergelijking van een lijn hierboven). De constante $ b_{10} $ kunnen we uitrekenen doordat we weten dat het punt (1,0) op $ m_{10} $ ligt $ :  0 = - \frac{1}{4}\cdot 1 + b_{10} $  dus is $ b_{10} = \frac{1}{4} $ en $ m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $ \\ De andere loodlijn gaat op dezelfde manier: $ rc_{01}= - \frac{1}{4} $. Dus $ m_{01}: y = - \frac{1}{4}x + b_{01} $, en we weten dat (0,1) op $ m_{01}  $ ligt. Dus $ 1 = - \frac{1}{4}\cdot 0 + b_{01} \  dus \   b_{01} = 1 $ en dus $ m_{01}: y = - \frac{1}{4}x + 1. $ Als we snijpunten (rood en blauw in figuur \ref{fig:projectie2D-3} ) weten, weten we waar de basisvectoren terecht komen. }\\
 
-\figuur[0.8]{projectie2D-3}{De projectie op de lijn $ l:  y = 4x $ met loodlijnen  $ m_{10} $ door (1,0) en $ m_{01} $ door (0,1) }
 
-Voor het snijpunt (rood) van  \textit{l} en $ m_{10}: $ geldt:
+Voor het snijpunt (rood) van  $l$ en $ m_{10}: $ geldt:
 \[\begin{cases}
 $$ l: y = 4x   \\
-m_{10}: y = - \frac{1}{4}x + \frac{1}{4}. $$
+m_{10}: y = - \frac{1}{4}x + \frac{1}{4} $$
 \end{cases}
 \] 
-En dus is $ 4x = - \frac{1}{4}x + \frac{1}{4} $ en dus $ x = \dfrac{1}{17}.  $ Daaruit volgt met $  y = 4.x $ dat: $  y = \dfrac{4}{17}.  $ Het rode snijpunt is dus $ (\red{\nicefrac{1}{17},\nicefrac{4}{17}  } ). $ \\ Op dezelfde manier reken je uit dat het blauwe snijpunt  $ (\blu{\nicefrac{4}{17},\nicefrac{16}{17}  } ). $ is. \\ \\Met andere woorden:
+Dit punt kunnen we uitrekenen door beide stellingen aan elkaar gelijk te stellen en uit te werken: \\
+\begin{align*}
+    4x &= - \frac{1}{4}x + \frac{1}{4} \\
+    4\frac{1}{4}x &= \frac{1}{4} \\
+    x &= \frac{1}{17}
+\end{align*}
+ Dan hoeven we alleen nog maar een y-waarde te berekenen, door deze x-waarde in $y = 4x $ te stoppen, hieruit volgt: $  y = \frac{4}{17}.  $ Het rode snijpunt ligt dus op: $ (\red{\nicefrac{1}{17},\nicefrac{4}{17}  } ). $ \\  \\
+ Op dezelfde manier reken het blauwe snijpunt van  $l$ en $ m_{01}$ uit. Hiervoor geldt:
+\[\begin{cases}
+$$ l: y = 4x   \\
+m_{01}: y = - \frac{1}{4}x + 1 $$
+\end{cases}
+\] 
+Waarmee het snijpunt ligt op:
+\begin{align*}
+    4x &= - \frac{1}{4}x + 1 \\
+    4\frac{1}{4}x &= 1 \\
+    x &= \frac{4}{17}
+\end{align*}
+De bijbehorende y-waarde hierbij is daarmee: $\frac{16}{17}$. Het blauwe snijpunt ligt dus op $ (\blu{\nicefrac{4}{17},\nicefrac{16}{17}  } ). $ is. 
+\\ \\Met andere woorden:
 $ \vectwee{1}{0}   \  \xrightarrow{P}  \ \vectwee[red]{ \nicefrac{1} {17}} {\nicefrac {4} {17}} $  \quad en  \quad 
 $ \vectwee{0}{1}   \  \xrightarrow{P}  \  \vectwee[blue]{\nicefrac{4}{17} } {\nicefrac{16}{17}} $ \\ \\ \\
 en dus is de matrix van 
@@ -310,43 +333,66 @@ $ P = \mattwee{\red{\nicefrac{1}{17}}&\blu{\nicefrac{4}{17}}}
 {\red{\nicefrac{4}{17}}&\blu{\nicefrac{16}{17}}} 
 = \frac{1}{17}\mattwee{1&4}{4&16}$\\
 
-\subsection{de matrix van een projectie in \RD}\label{projectieR3}
+\newpage
+\subsection{De matrix van een projectie in \RD}\label{projectieR3}
 Voor het vinden van de matrix van de projectie \textit{P} op een vlak in \RD moeten we bepalen wat er met de drie basisvectoren langs de x-, y-, en z-as  gebeurt.
  \mybv[projectie \RD] {
 	We nemen als voorbeeld de projectie op het vlak $ W:  2x-3y+z = 0. $ Het punt (1,0,0) komt op het 
-	blauwe punt in het vlak \textit{W} terecht, (0,1,0) komt op het rode punt in \textit{W} en  (0,0,1) komt op het groene punt in \textit{W}. Zie figuur \ref{fig:projectievlak}}
+	blauwe punt in het vlak $W$ terecht, (0,1,0) komt op het rode punt in $W$ en  (0,0,1) komt op het groene punt in $W$. Zie figuur \ref{fig:projectievlak}}
 
-\figuur[0.8]{projectievlak}{De projectie op het vlak $ W:  2x-3y+z = 0 $ door de oorsprong met de blauwe loodlijn  $ l_{100}, $  door (1,0,0) , de rode $ l_{010} $  door (0,1,0)  en de groene $ l_{001} $ door (0,0,1). NB: De snijpunten van de loodlijnen met het vlak \textit{W}, zijn met respectievelijk rood, groen en blauw aangegeven. Merk op dat de punten (1,0,0) en (0,0,1) 'omhoog' geprojecteerd worden en (0,1,0) 'naar beneden'.}	
+\figuur[0.6]{projectievlak}{De projectie op het vlak $ W:  2x-3y+z = 0 $ door de oorsprong met de blauwe loodlijn  $ l_{100}, $  door (1,0,0) , de rode $ l_{010} $  door (0,1,0)  en de groene $ l_{001} $ door (0,0,1). NB: De snijpunten van de loodlijnen met het vlak $W$, zijn met respectievelijk rood, groen en blauw aangegeven. Merk op dat de punten (1,0,0) en (0,0,1) 'omhoog' geprojecteerd worden en (0,1,0) 'naar beneden'.}	
 
-We moeten  de snijpunten van de 3 loodlijnen $ l_{100}, l_{010} $ en $ l_{001}  $ door respectievelijk de punten (1,0,0), (0,1,0) en (0,0,1) uitrekenen. We weten dat de richtingsvector van de loodlijnen gelijk is aan de normaalvector van \textit{W} : $\vec{n_W} = \vecdrie{2}{-3}{1}. $ \\ 
+We moeten  de snijpunten van de 3 loodlijnen $ l_{100}, l_{010} $ en $ l_{001}  $ door respectievelijk de punten (1,0,0), (0,1,0) en (0,0,1) uitrekenen. We weten dat de richtingsvector van de loodlijnen gelijk is aan de normaalvector van $W$ : $\vec{n_W} = \vecdrie{2}{-3}{1}. $ \\ 
 Dus  $ l_{100}: \ \ \vecdriesnel{x} \ = \  \vec{c} + \lambda \vecdrie{2}{-3}{1}. $ is de eerste (blauwe) loodlijn. \\
-Voor $ \vec{c} $ mogen we elk punt  nemen dat op  $ l_{100} $ ligt, bv  (1,0,0), dus
+Voor $ \vec{c} $ mogen we elk punt  nemen dat op  $ l_{100} $ ligt, bv  (1,0,0), dus \\
 $ l_{100}: \ \ \vecdrie{x}{y}{z} \ = \ \vecdrie{1}{0}{0} \ + \ \lambda \ \vecdrie{2}{-3}{1} $. \\ 
-Het snijpunt (blauw) van $ l_{100} $ en\textit{ W}  ligt èn in het vlak  èn op de loodlijjn, dus geldt:
+Het snijpunt (blauw) van $ l_{100} $ en $W$  ligt èn in het vlak  èn op de loodlijn, dus geldt:
 \[\begin{cases}
     x = 1 + 2\lambda  \\
-    y= -3\lambda   \qquad \qquad $ èn $ \qquad  2x-3y+z = 0 \\
+    y= -3\lambda   \qquad \qquad \text{èn} \qquad  2x-3y+z = 0 \\
     z= \lambda 
 \end{cases}
 \] 
-door x, y en z in te  vullen in de $ 2^e $  vergelijking vinden we 
-$  2(1 + 2\lambda) - 3 (-3\lambda) + \lambda = 0 $   dus  
-$ 2+ 14\lambda  = 0 $ en dus is $  \lambda = -\frac{1}{7}   $. Dat betekent dat het snijpunt van $ l_{100} $ en W gelijk is aaan:$  (\frac{5}{7}, \frac{3}{7}, -\frac{1}{7} )  $   want we mogen $\lambda = -\frac{1}{7} $ invullen in  de vectorvoorstelling van de lijn $ l_{100} $ . Bijvoorbeeld voor  de x-coördinaat : $ x= 1+2. -\frac{1}{7}  = 1 -\frac{2}{7}  =  \frac{5}{7}.  $ \\ \\
+door x, y en z in te  vullen in de $ 2^e $  vergelijking vinden we:
+\begin{align*}
+    2(1 + 2\lambda) - 3 (-3\lambda) + \lambda &= 0 \\
+    2 + 4\lambda +9\lambda + \lambda &= 0 \\
+    2+ 14\lambda  &= 0 \\
+    14\lambda  &= -2 \\
+    \lambda &= -\frac{1}{7}    
+\end{align*}
+Omdat we  $\lambda = -\frac{1}{7} $ mogen invullen in  de vectorvoorstelling van de lijn $ l_{100} $ betekent dat het snijpunt van $ l_{100} $ en $W$ gelijk is aan:
+\begin{align*}
+    l_{100}: \ \ \matdrie{x}{y}{z} \ &= \ \matdrie{1}{0}{0}  \ + \ \lambda \ \matdrie{2}{-3}{1}  \\
+      &= \ \matdrie{1}{0}{0} \ + \ -\frac{1}{7} \cdot \matdrie{2}{-3}{1} \\
+       &= \ \matdrie{1}{0}{0} \ + \ \matdrie{\nicefrac{-2}{7}}{\nicefrac{3}{7}}{\nicefrac{-1}{7}} \\
+       &= \ \matdrie{\nicefrac{5}{7}}{\nicefrac{3}{7}}{\nicefrac{-1}{7}}
+\end{align*}
 Met andere woorden:
-$ \ \vecdrie{1}{0}{0}   \  \xrightarrow{P}  \  \vecdrie[blue] {\nicefrac{5}{7} }{\nicefrac{3}{7} }{-\nicefrac{1}{7} }\ 
-\ = \   \blu{\frac{1}{7} } \vecdrie[blue] {5}{3}{-1}
-\ = \   \blu{\frac{1}{14} } \vecdrie[blue] {10}{6}{-2}. $  \\  \\
-Op dezelfde manier vinden we de snijpunten van $ l_{010} $ en  $ l_{001}  $ met  
-\textit{W}: \\ \\
-$ \ \vecdrie{0}{1}{0}   \  \xrightarrow{P}  \ \red{\frac{1}{14} }  \vecdrie[red]{ 6 }{5 }{-3 }\ $ 
-en \quad  
-$  \ \vecdrie{0}{0}{1}   \  \xrightarrow{P}  \  \gre{\frac{1}{14} } \vecdrie[green]{2 }{-3 }{15}. $  \\
-En dat betekent dat de matrix van $  r_1 $
-$ P = 
-\frac{1}{14} \matdrie{  \blu{10} &  \red{6} &   \gre{2} }
-{   \blu{6}   &   \red{5} &  \gre{-3} }
-{  \blu{-2} &   \red{-3}  &   \gre{15}}. $
+$ \ \vecdrie{1}{0}{0}   \  \xrightarrow{P}  \  \vecdrie[blue] {\nicefrac{5}{7} }{\nicefrac{3}{7} }{-\nicefrac{1}{7} }\ $
+% \ = \   \blu{\frac{1}{7} } \vecdrie[blue] {5}{3}{-1}
+% \ = \   \blu{\frac{1}{14} } \vecdrie[blue] {10}{6}{-2}. $  \\  \\
 
+Op dezelfde manier vinden we ook de snijpunten van $ l_{010} $ en  $ l_{001}  $ met $W$: \\ \\
+$ \ \vecdrie{0}{1}{0}   \  \xrightarrow{P}  \  \vecdrie[red]{ \nicefrac{6}{14} }{\nicefrac{5}{14} }{\nicefrac{3}{14} }\ $ 
+en \quad  
+$  \ \vecdrie{0}{0}{1}   \  \xrightarrow{P}  \ \vecdrie[green]{\nicefrac{-2}{14} }{\nicefrac{3}{14} }{\nicefrac{13}{14}}. $  \\
+En dat betekent dat de matrix van 
+$ P = \matdrie{  \blu{\nicefrac{5}{7}} &  \red{\nicefrac{6}{14}} &   \gre{\nicefrac{-2}{14}} }
+{   \blu{\nicefrac{3}{7}}   &   \red{\nicefrac{5}{14}} &  \gre{\nicefrac{3}{14}} }
+{  \blu{-\nicefrac{1}{7}} &   \red{\nicefrac{3}{14}}  &   \gre{\nicefrac{13}{14}}} $.
+
+En dat is is nog iets mooier te schrijven als:
+\begin{align*}
+P &= \matdrie{  \blu{\nicefrac{10}{14}} &  \red{\nicefrac{6}{14}} &   \gre{\nicefrac{-2}{14}} }
+{   \blu{\nicefrac{6}{14}}   &   \red{\nicefrac{5}{14}} &  \gre{\nicefrac{3}{14}} }
+{  \blu{-\nicefrac{2}{14}} &   \red{\nicefrac{3}{14}}  &   \gre{\nicefrac{13}{14}}} \\
+P &= \frac{1}{14}\cdot \matdrie{  \blu{10} &  \red{6} &   \gre{-2} }
+{   \blu{6}   &   \red{5} &  \gre{3} }
+{  \blu{-2} &   \red{3}  &   \gre{13} }
+\end{align*}
+
+\newpage
 \subsubsection{Opgaven}
 \begin{enumerate}
 	\item Transponeer de matrix 
@@ -354,7 +400,7 @@ $ P =
 	{ 2 &  0 & 7 & -4}
 	{-1 & 9 & 2 & 0 } $
 	
-	\item Wat is het product van deze  3 matrices
+	\item Wat is de uitkomst van
 	$ \mattwee{ 3 & 0 & 2 } 
 	{ 4 &  -1 & 1} \cdot 
 	\matdrie{ 2 & -1 & -2 } 
@@ -362,22 +408,22 @@ $ P =
 	{0 & 5 & 6 }  \cdot 
 	\matdrie{ 1 & 2 } 
 	{ 2 &  4 }
-	{-1 & 2 } $	?
+	{-1 & 2 } $	? 
 	
-	\item Geef de matrix  \textit{R } van de rotatie over $ 62\degree \ $ met de klok mee rond de positieve x-as zodat (0,0,2) wordt afgebeeld op $ (0, 2\sin 62\degree , 2\cos 62\degree ). $ 
+	\item Geef de matrix  \textit{R } van de rotatie over $ 62\degree \ $ met de klok mee om de x-as, zodat (0,0,2) wordt afgebeeld op $ (0, 2\sin 62\degree , 2\cos 62\degree ). $ \\
 	
 	\item Geef de matrix  \textit{$ P_1 $} van de projectie  in \RD op het vlak $  y=3x $. \\ \\
 	
 \end{enumerate}
 
-\subsubsection{extra opgaven}
+\subsubsection{Extra opgaven}
 \begin{enumerate}
 	\item  Transponeer de matrix 
 	$ N = \matdrie{ 2 & 5 & -3 &  5} 
 	{ 1 &  0 & 4 & 0}
 	{4 & 9 & 6 & -1 }$
 	
-	\item Wat is het product van deze  3 matrices
+	\item Wat is het product van 
 	$ \matdrie{ 1 & 2 } 
 	{ 2 &  4}
 	{ -1 & 2 } \cdot 
@@ -387,11 +433,11 @@ $ P =
 	{ 1 &  3 & 1 }
 	{0 & 5 & 6  } $	?
 	
-	\item Geef de matrix  \textit{$ R_1  $} van de rotatie over $ 4\degree \  $  met de klok mee rond de  z-as zodat (1,0,-2) wordt afgebeeld op $ (\cos 4\degree , -\sin 4\degree , -2) . $ 
+	\item Geef de matrix  \textit{$ R_1  $} van de rotatie over $ 4\degree \  $  met de klok mee rond de  z-as zodat (1,0,-2) wordt afgebeeld op $ (\cos 4\degree , -\sin 4\degree , -2) . $ \\
 	
-	\item Geef de matrix  \textit{$ R_2 $} van de rotatie over $ 42\degree \  $ tegen de klok in rond de  y-as zodat (3,0,0) wordt afgebeeld op $ (3\cos 42\degree , 0,  -3\sin 42\degree ). $ 
+	\item Geef de matrix  \textit{$ R_2 $} van de rotatie over $ 42\degree \  $ tegen de klok in rond de  y-as zodat (3,0,0) wordt afgebeeld op $ (3\cos 42\degree , 0,  -3\sin 42\degree ). $ \\ 
 	
-	\item Geef de matrix  \textit{$ R_3 $} van de rotatie over $ 126\degree \  $ tegen de klok in rond de  x-as zodat (3,0,1) wordt afgebeeld op $ (3, \cos 36\degree ,  -\sin 36\degree ). $ 
+	\item Geef de matrix  \textit{$ R_3 $} van de rotatie over $ 126\degree \  $ tegen de klok in rond de  x-as zodat (3,0,1) wordt afgebeeld op $ (3, -\cos 36\degree ,  -\sin 36\degree ). $ \\
 	
 	\item Geef de matrix  \textit{$ P_2 $} van de projectie  in \RD op het vlak $  y=x $.
 \end{enumerate}
