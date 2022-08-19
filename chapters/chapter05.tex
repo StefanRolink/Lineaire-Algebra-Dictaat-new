@@ -158,12 +158,13 @@ $ \begin{matrix}
 	\end{align*} }
 En dat is hetzelfde als we als antwoord kregen op de  vorige bladzij.\\ \\
 \myeig[optellen $det(A)$]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde; datzelfde geldt voor rijen} \\
-Stel we hebben de matrix
+\mybv[optellen $det(A)$]{Stel we hebben de matrix
 	$ A = \matvier{ 1 & -2 & 3 & 2 }
 	{ 3 & -6 & 0 & 7 }
 	{ -2 & 4 & 1 & 5 } 
 	{ -1 & 2 & 2 & -4 } 
-	$. Dat ziet indrukwekkend uit, maar als we de $ 1^e $ kolom met $2$ vermenigvuldigen en bij de $ 2^e  $kolom optellen dan is \\
+	$. } \\
+ Dat ziet indrukwekkend uit, maar als we de $ 1^e $ kolom met $2$ vermenigvuldigen en bij de $ 2^e  $kolom optellen dan is \\
 	\begin{align*}
 	|A|  \  & = \ \detvier{ 1 & & -2 &  & 3 & 2 }
 	{ 3 & & -6 & &  0 & 7 }
@@ -178,7 +179,7 @@ Stel we hebben de matrix
 	{ -2 & 0 &  \ \ 1 & 5 }
 	{ -1 & 0 &  \ \ 2 & -4} 
 	\end{align*} 
-	En, als een hele kolom $0$ is, dan is de determinant $0$ dus $ |A| = 0 $ 	 \\   \\                    
+	En, als een hele kolom $0$ is, dan is de determinant $0$, dus $ |A| = 0 $ 	 \\   \\                    
 \newpage
 Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudiger maken. 
 	Stel we hebben 
@@ -204,7 +205,7 @@ Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudige
     -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ %\quad \text{de } 2^e \text{ kolom van de } 1^e \text{ aftrekken} \\
     +-2\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 2 & 2 & -4 }\ 
     --1\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 1 & 1 & 5 } \\
-    &\text{Omdat } |A| \text{ immers $0$ is, als een rij of kolom enkel nullen bevat, blijft over: } \\
+    &\text{Omdat de determinant immers $0$ is, als een rij of kolom enkel nullen bevat, blijft over: } \\
     &= 0 -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ + 0 - 0\\
     &= -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\qquad \qquad \text{Je hoeft nu dus enkel te ontwikkelen naar de } 2^e \text{ rij!}\\
     &\text{Je kunt nu de } 2^e \text{ kolom van de } 1^e \text{ aftrekken: } \\ 
