@@ -4,7 +4,7 @@ De determinant van een matrix is binnen de lineaire algebra en meetkunde belangr
 \section{Determinant van een $2\plh2$ matrix}
 \mydef [De determinant van]{determinant \RT }{ $ A = \mattwee{a & b} {c & d} $ \quad is \quad $ |A| = ad - bc $ }
 
-Dat mag je ook schrijven als \quad $det(A)$$, \quad of als \quad $  \dettwee{a & b} {c & d}.  $ \\ \\
+Dat mag je ook schrijven als \quad $det(A)$, \quad of als \quad $  \dettwee{a & b} {c & d}.  $ \\ \\
 \mybv[determinant] {Als $ A = \mattwee{-1 & 5} {2 & -3} $ \ \ dan is  \ \ $ |A| = -1\cdot -3 \ - \ 2\cdot 5 = -7 $ }
 
 \subsection{Eigenschappen van determinanten}
@@ -133,7 +133,7 @@ en voor   $  a_{31} $  :
 \end{align*}
 }
 Oef! Daar kunnen we wel wat trucjes bij gebruiken die in de volgende paragraaf behandeld worden.
-\subsection{rekenhulpjes determinant}
+\subsection{Rekenhulp determinant}
 \myeig[ontwikkelen]
 {Je mag een determinant uitrekenen met behulp van de $ 1^e $ kolom, maar dat  mag ook met behulp van de $ 2^e  $ rij of de laatste kolom of ... }
 Je moet alleen wel rekening houden met minnen en plussen volgens onderstaand schema: \\ \\
@@ -188,7 +188,7 @@ Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudige
 	{ -2 & 1 & 1 & 5 }
 	{ -1 & 2 & 2 & -4 } $. \\ \\
  We trekken $3$ keer de $ 1^e  $ rij van de  $ 2^e $ rij af. Dan is 
-	\begin{align*}
+\begin{align*}
 	|A|  \ & = \ \detvier{1 & -2 & 3 & 2 }
 	{ 4 & -6 & 9 & 6  }
 	{  -2 & 1 & 1 & 5 }
@@ -217,13 +217,7 @@ Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudige
     &= -1\cdot -5\cdot (-4 -10) \\
     &= -1\cdot -5\cdot -14 \\
     &= -70 \\
-	\end{align*}
-% Ter verduidelijking, de overige rijen hoefen we niet uit te rekenen, omdat elke $3\pth3$ submatrix, een rij met enkel nullen heeft, dus:
-% \begin{align*}
-%     \ 1\cdot \detdrie{ 0 & 0 & 0 }{1 & 1 & 5 }{ 2 & 2 & -4 } &= 0 \\
-%     \ -2\cdot \detdrie{ -2 & 3 & 2 }{0 & 0 & 0 }{ 2 & 2 & -4 } &= 0 \\
-%     \ 1\cdot \detdrie{ -2 & 3 & 2 }{0 & 0 & 0 }{ 1 & 1 & 5 } &= 0 \\
-% \end{align*}
+\end{align*}
 
 \newpage 
 \subsubsection{Opgaven}
