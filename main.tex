@@ -153,5 +153,15 @@
 \printindex[voorbeelden]
  
 %----------------------------------------------------------------------------------------
+%	BACK COVER
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty} % Suppress headers and footers on the title page
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{pictures/NHL_cover_back.pdf}};
+\end{tikzpicture}
+\vfill
+\endgroup
 
 \end{document}
