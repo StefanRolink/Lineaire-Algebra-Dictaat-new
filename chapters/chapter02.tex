@@ -118,8 +118,19 @@ De andere manier waarop je 2 vectoren kunt 'vermenigvuldigen' heet het uitproduc
 	De vector $ \vec{c} \ = \ \vec{a} \times \vec{b} $ staat loodrecht op  $ \vec{a} $ en loodrecht op  $ \vec{b} $}\\
 
 \mybv[loodrecht]{ Neem $ \vec{a}, \   \vec{b} $   en   $ \vec{c} $ als hierboven.
-	dan is  $(\vec{c}, \vec{a}) = 10\cdot-1 + 13\cdot2 -4\cdot4 = -10+26-16 =0 $ \\
-	en $(\vec{c}, \vec{b}) = 10\cdot3 + 13\cdot-2 -4\cdot1 = 30-26-4=0 $}
+	dan is:
+  \begin{align*}
+    (\vec{c}, \vec{a}) &= 10\cdot-1 + 13\cdot2 -4\cdot4 \\
+                       &= -10+26-16 \\
+                       &=0
+  \end{align*}
+  en:
+  \begin{align*}
+    (\vec{c}, \vec{b}) &= 10\cdot3 + 13\cdot-2 -4\cdot1 \\
+    &= 30-26-4 \\
+    &=0
+  \end{align*}
+  }
 
 \figuur[0.4]{loodrecht3d}{De vector $  \vec{c}  $  staat loodrecht op $  \vec{a}  $  \textbf{\textit{en}} $  \vec{b} $.}
 
@@ -169,8 +180,11 @@ Daarbij is $\alpha$ (\textit{alfa}) de hoek tussen de vectoren $\vec{a}$ en $\ve
 	$ \vec{a} = \vecdrie {2}  {-2} {1}  $ \ en \  $ \vec{b} = \vecdrie {-3}  {0} {4}  $ 
 	\qquad dan is 
 	\qquad $ (\vec{a}, \vec{b}) = 2\cdot-3 + -2\cdot0  + 1\cdot4 = -2 $.\\ 
-	De lengte van de vectoren is: 
-	$ |\vec{a}| = \sqrt{9} = 3, \ |\vec{b}| = \sqrt{25}=5 $. \\
+	De lengte van de twee vectoren zijn: 
+  \begin{align*}
+    |\vec{a}| &= \sqrt{9} = 3 \\ 
+    |\vec{b}| &= \sqrt{25}=5
+  \end{align*}
 	Invullen in de formule levert: 
 	$\cos \alpha = \dfrac{-2}{3\cdot5} = - \dfrac{2}{15}. $  \ Met de rekenmachine berekenen we het aantal graden van de hoek: 
 	$\alpha \ = \cos ^{-1}(- \dfrac{2}{15}) \ \approx \ ~ 97,7 ^{\circ} $ } 
@@ -220,7 +234,7 @@ $ \lambda $  (lambda) een variabel getal. Let op het verschil tussen een richtin
 \mydef [De \textit{vectorvoorstellling} van een vlak $ V $ in \RD is: ]
 {vlak \RD}  
 {  $ \vecdriesnel{x} \ =\ \vecdriesnel{b}  \ +  \lambda\cdot \vecdriesnel{v} \   + \  \mu\cdot \vecdriesnel{w} $ \qquad \qquad  of:  $ \vec{x}  =   \vec{b}  + \  \lambda \ \vec{v} + \  \mu \ \vec{w}  $ }\\ 
-Met $ \vec{x}  = \   \vecdriesnel{x}  \quad    \vec{b} = \  \vecdriesnel{b} \quad    \vec{v} =  \  \vecdriesnel{v} \quad   \vec{w} =  \ \vecdriesnel{w} $  \\   $ \lambda $ en  $ \mu $ zijn variabele getallen ( $ \mu $, spreek uit: muu, is de Griekse letter m). En  $ \vec{b} $ is een constante beginvector en $ \vec{v}  $  en $ \vec{w}  $ zijn richtingsvectoren van vlak \textit{V}.\\ \\ \\ 
+Met $ \vec{x}  = \   \vecdriesnel{x}  \quad    \vec{b} = \  \vecdriesnel{b} \quad    \vec{v} =  \  \vecdriesnel{v} \quad   \vec{w} =  \ \vecdriesnel{w} $  \\   $ \lambda $ en  $ \mu $ zijn variabele getallen ( $ \mu $, spreek uit: muu, is de Griekse letter m). En  $ \vec{b} $ is een constante beginvector en $ \vec{v}  $  en $ \vec{w}  $ zijn richtingsvectoren van vlak \textit{V}.\\ 
 
 \mybv[vlak \RD]
 {Een voorbeeld van een vectorvoorstellling van een vlak $ V $ is: \\
@@ -237,44 +251,103 @@ Wat  $ \lambda $ (spreek uit: lambda) en  $ \mu $ (spreek uit: muu) zijn wordt v
 
 \subsubsection{Van vectorvoorstelling lijn naar vergelijking lijn:} 
 Een voorbeeld van een  vectorvoorstelling van een lijn $ l $ in \RT  is:
-$ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $.   (zie figuur \ref{fig:lijnVV} ) Dat betekent dat de lijn\textit{ l} door het punt $ (1,2) $ gaat en als richtingsvector de vector $ \vectwee {2}{-1} $ heeft. $ \lambda $  is een parameter, dat wil zeggen dat om een punt op de lijn $ l $ te vinden mogen we een waarde voor $ \lambda $  kiezen (2, of 100, of $ -\frac{2}{5} $, of ...). Bijvoorbeeld bij  $ \lambda= 3 $ vinden we dat het punt $(7,-1) = (1 + 3\cdot2 , 2 + 3\cdot-1)$   op $ l $ ligt. Hoe maken we een vergelijking van  $ l $? In een vergelijking komt geen $ \lambda $ voor, dus moeten we zorgen de $ \lambda $ uit de vectorvoorstelling "kwijt te raken". Als je goed naar de vectorvoorstelling van $ l $ kijkt, zie je dat het eigenlijk 2 vergelijkingen zijn, één voor de x-coördinaat en één voor de y-coördinaat:
+$ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $.   (zie figuur \ref{fig:lijnVV} ) Dat betekent dat de lijn\textit{ l} door het punt $ (1,2) $ gaat en als richtingsvector de vector $ \vectwee {2}{-1} $ heeft. $ \lambda $  is een parameter, dat wil zeggen dat om een punt op de lijn $ l $ te vinden mogen we een waarde voor $ \lambda $  kiezen (2, of 100, of $ -\frac{2}{5} $, of ...). Bijvoorbeeld bij  $ \lambda= 3 $: 
+\begin{align*}
+  l: \ \mattwee {x}{y} &= \mattwee {1}{2}  + \lambda  \mattwee {2}{-1}  \\
+  l: \ \mattwee {x}{y} &= \mattwee {1}{2}  + 3 \cdot \mattwee {2}{-1}  \\
+  l: \ \mattwee {x}{y} &= \mattwee {1}{2}  + \mattwee {2\cdot 3}{-1\cdot 3}  \\
+  l: \ \mattwee {x}{y} &= \mattwee {1}{2}  + \mattwee {6}{-3}  \\
+  l: \ \mattwee {x}{y} &= \mattwee {7}{-1}
+\end{align*}
+Vinden we het punt $(7,-1)$ en die dus ligt op de lijn $ l $. \\ \\
+
+Hoe maken we een vergelijking van  $ l $? In een vergelijking komt geen $ \lambda $ voor, dus moeten we zorgen de $ \lambda $ uit de vectorvoorstelling "kwijt te raken". Als je goed naar de vectorvoorstelling van $ l $ kijkt, zie je dat het eigenlijk 2 vergelijkingen zijn, één voor de x-coördinaat en één voor de y-coördinaat:
 
 \[\begin{cases}
 x = 1 + 2\lambda\\
 y = 2 - \lambda 
 \end{cases}
 \] 
-Dit is een stelsel van 2 vergelijkingen  en kunnen we 'oplossen' door $ \lambda $ te elimineren ('weg te werken'):
-Uit de $ 2^{e}$ vergelijking $ y = 2 - \lambda $ volgt  dat $\lambda = 2 - y $. Invullen van  $ \lambda $ in de $ 1^{e}$ vergelijking levert $ x = 1 +2(2-y) $. Dan is $ x= 5 -2y $, oftewel $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $,  wat dus dezelfde lijn is als: $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waar we mee begonnen, zie de tekening in  figuur  \ref{fig:lijnVV}
+Dit is een stelsel van 2 vergelijkingen  en kunnen we 'oplossen' door $ \lambda $ te elimineren ('weg te werken'). Daarvoor moeten een van beide vergelijkingen omzetten in de vorm: $\lambda = ...$. Bijv:
+\begin{align*}
+  x & = 1 + 2\lambda \\
+  x - 2\lambda &= 1 \\
+  -2\lambda &= 1 - x \\
+  \lambda &= -\frac{1}{2} + \frac{1}{2}x
+%   y &= 2 -\lambda \\
+  % y+\lambda &= 2 \\
+  % \lambda &= 2 -y
+\end{align*}
+Nu we de vergelijking van $\lambda$ weten, kunnen we deze invullen in de eerste vergelijking (van $x$):
+\begin{align*}
+  y &= 2 - \lambda \\
+  y &= 2 - (-\frac{1}{2} + \frac{1}{2}x) \\
+  y &= 2 + \frac{1}{2} - \frac{1}{2}x \\
+  y &= 2\frac{1}{2} - \frac{1}{2}x \\
+  y &= -\frac{1}{2}x + 2\frac{1}{2} \\
+%   x &= 1+2\lambda \\
+  % x &= 1 + 2(2 -y) \\
+  % x &= 1 + 4 - 2y \\
+  % x &= 5 - 2y
+\end{align*}
 
-\figuur[0.6]{lijnVV}{De lijn  $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $. Let op de steunvector (\red{rood}) en de richtingsvector (zwart).}
+\newpage 
+Op deze manier hebben we $\lambda$ dus 'geëlimineerd'. De vergelijking  $ y = -\frac{1}{2}x + 2\frac{1}{2} $  is dezelfde lijn is als: $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waar we mee begonnen, zie de tekening in  figuur  \ref{fig:lijnVV} \\
+
+\figuur[0.6]{lijnVV}{De lijn  $ l:  \ y = - \frac{1}{2}x + 2\frac{1}{2} $. Let op de steunvector (\red{rood}) en de richtingsvector (zwart).} 
 
 De lijn $l$ bestaat dus uit alle vectoren (punten) die te schrijven zijn als vectorvoorstelling $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waarbij elk punt (x, y) waaruit die lijn bestaat voldoet aan de vergelijking: $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $.
 
 \subsubsection{Van vergelijking lijn naar vectorvoorstelling lijn:}
-Als we, omgekeerd, van een vergelijking een vectorvoorstelling willen maken moeten we zorgen dat er een parameter $ \lambda $ in de vectorvoorstelling komt. Neem als voorbeeld de vergelijking $ y = 3x - 2 $. We weten dat we een $ \lambda $ moeten hebben (invoeren). Stel daarvoor dat $ y =  \lambda $ dan volgt uit de vergelijking  dat $ \lambda = 3x -2 $ dus $ x = \frac{1}{3}  \lambda  + \frac{2}{3} $. Dan hebben we  2 vergelijkingen, een voor y en een voor x:
-
+Als we, omgekeerd, van een vergelijking een vectorvoorstelling willen maken moeten we zorgen dat er een parameter $ \lambda $ in de vectorvoorstelling komt. Neem als voorbeeld de vergelijking $ y = 3x - 2 $. We weten dat we een $ \lambda $ moeten hebben (invoeren). Stel daarvoor dat: \\
+$ x =  \lambda $ \\
+Als we dit invullen in de vergelijking, volgt dat $y = 3\lambda - 2$. We hebben nu dus $2$ vergelijkingen, een voor $y$ en een voor $x$:
 \[\begin{cases}
-x = \frac{2}{3} + \frac{1}{3} \lambda\\
-y =  \lambda 
+x = \lambda \\
+y = 3\lambda - 2 
 \end{cases}
 \] 
-Dat schrijven we dan met behulp van vectoren. 
-$ l: \  \vectwee {x}{y} \ = \ \vectwee {\frac{2}{3}}{0} \ +\  \lambda  \vectwee {\frac{1}{3}}{1}  $.\\
-Ga na dat dit precies dezelfde lijn is als:
-$ l: \  \vectwee {x}{y} \ = \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $.\\ (immers we kunnen voor $ \lambda $ 1 kiezen, daarmee een nieuw steunpunt, (1,1), uitrekenen: $\vectwee{\frac{2}{3}}{0}+1\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{1} $ en vervolgens $ \lambda $ 3 keer zo groot kiezen: $3\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{3} $)\\
-Nog anders geschreven:
-$  l: \  \vectweesnel{x} =  \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $ \qquad
-of: $ l: \ \vec{x} = \ \vectwee{1}{1} \ + \ \lambda \vectwee {1}{3} $
 
+Anders geschreven: 
+\[\begin{cases}
+  x = \red{0}  + \blu{1}\cdot \lambda \\
+  y = \red{-2} + \blu{3}\cdot \lambda 
+\end{cases}
+\] 
+
+
+Dat schrijven we dan met behulp van vectoren: \\ 
+$ l: \  \vectwee {x}{y} \ = \ \vectwee[red] {0}{-2} \ +\  \lambda  \vectwee[blue] {1}{3}  $.\\
+% Ga na dat dit precies dezelfde lijn is als:
+% $ l: \  \vectwee {x}{y} \ = \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $.\\ (immers we kunnen voor $ \lambda $ 1 kiezen, daarmee een nieuw steunpunt, (1,1), uitrekenen: $\vectwee{\frac{2}{3}}{0}+1\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{1} $ en vervolgens $ \lambda $ 3 keer zo groot kiezen: $3\cdot\vectwee{\frac{1}{3}}{1}=\vectwee{1}{3} $)\\
+% Nog anders geschreven:
+% $  l: \  \vectweesnel{x} =  \ \vectwee {1}{1} \ +\  \lambda  \vectwee {1}{3}  $ \qquad
+% of: $ l: \ \vec{x} = \ \vectwee{1}{1} \ + \ \lambda \vectwee {1}{3} $
+%
+
+\newpage
 \subsection{Berekeningen vlak}
 \subsubsection{Van vergelijking vlak naar vectorvoorstelling vlak:}
-We hebben gezien dat $ ax + by + cz = d $ een vergelijking van een vlak in \RD is. Net zo als bij een lijn moeten we om een vectorvoorstelling van een vergelijking te maken parameters invoeren (bij een vlak hebben we 2 parameters nodig omdat een vlak  twee-dimensionaal is). Die parameters noemen we $ \lambda $  en $ \mu $ . Neem als voorbeeld het vlak $ -x + 2y -2z = 6 $.  We stellen  nu dat $ x=  \lambda $ en $ y = \mu $. Dan kunnen we $ z$ uitdrukken in $ \lambda $  en $ \mu $. Immers we vullen  $ x=  \lambda $ en $ y = \mu $ in in de vergelijking $ -x + 2y -2z = 6 $. Dan geldt dus: $ -\lambda + 2\mu -2z = 6 $, oftewel $ z = -3 + \mu -   \frac{1}{2} \lambda $. In feite hebben we nu 3 vergelijkingen namelijk:
+We hebben gezien dat $ ax + by + cz = d $ een vergelijking van een vlak in \RD is. Net zo als bij een lijn moeten we om een vectorvoorstelling van een vergelijking te maken parameters invoeren (bij een vlak hebben we 2 parameters nodig omdat een vlak  twee-dimensionaal is). Die parameters noemen we $ \lambda $  en $ \mu $ . \\
 
+Neem als voorbeeld het vlak: $ -x + 2y -2z = 6 $. \\
+We stellen  nu dat:
+\begin{align*}
+  x &= \lambda \\
+  y &= \mu  
+\end{align*}
+Dan kunnen we $ z$ uitdrukken in $ \lambda $  en $ \mu $. Immers, we vullen  $ x=  \lambda $ en $ y = \mu $ in in de vergelijking $ -x + 2y -2z = 6 $. Dan geldt dus: $ -\lambda + 2\mu -2z = 6 $, dit hoeven dan alleen nog maar even om te schrijven naar de vorm $z = ..$:
+\begin{align*}
+  -\lambda + 2\mu -2z &= 6 \\
+  2\mu -2z &= 6 + \lambda \\
+  -2z &= 6 + \lambda - 2\mu \\
+  z &= -3 -\frac{1}{2}\lambda + \mu 
+\end{align*}
+In feite hebben we nu $3$ vergelijkingen, namelijk:
 \[\begin{cases}
 x =  \lambda\\
 y =  \mu\\
-z = -3 + \mu -   \frac{1}{2} \lambda 
+z = -3 -\frac{1}{2}\lambda + \mu 
 \end{cases}
 \] 
 anders geschreven:
@@ -290,28 +363,69 @@ $ V: \ \vecdrie{x}{y}{z} \ = \ \vecdrie{0}{0}{-3} \ + \ \lambda \  \vecdrie[red]
 De vectorvoorstelling van een vlak kent dus \textit{twee}  richtingsvectoren. 
 Zie  figuur  \ref{fig:vlak}.
 
+\newpage
 \subsubsection{Van vectorvoorstelling vlak naar vergelijking vlak:}
 Omgekeerd nemen we de vectorvoorstelling van een vlak $ V $,\\ 
 bijvoorbeeld:
-$ V: \  \vec{x} =\  \vecdriesnel{x} \ = \  \ \vecdrie{1}{3}{6} \ + \ \lambda \ \vecdrie{0}{2}{1} \ + \ \mu \ \vecdrie{1}{1}{2} $.\\
+$ V: \  \vec{x} =\  \vecdrie{x}{y}{z} \ = \  \ \vecdrie{1}{3}{6} \ + \ \lambda \ \vecdrie{0}{2}{1} \ + \ \mu \ \vecdrie{1}{1}{2} $.\\
 Om nu een vergelijking te krijgen moeten we $ \lambda $  en $ \mu $ wegwerken (elimineren). Dat kan als we zien dat de vectorvoorstelling van $ V $ eigenlijk 3 vergelijkingen bevat:
 
 \[\begin{cases}
-x_1 =  1 + 0\lambda + 1\mu\\
-x_2 =  3 + 2\lambda  + 1\mu\\
-x_3 = 6 + 1 \lambda + 2\mu  
+x =  1 + 0\lambda + 1\mu\\
+y =  3 + 2\lambda  + 1\mu\\
+z = 6 + 1 \lambda + 2\mu  
 \end{cases}
 \] 
-Uit de $ 1^{e}$ vergelijking halen we $ \mu = x_1 -1 $ en dat vullen we in in de $ 2^{e}$ en $ 3^{e}$ vergelijking:
+Uit de $ 1^{e}$ vergelijking halen we $ \mu $:
+\begin{align*}
+  x &= 1 + 0\lambda + 1\mu \\
+  x &= 1 + \mu \\
+  x - \mu &= 1 \\
+  -\mu &= 1 - x \\
+  \mu &= -1 + x
+\end{align*}
 
+Dat kunnen we dan weer invullen in de $ 2^{e}$ en $ 3^{e}$ vergelijking:
+\begin{align*}
+  y &= 3 + 2\lambda  + (-1 + x) \\
+  y &= 3 + 2\lambda -1 + x \\
+  y &= 2 + 2\lambda + x
+\end{align*}
+\begin{align*}
+  z &= 6 + \lambda + 2(-1 + x) \\
+  z &= 6 + \lambda -2 + 2x \\
+  z &= 4 + \lambda + 2x
+\end{align*}
+
+Hiermee hebben we $2$ nieuwe vergelijkingen. Waarbij $\mu$ is ge\"elimineerd, maar $\lambda$ nog niet:
 \[\begin{cases}
-x_2 =  3 + 2\lambda  + ( x_1 -1)\\
-x_3 = 6 + 1 \lambda + 2( x_1 -1)
+  y = 2 + 2\lambda + x \\
+  z = 4 + \lambda + 2x
 \end{cases}
 \] 
-Uit de $ 2^{e}$ vergelijking halen we dat $ \lambda = x_3 - 4 - 2x_1 $ wat we in de $ 1^{e}$ vergelijking invullen:
-$ x_2 = 3 + 2(x_3 -4 -2x_1) + x_1 - 1$, anders geschreven: $ 3x_1 +x_2 - 2x_3 = -6
-$. En dat is precies de algemene vorm van de vergelijking van een vlak.
+Hieruit kunnen we dan weer $\lambda$ halen: 
+\begin{align*}
+  z &= 4 + \lambda + 2x \\
+  -\lambda + z &= 4 + 2x \\
+  -\lambda &= 4 + 2x - z \\
+  \lambda &= -4 - 2x + z \\
+\end{align*}
+
+Deze $\lambda$ kunnen we dan weer invullen in de andere vergelijking:
+\begin{align*}
+  y &= 2 + 2\lambda + x \\
+  y &= 2 + 2(-4 -2x + z) + x \\
+  y &= 2 + -8 -4x + 2z + x \\
+  y &= -6 -3x + 2z \\
+\end{align*}
+
+Die laatste vergelijking van $y$ lijkt al heel erg op een vergelijking van een vlak. Het enige dat we nu nog hoeven doen is deze om te zetten naar de standaardvorm $ax + by + cz = d$:
+\begin{align*}
+  y &= -6 -3x + 2z \\
+  3x + y &= -6 + 2z \\
+  3x + y - 2z &= -6 \\
+\end{align*}
+En daarmee hebben we de vergelijking van ons vlak bepaald!
 
 
 \section{Normaalvectoren}
@@ -344,7 +458,7 @@ Om goed te kunnen rekenen met vlakken hebben we een normaalvector nodig.
 	$ V $ .}
 
 \mybv[normaal vlak]
-{als $ V: 7x_1 + 3x_2 - x_3 = -20 $ \qquad dan is 
+{Bijv. als $ V: 7x_1 + 3x_2 - x_3 = -20 $ \qquad dan is 
 	$ \vec{n} = \vecdrie{7}{3}{-1} $ de normaalvector van $V$.\\}
 Maar wat als we niet de vergelijking maar de vectorvoorstelling van een vlak hebben? Dan kunnen we gebruik maken van de eigenschap dat  het uitproduct van 2 vectoren loodrecht staat staat op beide richtingsvectoren. 
 
