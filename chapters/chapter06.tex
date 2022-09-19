@@ -27,8 +27,8 @@ Maar wat nu als je bijv. $x$ probeert op te lossen uit de volgende vergelijking?
 Er is geen enkel getal in $\mathbb{R}$ waarvan je de wortel kunt nemen zodat er $-1$ uitkomt. Wellicht heb je ooit wel gehoord van een docent wiskunde dat $\sqrt{-1}$ dan ook 'niet kan' en op zich klopt dat, voor $\mathbb{R}$ althans. Maar met complexe getallen is dit wel op te lossen. \mydef[Complexe getallen hebben namelijk een 'imaginair deel', $i$ en daarvoor geldt:]{imaginair }{ $  i^2 = -1 $.}
 In het bovenstaande voorbeeld zou $x=i$, dus een oplossing zijn. Vaak worden complexe getallen toegepast als er geen (of lastig een) oplossing in $\mathbb{R}$ gevonden kan worden. Men zet dan het getal om in een complex getal, voert daarin allerlei berekeningen uit, en zet het dan weer om naar een reëel getal (Dat laatste gaat in dit kleine voorbeeld echter niet). \\
 
-\mydef[We definiëren een complex getal $z$ als:] {getal in $\mathbb{C}$}{   $  z = a + bi $ \quad met $a$ en $b$ reële getallen}
-\mybv[getal in $\mathbb{C}$]{Bijvoorbeeld, $ z = 2+3i  $ is een complex getal. Complexe getallen ($\mathbb{C}$) kun je zien als 2-dimensionale getallen, zie ook figuur \ref{fig:lijnreeel}. }
+\mydef[We definiëren een complex getal $z$ als:] {getal in $\mathbb{C}$}{   $  z = a + bi $ \quad met $a$ en $b$ reële getallen}\\
+\mybv[getal in $\mathbb{C}$]{Bijvoorbeeld, $ z = 2+3i  $ is een complex getal. Complexe getallen ($\mathbb{C}$) kun je zien als 2-dimensionale getallen, zie ook figuur \ref{fig:lijncomplex}. }
 \begin{figure}[h!]
     \centering
     \begin{tikzpicture}
@@ -48,12 +48,12 @@ In het bovenstaande voorbeeld zou $x=i$, dus een oplossing zijn. Vaak worden com
       % PHASOR
       \draw[dashed] (R) -- (Rx) node[below]{$a$};;
       \draw[dashed] (R) -- (Ry) node[left]{$b$};
-      \draw[vector, blue!50!black, thick] (O) -- (R) node[above right=-3] {$z=a+bi$};
+      \draw[->, blue!50!black, thick] (O) -- (R) node[above right=-3] {$z=a+bi$};
     \end{tikzpicture}
     
     % \includegraphics[scale=0.15]{pictures/figuren/complex.png}
     \caption{Complexe getallen kun je zien als 2-dimensionaal, waarbij een getal $z$ een 'reëel deel' $a$ heeft en een 'imaginair deel' $bi$.}
-    \label{fig:lijnreeel}
+    \label{fig:lijncomplex}
     \index[figuren]{Complexe getallen}
 \end{figure}
 
