@@ -173,11 +173,11 @@ Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te be
 	$ P = \mattwee{\red{1}&\blu{0}}
 	{\red{0}&\blu{0}} $}
 \subsection{Het resultaat berekenen}
-Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door deze matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectweesnel{x} $  terecht komt op: 
+Als je uit wil rekenen waar een punt of vector "terecht" \ komt als je een afbeelding toepast dan kun je dat met de matrix uitrekenen door deze matrix te vermenigvuldigen met de vector. In het voorbeeld van de projectie hierboven was $ P = \mattwee{1&0}{0&0} $. Dat betekent dat een willekeurige vector $ \vec{x} =  \vectwee{x}{y} $  terecht komt op: 
 \begin{align*}
-    P\cdot \vec{x} &= \mattwee{1&0}{0&0}   \cdot \mattwee{x_1}{x_2} \\
-    &= \ \mattwee{1\cdot x_1 + 0\cdot x_2} {0\cdot x_1 + 0\cdot x_2}  \\
-    & = \ \mattwee{x_1}{0}  
+    P\cdot \vec{x} &= \mattwee{1&0}{0&0}   \cdot \mattwee{x}{y} \\
+    &= \ \mattwee{1\cdot x + 0\cdot y} {0\cdot x + 0\cdot y}  \\
+    & = \ \mattwee{x}{0}  
 \end{align*}
 Dus: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de plek die de $ x_1 $ waarde aangeeft Bijvoorbeeld (zie figuur \ref{fig:projectie2D}) kun je nu uitrekenen dat
 \begin{align*}
@@ -248,7 +248,7 @@ In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je
 {Als voorbeeld gaan we een rotatie rechtsom om de z-as over de hoek $\theta$ uitrekenen. }
 
 We gaan weer bepalen waar de basisvectoren komen na de rotatie. De basisvectoren langs de assen zijn: \\
-$ \hat{b_x} \ &= \ \vecdrie{1}{0}{0}, \quad \hat{b_y} \ &= \ \vecdrie{0}{1}{0},  \quad \hat{b_z} \ &= \ \vecdrie{0}{0}{1} $ \\
+$ \hat{b_x} \ = \ \vecdrie{1}{0}{0}, \quad \hat{b_y} \ = \ \vecdrie{0}{1}{0},  \quad \hat{b_z} \ = \ \vecdrie{0}{0}{1} $ \\
 Zoals in figuur \ref{fig:rotatie3D-3} te zien is veranderen de z-coördinaten bij geen van de basisvectoren! 
 \newpage
 \figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in x en y waarbij de z-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de x-, y- en z-as   komen na de rotatie. }
@@ -343,7 +343,7 @@ Voor het vinden van de matrix van de projectie \textit{P} op een vlak in \RD moe
 \figuur[0.6]{projectievlak}{De projectie op het vlak $ W:  2x-3y+z = 0 $ door de oorsprong met de blauwe loodlijn  $ l_{100}, $  door (1,0,0) , de rode $ l_{010} $  door (0,1,0)  en de groene $ l_{001} $ door (0,0,1). NB: De snijpunten van de loodlijnen met het vlak $W$, zijn met respectievelijk rood, groen en blauw aangegeven. Merk op dat de punten (1,0,0) en (0,0,1) 'omhoog' geprojecteerd worden en (0,1,0) 'naar beneden'.}	
 
 We moeten  de snijpunten van de 3 loodlijnen $ l_{100}, l_{010} $ en $ l_{001}  $ door respectievelijk de punten (1,0,0), (0,1,0) en (0,0,1) uitrekenen. We weten dat de richtingsvector van de loodlijnen gelijk is aan de normaalvector van $W$ : $\vec{n_W} = \vecdrie{2}{-3}{1}. $ \\ 
-Dus  $ l_{100}: \ \ \vecdriesnel{x} \ = \  \vec{c} + \lambda \vecdrie{2}{-3}{1}. $ is de eerste (blauwe) loodlijn. \\
+Dus  $ l_{100}: \ \ \vecdrie{x}{y}{z} \ = \  \vec{c} + \lambda \vecdrie{2}{-3}{1}. $ is de eerste (blauwe) loodlijn. \\
 Voor $ \vec{c} $ mogen we elk punt  nemen dat op  $ l_{100} $ ligt, bv  (1,0,0), dus \\
 $ l_{100}: \ \ \vecdrie{x}{y}{z} \ = \ \vecdrie{1}{0}{0} \ + \ \lambda \ \vecdrie{2}{-3}{1} $. \\ 
 Het snijpunt (blauw) van $ l_{100} $ en $W$  ligt èn in het vlak  èn op de loodlijn, dus geldt:

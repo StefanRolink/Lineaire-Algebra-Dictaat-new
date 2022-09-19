@@ -897,11 +897,13 @@ $ \vec{#1} $}
 \makeindex[name = definities, title=Index van definities , intoc]
 \makeindex[name = eigenschappen, title=Index van eigenschappen,  intoc]
 \makeindex[name = voorbeelden, title=Index van voorbeelden,  intoc]
+\makeindex[name = figuren, title=Index van figuren, intoc]
 
 % Macro's:
 \newcommand{\mydef}[3] []{
-  #1\index[definities]{#2} \\
-	\marginnote{\textbf{\Large $ \Delta $} #2} [0cm] \quad #3 \\ \\
+  #1\index[definities]{#2}
+	\marginnote{\textbf{\Large $ \Delta $} #2} [0cm] \quad #3 
+        \vspace{10mm}
 }
 
 \newcommand{\figuur}[3][0.4]{	
@@ -919,7 +921,8 @@ $ \vec{#1} $}
 
 \newcommand{\mybv} [2][]{
   \index [voorbeelden]{#1} 
-  \marginnote{ {\LARGE $\nu$} #1}[0cm] #2\\ 
+  \marginnote{ {\LARGE $\nu$} #1}[0cm] #2
+  \vspace{10mm}
 }
 
 \newcommand{\myeig} [2][]{ 
