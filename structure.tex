@@ -21,6 +21,7 @@
 
 \usepackage{graphicx} % Required for including pictures
 \graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+\usepackage{float}
 
 \usepackage{lipsum} % Inserts dummy text
 
@@ -40,7 +41,7 @@
 \usepackage{nicefrac}
 \usepackage{placeins}
 \usepackage{imakeidx}
-\usepackage{gensymb}
+\usepackage{textcomp, gensymb}
 \usepackage{cancel} 
 
 \usepackage{tikz} % Required for drawing custom shapes
@@ -74,9 +75,10 @@
 %\usepackage{times} % Use the Times font for headings
 \usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
 
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[nopatch=eqnum]{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{csquotes}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -513,7 +515,7 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 \renewcommand\UrlFont{\color{blue}\rmfamily\itshape} 
 \usepackage{hyperref}
-\hypersetup{hidelinks,colorlinks=false,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false}
+\hypersetup{hidelinks,colorlinks=false,breaklinks=true,urlcolor=blue,bookmarksopen=false}
 
 \usepackage{bookmark}
 \bookmarksetup{
@@ -538,12 +540,12 @@ addtohook={%
 % QUOTES	
 %----------------------------------------------------------------------------------------
 % \usepackage{memoir}
-\usepackage{microtype}
+% \usepackage{microtype}
 \usepackage{times}
-\usepackage[utf8]{inputenc}     
-\usepackage[english]{babel}
-\usepackage{graphicx}
-\usepackage{lipsum}
+% \usepackage[utf8]{inputenc}     
+% \usepackage[english]{babel}
+% \usepackage{graphicx}
+% \usepackage{lipsum}
 %%%%********************************************************************
 % fancy quotes
 \definecolor{quotemark}{gray}{0.7}
@@ -739,8 +741,6 @@ addtohook={%
 %----------------------------------------------------------------------------------------
 %	LISTINGS: Python
 %----------------------------------------------------------------------------------------
-% \usepackage[utf8]{inputenc}
-
 % % Default fixed font does not support bold face
 % \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
 % \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
@@ -787,11 +787,17 @@ addtohook={%
 %----------------------------------------------------------------------------------------
 % Lineaire Algebra macro's	
 %----------------------------------------------------------------------------------------
+% Supress warnings about 'math shift':
+\makeatletter
+\pdfstringdefDisableCommands{\let\HyPsd@CatcodeWarning\@gobble}
+\makeatother
+
 \newcommand{\plh}{{\mkern-2mu\times\mkern-2mu}}
 \newcommand{\mytrans}[1]{$ #1^T $}
 \newcommand{\noteq}{ $ \ne $ }
-\newcommand{\RD}{$\mathbb{R}^{3}\ $}
-\newcommand{\RT}{$\mathbb{R}^{2}\ $}
+\newcommand{\RD}{$\mathbb{R}^{3}$}
+\newcommand{\RT}{$\mathbb{R}^{2}$}
+
 % COLORS
 \newcommand{\red}[1]{
 {\color{red}#1}}
@@ -903,7 +909,7 @@ $ \vec{#1} $}
 \newcommand{\mydef}[3] []{
   #1\index[definities]{#2}
 	\marginnote{\textbf{\Large $ \Delta $} #2} [0cm] \quad #3 
-        \vspace{10mm}
+        \vspace{7mm}
 }
 
 \newcommand{\figuur}[3][0.4]{	
@@ -922,7 +928,7 @@ $ \vec{#1} $}
 \newcommand{\mybv} [2][]{
   \index [voorbeelden]{#1} 
   \marginnote{ {\LARGE $\nu$} #1}[0cm] #2
-  \vspace{10mm}
+  \vspace{7mm}
 }
 
 \newcommand{\myeig} [2][]{ 
