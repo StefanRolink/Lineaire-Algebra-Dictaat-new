@@ -4,53 +4,60 @@
 Dit en het volgende hoofdstuk gaan over lineaire afbeeldingen. Lineaire afbeeldingen zijn afbeeldingen die de lineaire eigenschappen van  vectoren niet verstoren. Zulke afbeeldingen worden veel gebruikt in vakgebieden als Computer Graphics en Robotica. Een lineaire afbeelding kan geschreven worden met behulp van een matrix. En met een matrix kun je in software makkelijk rekenen
 
 \mydeftekst[Een matrix is:]{matrix}{een verzameling getallen in een rechthoek, gerangschikt in rijen en kolommen.}
-Een matrix geven we aan met een hoofdletter:
-\mybv[matrix]{$  S = \mattwee{2&1}{3&4} $
-	\qquad $ M = \begin{pmatrix}
-	2 & -1 \\
-	4 & 5  \\
-	7 & 0
-	\end{pmatrix}$}
-Daarbij noemen we $S$ een $ 2 \times 2 $ matrix, en $M$ een $ 3 \times 2 $ matrix. 
 
-De algemene vorm van een $ m \times n $ matrix is:
-$$
-A = \begin{pmatrix}
-    a_{11} &  a_{12}  & \ldots & a_{1n}\\
-    a_{21}  &  a_{22} & \ldots & a_{2n}\\
-    \vdots & \vdots & \ddots & \vdots\\
-    a_{m1}  &   a_{m2}       &\ldots & a_{mn}
-\end{pmatrix}
-$$
+\mybv[matrix]{\raggedright Een matrix geven we aan met een hoofdletter, bijv:
+\[
+    S = \mattwee{2&1}{3&4} \qquad M = \begin{pmatrix}
+	                                   2 & -1 \\
+                                          4 & 5  \\
+                                          7 & 0
+                                        \end{pmatrix}
+\]}
+Daarbij noemen we $S$ een $2 \times 2$ matrix, en $M$ een $3 \times 2$ matrix. 
+
+De algemene vorm van een $m \times n$ matrix is:
+\[
+    A = \begin{pmatrix}
+        a_{11}  &  a_{12} & \ldots & a_{1n} \\
+        a_{21}  &  a_{22} & \ldots & a_{2n} \\
+        \vdots  & \vdots  & \ddots & \vdots \\
+        a_{m1}  & a_{m2}  & \ldots & a_{mn}
+    \end{pmatrix}
+\]
 Deze matrix heeft $ m $ rijen en $ n $ kolommen. Meestal beperken we ons tot $ 2 \times 2 $ , \  $ 3 \times 3 $ of $ 4 \times 4 $ matrices.
 \section{Bijzondere matrices}
-\mydeftekst[Een \textit{vector} is:]{vector}{een matrix die bestaat uit één rij of één  kolom, en wordt zoals je al weet, \textit{niet} met een hoofdletter aangeduid maar met een kleine en een pijltje erboven.}
-
-Ter voorbeeld: \mybv[vector]{$  \vec{v} = \vectwee{2}{3} $}
+\mydeftekst[Een \textit{vector} is:]{vector}{een matrix die bestaat uit één rij of één  kolom, en wordt zoals je al weet, \textit{niet} met een hoofdletter aangeduid maar met een kleine en een pijltje erboven.} \mybv[vector]{\raggedright Ter voorbeeld: \[\vec{v} = \vectwee{2}{3} \]}
 
 \mydeftekst{vierkante matrix}{Een vierkante matrix is: Een matrix met evenveel rijen als kolommen. We schrijven dat als een $n \times n$ matrix:} 
-\mybv[vierkante matrix]
-{\quad  $ P = \matvier{6&2&0&7}{9&-1&-4&3} {0&3&1&5}{-2&8&3&2} $ \quad is een vierkante, $4 \times 4$ matrix:}  
+\mybv[vierkante matrix]{\raggedright Bijvoorbeeld een vierkante, $4 \times 4$ matrix: $P$:
+\[
+    P = \matvier{6&2&0&7}{9&-1&-4&3} {0&3&1&5}{-2&8&3&2} 
+\]}  
 
 \mydeftekst{hoofddiagonaal}{De hoofddiagonaal van een matrix is: De diagonaal van linksboven naar rechtsonder}
 \mybv[hoofddiagonaal]{\raggedright Bij $ A = \matdrie { {\red{-1}} & 2 & 3}{0 & \red{4} & 1 }{-3&2&\red{1}} $ \ staan de getallen $-1$, $4$ en $1$ op de hoofddiagonaal}
  
 \mydeftekst{diagonaalmatrix}{Een diagonaalmatrix is: Een vierkante matrix waar alleen op de hoofddiagonaal getallen $\ne 0$ staan. Ter voorbeeld:}
-\mybv[diagonaalmatrix]{$ D = \matdrie{1&0&0}{0&3&0}{0&0&-1} $ }
+\mybv[diagonaalmatrix]{\[ D = \matdrie{1&0&0}{0&3&0}{0&0&-1} \]}
 
 \mydeftekst{eenheidsmatrix}{Een eenheidsmatrix is: Een diagonaalmatrix waar op de hoofddiagonaal alleen maar $1$-en staan. Ter voorbeeld:}
-\mybv[eenheidsmatrix]{ $ E = \matdrie{1&0&0}{0&1&0}{0&0&1} $ }
+\mybv[eenheidsmatrix]{\[ E = \matdrie{1&0&0}{0&1&0}{0&0&1} \]}
 
-\mydeftekst{nulmatrix}{Een nulmatrix  is: Een matrix met alleen maar nullen. Zoals: }
-\mybv[nulmatrix]{$ N = \mattwee{0&0}{0&0} $}
+\mydeftekst{nulmatrix}{Een nulmatrix  is: Een matrix met alleen maar nullen. Zoals:}
+\mybv[nulmatrix]{\[ N = \mattwee{0&0}{0&0} \]}
 
 \mydeftekst{getransponeerd}{De getransponeerde matrix $ A^{T}  $ van matrix $A$ is:	een (andere) matrix waarbij de rijen en kolommen van $A$ zijn verwisseld. } 
-\mybv[getransponeerde]{ Als $ A = \mattwee{2&-1&3}{5&6&4} $  dan is  $ A^{T} =   \matdrie{2&5}{-1&6}{3&4} $ }
+\mybv[getransponeerde]{\[
+    \text{Als } A = \mattwee{2&-1&3}{5&6&4} \text{ dan is } A^{T} = \matdrie{2&5}{-1&6}{3&4} 
+\] }
 
-\mydeftekst[Een symmetrische matrix is:]{symmetrisch}{een  matrix $A$ waarbij $ A^{T} = A $. 
+\mydeftekst[Een symmetrische matrix is:]{symmetrisch}{een matrix $A$ waarbij $ A^{T} = A $. 
 
-In feite betekent dat dat de rechterbovenhoek van de matrix gespiegeld wordt in de linkeronderhoek. Bijvoorbeeld: }  
-\mybv[symmetrisch]{ Als $ A = \mattwee{2&1}{1&6} $  \quad dan is  $ A^{T} =   \mattwee{2&1}{1&6} = A $ }
+In feite betekent dat dat de rechterbovenhoek van de matrix gespiegeld wordt in de linkeronderhoek. }  
+\mybv[symmetrisch]{\raggedright Bijvoorbeeld: 
+\[
+    \text{Als } A = \mattwee{2&1}{1&6} \quad \text{dan is } A^{T} = \mattwee{2&1}{1&6} = A 
+\]}
 
 \section{Matrixvermenigvuldiging}
 Matrixvermenigvuldiging is tamelijk ingewikkeld:
@@ -206,11 +213,11 @@ of, op een andere manier opgeschreven:
 \myeig[matrix rotatie]
 {De matrix van een rotatie om \textit{O} over de hoek $\theta$ in \RT is altijd 
 
-òf  (tegen de klok in):\quad 
+òf (tegen de klok in):\quad 
 	$  \mattwee { \cos \theta & -\sin \theta }
 	{ \sin \theta & \cos \theta} $  
  
- òf  (met de klok mee):\quad 
+òf (met de klok mee):\quad 
 	$  \mattwee { \cos \theta & \sin \theta }
 	{ -\sin \theta & \cos \theta} $ }
  
