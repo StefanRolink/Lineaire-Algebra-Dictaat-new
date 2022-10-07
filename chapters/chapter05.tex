@@ -2,296 +2,249 @@
 \label{chap: Determinant}
 De determinant van een matrix is binnen de lineaire algebra en meetkunde belangrijk begrip. De determinant is in de meetkunde een oppervlakte of inhoud van een ruimte. In de lineaire algebra geeft een determinant belangrijke informatie over een matrix.
 \section{Determinant van een $2\plh2$ matrix}
-\mydef [De determinant van]{determinant \RT }{ $ A = \mattwee{a & b} {c & d} $ \quad is \quad $ |A| = ad - bc $ }
 
-Dat mag je ook schrijven als \quad $det(A)$, \quad of als \quad $  \dettwee{a & b} {c & d}.  $ \\ \\
-\mybv[determinant] {Als $ A = \mattwee{-1 & 5} {2 & -3} $ \ \ dan is  \ \ $ |A| = -1\cdot -3 \ - \ 2\cdot 5 = -7 $ }
+\mydeftekst[De determinant van]{determinant \RT }{
+\[
+ A = \mattwee{a&b}{c&d} \quad \text{is} \quad |A| = ad - bc
+ \]}
+
+Dat mag je ook schrijven als $det(A)$, of als $\dettwee{a&b}{c&d} $.
+
+\mybv[determinant]{\raggedright Bijvoorbeeld:
+\[
+    \text{Als } A = \mattwee{-1&5}{2&-3} \quad \text{dan is} \quad |A| = -1\cdot -3 \ - \ 2\cdot 5 = -7
+\]}
 
 \subsection{Eigenschappen van determinanten}
-\textit{Vierkante matrix}\\
-De determinant van \textit{niet} vierkante matrices (bv ($2\plh3$) of ($5\plh4$)) bestaat niet. \\ \\       
-\textit{Eenheidsmatrix}\\
-De determinant van de eenheidsmatrix (een matrix waarin op de hoofddiagonaal allen enen staan) is $= 1$. \\ \\
-\textit{Inverse matrix}\\
-De determinant wordt gebruikt om te bepalen of een matrix een inverse heeft. Anders gezegd: of je een beweging ook weer terug kunt draaien, ongedaan kunt maken. \\ \\
-\myeig[det(A) \noteq  0]
-{Als $ |A| \ne 0 $ dan heeft $A$ een inverse (is omkeerbaar) }
-Je kunt zelfs de inverse van een matrix uitrekenen (als de determinant $\ne 0 $):\\
-\myeig[inverse berekenen]
-{Als $ |A| \ne 0 $ dan is in \RT
-	\begin{align*}
-	   A^{-1} &= \dfrac{1}{|A|} \mattwee{d & -b }{-c & a }    \\
-                 &= \dfrac{1}{ad-bc}\mattwee{d & -b }{-c & a }                    
-        \end{align*}
-}
+\subsubsection{Vierkante matrix}
+De determinant van \textit{niet} vierkante matrices (bv ($2\times 3$) of ($5\times 4$)) bestaat niet.
 
-\mybv[inverse berekenen]
-{Stel $ A = \mattwee{-1 & 5} {2 & -3} $	\quad dan is $ |A|  = -7 $                            
-	\ en  \quad $ A^{-1} = \ -\frac{1}{7} \mattwee{-3 & -5} {-2 & -1} $
+\subsubsection{Eenheidsmatrix}
+De determinant van de eenheidsmatrix (een matrix waarin op de hoofddiagonaal allen enen staan) is $= 1$.
+
+\subsubsection{Inverse matrix}
+De determinant wordt gebruikt om te bepalen of een matrix een inverse heeft. Anders gezegd: of je een beweging ook weer terug kunt draaien, ongedaan kunt maken.
+
+\myeig[det(A) \noteq  0]{Als $|A| \ne 0$ dan heeft $A$ een inverse (is omkeerbaar)}
+Je kunt zelfs de inverse van een matrix uitrekenen (als de determinant $\ne 0 $):
+
+\myeig[inverse]{Als $|A| \ne 0$ dan is in \RT
+	\begin{align*}
+	   A^{-1} &= \dfrac{1}{|A|}  \mattwee{d & -b }{-c & a } \\
+                 &= \dfrac{1}{ad-bc}\mattwee{d & -b }{-c & a }                    
+    \end{align*}
 }
-Nu kunnen we controleren of de inverse echt de omgekeerde is door $A$ en $ A^{-1} $ met elkaar te vermenigvuldigen:
+\mybv[inverse]{\raggedright Bijvoorbeeld:
+\[
+    \text{Stel } A = \mattwee{-1&5}{2&-3} \quad \text{dan is }|A| = -7 \quad \text{en} \quad 
+    A^{-1} = -\frac{1}{7} \mattwee{-3&-5}{-2&-1}
+\]
+}
+Nu kunnen we controleren of de inverse echt de omgekeerde is door $A$ en $A^{-1}$ met elkaar te vermenigvuldigen:
 \begin{align*}
-    A . A^{-1}  & = \mattwee{-1 & 5} {2 & -3} \cdot  \ -\frac{1}{7} \mattwee{-3 & -5} {-2 & -1} \\
-                & = \ -\frac{1}{7} \mattwee{-1\cdot -3  + 5\cdot -2 & \ \ \ \ -1\cdot -5+5\cdot -1} {2\cdot -3+-3\cdot -2 & \ \ \ \  2\cdot -5+-3\cdot -1} \\
-                & = \ -\frac{1}{7} \mattwee{-7 & 0} {0 & -7}\\
-                & = \ \mattwee{1 & 0} {0 & 1}
+    A \cdot A^{-1} &= \mattwee{-1&5}{2&-3} \cdot\ -\frac{1}{7} \mattwee{-3&-5}{-2&-1} \\
+                   &= -\frac{1}{7} \mattwee{-1\cdot -3 + 5\cdot -2 & \ \ \ -1\cdot -5+5\cdot -1} 
+                                           {2\cdot -3+-3\cdot -2 & \ \ \ 2\cdot -5+-3\cdot -1} \\
+                   &= -\frac{1}{7} \mattwee{-7 & 0} {0 & -7}\\
+                   &= \mattwee{1 & 0} {0 & 1}
 \end{align*}                                            
 
-\myeig[$det(A^T) = det(A)$] {De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
-\mybv[$det(A^T) = det(A)$]
-{We nemen weer als voorbeeld de matrix 
-	$ A = \mattwee{-1 & 5} {2 & -3} $
-	\  \ dan is $ A^T =  \mattwee{-1 & 2} {5 & -3} $ \\
-	en dus is  $  |A^T|  =  -1\cdot -3-2\cdot 5 = -7 = |A|  $                                         	         
-}\\
-\textit\\
-\myeig[rijen gelijk]{Als een matrix twee of meer gelijke rijen (of kolommen) heeft dan is de determinant $= 0$:  } 
-\mybv[gelijke rijen ]
-{We nemen  als voorbeeld de matrix 
-	$ A = \mattwee{-1 & 5} {-1 & 5} $\\ 
-	en zien dat $ |A| = -1\cdot 5 - -1\cdot 5 = 0 $ 
-}
-\myeig[rij, kolom  = 0]{Als in een matrix een hele rij of kolom gelijk is $0$ dan is $|A| = 0$}
-\mybv[{kolom, rij = 0}]
-{
-	We nemen  als voorbeeld de matrix 
-	$ A = \mattwee{0 & 5} {0 & 2} $\\ 
-	en zien dat $ |A| = 0\cdot 2 - 0\cdot 5 = 0 $ 
-}
-\section{Ontwikkelen van een determinant}
-Natuurlijk willen we ook de determinant van $3\plh3$ en $4\plh4$ matrices (en hogere dimensies) uit kunnen rekenen. Daar bestaat een mooi recursief algoritme voor. Om te beginnen met een $3\plh3$ determinant:\\ \\ \\
-\mydef [De determinant van]
-{determinant  \RD}
-{ $  A  = \matdrie{ a_{11} & a_{12} & a_{13} }
-	               { a_{21} & a_{22} & a_{23} }
-	               { a_{31} & a_{32}& a_{33} }  $
-	\  is \ $ |A|  = a_{11} \cdot \dettwee{a_{22} & a_{23}}{a_{32}& a_{33} } 
-	\  \red {-} \ a_{21} \cdot    \dettwee{a_{12} & a_{13}}{a_{32}& a_{33} } +a_{31} 
-    \cdot    \dettwee{a_{12} & a_{13}}{ a_{22} & a_{23} }  $ } \\
-In woorden: Je ontwikkelt de determinant naar de $ 1^{e} $ rij door voor $  a_{11} $ de rij en kolom waar $  a_{11} $ in staat 'door te strepen' en daarna $  a_{11}  $ te vermenigvuldigen met de determinant van de getallen die overblijven:
-$  \matdrie{  \red {a_{11}} & \cancel{a_{12}} & \cancel{a_{13} } }
-{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
-{ \cancel{a_{31}} & \red{a_{32}} & \red{a_{33}} }  $ \\ \\ \\
-voor  $  a_{21}  $ :
-\qquad \ \ \ $  \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13 }} }
-{\red {a_{21}} & \cancel{a_{22}} & \cancel{a_{23}} }
-{ \cancel{a_{31}} & \red{a_{32}}  & \red{a_{33} }}   $
-\quad \textbf{N.B. bij $  a_{21}  $ komt er een min-teken bij!}\\ \\ \\
-en voor   $  a_{31} $  :
-\quad \ \ $   \matdrie{ \cancel{ a_{11}} & \red{a_{12}} & \red{a_{13}}  }
-{ \cancel{a_{21}} & \red{a_{22}} & \red{a_{23}} }
-{ \red {a_{31}} & \cancel{a_{32}} & \cancel{a_{33} } }  $
-\\ \\ \\ \\
+\myeig[$det(A^T) = det(A)$] {\raggedright De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
+\mybv[$det(A^T) = det(A)$]{\raggedright We nemen weer als voorbeeld de matrix $A = \mattwee{-1&5}{2&-3} $
+\ dan is $A^T = \mattwee{-1&2}{5&-3} $ en dus is:  \[|A^T| = -1\cdot -3-2\cdot 5 = -7 = |A|\] }
 
-\mybv[determinant  \RD ]
-{ Voorbeeld van een $3\plh3$ determinant:
-	\begin{align*}
-	\text{als} \ A & = \matdrie{-5 & 0 & 3} {4 & 2 & -1} {1 & 6 & 2} \qquad \text{dan is}\\ 
+\myeig[rijen gelijk]{Als een matrix twee of meer gelijke rijen (of kolommen) heeft dan is de determinant gelijk aan $0$:} 
+\mybv[gelijke rijen]{\raggedright We nemen  als voorbeeld de matrix: $A = \mattwee{-1 & 5} {-1 & 5} $ en zien dat: \[|A| = -1\cdot 5 - -1\cdot 5 = 0\]}
+
+\myeig[rij, kolom  = 0]{Als in een matrix een hele rij of kolom gelijk is $0$ dan is $|A| = 0$}
+\mybv[{kolom, rij = 0}]{\raggedright We nemen  als voorbeeld de matrix $A = \mattwee{0&5}{0&2} $ en zien dat: \[|A| = 0\cdot 2 - 0\cdot 5 = 0 \]}
+
+\section{Ontwikkelen van een determinant}
+Natuurlijk willen we ook de determinant van $3\times3$ en $4\times4$ matrices (en hogere dimensies) uit kunnen rekenen. Daar bestaat een mooi recursief algoritme voor. Om te beginnen met een $3\times3$ determinant:
+
+\mydeftekst[De determinant van]{determinant \RD}{ 
+\[  
+    A = \matdrie{ a_{11} & a_{12} & a_{13} }{ a_{21} & a_{22} & a_{23} }{ a_{31} & a_{32}& a_{33} } \ \text{ is } \ 
+    |A| = a_{11} \cdot \dettwee{a_{22} & a_{23}}{a_{32}& a_{33}} \ \red {-} \ 
+          a_{21} \cdot \dettwee{a_{12} & a_{13}}{a_{32}& a_{33} } + 
+          a_{31} \cdot \dettwee{a_{12} & a_{13}}{a_{22} & a_{23}}  
+\] }
+    
+In woorden: Je ontwikkelt de determinant naar de $1^{e}$ rij door voor $ a_{11}$ de rij en kolom waar $a_{11}$ in staat 'door te strepen' en daarna $a_{11}$ te vermenigvuldigen met de determinant van de getallen die overblijven:
+\begin{align*}
+    \text{Dus, voor } a_{11} \text{:} \qquad & \matdrie{ \red {a_{11}}   & \cancel{a_{12}} & \cancel{a_{13} } }
+                                                       { \cancel{a_{21}} & \red{a_{22}}    & \red{a_{23}} }
+                                                       { \cancel{a_{31}} & \red{a_{32}}    & \red{a_{33}} } \\
+    \text{voor } a_{21} \text{:} \qquad & \matdrie{ \cancel{ a_{11}} & \red{a_{12}}    & \red{a_{13 }} }
+                                                  { \red {a_{21}}    & \cancel{a_{22}} & \cancel{a_{23}} }
+                                                  { \cancel{a_{31}}  & \red{a_{32}}    & \red{a_{33} }} 
+                                                  \quad \textbf{N.B. bij } a_{21} \textbf{ komt er een min-teken bij!} \\
+    \text{en voor } a_{31} \text{:} \qquad & \matdrie{ \cancel{ a_{11}} & \red{a_{12}}    & \red{a_{13}}  }
+                                                     { \cancel{a_{21}}  & \red{a_{22}}    & \red{a_{23}} }
+                                                     { \red {a_{31}}    & \cancel{a_{32}} & \cancel{a_{33} } } 
+\end{align*}
+
+\mybv[determinant \RD]{\raggedright Voorbeeld van een $3\plh3$ determinant:}
+\begin{align*}
+	\text{als} \ A & = \matdrie{-5 & 0 & 3} {4 & 2 & -1} {1 & 6 & 2} \quad \text{dan is } |A| \text{:}\\ 
 	|A| & = -5\cdot \dettwee{2 & -1} {6 & 2 } 
         \red{-} \ 4\cdot \dettwee{0 & 3} {6 & 2 }	
         +1\cdot \dettwee{0 & 3} {2 & -1 }\\
 	   & = -5\cdot (2\cdot 2 \ -\  -1\cdot 6) \  \red{-} \  4\cdot (0\cdot 2 \ - \ 3\cdot 6) +1\cdot (0\cdot -1 \ - \ 3\cdot 2)\\
 	   & = -5\cdot 10 \ \red{-} \  4\cdot -18 \ + \ 1\cdot -6\\
 	   & = 16
-	\end{align*} 
-} 
+\end{align*} 
 
 \newpage
-\mydef
-{determinant  ${\rm \mathbb{R}^{n}}$}
-{De formule voor de determinant van een $n\ \plh\ n$ matrix gaat natuurlijk ook recursief:   
+\mydeftekst{determinant $\mathbb{R}^{n}$}{De formule voor de determinant van een $n\times n$ matrix gaat natuurlijk ook recursief:}   
 \begin{align*}
 	\text{Als} \quad A  &= 
 	\begin{pmatrix}
-	   a_{11} &  a_{12}  & \ldots & a_{1n}\\
-	   a_{21}  &  a_{22} & \ldots & a_{2n}\\
-	   \vdots & \vdots & \ddots & \vdots\\
-	   a_{n1}  &   a_{n2}       &\ldots & a_{nn}
-	\end{pmatrix} 	 \quad  \text{dan is} \\ \\
+	   a_{11}  &  a_{12}  & \ldots & a_{1n}\\
+	   a_{21}  &  a_{22}  & \ldots & a_{2n}\\
+	   \vdots  & \vdots   & \ddots & \vdots\\
+	   a_{n1}  &  a_{n2}  & \ldots & a_{nn}
+	\end{pmatrix} \quad  \text{dan is} \\ \\
 	|A| &= a_{11} \cdot    	 
 	\begin{vmatrix}
 	   a_{22}  &  a_{23} & \ldots & a_{2n}\\
 	   a_{32}  &  a_{33} & \ldots & a_{3n}\\
-	   \vdots & \vdots & \ddots & \vdots\\
-	   a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	   \vdots  &  \vdots & \ddots & \vdots\\
+	   a_{n2}  &  a_{n3} & \ldots & a_{nn}
 	\end{vmatrix} 
 	\ \red{-}  \ a_{21} \cdot  	
 	\begin{vmatrix}
-	   a_{12} &  a_{13}  & \ldots & a_{1n}\\
-	   a_{32}  &  a_{33} & \ldots & a_{3n}\\
-	   \vdots & \vdots & \ddots & \vdots\\
-	   a_{n2}  &   a_{n3}       &\ldots & a_{nn}
+	   a_{12} &  a_{13} & \ldots & a_{1n}\\
+	   a_{32} &  a_{33} & \ldots & a_{3n}\\
+	   \vdots & \vdots  & \ddots & \vdots\\
+	   a_{n2} &  a_{n3} & \ldots & a_{nn}
 	\end{vmatrix} \\ \\
 	& +\ \dots\ \red{-}\ \dots\ +\ \dots\ \red{-}\  \dots\ \dots\ \dots\\ \\
 	&\red {\pm \ } a_{n1} \cdot    
 	\begin{vmatrix}
-	   a_{12} &  a_{13}  & \ldots & a_{1n}\\
-	   a_{22}  &  a_{23} & \ldots & a_{2n}\\
-	   \vdots & \vdots & \ddots & \vdots\\
-	   a_{n-1 \ 2}  &   a_{n-1 \ 3}       &\ldots & a_{n-1 \ n}
+	   a_{12} &  a_{13} & \ldots & a_{1n}\\
+	   a_{22} &  a_{23} & \ldots & a_{2n}\\
+	   \vdots & \vdots  & \ddots & \vdots\\
+        a_{n-1 \ 2} & a_{n-1 \ 3} &\ldots & a_{n-1 \ n}
 	\end{vmatrix} 
 \end{align*}
-}
+
 Oef! Daar kunnen we wel wat trucjes bij gebruiken die in de volgende paragraaf behandeld worden.
 \subsection{Rekenhulp determinant}
-\myeig[ontwikkelen]
-{Je mag een determinant uitrekenen met behulp van de $ 1^e $ kolom, maar dat  mag ook met behulp van de $ 2^e  $ rij of de laatste kolom of ... }
-Je moet alleen wel rekening houden met minnen en plussen volgens onderstaand schema: \\ \\
+\myeig[ontwikkelen]{Je mag een determinant uitrekenen met behulp van de $1^e$ kolom, maar dat  mag ook met behulp van de $2^e$ rij of de laatste kolom of $\ldots$ }
+
+Je moet alleen wel rekening houden met minnen en plussen volgens onderstaand schema:
 $ \begin{matrix}
-+ &  -  & + &  -  &  + &  -  & \ldots \\
--  & + &  -  &  + &  -  &  +& \ldots \\
-+ &  -  & + &  -  &  + &  -  & \ldots \\
--  & + &  -  &  + &  -  &  +& \ldots \\
-+ &  -  & + &  -  &  + &  -  & \ldots \\
-\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
-\end{matrix}  $\\ \\ \\
-\mybv[ontwikkelen]
-{Dus als je bijvoorbeeld naar de $ 2^e  $ rij ontwikkelt dan begin je met een $-$ , \\daarna $+$ en je wisselt de $-$ en $+$ af:
-	\begin{align*}
-	\text{als} \ 	 A & = \matdrie{-5 & 0 & 3} {4 & 2 & -1} {1 & 6 & 2} \qquad \text{dan is}\\ 
-	|A| & = \red{-}4\cdot   \dettwee{0 & 3}{6 & 2 }  
-	\red{+}2\cdot \dettwee{-5 & 3}{1 & 2 }
-	\red{--}1\cdot \dettwee{-5 & 0}{1 & 6 }\\
-	& =  \red{-}4\cdot (0\cdot 2  -  6\cdot 3) \  \red{+}2\cdot (-5\cdot 2  -  1\cdot 3)    \red{+}1\cdot (-5\cdot 6 - 1\cdot 0)\\
-	& = -4\cdot -18 +2\cdot -13 +1\cdot -30\\
-	& = 16
-	\end{align*} }
-En dat is hetzelfde als we als antwoord kregen op de  vorige bladzij.\\ \\
-\myeig[optellen $det(A)$]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde; datzelfde geldt voor rijen} \\
-\mybv[optellen $det(A)$]{Stel we hebben de matrix
-	$ A = \matvier{ 1 & -2 & 3 & 2 }
-	{ 3 & -6 & 0 & 7 }
-	{ -2 & 4 & 1 & 5 } 
-	{ -1 & 2 & 2 & -4 } 
-	$. } \\
- Dat ziet indrukwekkend uit, maar als we de $ 1^e $ kolom met $2$ vermenigvuldigen en bij de $ 2^e  $kolom optellen dan is \\
-	\begin{align*}
-	|A|  \  & = \ \detvier{ 1 & & -2 &  & 3 & 2 }
-	{ 3 & & -6 & &  0 & 7 }
-	{ -2 & & 4 & &  1 & 5 }
-	{ -1 & & 2 & &  2 & -4} \\
-	\  & = \ \detvier{ \red{1} & -2+2\cdot \red{1} &  \ \ 3 & 2 }
-	{ \red{3} & -6+2\cdot \red{3} &  \ \ 0 & 7 }
-	{ \red{-2} & \ \ 4+2\cdot \red{-2} &  \ \ 1 & 5 }
-	{ \red{-1} & \ \  2+2\cdot \red{-1} &  \ \ 2 & -4} \\
-	\ & = \ \detvier{ 1 & 0 &  \ \ 3 & 2 }
-	{ 3 & 0 &  \ \ 0 & 7 }
-	{ -2 & 0 &  \ \ 1 & 5 }
-	{ -1 & 0 &  \ \ 2 & -4} 
-	\end{align*} 
-	En, als een hele kolom $0$ is, dan is de determinant $0$, dus $ |A| = 0 $ 	 \\   \\                    
-\newpage
-Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudiger maken. 
-	Stel we hebben 
-	$ A = \matvier{ 1 & -2 & 3 & 2 }
-	{ 4 & -6 & 9 & 6 }
-	{ -2 & 1 & 1 & 5 }
-	{ -1 & 2 & 2 & -4 } $. \\ \\
- We trekken $3$ keer de $ 1^e  $ rij van de  $ 2^e $ rij af. Dan is 
+    +  & - & + & - & + & - & \ldots \\
+    -  & + & - & + & - & + & \ldots \\
+    +  & - & + & - & + & - & \ldots \\
+    -  & + & - & + & - & + & \ldots \\
+    +  & - & + & - & + & - & \ldots \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{matrix}  $
+
+\mybv[ontwikkelen]{\raggedright Dus als je bijvoorbeeld naar de $2^e$ rij ontwikkelt dan begin je met een $-$, daarna $+$ en je wisselt de $-$ en $+$ af:}
 \begin{align*}
-	|A|  \ & = \ \detvier{1 & -2 & 3 & 2 }
-	{ 4 & -6 & 9 & 6  }
-	{  -2 & 1 & 1 & 5 }
-	{ -1 & 2 & 2 & -4 } \\
-    \ & = \ \detvier{1 & -2 & 3 & 2 }
-	{ 4\red{-3\cdot1} & -6\red{-3\cdot-2} & 9\red{-3\cdot3} & 6\red{-3\cdot2}  }
-	{  -2 & 1 & 1 & 5 }
-	{ -1 & 2 & 2 & -4 } \\
-	  & = \ \detvier{1 & -2 & 3 & 2  }
-	{ 1 & 0 &  0 & 0 }
-	{  -2 & 1 & 1 & 5 }
-	{ -1 & 2 & 2 & -4 } \\% \quad \text{ontwikkelen naar de } 2^e \text{ rij!}\\
-	& = 1\cdot \detdrie{ \red{0} & \red{0} & \red{0} }{1 & 1 & 5 }{ 2 & 2 & -4 }\ 
-    -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ %\quad \text{de } 2^e \text{ kolom van de } 1^e \text{ aftrekken} \\
-    +-2\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 2 & 2 & -4 }\ 
-    --1\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 1 & 1 & 5 } \\
-    &\text{Omdat de determinant immers $0$ is, als een rij of kolom enkel nullen bevat, blijft over: } \\
-    &= 0 -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ + 0 - 0\\
-    &= -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\qquad \qquad \text{Je hoeft nu dus enkel te ontwikkelen naar de } 2^e \text{ rij!}\\
-    &\text{Je kunt nu de } 2^e \text{ kolom van de } 1^e \text{ aftrekken: } \\ 
-    &= -1\cdot  \detdrie{ -2 \red{-3} & 3 & 2 }{1 \red{-1} & 1 & 5 }{ 2\red{-2} & 2 & -4 }\\
-    &= \ -1\cdot \detdrie{ -5 & 3 & 2 }{0 & 1 & 5 }{ 0 & 2 & -4 }\ \\ 
-    &= -1\cdot -5\cdot \dettwee{1&5}{2&-4} - \red{0}\cdot \dettwee{3&2}{2&-4} + \red{0}\cdot\dettwee{3&2}{1&5}\\
-    &= -1\cdot -5\cdot \dettwee{1&5}{2&-4}\\
-    &= -1\cdot -5\cdot (1\cdot -4 -2\cdot 5) \\
-    &= -1\cdot -5\cdot (-4 -10) \\
-    &= -1\cdot -5\cdot -14 \\
-    &= -70 \\
+    	\text{Als } A &= \matdrie{-5 & 0 & 3}{4 & 2 & -1}{1 & 6 & 2} \quad \text{dan is} \\ 
+    	         |A| &= \red{-}4\cdot  \dettwee{0 & 3}{6 & 2 }  
+                         \red{+}2\cdot  \dettwee{-5 & 3}{1 & 2 }
+                         \red{-}-1\cdot \dettwee{-5 & 0}{1 & 6 }\\
+    	           &= \red{-}4\cdot (0\cdot 2-6\cdot 3)\ 
+                         \red{+}2\cdot (-5\cdot 2-1\cdot 3) 
+                         \red{+}1\cdot (-5\cdot 6-1\cdot 0)\\
+    	           &= -4\cdot -18 +2\cdot -13 +1\cdot -30\\
+    	           &= 16
+\end{align*}
+En dat is hetzelfde als we als antwoord kregen op de vorige bladzij.
+
+\myeig[optellen $det(A)$]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde. En omdat: $det(A^T) = det(A)$, geldt datzelfde dus ook voor rijen!} 
+
+\mybv[optellen $det(A)$]{\raggedright Bijvoorbeeld, stel we hebben de matrix $A$:}
+\[
+    A = \matvier{ 1 & -2 & 3 & 2 }{ 3 & -6 & 0 & 7 }{ -2 & 4 & 1 & 5 }{ -1 & 2 & 2 & -4 }
+\]
+
+Dat ziet indrukwekkend uit, maar als we de $1^e$ kolom met $2$ vermenigvuldigen en bij de $2^e$ kolom optellen dan is 
+\begin{align*}
+    |A| &= \detvier{1 & & -2 &  & 3 & 2}{3 & & -6 & & 0 & 7}{-2 & & 4 & & 1 & 5}{-1 & & 2 & & 2 & -4} \\
+        &= \detvier{ \red{1}  & \ \ -2+2\cdot \red{1} & \ \ 3 & 2 }
+                    { \red{3}  & \ \ -6+2\cdot \red{3} & \ \ 0 & 7 }
+                    { \red{-2} & \ \ 4+2\cdot \red{-2} & \ \ 1 & 5 }
+                    { \red{-1} & \ \ 2+2\cdot \red{-1} & \ \ 2 & -4} \\
+        &= \ \detvier{ 1 & 0 & \ \ 3 & 2 }{ 3 & 0 & \ \ 0 & 7 }{ -2 & 0 & \ \ 1 & 5 }{ -1 & 0 & \ \ 2 & -4} 
+\end{align*} 
+En, als een hele kolom $0$ is, dan is de determinant $0$, dus $|A| = 0$
+ 
+\newpage
+
+Als een hele rij of kolom $0$ maken niet lukt kunnen we het toch veel eenvoudiger maken. Stel we hebben 
+$A = \matvier{1 & -2 & 3 & 2}{4 & -6 & 9 & 6}{-2 & 1 & 1 & 5}{-1 & 2 & 2 & -4} $ 
+
+Een hele rij of kolom kunnen we hier inderdaad niet $0$ maken, maar we kunnen wel zorgen dat zo veel mogelijk $0$ worden. Om te beginnen trekken we $3$ keer de $1^e$ rij van de $2^e$ rij af. Dan is:
+\begin{align*}
+	|A| & = \detvier{1 & -2 & 3 & 2 }{ 4 & -6 & 9 & 6  }{  -2 & 1 & 1 & 5 }{ -1 & 2 & 2 & -4 } \\
+        & = \detvier{1 & -2 & 3 & 2 }
+                    { 4\red{-3\cdot1} & -6\red{-3\cdot-2} & 9\red{-3\cdot3} & 6\red{-3\cdot2}  }
+	              {  -2 & 1 & 1 & 5 }
+	              { -1 & 2 & 2 & -4 } \\
+	  & = \ \detvier{1 & -2 & 3 & 2  }{ 1 & 0 &  0 & 0 }{  -2 & 1 & 1 & 5 }{ -1 & 2 & 2 & -4 } \\% \quad \text{ontwikkelen naar de } 2^e \text{ rij!}\\
+	   & = 1\cdot \detdrie{ \red{0} & \red{0} & \red{0} }{1 & 1 & 5 }{ 2 & 2 & -4 }\ 
+        -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ %\quad \text{de } 2^e \text{ kolom van de } 1^e \text{ aftrekken} \\
+        +-2\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 2 & 2 & -4 }\ 
+        --1\cdot \detdrie{ -2 & 3 & 2 }{\red{0} & \red{0} & \red{0} }{ 1 & 1 & 5 } \\
+ \text{Omdat }  & \text{de determinant immers $0$ is, als een rij of kolom enkel nullen bevat, blijft over: } \\
+        &= 0 -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 }\ + 0 - 0 = -1\cdot  \detdrie{ -2 & 3 & 2 }{1 & 1 & 5 }{ 2 & 2 & -4 } \\
+\text{Je hoeft} & \text{nu dus enkel te ontwikkelen naar de } 2^e \text{ rij! Nu kun je de } 2^e \text{ kolom van de } 1^e \text{ aftrekken: } \\ 
+        &= -1\cdot  \detdrie{ -2 \red{-3} & 3 & 2 }{1 \red{-1} & 1 & 5 }{ 2\red{-2} & 2 & -4 }\\
+        &= \ -1\cdot \detdrie{ -5 & 3 & 2 }{0 & 1 & 5 }{ 0 & 2 & -4 }\ \\ 
+        &= -1\cdot -5\cdot \dettwee{1&5}{2&-4} - \red{0}\cdot \dettwee{3&2}{2&-4} + \red{0}\cdot\dettwee{3&2}{1&5}\\
+        &= -1\cdot -5\cdot \dettwee{1&5}{2&-4}\\
+        &= -1\cdot -5\cdot (1\cdot -4 -2\cdot 5) \\
+        &= -1\cdot -5\cdot (-4 -10) \\
+        &= -1\cdot -5\cdot -14 \\
+        &= -70 \\
 \end{align*}
 
 \newpage 
 \section{Opgaven}
-Bereken de determinanten van de volgende matrices:\\
+Bereken de determinanten van de volgende matrices:
+
 \begin{enumerate}[label=\Alph*]
-	\item 
-	$  = \mattwee{1 & -1}
-	{ 2 & 3} $ \\
-	\item 
-	$  = \matdrie{2 & 0 & 4}
-	{1 & 1 & 2}
-	{4 & -1 & 8} $ \\
-	\item 
-	$  =  \matdrie{3 & -1 & 0}
-	{2 & 1 & 4}
-	{5 & 0 & 4} $ \\
-	\item 
-	$  =  \matdrie{-1 & 0 & 6}
-	{1 & 4 & 3}
-	{2 & 1 & 4} $ \\ 
-	\item 
-	$   = \matvier{-1 & 0 &  0 & 6}
-	{-1 & 6 & -1 & 4}
-	{1 & 4 & 0 & 3}
-	{2 & 1 & 0 & 4} $ \\
-	\item 
-	$  =  \matvier{-1 & 2 &  5 & 3}
-	{6 & 4 & 1 & 0}
-	{1 & 0 & 2 & -4}
-	{5 & 6 & 6 & 3} $ \\
-	\item 
-	$   = \matvier{-1 & 0 &  -2 & 1}
-	{3 & 6 & -1 & 0}
-	{4 & 6 & 5 & 1}
-	{1 & 8 & 3 & 4} $ \\
-	\item 
-	$  =  \matvier{7 & 3 &  1 & 4}
-	{5 & 1 & 2 & -3}
-	{1 & 3 & 0 & 7}
-	{8 & 2 & 1 & 0} $
+    \setlength{\itemsep}{5pt}
+	\item $ = \mattwee{1 & -1}{ 2 & 3} $
+ 
+	\item $ = \matdrie{2 & 0 & 4}{1 & 1 & 2}{4 & -1 & 8} $ 
+ 
+	\item $ = \matdrie{3 & -1 & 0}{2 & 1 & 4}{5 & 0 & 4} $
+ 
+	\item $ = \matdrie{-1 & 0 & 6}{1 & 4 & 3}{2 & 1 & 4} $
+ 
+	\item $ = \matvier{-1 & 0 &  0 & 6}{-1 & 6 & -1 & 4}{1 & 4 & 0 & 3}{2 & 1 & 0 & 4} $
+	
+    \item $ = \matvier{-1 & 2 &  5 & 3}{6 & 4 & 1 & 0}{1 & 0 & 2 & -4}{5 & 6 & 6 & 3} $
+    
+	\item $ = \matvier{-1 & 0 &  -2 & 1}{3 & 6 & -1 & 0}{4 & 6 & 5 & 1}{1 & 8 & 3 & 4} $ 
+ 
+	\item $ = \matvier{7 & 3 &  1 & 4}{5 & 1 & 2 & -3}{1 & 3 & 0 & 7}{8 & 2 & 1 & 0} $
 \end{enumerate}
 
 \newpage
 \subsection{Extra opgaven}
-Bereken de determinanten van de volgende matrices:\\
+Bereken de determinanten van de volgende matrices:
 
 \begin{enumerate}[label=\Alph*]
-	\item 
-	$   = \mattwee{1 & -2}
-	{ -3 & 6} $ \\ 
-	\item 
-	$  = \mattwee{3 & 2 }
-	{1 & 4 } $ \\
-	\item 
-	$ = \matdrie{2 & 0 & 1}
-	{-1 & 2 & 7} 
-	{3 & 0 & 2} $ \\
-	\item  
-	$  = \matdrie{2 & 0 & 3}
-	{5 & 2 & 6}
-	{-1 & 4 & 3} $ \\  
-	\item 
-	$   = \matdrie{3 & 9 &  -6 }
-	{-1 & 4 & 2 }
-	{2 & 0 & -4 }
-	$ \\
-	\item 
-	$  =  \matvier{-2 & 2 &  0 & 3}
-	{-7 & 5 & 2 & 6}
-	{-1 & 4 & 0 & 3}
-	{5 & -2 & -2 & -1} $ \\ 
-	\item 
-	$ = \matvier{7 & 2 &  11 & 4}
-	{0 & 1 & 0 & 2}
-	{5 & -3 & 8 & -6}
-	{9 & 2 & 7 & 5} $
+    \setlength{\itemsep}{5pt}
+	\item $ = \mattwee{1 & -2}{ -3 & 6} $
+ 
+    \item $ = \mattwee{3 & 2 }{1 & 4 } $ 
+    
+    \item $ = \matdrie{2 & 0 & 1}{-1 & 2 & 7} {3 & 0 & 2} $ 
+    
+	\item $ = \matdrie{2 & 0 & 3}{5 & 2 & 6}{-1 & 4 & 3} $ 
+ 
+	\item $ = \matdrie{3 & 9 &  -6 }{-1 & 4 & 2 }{2 & 0 & -4 }$
+ 
+	\item $ =  \matvier{-2 & 2 &  0 & 3}{-7 & 5 & 2 & 6}{-1 & 4 & 0 & 3}{5 & -2 & -2 & -1} $
+ 
+	\item $ = \matvier{7 & 2 &  11 & 4}{0 & 1 & 0 & 2}{5 & -3 & 8 & -6}{9 & 2 & 7 & 5} $
 \end{enumerate}
