@@ -7,7 +7,7 @@ Een spiegeling in \RT wordt uitgevoerd door vanuit een punt een loodlijn te trek
 \figuur[0.7]{spiegeling2D_2}{De spiegeling in de lijn $ y=4x$. Het rode punt is het spiegelbeeld van (1,0), het blauwe het spiegelbeeld van (0,1). De grijze punten zijn de projectiepunten.}
 
 \subsection{De matrix van een spiegeling in \RT}
-\mybv[spiegeling \RT] {\raggedright Als voorbeeld nemen we de spiegeling in de lijn $y=4x$ (figuur \ref{fig:spiegeling2D_2}).} We kunnen bij een spiegeling gebruik maken van wat we bij een projectie uitgerekend hebben (zie \textit{de matrix van een projectie in \RT} blz. \pageref{projectie2D}). 
+\mybv[spiegeling \RT] { Als voorbeeld nemen we de spiegeling in de lijn $y=4x$ (figuur \ref{fig:spiegeling2D_2}).} We kunnen bij een spiegeling gebruik maken van wat we bij een projectie uitgerekend hebben (zie \textit{de matrix van een projectie in \RT} blz. \pageref{projectie2D}). 
 
 $P_{10}$ is het punt waarop $(1,0)$ \textit{geprojecteerd} wordt, en $S_{10} $ het punt waarnaar toe $(1,0)$ \textit{gespiegeld} wordt. Verder stellen we dat $\vec{p} = \overrightarrow{OP_{10}}$. ($\overrightarrow{OP_{10}}$ is de vector van de oorsprong naar punt $P_{10}$). 
 
@@ -69,7 +69,7 @@ Net zoals we bij een spiegeling in \RT gebruik maken van de projectie (op dezelf
     \qquad \qquad \text{voor elke basisvector } \hat{b}
 \]
 }
-\mybv[spiegeling \RD] {\raggedright Als voorbeeld nemen we de spiegeling in het vlak $W: 2x-3y+z = 0$.}
+\mybv[spiegeling \RD] { Als voorbeeld nemen we de spiegeling in het vlak $W: 2x-3y+z = 0$.}
 Van de \textit{projectie op $W$} (zie: 'matrix van een projectie in \RD' op blz.\pageref{projectieR3}) weten we dat:
 \[
     \vecdrie{1}{0}{0} \ \xrightarrow{P}\ \frac{1}{7}  \vecdrie{5}{3}{-1} \text{, } \quad 
@@ -106,7 +106,7 @@ Dan is de matrix van $S$:
 \section{Translatie}		
 Transleren, anders gezegd verschuiven, is een afwijkende afbeelding. Zoals we zullen zien is transleren, in tegenstelling tot roteren, spiegelen en projecteren \textit{niet} lineair. Dat is belangrijk want daarom kunnen we er niet zomaar een matrix van maken. En alleen als we een matrix hebben kunnen we (beter gezegd software) er  goed mee rekenen. 
 \subsection{Translatie niet lineair}
-\mybv[translatie \RT] {\raggedright Als voorbeeld nemen we de translatie over de vector $\vec{t}= \vectwee{2}{1} $.}
+\mybv[translatie \RT] { Als voorbeeld nemen we de translatie over de vector $\vec{t}= \vectwee{2}{1} $.}
 \figuur[0.8]{translatie2D2}{De translatie over de vector $\vec{t}$.}
 
 Je kunt de werking van deze translatie als volgt opschrijven: neem een willekeurige vector $\vectwee{x}{y} $ dan is het beeld daarvan $T\vectwee{x}{y} = \vectwee{x+2}{y+1} $.
@@ -127,7 +127,7 @@ Dat \textbf{\textit{zou}} betekenen dat het de oorsprong (0,0) niet verschoven z
 \[
     T(\vec{a} \ + \ \vec{b}) = T(\vec{a})\ +\ T(\vec{b})
 \]    
-\mybv[translatie \RT] {\raggedright Bijvoorbeeld als $\vec{a} = \vectwee{1}{0} $ en $\vec{b} \ =\ \vectwee{0}{1} $ is: }
+\mybv[translatie \RT] { Bijvoorbeeld als $\vec{a} = \vectwee{1}{0} $ en $\vec{b} \ =\ \vectwee{0}{1} $ is: }
 \begin{align*} 
 T(\vec{a}\ +\ \vec{b}) &= \mattwee{1+0}{0+1} = \mattwee{1+2}{1+1} = \mattwee{3}{2} \quad \text{maar} \\
 T(\vec{a})\ +\ T(\vec{b}) &= \mattwee{1+2}{0+1} + \mattwee{0+2}{1+1} = \mattwee{3}{1} + \mattwee{2}{2} = \mattwee{5}{3}  
@@ -144,7 +144,7 @@ Maar er bestaat een truc om  toch met een translatie te kunnen rekenen. We voege
     \vec{t} = \vectweesnel{t} \quad \text{ dan is } T_a = \matdrie{1&0&t_1}{0&1&t_2}{0&0&1} \quad \text {de affiene matrix} 
 \]
 
-\mybv[affiene matrix]{\raggedright Voor de translatie over $\vec{t} = \vectwee{2}{-3} $ is de affiene matrix $T_a$: $T_a = \matdrie{1&0&2}{0&1&-3}{0&0&1} $}
+\mybv[affiene matrix]{ Voor de translatie over $\vec{t} = \vectwee{2}{-3} $ is de affiene matrix $T_a$: $T_a = \matdrie{1&0&2}{0&1&-3}{0&0&1} $}
 
 \subsection{Rekenen met een affiene  matrix in \RT}
 Om te kunnen rekenen met een affiene matrix moeten we aan alles een dimensie toevoegen: aan punten, vectoren en andere matrices. Dat doen we als volgt: 
@@ -154,7 +154,7 @@ Om te kunnen rekenen met een affiene matrix moeten we aan alles een dimensie toe
  \]
 }
 \vspace{-5mm}
-\mybv[affiene vector]{\raggedright Bijv: 
+\mybv[affiene vector]{ Bijv: 
 \[
     \text{Als } \vec{t}= \vectwee{-4}{7} \quad \text{dan is de affiene vector} \quad t_a= \matdrie{-4}{7}{1}
 \]}
@@ -181,13 +181,13 @@ Ook in $3$ dimensies is een translatie niet lineair. Dus ook hier voegen we een 
     \text{Als } \vec{t} = \vecdriesnel{t} \quad \text{ dan is } T_a = \matvier{1&0&0&t_1} 
 	{0&1&0&t_2}{0&0&1&t_3}{0&0&0&1} \quad \text{de affiene matrix}
 \]}
-\mybv[affiene matrix]{\raggedright Voor de translatie over $\vec{t}= \vecdrie{2}{3}{-4} $ is de affiene matrix: $T_a = \matvier{1&0&0&2}{0&1&0&3}{0&0&1&-4}{0&0&0&1} $}
+\mybv[affiene matrix]{ Voor de translatie over $\vec{t}= \vecdrie{2}{3}{-4} $ is de affiene matrix: $T_a = \matvier{1&0&0&2}{0&1&0&3}{0&0&1&-4}{0&0&0&1} $}
 \mydeftekst{affiene vector}{\[
     \text{Als } \vec{v} =\ \vecdriesnel{v} \quad \text{ dan is } \quad 
 	\vec{v}_a = \vecvier{v_1}{v_2}{v_3}{1} \quad \text{de affiene vector }
 \]} 
 \vspace{-5mm}
-\mybv[affiene vector]{\raggedright Bijvoorbeeld: \[ 
+\mybv[affiene vector]{ Bijvoorbeeld: \[ 
     \text{Als } \vec{a} =\ \vecdrie{2}{-4}{-1} \quad \text{dan is } \quad 
 	\vec{a}_a = \vecvier{2}{-4}{-1}{1} \quad \text{de affiene vector }
 \]}
@@ -203,7 +203,7 @@ Het beeld van $\vec{v} $ kunnen we nu uitrekenen:
     =\ \vecvier{v_1 + 2}{v_2 + 3}{v_3 - 4}{1}
 \]
 Dus: \quad \quad $\vecdriesnel{v} \ \xrightarrow{T} \ \vecdrie{v_1+2}{v_2+3}{v_3-4} $ 
-\mybv[affiene vector]{\raggedright Bijvoorbeeld 
+\mybv[affiene vector]{ Bijvoorbeeld 
 \[
     \vecdrie{1}{1}{1} \ \xrightarrow{T} \ \vecdrie{3}{4}{-3} \quad \text{en} \quad 
     \vecdrie{0}{1}{0} \ \xrightarrow{T} \ \vecdrie{2}{4}{-4}
@@ -217,7 +217,7 @@ Bewegen bestaat natuurlijk niet alleen uit draaien (roteren), spiegelen enzovoor
  N.B.: voor je gevoel draait de volgorde om! Maar als je goed kijkt zie je dat je eerst $A$ uitvoert en daarna $B$.
  
 \subsection{Samenstelling in \RT}
-\mybv[samenstelling]{\raggedright Stel dat de rotatie $R = \mattwee{1&-1}{1&1} $ \quad en de projectie \quad $P=\ \mattwee{0.5&0.5}{0.5&0.5} $ en we willen \textit{eerst} roteren en \textit{daarna} projecteren, dan is de matrix van die samenstelling:} 
+\mybv[samenstelling]{ Stel dat de rotatie $R = \mattwee{1&-1}{1&1} $ \quad en de projectie \quad $P=\ \mattwee{0.5&0.5}{0.5&0.5} $ en we willen \textit{eerst} roteren en \textit{daarna} projecteren, dan is de matrix van die samenstelling:} 
 \[
   S = P\cdot R =\ \mattwee{0.5&0.5}{0.5&0.5} \cdot \mattwee{1&-1}{1&1} =\ \mattwee{1&0}{1&0} 
 \]
@@ -225,7 +225,7 @@ maar als we \textit{eerst} willen  projecteren en \textit{daarna}  roteren, dan 
 \[
   S_2 = R\cdot P = \mattwee{1&-1}{1&1} \cdot\ \mattwee{0.5&0.5}{0.5&0.5} =\ \mattwee{0&0}{1&1}
 \]
-\mybv[samenstelling]{\raggedright Stel dat de rotatie $R = \mattwee{\cos\theta & -\sin\theta}{\sin\theta & \cos\theta} $ \quad en de projectie \quad $P =\ \frac{1}{17}\ \mattwee{1&4}{4&16} $ en we willen \textit{eerst} projecteren en \textit{daarna} roteren, dan is de matrix van die samenstelling:}
+\mybv[samenstelling]{ Stel dat de rotatie $R = \mattwee{\cos\theta & -\sin\theta}{\sin\theta & \cos\theta} $ \quad en de projectie \quad $P =\ \frac{1}{17}\ \mattwee{1&4}{4&16} $ en we willen \textit{eerst} projecteren en \textit{daarna} roteren, dan is de matrix van die samenstelling:}
 \begin{align*} 
     S = R\cdot P &=	\mattwee{\cos\theta & -\sin\theta}{\sin\theta & \cos\theta} \ \cdot \ 
                         \frac{1}{17} \ \mattwee{1&4}{4&16}  \\
@@ -243,8 +243,7 @@ Als we een translatie in \RT willen samenstellen met een andere afbeelding moete
 \mydeftekst[Als $A = \mattwee{a_{11} & a_{12}}{a_{21} & a_{22}} $]{affiene matrix}
 {dan is de affiene matrix daarvan, $A_a = \matdrie{a_{11} & a_{12} & 0}{a_{21} & a_{22} & 0}{0 & 0 & 1} $}
 
-\newpage
-\mybv[affiene samenst.]{\raggedright Stel $T$ is de translatie over $\vec{t} =\ \vectwee{4}{-3} $ en dat we daarnaast willen roteren met $R = \mattwee{1&-1}{1&1} $ en willen met $S = \mattwee{0&1}{1&0}$. Dan zijn de affiene matrices:}
+\mybv[affiene samenst.]{ Stel $T$ is de translatie over $\vec{t} =\ \vectwee{4}{-3} $ en dat we daarnaast willen roteren met $R = \mattwee{1&-1}{1&1} $ en willen met $S = \mattwee{0&1}{1&0}$. Dan zijn de affiene matrices:}
 \[
     T_a = \matdrie{1&0&4}{0&1&-3}{0&0&1} \qquad 
     R_a = \matdrie{1&-1&0}{1&1&0}{0&0&1} \qquad
@@ -272,7 +271,7 @@ Als we een translatie in \RD willen samenstellen met een andere afbeelding moete
 	                     {0&0&0&1} $ de affiene matrix van $A$. 
 } 
                         
-\mybv[affiene samenst.]{\raggedright Stel $T$ is de translatie over $\vec{t} = \vecdrie{4}{-3}{2} $, en    
+\mybv[affiene samenst.]{ Stel $T$ is de translatie over $\vec{t} = \vecdrie{4}{-3}{2} $, en    
 	$R = \matdrie{1&-1&0}{1&1&-1}{0&-1&1} $, en $P = \matdrie{0&1&0}{1&0&0}{0&0&1} $ }
 Dan zijn de affiene matrices:
 \[

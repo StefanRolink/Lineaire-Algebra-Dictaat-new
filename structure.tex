@@ -796,6 +796,9 @@ addtohook={%
 \pdfstringdefDisableCommands{\let\HyPsd@CatcodeWarning\@gobble}
 \makeatother
 
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+
 \newcommand{\plh}{{\mkern-2mu\times\mkern-2mu}}
 \newcommand{\mytrans}[1]{$ #1^T $}
 \newcommand{\noteq}{ $ \ne $ }
@@ -803,16 +806,12 @@ addtohook={%
 \newcommand{\RT}{$\mathbb{R}^{2}\ $}
 
 % COLORS
-\newcommand{\red}[1]{
-{\color{red}#1}}
-\newcommand{\blu}[1]{
-{\color{blue}#1}}
-\newcommand{\gre}[1]{
-{\color{olive}#1}}
-\newcommand{\pur}[1]{
-{\color{purple}#1}}
-\newcommand{\bro}[1]{
-{\color{brown}#1}}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blu}[1]{{\color{blue}#1}}
+\newcommand{\gre}[1]{{\color{olive}#1}}
+\newcommand{\pur}[1]{{\color{purple}#1}}
+\newcommand{\bro}[1]{{\color{brown}#1}}
+
 % DETERMINANTEN
 \newcommand{\dettwee}[2]{
 \begin{vmatrix}
@@ -912,7 +911,7 @@ $ \vec{#1} $}
 % Macro's:
 \newcommand{\mydef}[3] []{
   #1\index[definities]{#2}
-	\marginnote{\color{nhl_blue} \textbf{\Large $ \Delta $} #2} [9mm] \begin{center}#3\end{center}
+	\marginnote{\color{nhl_blue} \textbf{\Large $ \Delta $} #2} [12mm] #3
         % \vspace{7mm}
 }
 
@@ -938,7 +937,7 @@ $ \vec{#1} $}
 \newcommand{\mybv} [2][]{
   \index [voorbeelden]{#1} 
   % \vspace{2mm}
-  \marginnote{\color{nhl_blue} {\LARGE $\nu$} #1}[9mm] \begin{center}#2\end{center}
+  \marginnote{\color{nhl_blue} {\LARGE $\nu$} #1}[12mm] #2
   % \vspace{7mm}
 }
 

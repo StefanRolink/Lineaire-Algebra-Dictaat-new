@@ -5,7 +5,7 @@ Dit en het volgende hoofdstuk gaan over lineaire afbeeldingen. Lineaire afbeeldi
 
 \mydeftekst[Een matrix is:]{matrix}{een verzameling getallen in een rechthoek, gerangschikt in rijen en kolommen.}
 
-\mybv[matrix]{\raggedright Een matrix geven we aan met een hoofdletter, bijv:
+\mybv[matrix]{ Een matrix geven we aan met een hoofdletter, bijv:
 \[
     S = \mattwee{2&1}{3&4} \qquad M = \begin{pmatrix}
 	                                   2 & -1 \\
@@ -26,16 +26,16 @@ De algemene vorm van een $m \times n$ matrix is:
 \]
 Deze matrix heeft $ m $ rijen en $ n $ kolommen. Meestal beperken we ons tot $ 2 \times 2 $ , \  $ 3 \times 3 $ of $ 4 \times 4 $ matrices.
 \section{Bijzondere matrices}
-\mydeftekst[Een \textit{vector} is:]{vector}{een matrix die bestaat uit één rij of één  kolom, en wordt zoals je al weet, \textit{niet} met een hoofdletter aangeduid maar met een kleine en een pijltje erboven.} \mybv[vector]{\raggedright Ter voorbeeld: \[\vec{v} = \vectwee{2}{3} \]}
+\mydeftekst[Een \textit{vector} is:]{vector}{een matrix die bestaat uit één rij of één  kolom, en wordt zoals je al weet, \textit{niet} met een hoofdletter aangeduid maar met een kleine en een pijltje erboven.} \mybv[vector]{ Ter voorbeeld: \[\vec{v} = \vectwee{2}{3} \]}
 
 \mydeftekst{vierkante matrix}{Een vierkante matrix is: Een matrix met evenveel rijen als kolommen. We schrijven dat als een $n \times n$ matrix:} 
-\mybv[vierkante matrix]{\raggedright Bijvoorbeeld een vierkante, $4 \times 4$ matrix: $P$:
+\mybv[vierkante matrix]{ Bijvoorbeeld een vierkante, $4 \times 4$ matrix: $P$:
 \[
     P = \matvier{6&2&0&7}{9&-1&-4&3} {0&3&1&5}{-2&8&3&2} 
 \]}  
 
 \mydeftekst{hoofddiagonaal}{De hoofddiagonaal van een matrix is: De diagonaal van linksboven naar rechtsonder}
-\mybv[hoofddiagonaal]{\raggedright Bij $ A = \matdrie { {\red{-1}} & 2 & 3}{0 & \red{4} & 1 }{-3&2&\red{1}} $ \ staan de getallen $-1$, $4$ en $1$ op de hoofddiagonaal}
+\mybv[hoofddiagonaal]{ Bij $ A = \matdrie { {\red{-1}} & 2 & 3}{0 & \red{4} & 1 }{-3&2&\red{1}} $ \ staan de getallen $-1$, $4$ en $1$ op de hoofddiagonaal}
  
 \mydeftekst{diagonaalmatrix}{Een diagonaalmatrix is: Een vierkante matrix waar alleen op de hoofddiagonaal getallen $\ne 0$ staan. Ter voorbeeld:}
 \mybv[diagonaalmatrix]{\[ D = \matdrie{1&0&0}{0&3&0}{0&0&-1} \]}
@@ -54,7 +54,7 @@ Deze matrix heeft $ m $ rijen en $ n $ kolommen. Meestal beperken we ons tot $ 2
 \mydeftekst[Een symmetrische matrix is:]{symmetrisch}{een matrix $A$ waarbij $ A^{T} = A $. 
 
 In feite betekent dat dat de rechterbovenhoek van de matrix gespiegeld wordt in de linkeronderhoek. }  
-\mybv[symmetrisch]{\raggedright Bijvoorbeeld: 
+\mybv[symmetrisch]{ Bijvoorbeeld: 
 \[
     \text{Als } A = \mattwee{2&1}{1&6} \quad \text{dan is } A^{T} = \mattwee{2&1}{1&6} = A 
 \]}
@@ -77,7 +77,6 @@ Het eerste element van het product krijgen we door de getallen in de eerste \tex
 }
 Hierbij vermenigvuldig je eerst elk zwart getal  met het bijbehorende rode getal ($3$ met \red{$-4$}, daarna $-1$ met \red{$1$}  en vervolgens $2$ met \red{$-2$}). Die vermenigvuldigingen  tel je bij elkaar  op met als uitkomst $-17$. Vervolgens doe je met de zwarte en blauwe getallen  hetzelfde om $20$ te krijgen, daarna ook met de groene en rode getallen  (met $-21$ als uitkomst), en tot slot groen met blauw combineren met als uitkomst $-15$.
 
-\newpage
 \subsection{eigenschappen van matrixvermenigvuldiging}
 \myeig[ A.B \noteq B.A ]{Anders dan bij gewone getallen is matrixvermenigvuldiging niet commutatief. Dat wil zeggen: $2\times 3 = 3\times 2$, maar als $A$ en $B$ matrices zijn dan is meestal $A.B \ne B.A$! }
 \mybv[A.B \noteq B.A  ]{
@@ -106,10 +105,10 @@ Om met lineaire afbeeldingen te kunnen rekenen moeten we de matrix bepalen. Jamm
 
 \mydeftekst{basisvector}{Basisvectoren zijn: vectoren die gecombineerd alle andere vectoren kunnen genereren (maken)}
 
-\mybv[basis \RT]{\raggedright Basisvectoren voor \RT zijn: $\vectwee{1}{0} $ en $\vectwee{0}{1} $ want met combinaties van deze twee vectoren kun je alle andere tweedimensionale vectoren maken. Bijv:} 
+\mybv[basis \RT]{ Basisvectoren voor \RT zijn: $\vectwee{1}{0} $ en $\vectwee{0}{1} $ want met combinaties van deze twee vectoren kun je alle andere tweedimensionale vectoren maken. Bijv:} 
 \[\vectwee{3}{-4} = 3\cdot \vectwee{1}{0} -4\cdot\vectwee{0}{1} \]
 
-\mybv[basis \RD]{\raggedright Basisvectoren voor \RD zijn: $\vecdrie{1}{0}{0}\ ,\ \vecdrie{0}{1}{0} $ en $\vecdrie{0}{0}{1} $ want met combinaties van deze drie vectoren kun je alle andere driedimensionale vectoren maken. Bijv:}
+\mybv[basis \RD]{ Basisvectoren voor \RD zijn: $\vecdrie{1}{0}{0}\ ,\ \vecdrie{0}{1}{0} $ en $\vecdrie{0}{0}{1} $ want met combinaties van deze drie vectoren kun je alle andere driedimensionale vectoren maken. Bijv:}
 \[\vecdrie{1}{-2}{5} = 1\cdot\vecdrie{1}{0}{0} \ -2\cdot \vecdrie{0}{1}{0} \ + \ 5\cdot\vecdrie{0}{0}{1} \]
 
 \myeig[matrix bepalen]{De matrix van een afbeelding bestaat uit: het beeld van de basisvectoren}
@@ -117,7 +116,7 @@ Om met lineaire afbeeldingen te kunnen rekenen moeten we de matrix bepalen. Jamm
 Dus wat de afbeelding doet met elke basisvector levert de matrix van een afbeelding
 Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te berekenen wat de afbeelding doet met basisvectoren. 
 
-\mybv[matrix \RD]{\raggedright Stel we weten van afbeelding $A$ alleen wat er met de basisvectoren gebeurt:} 
+\mybv[matrix \RD]{ Stel we weten van afbeelding $A$ alleen wat er met de basisvectoren gebeurt:} 
 \[
     \vecdrie{1}{0}{0} \ \ \xrightarrow{A} \ \ \vecdrie[red]{0}{3}{1}  \qquad \text{ en } \qquad 
     \vecdrie{0}{1}{0} \ \ \xrightarrow{A} \ \ \vecdrie[blue]{2}{0}{1} \qquad \text{ en } \qquad 
@@ -127,7 +126,7 @@ Anders gezegd om  de matrix te bepalen van een afbeelding is het genoeg om te be
 Dan is de matrix van $A= \matdrie{\red{0} & \blu{2} & \gre{-1}}{\red{3} & \blu{0} & \gre{0}}{\red{1} & \blu{1} & \gre{1}} $
 
 \subsection{Voorbeeld matrix bepalen van afbeelding (projectie)}
-\mybv[matrix \RT]{\raggedright Stel $P$ is de projectie in \RT op de $x$-as, dat wil zeggen: alle punten in het vlak worden geprojecteerd op de $x$-as. Dus de punten uit een tweedimensionale ruimte worden dan terug gebracht naar een eendimensionale ruimte. (zie figuur \ref{fig:projectie2D}).} 
+\mybv[matrix \RT]{ Stel $P$ is de projectie in \RT op de $x$-as, dat wil zeggen: alle punten in het vlak worden geprojecteerd op de $x$-as. Dus de punten uit een tweedimensionale ruimte worden dan terug gebracht naar een eendimensionale ruimte. (zie figuur \ref{fig:projectie2D}).} 
 \figuur[0.5]{projectie2D}{De projectie in \RT op de $x$-as; het punt $(3,4)$ komt bijvoorbeeld uit op het punt  $(3,0)$.}
 
 Het beeld van de basisvector $\vectwee{1}{0} $ onder $P$ is $\vectwee{1}{0} $ en $\vectwee{0}{1} $ gaat naar $ \vectwee{0}{0} $, anders gezegd:
@@ -190,7 +189,7 @@ Anders gezegd: (Let op het minteken!)
 En dus is de matrix van \textit{R} =  
 $  \mattwee { \red{\cos \theta} & \blu{-\sin \theta} }{ \red{\sin \theta} & \blu{\cos \theta}} $
 
-\mybv[rotatie 60]{\raggedright Als $\theta = 60\degree$ dan is $\cos\theta = \cos 60\degree = 0.5$ en $\sin 60\degree = \frac{1}{2} \sqrt{3}$ (reken uit met de rekenmachine) en dat betekent dat als je linksom draait over $60\degree$ je matrix wordt:}
+\mybv[rotatie 60]{ Als $\theta = 60\degree$ dan is $\cos\theta = \cos 60\degree = 0.5$ en $\sin 60\degree = \frac{1}{2} \sqrt{3}$ (reken uit met de rekenmachine) en dat betekent dat als je linksom draait over $60\degree$ je matrix wordt:}
 \[
 	R_{60} = \mattwee{\frac{1}{2} & -\frac{1}{2} \sqrt{3}}{\frac{1}{2}\sqrt{3} & \frac{1}{2}} 
            = \frac{1}{2} \cdot \mattwee{1 & -\sqrt{3}}{\sqrt{3} & 1}
@@ -228,7 +227,7 @@ In \RD draaien (roteren) we niet om een punt maar om een as. Het lijkt op wat je
 
 \figuur[0.5]{rotatie3D-3}{Rotatie in \RD om de z-as over een hoek $\theta.$ Je kunt dit zien als een rotatie in $x$ en $y$ waarbij de $z$-coördinaat  hetzelfde blijft, dus een rotatie in \RT, zie figuur \ref{fig:rotatie3D-3als2d} Ga na waar de basisvectoren langs de $x$-, $y$- en $z$-as komen na de rotatie. }
 
-\mybv[rotatie \RD]{\raggedright Als voorbeeld gaan we een rotatie rechtsom om de z-as over de hoek $\theta$ uitrekenen.}
+\mybv[rotatie \RD]{ Als voorbeeld gaan we een rotatie rechtsom om de z-as over de hoek $\theta$ uitrekenen.}
 
 We gaan weer bepalen waar de basisvectoren komen na de rotatie. De basisvectoren langs de assen zijn: 
 \[
@@ -258,7 +257,7 @@ N.B.: Het $2\times2$ stukje linksboven in de matrix $R$ is hetzelfde als bij een
 \subsection{De matrix van een projectie in \RT} \label{projectie2D}
 In \RT is een projectie  het loodrecht verplaatsen van punten   naar een rechte lijn (zie figuur \ref{fig:projectie2D},  \ref{fig:projectie2D-2} en \ref{fig:projectie2D-3} ) 
 
-\mybv[projectie  \RT]{\raggedright De projectie op de lijn $y=x$.}	
+\mybv[projectie  \RT]{ De projectie op de lijn $y=x$.}	
 \figuur[0.6]{projectie2D-2}{De projectie op de lijn $l:y=x$. Merk op dat beide basisvectoren op dezelfde vector (paars = rood + blauw!) geprojecteerd worden.}
 
 Om de matrix te bepalen moeten we kijken wat er gebeurt met de basisvectoren. 	
@@ -269,8 +268,7 @@ Zoals je in figuur \ref{fig:projectie2D-2} kunt zien werkt de projectie zo dat b
 \]
 Dat betekent dat: \[P = \mattwee{\red{0.5}&\blu{0.5}}{\red{0.5}&\blu{0.5}} \]
 
-\newpage
-\mybv[projectie \RT]{\raggedright De projectie op de lijn $y=4x$.}
+\mybv[projectie \RT]{ De projectie op de lijn $y=4x$.}
 \figuur[0.6]{projectie2D-3}{De projectie op de lijn $l:y=4x$ met loodlijnen $m_{10}$ door $(1,0)$ en $m_{01}$ door $(0,1)$.}
 
 Bij de vorige projectie konden we aflezen wat het resultaat van de projectie was. In het algemeen is dat lastiger, en moeten we eerst loodlijnen uitrekenen. Zie figuur  \ref{fig:projectie2D-3}. De loodlijn $ m_{10} $ staat loodrecht op $l$ en gaat door het punt $(1,0)$, de loodlijn $m_{01}$ staat ook loodrecht op $l$ maar gaat door het punt $(0,1)$. De vraag is: hoe berekenen we de loodlijnen? Daarvoor maken we gebruik van het volgende eigenschap:
@@ -282,7 +280,7 @@ Waarbij $rc$ de richtingscoëfficiënt is, oftewel de $a$ in de algemene vergeli
 Anders gezegd: de richtingscoëfficiënt van een lijn loodrecht op een andere (het origineel) is het omgekeerde daarvan met een min ervoor. Uit het vak logica komt misschien deze nog wel bekend voor: Als $2$ rechte lijnen loodrecht op elkaar staan dan geldt er:
 \[rc_{\text{lijn}1}\ \cdot\ rc_{\text{lijn}2} = -1\]
 
-\mybv[rc loodlijn]{\raggedright Als $l: y=4x$ dan is de richtingscoëfficiënt van $l$:\ $rc_l=4$ en de richtingscoëfficiënt van de loodlijn $rc_{loodlijn} = -\frac{1}{4}$.} 
+\mybv[rc loodlijn]{ Als $l: y=4x$ dan is de richtingscoëfficiënt van $l$:\ $rc_l=4$ en de richtingscoëfficiënt van de loodlijn $rc_{loodlijn} = -\frac{1}{4}$.} 
 Dan weten we dus dat $m_{10}: y= -\frac{1}{4}x+b_{10}$ ($b_{10}$ is een constante, vergelijk met de algemene vergelijking van een lijn hierboven). De constante $b_{10}$ kunnen we uitrekenen doordat we weten dat het punt $(1,0)$ op $m_{10}$ ligt:  \[0 = -\frac{1}{4}\cdot 1 + b_{10}\quad \text{ dus is } \quad b_{10}= \frac{1}{4}\quad \text{ en } \quad m_{10}: y=-\frac{1}{4}x+\frac{1}{4}\] 
  
 De andere loodlijn gaat op dezelfde manier: $rc_{01}= -\frac{1}{4}$. Dus $m_{01}: y=-\frac{1}{4}x + b_{01}$, en we weten dat $(0,1)$ op $m_{01}$ ligt. Dus: \[1=-\frac{1}{4}\cdot 0 + b_{01} \quad \text{ dus } \quad b_{01} = 1 \quad \text{ en dus } \quad m_{01}: y=-\frac{1}{4}x+1\] Als we snijpunten (rood en blauw in figuur \ref{fig:projectie2D-3} ) weten, weten we waar de basisvectoren terecht komen. Voor het snijpunt (rood) van  $l$ en $m_{10}:$ geldt:
@@ -327,7 +325,7 @@ en dus is de matrix van $P$:
 \newpage
 \subsection{De matrix van een projectie in \RD}\label{projectieR3}
 Voor het vinden van de matrix van de projectie $P$ op een vlak in \RD moeten we bepalen wat er met de drie basisvectoren langs de $x$-, $y$-, en $z$-as gebeurt.
-\mybv[projectie \RD]{\raggedright We nemen als voorbeeld de projectie op het vlak $W: 2x-3y+z=0$. Het punt $(1,0,0)$ komt op het 
+\mybv[projectie \RD]{ We nemen als voorbeeld de projectie op het vlak $W: 2x-3y+z=0$. Het punt $(1,0,0)$ komt op het 
 blauwe punt in het vlak $W$ terecht, $(0,1,0)$ komt op het rode punt in $W$ en $(0,0,1)$ komt op het groene punt in $W$. Zie figuur \ref{fig:projectievlak}}
 
 \figuur[0.6]{projectievlak}{De projectie op het vlak $W: 2x-3y+z=0$ door de oorsprong met de blauwe loodlijn $\blu{l_{100}}$, door $(1,0,0)$, de rode $\red{l_{010}}$ door $(0,1,0)$ en de groene $\gre{l_{001}}$ door $(0,0,1)$. N.B.: De snijpunten van de loodlijnen met het vlak $W$, zijn met respectievelijk rood, groen en blauw aangegeven. Merk op dat de punten $(1,0,0)$ en $(0,0,1)$ 'omhoog' geprojecteerd worden en $(0,1,0)$ 'naar beneden'.}	

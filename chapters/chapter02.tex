@@ -5,7 +5,7 @@ In dit hoofdstuk behandelen we vectoren en hoe vectoren in de wiskunde gebruikt 
 \mydeftekst[Een \textit{vector} is] {vector} {een verzameling getallen die in een rij of kolom gerangschikt zijn.} In dit dictaat bestaat een vector alleen uit reële getallen (d.w.z. gehele getallen, breuken en getallen als $\pi$ of $\sqrt{2}$). Alle reële getallen samen noemen we $\mathbb{R}$, de twee-dimensionale ruimte met reële getallen \RT, en de drie-dimensionale ruimte \RD.
 Een vector wordt hier geschreven als een kleine letter met een pijltje erboven. 
 
-\mybv[vector \RD, \RT]{\raggedright Bijvoorbeeld $\vec{b}$ en:
+\mybv[vector \RD, \RT]{ Bijvoorbeeld $\vec{b}$ en:
 \[
     \vec{x} = \vecdriesnel {x}    \quad \quad
 	\vec{v} = \vectwee {x}{y} 	  \quad \quad 
@@ -17,32 +17,30 @@ $\vec{x}$ is bijv. een vector in \RD, een vector in de drie-dimensionale ruimte.
 
 \figuur[0.9]{vectorVB3}{(a) De \textit{vector} $\vec{a} $ in \RT is het 'pijltje' vanuit O, de oorsprong, naar het punt (1,2) met een lengte en een richting. Het \textit{punt P(2,1)} heeft \textit{geen} lengte of richting. (b) De vector $\vec{s} $ in \RD loopt iets naar achter omhoog.}
 
-
 \section{Rekenen met vectoren}
 Je kunt op verschillende manieren rekenen met vectoren.
 
 \subsubsection{Optellen}
 Het optellen van vectoren doe je door de overeenkomstige elementen van de vectoren bij elkaar op te tellen. Als volgt:
 
-\newpage
-\mydef[De som van twee vectoren \V{a} en \V{b} \ is:] {som}
-{\[\vec{a} + \vec{b} \ =\ \vecdriesnel{a} \ + \ \vecdriesnel{b} \ = \ \vecdrie{a_1+b_1}{a_2+b_2}{a_3+b_3} \]} 
+\mydef[De som van twee vectoren $\vec{a}$ en $\vec{b}$ \ is:] {som}{\[
+  \vec{a} + \vec{b} \ =\ \vecdriesnel{a} \ + \ \vecdriesnel{b} \ = \ \vecdrie{a_1+b_1}{a_2+b_2}{a_3+b_3} 
+\]} 
 
 Je kunt 2 vectoren alleen maar bij elkaar optellen als ze dezelfde dimensie hebben, dat wil zeggen een gelijk aantal elementen.
 
-\mybv[som \RD]{\raggedright Bijvoorbeeld in \RD: 
+\mybv[som \RD]{ Bijvoorbeeld in \RD: 
 \[ 
     \vecdrie{3}{-1}{2} \ + \ \vecdrie{0}{6}{-4} \ =\ \vecdrie{3+0}{-1+6}{2+-4}\ =	\ \vecdrie{3}{5}{-2} 
 \]}
 
-\mybv[som \RT]{\raggedright En in \RT:
+\mybv[som \RT]{ En in \RT:
 \[
   \vectwee{-3}{6} \ +\ \vectwee{7}{2} \ =\ \vectwee{-3+7}{6+2} \ =\ \vectwee{4}{8} \qquad \text{(zie figuur  \ref{fig:som2_new})}
 \]}
 
 \figuur[0.4]{som2_new}{De som van de vectoren $\vec{a}$ en $\vec{b}$ is weer een vector. Ga voor jezelf na dat je de resulterende vector kunt krijgen door $\vec{a}$ 'op' $\vec{b}$ te plaatsen en andersom.}
 
-\newpage
 \subsubsection{Scalair product}
 Als je een vector vermenigvuldigt met een getal heet dat vermenigvuldigen met een scalar (scalair product). Bij scalaire vermenigvuldiging worden alle elementen van de vector met datzelfde getal vermenigvuldigd.
 
@@ -51,7 +49,7 @@ Als je een vector vermenigvuldigt met een getal heet dat vermenigvuldigen met ee
     c \cdot \vec{a} \ = \ c\cdot \vecdriesnel{a} \ =\ \vecdrie{c\cdot a_1}{c\cdot a_2}{c\cdot a_3}
 \]}
 
-\mybv[scalair product]{\raggedright Ter voorbeeld, als $\vec{a} = \vectwee{-4}{-3} $ en $c= -2$, dan is $c \cdot \vec{a} $:
+\mybv[scalair product]{ Ter voorbeeld, als $\vec{a} = \vectwee{-4}{-3} $ en $c= -2$, dan is $c \cdot \vec{a} $:
 \[ 
     c \cdot \vec{a} = -2\cdot \vectwee{-4}{-3} =\ \vectwee {-2\cdot -4}{-2\cdot -3} 
                     =\ \vectwee{8}{6} \qquad \text{(Zie ook figuur \ref{fig:scalair})}
@@ -62,17 +60,17 @@ Als je een vector vermenigvuldigt met een getal heet dat vermenigvuldigen met ee
 \subsubsection{Verschil}
 Vectoren van elkaar aftrekken doe je door de overeenkomstige elementen van elkaar af te trekken:
 
-\mydeftekst[Het verschil tussen twee vectoren \V{a} en \V{b} is:]{verschil}{
+\mydeftekst[Het verschil tussen twee vectoren $\vec{a}$ en $\vec{b}$ is:]{verschil}{
 \[ 
     \vec{a} - \vec{b} = \vecdriesnel{a} - \vecdriesnel{b} = \vecdrie{a_1-b_1}{a_2-b_2}{a_3-b_3}
 \]}
 
-\mybv[verschil \RD]{\raggedright Een voorbeeld in \RD: 
+\mybv[verschil \RD]{ Een voorbeeld in \RD: 
 \[
     \vecdrie{3}{-1}{2} - \vecdrie {0}{6}{-4} =  \vecdrie{3-0}{-1-6}{2--4} = \vecdrie{3}{-7}{6}
 \]}
 
-\mybv[verschil \RT]{\raggedright En een voorbeeld in \RT: 
+\mybv[verschil \RT]{ En een voorbeeld in \RT: 
 \[
     \vectwee{-3}{6} - \vectwee{7}{2} = \vectwee{-3 - 7}{6-2} = \vectwee{-10}{4} \qquad \text{(zie ook figuur \ref{fig:verschil2})}
 \]}
@@ -91,7 +89,7 @@ Het inproduct van twee vectoren is een getal(!), geen vector. We noteren het inp
     (\vec{a}, \vec{b}) = a_1b_1 + a_2b_2 + . . . + a_nb_n
 \]}
 
-\mybv[inproduct]{\raggedright Bijvoorbeeld, als $\vec{a} = \vecdrie{3}{-1}{2} $ en $\vec{b} = \vecdrie{0}{6}{-4} $ dan is $(\vec{a}, \vec{b})$: 
+\mybv[inproduct]{ Bijvoorbeeld, als $\vec{a} = \vecdrie{3}{-1}{2} $ en $\vec{b} = \vecdrie{0}{6}{-4} $ dan is $(\vec{a}, \vec{b})$: 
 \[
     (\vec{a}, \vec{b}) = 3\cdot0 +-1\cdot6 +2\cdot-4 = 0-6-8=-14
 \]}
@@ -113,8 +111,7 @@ Oftewel in wiskundetaal: \mydeftekst{Loodrecht}{
 
 \figuur[0.3]{loodrecht}{De vectoren $\vec{a}$ en $\vec{b}$ staan loodrecht op elkaar.}
 
-\newpage
-\mybv [loodrecht]{\raggedright Bijvoorbeeld, stel dat $\vec{a} = \vectwee{1}{-2} $ en $\vec{b} = \vectwee{2}{1} $ dan is $(\vec{a}, \vec{b})$:
+\mybv [loodrecht]{ Bijvoorbeeld, stel dat $\vec{a} = \vectwee{1}{-2} $ en $\vec{b} = \vectwee{2}{1} $ dan is $(\vec{a}, \vec{b})$:
 \[
     (\vec{a}, \vec{b}) = 1\cdot2 + -2\cdot1 = 0 \qquad \text{(Zie ook figuur \ref{fig:loodrecht})}
 \]}
@@ -127,7 +124,7 @@ De andere manier waarop je 2 vectoren kunt 'vermenigvuldigen' heet het uitproduc
     \vec{a} \times \vec{b} \ = \ \vecdriesnel{a} \ \times\ \vecdriesnel{b} \ =\ \vecdrie{a_2\cdot b_3 -a_3\cdot b_2}{a_3\cdot b_1 -a_1\cdot b_3}{a_1\cdot b_2 - a_2\cdot b_1}
 \]} 
 
-\mybv[uitproduct]{\raggedright Bijvoorbeeld, als $\vec{a} = \vecdrie{-1}{2}{4} $ en $\vec{b} = \vecdrie{3}{-2}{1} $, dan is $\vec{c} = \vec{a} \times \vec{b}$:
+\mybv[uitproduct]{ Bijvoorbeeld, als $\vec{a} = \vecdrie{-1}{2}{4} $ en $\vec{b} = \vecdrie{3}{-2}{1} $, dan is $\vec{c} = \vec{a} \times \vec{b}$:
 \[
     \vec{c} = \vec{a}\times \vec{b} = \vecdrie{2\cdot1 - 4\cdot-2}{4\cdot3--1\cdot1}{-1\cdot-2 - \cdot.3} = \vecdrie{10}{13}{-4}
 \]}
@@ -136,7 +133,7 @@ De andere manier waarop je 2 vectoren kunt 'vermenigvuldigen' heet het uitproduc
 
 De vector $\vec{c}\ =\ \vec{a} \times \vec{b}$ staat loodrecht op $\vec{a}$ en loodrecht op $\vec{b}$}
 
-\mybv[loodrecht]{\raggedright Neem bijv.: $ \vec{a},\ \vec{b}$ en $\vec{c}$ als hierboven,dan is:}
+\mybv[loodrecht]{ Neem bijv.: $ \vec{a},\ \vec{b}$ en $\vec{c}$ als hierboven,dan is:}
 \begin{align*}
     (\vec{c}, \vec{a}) &= 10\cdot-1 + 13\cdot2 -4\cdot4 \\
                        &= -10+26-16 \\
@@ -163,7 +160,7 @@ De norm van een vector is de lengte daarvan. Dat is in \RD en \RT makkelijk  voo
     |\vec{a}| = \sqrt{ {a_1}^{2} + {a_2}^{2} + . . . +{a_n}^{2}}
 \]}
 
-\mybv[norm]{\raggedright Ter voorbeeld, als $\vec{a} = \vectwee{3}{4} $ dan is $|\vec{a}|$:
+\mybv[norm]{ Ter voorbeeld, als $\vec{a} = \vectwee{3}{4} $ dan is $|\vec{a}|$:
 \[
     |\vec{a}| = \sqrt{ 3^{2} + 4^{2}} = 5 
 \]}
@@ -172,17 +169,16 @@ En dit principe werkt ook met hogere dimensies:
     \text{Als } \vec{v} = \vecvijf{3}{1}{-3}{4}{-1} \ \text{ dan is } |\vec{v}| = \sqrt{3^{2}+1^{2}+(-3)^{2}+4^{2}+(-1)^{2}} = 6
 \]
 
-\newpage
 \subsubsection{Eenheidsvector}
 Soms is het nodig om vectoren met lengte 1 te hebben:
 \mydeftekst{eenheidsvector}{Een eenheidsvector is een vector met lengte $1$.}
 Een eenheidsvector wordt genoteerd met een accent circonflexe (\textasciicircum \ , dakje). 
 
-\mybv[eenheidsvector]{\raggedright Bijvoorbeeld: \[\hat{e} = \vecdrie {0}{0}{1}\]}
+\mybv[eenheidsvector]{ Bijvoorbeeld: \[\hat{e} = \vecdrie {0}{0}{1}\]}
 
 Een willekeurige vector $\vec{v}$ is te schalen naar een eenheidsvector door $\vec{v}$ te vermenigvuldigen met $\dfrac{1}{\text{norm}} =  \dfrac{1}{|\vec{v}|}$. Dat wil zeggen $\hat{v} = \dfrac{1}{|\vec{v}|}\cdot\vec{v}$, oftewel: $\dfrac{\vec{v}}{|\vec{v}|}$ 
 
-\mybv[eenheidsvector]{\raggedright De berekening van een eenheidsvector in 5 dimensies gaat als volgt, als:
+\mybv[eenheidsvector]{ De berekening van een eenheidsvector in 5 dimensies gaat als volgt, als:
 \[
     \vec{v} = \vecvijf{3}{1}{-3}{4}{-1} \quad \text{dan is } |\vec{v}| = 6 \quad \text{(zie boven)}
 \]}	
@@ -204,8 +200,8 @@ Daarbij is $\alpha$ (\textit{alfa}) de hoek tussen de vectoren $\vec{a}$ en $\ve
 
 \figuur[0.3]{hoek}{Met $ \alpha $ geven we de hoek tussen twee vectoren aan.}
 
-\newpage
-\mybv[hoek]{\raggedright De berekening van een hoek tussen twee vectoren gaat als volgt.}
+\mybv[hoek]{ De berekening van een hoek tussen twee vectoren gaat als volgt.}
+
 Stel, $\vec{a} = \vecdrie{2}{-2}{1} $ en $\vec{b} = \vecdrie{-3}{0}{4} $ dan is $(\vec{a}, \vec{b})$:
 \[
     (\vec{a}, \vec{b}) = 2\cdot-3 + -2\cdot0  + 1\cdot4 = -2
@@ -223,9 +219,9 @@ Met de rekenmachine berekenen we het aantal graden van de hoek: $\alpha = \cos^{
 Uit de lessen Wiskunde Basis is bekend dat de vergelijking van een lijn in \RT in het algemeen $y = ax + b$ is. Daarnaast bestaan er vectorvoorstellingen en vergelijkingen van lijnen en vlakken. 
 
 \subsection{Definities lijn}
-\mydeftekst[De \textit{vergelijking} van een lijn $l$ in \RT is: ] {lijn \RT}{$y = ax + b$} Met $a$ de richtingscoëfficiënt en $b$ een constante (het snijpunt met de $y$-as).
+\mydeftekst[De \textit{vergelijking} van een lijn $l$ in \RT is: ] {lijn \RT}{\[y = ax + b\]} Met $a$ de richtingscoëfficiënt en $b$ een constante (het snijpunt met de $y$-as).
 
-\mybv[lijn \RT]{\raggedright Ter voorbeeld, neem de lijn $l: y = -\frac{1}{2}x +4. $ Hiervan is de richtingscoëfficiënt $-\frac{1}{2}$ en het snijpunt met de $y$-as $4$. (zie ook figuur \ref{fig:lijn2d_new})}
+\mybv[lijn \RT]{ Ter voorbeeld, neem de lijn $l$: \[l: y = -\frac{1}{2}x +4\] Hiervan is de richtingscoëfficiënt $-\frac{1}{2}$ en het snijpunt met de $y$-as $4$. (zie ook figuur \ref{fig:lijn2d_new})}
 
 \mydeftekst[De \textit{vectorvoorstelling} van een lijn $l$ in \RT is: ]{lijn \RT}{ 
 \[
@@ -235,7 +231,7 @@ Uit de lessen Wiskunde Basis is bekend dat de vergelijking van een lijn in \RT i
 Met  $\vec{x}  =  \vectwee{x}{y} $ en beginvector (ook wel steunvector genoemd) $ \vec{b} =  \vectweesnel{b} $ ,  
 richtingsvector $\vec{r} = \vectweesnel{r} $ en $\lambda$ (lambda) een variabel getal. Let op het verschil tussen een richtings\textit{vector} en een richtings\textit{coëfficiënt}.
 
-\mybv[lijn \RT]{\raggedright Een voorbeeld van een vectorvoorstelling is: $m: \vectwee{x}{y} \ =\ \vectwee{-5}{0} \ +\ \lambda \ \vectwee{0}{-1} $.  Zie figuur  \ref{fig:lijn2d_new}. De richtingsvector van $m$ is $\overrightarrow{rv_m} =\vectwee{0}{-1} $ en de beginvector $\vec{b} = \vectwee{-5}{0} $}
+\mybv[lijn \RT]{ Een voorbeeld van een vectorvoorstelling is: $m: \vectwee{x}{y} \ =\ \vectwee{-5}{0} \ +\ \lambda \ \vectwee{0}{-1} $.  Zie figuur  \ref{fig:lijn2d_new}. De richtingsvector van $m$ is $\overrightarrow{rv_m} =\vectwee{0}{-1} $ en de beginvector $\vec{b} = \vectwee{-5}{0} $}
 
 \figuur[0.5]{lijn2d_new}{De lijn $l: y = -\frac{1}{2}x +4$. met $rc= -\frac{1}{2}$ en (los daarvan) de lijn $m$ met de rode richtingsvector en zwarte beginvector.}
 
@@ -245,7 +241,11 @@ richtingsvector $\vec{r} = \vectweesnel{r} $ en $\lambda$ (lambda) een variabel 
     ax + by + cz = d \quad  \quad \text{($a$, $b$, $c$ en $d$ zijn constanten)}
 \]}
 
-\mybv[vlak \RD]{\raggedright Een voorbeeld van een vergelijking van een vlak $ V $ is: $ 2x-3y+7z = -5$ }
+\newpage
+\mybv[vlak \RD]{ Een voorbeeld van een vergelijking van een vlak $ V $ is: 
+\[
+    V: 2x-3y+7z = -5
+\]}
 
 \mydeftekst[De \textit{vectorvoorstelling} van een vlak $ V $ in \RD is: ]{vlak \RD}{
 \[
@@ -259,7 +259,7 @@ richtingsvector $\vec{r} = \vectweesnel{r} $ en $\lambda$ (lambda) een variabel 
 
 $\lambda$ en $\mu$ zijn variabele getallen ($\mu$, spreek uit: muu, is de Griekse letter m). En $\vec{b}$ is een constante beginvector en $\vec{v}$ en $\vec{w}$ zijn richtingsvectoren van vlak $V$.
 
-\mybv[vlak \RD]{\raggedright Een voorbeeld van een vectorvoorstelling van een vlak $V$ is: 
+\mybv[vlak \RD]{ Een voorbeeld van een vectorvoorstelling van een vlak $V$ is: 
 \[
     V:\ \vecdrie{x}{y}{z} \ = \ \vecdrie{1}{-3}{0} \ + \lambda\cdot  \vecdrie{1}{2}{-2} \ + \  \mu\cdot \vecdrie{-4}{1}{2}
 \]}
@@ -299,6 +299,8 @@ Dit is een stelsel van 2 vergelijkingen  en kunnen we 'oplossen' door $ \lambda 
   % y+\lambda &= 2 \\
   % \lambda &= 2 -y
 \end{align*}
+
+\newpage
 Nu we de vergelijking van $\lambda$ weten, kunnen we deze invullen in de eerste vergelijking (van $x$):
 \begin{align*}
   y &= 2 - \lambda \\
@@ -315,7 +317,6 @@ Op deze manier hebben we $\lambda$ dus 'geëlimineerd'. De vergelijking  $ y = -
 
 \figuur[0.6]{lijnVV}{De lijn  $ l:  \ y = - \frac{1}{2}x + 2\frac{1}{2} $. Let op de steunvector (\red{rood}) en de richtingsvector (zwart).} 
 
-\newpage
 De lijn $l$ bestaat dus uit alle vectoren (punten) die te schrijven zijn als vectorvoorstelling $ l: \ \vectwee {x}{y} = \vectwee {1}{2} + \lambda  \vectwee {2}{-1}  $, waarbij elk punt (x, y) waaruit die lijn bestaat voldoet aan de vergelijking: $ l:  \ y = - \frac{1}{2}x + \frac{5}{2} $.
 
 \subsubsection{Van vergelijking lijn naar vectorvoorstelling lijn:}
@@ -444,7 +445,6 @@ Die laatste vergelijking van $y$ lijkt al heel erg op een vergelijking van een v
 \end{align*}
 En daarmee hebben we de vergelijking van ons vlak bepaald!
 
-\newpage
 \section{Normaalvectoren}
 Om goed te kunnen rekenen met lijnen en vlakken hebben we zogeheten normaalvectoren nodig.
 
@@ -452,7 +452,7 @@ Om goed te kunnen rekenen met lijnen en vlakken hebben we zogeheten normaalvecto
 \mydeftekst{normaal lijn}
 {De normaal of normaalvector van een lijn is: de vector $\vec{n} $ die loodrecht staat op de richtingsvector van de lijn.} Voor het bepalen van de normaalvector zijn het inproduct en uitproduct handige gereedschappen. 
 
-\mybv[normaal lijn]{\raggedright Voorbeeld van een berekening van de normaal van een lijn:} 
+\mybv[normaal lijn]{ Voorbeeld van een berekening van de normaal van een lijn:} 
 Stel we hebben de lijn $l:\ \vectwee{x}{y} \ = \ \vectwee{2}{0} \ +\ \lambda \vectwee{3}{2} $, Zie ook figuur \ref{fig:lijnnormaal}:
 
 \figuur[0.4]{lijnnormaal}{De normaal $\vec{n}$  staat loodrecht op de richtingsvector van $l$. }	
@@ -484,7 +484,7 @@ Dus $\vec{n} = \vectwee{1}{-\frac{3}{2}} $. Mocht je het nu niet fijn vinden om 
 \subsubsection{Normaal van lijn a.h.v. lineaire vergelijking}
 Voor het normaal bepalen van een lijn als we een lineaire vergelijking hebben, is een stuk minder rekenwerk. Deze kunnen we namelijk gewoon aflezen.
 
-\mybv[normaal lijn]{\raggedright In het algemeen geldt voor een lineaire vergelijking $ax+by = c$ dat de normaal ervan is: $\vec{n} = \vectwee{a}{b} $. Dus ter voorbeeld, is de vergelijking $3x-4y=-7$, dan is het normaal van die lijn: $\vec{n} = \vectwee{3}{-4} $.}
+\mybv[normaal lijn]{ In het algemeen geldt voor een lineaire vergelijking $ax+by = c$ dat de normaal ervan is: $\vec{n} = \vectwee{a}{b} $. Dus ter voorbeeld, is de vergelijking $3x-4y=-7$, dan is het normaal van die lijn: $\vec{n} = \vectwee{3}{-4} $.}
 
 \subsection{Normaal van vlak}
 
@@ -495,14 +495,13 @@ Om goed te kunnen rekenen met vlakken hebben we een normaalvector nodig.
 
 \myeig[normaal vlak]{Als $V: ax + by +cz = d $ \qquad dan is: $ \vec{n} = \vecdrie{a}{b}{c} $ \ de normaalvector van $V$.}
 
-\mybv[normaal vlak]{\raggedright Bijv. als $ V: 7x + 3y - z = -20 $ \qquad dan is $ \vec{n} = \vecdrie{7}{3}{-1} $ de normaalvector van $V$.
+\mybv[normaal vlak]{ Bijv. als $ V: 7x + 3y - z = -20 $ \qquad dan is $ \vec{n} = \vecdrie{7}{3}{-1} $ de normaalvector van $V$.
 
 Let wel op: Alle $x$-, $y$- en $z$-waardes moeten dus aan dezelfde kant van het $=$-teken staan.}
 
-\newpage
 Maar wat als we niet de vergelijking maar de vectorvoorstelling van een vlak hebben? Dan kunnen we gebruik maken van de eigenschap dat  het uitproduct van 2 vectoren loodrecht staat staat op beide richtingsvectoren. 
 
-\mybv[normaal vlak]{\raggedright Als $W:\vec{x} = \vecdrie{0}{1}{-1} + \ \lambda\ \vecdrie{2}{-3}{1} +\ \mu\ \vecdrie{0}{1}{2} $} 
+\mybv[normaal vlak]{ Als $W:\vec{x} = \vecdrie{0}{1}{-1} + \ \lambda\ \vecdrie{2}{-3}{1} +\ \mu\ \vecdrie{0}{1}{2} $} 
 dan zijn de richtingsvectoren: \[\vecdrie{2}{-3}{1} \text{ en } \vecdrie{0}{1}{2} \]
  
 en hun uitproduct is : \[
@@ -550,7 +549,7 @@ We hebben nu genoeg hulpmiddelen om in \RD de afstand van een punt tot een vlak 
 
 \figuur[1]{afstand1}{Gevraagd: de afstand tussen $ P $ en $ V $, ( $ P $ is een punt dat boven het vlak $V$ 'zweeft').}
 
-\mybv[afstand]{\raggedright We nemen als voorbeeld voor de berekening het punt $P$ en het vlak $V$:}
+\mybv[afstand]{ We nemen als voorbeeld voor de berekening het punt $P$ en het vlak $V$:}
 \[P: \vecdrie{3}{6}{7} \quad \quad V:\ \vecdrie{x}{y}{z} \ = \ \vecdrie{5}{0}{3} \ + \ \lambda\ \vecdrie{-1}{-1}{1} \ + \mu\ \vecdrie{3}{5}{-6}\]
 
 \begin{enumerate}[label=(\alph*)]
@@ -604,7 +603,7 @@ Anders gezegd de afstand tussen P en V is 2 keer de lengte van die richtingsvect
 \subsection{Extra voorbeeld}
 Omdat het berekenen van de afstand van een punt naar een vlak vaak lastig word gevonden, is hieronder nog een extra voorbeeld gegeven:
 
-\mybv[afstand]{\raggedright In dit voorbeeld berekenen we wederom de afstand van vlak $V$ en punt $P$. Hierbij is het volgende gegeven:}
+\mybv[afstand]{ In dit voorbeeld berekenen we wederom de afstand van vlak $V$ en punt $P$. Hierbij is het volgende gegeven:}
 \[V:\ \vecdrie{x}{y}{z} \ =\ \vecdrie{-1}{-2}{0} \ +\ \lambda\ \vecdrie{-5}{-8}{3} \ + \mu\ \vecdrie{2}{3}{-1} \quad \text{ en } \quad P: \vecdrie{-3}{1}{7}\]
 
 Omdat het vlak als vectorvoorstelling is gegeven moet deze eerst worden om\-geschreven naar vergelijking. Dit is te doen door in het stelsel vergelijkingen $\lambda$ en $\mu$ weg te werken.

@@ -34,7 +34,7 @@ In het bovenstaande voorbeeld zou $x=i$, dus een oplossing zijn. Vaak worden com
 
 \mydeftekst[We definiëren een complex getal $z$ als:] {getal in $\mathbb{C}$}{ $z=a+bi$ \ met $a$ en $b$ reële getallen}
 
-\mybv[getal in $\mathbb{C}$]{\raggedright Bijvoorbeeld, $z=2+3i$ is een complex getal. Complexe getallen ($\mathbb{C}$) kun je zien als $2$-dimensionale getallen, zie ook figuur \ref{fig:lijncomplex}. }
+\mybv[getal in $\mathbb{C}$]{ Bijvoorbeeld, $z=2+3i$ is een complex getal. Complexe getallen ($\mathbb{C}$) kun je zien als $2$-dimensionale getallen, zie ook figuur \ref{fig:lijncomplex}. }
 \begin{figure}[h!]
     \centering
     \begin{tikzpicture}
@@ -63,7 +63,7 @@ In het bovenstaande voorbeeld zou $x=i$, dus een oplossing zijn. Vaak worden com
     \index[figuren]{Complexe getallen}
 \end{figure}
 
-We zeggen ook wel dat $z$ bestaat uit een reëel deel $a$ en een imaginair deel $bi$. Je kunt met complexe getallen net zo rekenen als met reële getallen als je maar rekening houdt met $i^2 = -1$.\mybv[imaginair]{\raggedright Bijvoorbeeld:}
+We zeggen ook wel dat $z$ bestaat uit een reëel deel $a$ en een imaginair deel $bi$. Je kunt met complexe getallen net zo rekenen als met reële getallen als je maar rekening houdt met $i^2 = -1$.\mybv[imaginair]{ Bijvoorbeeld:}
 \begin{align*}
     (1-i)^2 &= (1-i)\cdot (1-i) \\
             &= (1\cdot 1) + (1\cdot -i) + (-i \cdot 1) + (-i\cdot -i) \\
@@ -89,7 +89,10 @@ Je zou Quaternionen dus kunnen zien als vier-dimensionale getallen, al is dat wa
     j\cdot k &= i \qquad \ \ k\cdot j = -i      
 \end{align*}
 
-Met $a$, $b$, $c$ en $d$ kun je gewoon rekenen, omdat het reële getallen zijn. \mybv[quaternion]{\raggedright Ter voorbeeld: $ q_1 = 2 - i  + 2j - 3k $ is een quaternion, net als $ q_2 = - j + k $.}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+
+Met $a$, $b$, $c$ en $d$ kun je gewoon rekenen, omdat het reële getallen zijn. \mybv[quaternion]{ Ter voorbeeld: $ q_1 = 2 - i  + 2j - 3k $ is een quaternion, net als $ q_2 = - j + k $.}
 
 \subsection{Rekenschema}
 Voor het berekenen van de rotatie wordt gebruik gemaakt van quaternion vermenigvuldiging. Twee quaternionen met elkaar vermenigvuldigen gaat via onderstaande tabel:
@@ -107,7 +110,7 @@ Voor het berekenen van de rotatie wordt gebruik gemaakt van quaternion vermenigv
 
 Je zoekt \textit{eerst} in de $ 1^e $ kolom (\blu{blauw} ) welke van $i$, $j$ of $k$ je nodig hebt en \textit{daarna} het volgende  imaginaire getal in de $ 1^e $ rij (\red{rood} ).  Op het kruispunt staat het resultaat van de vermenigvuldiging (de volgorde is belangrijk omdat bijv. $  i\cdot k = -j $ maar $ k\cdot i = j  $ !) 
 
-\mybv[quaterniontabel]{\raggedright Als $ q_1 = 6 + 3i - 5j + 2k $ en $ q_2 = 2 + i + 4j - 2k $ wat is dan $ q_1\cdot q_2 $? }
+\mybv[quaterniontabel]{ Als $ q_1 = 6 + 3i - 5j + 2k $ en $ q_2 = 2 + i + 4j - 2k $ wat is dan $ q_1\cdot q_2 $? }
 Daarvoor zijn er 2 manieren:
 
 \subsubsection{1. invullen in tabel} Dit is de handigste manier:  Schrijf de eerste quaternion in de eerste kolom en de tweede quaternion in de eerste rij. Vul op de kruispunten de 
@@ -155,7 +158,7 @@ Een quaternion kan geconjugeerd worden en dit is ook nodig voor het berekenen va
 
 Let op! Alleen de imaginaire delen $i, j$ en $k$ veranderen van plus naar min (of andersom). Het reële deel ($a$) blijft zoals het is. 
 
-\mybv[geconjugeerd]{\raggedright We doen even een paar voorbeeldjes:}
+\mybv[geconjugeerd]{ We doen even een paar voorbeeldjes:}
 \begin{align*}
   \text{Stel: } q = 1 - 2i + 3j + k &\text{ dan is } q^* = 1 + 2i - 3j - k \\
   \text{En als: } q = i - 3j  &\text{ dan is } q^* = -i + 3j
@@ -166,18 +169,18 @@ We gebruiken quaternionen om te roteren. Daarvoor moeten we dan wel eerst de pun
 
 \mydeftekst{puntquaternion}{Als $P = (x, y, z)$  in \RD dan is het puntquaternion dat er bij hoort: $p = xi+yj+zk$}
 
-\mybv[puntquaternion]{\raggedright	Stel: $P = (1, 3, -2)$\ dan is het puntquaternion $p$ dat er bij hoort:}
+\mybv[puntquaternion]{	Stel: $P = (1, 3, -2)$\ dan is het puntquaternion $p$ dat er bij hoort:}
 \[
     p=0 + 1\cdot i+3j-2k\ = i+3j-2k
 \]
 
-Voor het berekenen van een rotatie in \RD geldt de volgende formule: \mydeftekst{quaternionrotatie}{Als $p$ een punt en $q_r$ een rotatie is in \RD dan is: het geroteerde punt	$p' = q_r\cdot p.q^*_r$ }
+Voor het berekenen van een rotatie in \RD geldt de volgende formule: \mydeftekst{\small quaternionrotatie}{Als $p$ een punt en $q_r$ een rotatie is in \RD dan is: het geroteerde punt	$p' = q_r\cdot p.q^*_r$ }
 
 \newpage
 \setlength{\abovedisplayskip}{5pt}
 \setlength{\belowdisplayskip}{5pt}
 
-\mybv[quaternionrotatie]{\raggedright Bijvoorbeeld:}
+\mybv[\small quaternionrotatie]{ Bijvoorbeeld:}
 Stel $P = (3,0,1)$ en $q_r = 2j-k$ wat is dan $q_r\cdot p\cdot q^*_r $ ?
 \begin{align*}
 	  p &= 0 + 3i + 0\cdot j + k = 3i+k  \\
@@ -216,12 +219,12 @@ en dus is $ p' = q_r\cdot (p\cdot q^*_r) =  -15i -4j -3k. $ Dat betekent dat het
 Dat is een vreemde rotatie (want de afstand tot de oorsprong wordt ineens groter). Dat komt omdat we voor $q_r$ wat gemakkelijke waardes hebben genomen en dat is geen echt rotatiequaternion.
 
 
-Daarom hebben we de volgende definitie nodig: \mydeftekst{quaternionrotatie}{Gegeven de eenheidsvector $\hat{v}$ en de  hoek $\alpha $ dan is:	het rotatiequaternion:
+Daarom hebben we de volgende definitie nodig: \mydeftekst{\small quaternionrotatie}{Gegeven de eenheidsvector $\hat{v}$ en de  hoek $\alpha $ dan is:	het rotatiequaternion:
 \[ 
     q_r = \cos\left(\frac{\alpha}{2}\right) + \sin\left(\frac{\alpha}{2}\right) \hat{v}_1 i + \sin\left(\frac{\alpha}{2}\right) \hat{v}_2 j + \sin\left(\frac{\alpha}{2}\right) \hat{v}_3 k 
 \]}
 
-\mybv[quaternionrotatie]{\raggedright Ter voorbeeld:}
+\mybv[\small quaternionrotatie]{ Ter voorbeeld:}
 Stel $\vec{v} = \vecdrie{-3}{0}{4} $ dan is $\hat{v} = \frac{1}{5} \vecdrie{-3}{0}{4} $ \quad (omdat $|\vec{v}| = \sqrt{3^2+ 4^2} = 5$)
 
 Stel verder dat we over $\alpha = 180\degree$ willen roteren, dan is $\frac{180\degree}{2} = 90\degree$. We weten dat $  \cos\left(90\degree\right) = 0 $ en  $ \sin\left(90\degree\right) = 1 $ \ \ En dus is: 
@@ -233,7 +236,7 @@ Stel verder dat we over $\alpha = 180\degree$ willen roteren, dan is $\frac{180\
     q_r &= -\frac{3}{5}i + \frac{4}{5}k 
 \end{align*}
 
-\mybv[quaternionrotatie]{\raggedright We nemen dezelfde vector en hoek als hierboven.} Stel verder dat we $P=(-1,-1,0)$ willen roteren. Dan is het puntquaternion $p$:
+\mybv[\small quaternionrotatie]{ We nemen dezelfde vector en hoek als hierboven.} Stel verder dat we $P=(-1,-1,0)$ willen roteren. Dan is het puntquaternion $p$:
 \[p = -i-j\]
 	
 We hadden $q_r = -\frac{3}{5}i+\frac{4}{5}k$ en dus is $q^*_r$:
@@ -307,6 +310,7 @@ En dat betekent dat het punt $ P=(-1,-1,0)  $ waar we mee begonnen  geroteerd wo
 	We roteren over $60\degree$. Gebruik quaternionen om het beeld van $P$ onder deze rotatie uit te rekenen.
 \end{enumerate}
 
+\newpage
 \subsection{extra opgaven}
 \begin{enumerate}
     \setlength{\itemsep}{10pt}

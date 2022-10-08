@@ -10,7 +10,7 @@ De determinant van een matrix is binnen de lineaire algebra en meetkunde belangr
 
 Dat mag je ook schrijven als $det(A)$, of als $\dettwee{a&b}{c&d} $.
 
-\mybv[determinant]{\raggedright Bijvoorbeeld:
+\mybv[determinant \RT]{ Bijvoorbeeld:
 \[
     \text{Als } A = \mattwee{-1&5}{2&-3} \quad \text{dan is} \quad |A| = -1\cdot -3 \ - \ 2\cdot 5 = -7
 \]}
@@ -28,13 +28,13 @@ De determinant wordt gebruikt om te bepalen of een matrix een inverse heeft. And
 \myeig[det(A) \noteq  0]{Als $|A| \ne 0$ dan heeft $A$ een inverse (is omkeerbaar)}
 Je kunt zelfs de inverse van een matrix uitrekenen (als de determinant $\ne 0 $):
 
-\myeig[inverse]{Als $|A| \ne 0$ dan is in \RT
+\myeig[inverse \RT]{Als $|A| \ne 0$ dan is in \RT
 	\begin{align*}
 	   A^{-1} &= \dfrac{1}{|A|}  \mattwee{d & -b }{-c & a } \\
                  &= \dfrac{1}{ad-bc}\mattwee{d & -b }{-c & a }                    
     \end{align*}
 }
-\mybv[inverse]{\raggedright Bijvoorbeeld:
+\mybv[inverse \RT]{ Bijvoorbeeld:
 \[
     \text{Stel } A = \mattwee{-1&5}{2&-3} \quad \text{dan is }|A| = -7 \quad \text{en} \quad 
     A^{-1} = -\frac{1}{7} \mattwee{-3&-5}{-2&-1}
@@ -49,15 +49,15 @@ Nu kunnen we controleren of de inverse echt de omgekeerde is door $A$ en $A^{-1}
                    &= \mattwee{1 & 0} {0 & 1}
 \end{align*}                                            
 
-\myeig[$det(A^T) = det(A)$] {\raggedright De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
-\mybv[$det(A^T) = det(A)$]{\raggedright We nemen weer als voorbeeld de matrix $A = \mattwee{-1&5}{2&-3} $
+\myeig[$det(A^T) = det(A)$] { De determinant van een getransponeerde matrix is hetzelfde als de determinant van de matrix zelf: }
+\mybv[$det(A^T) = det(A)$]{ We nemen weer als voorbeeld de matrix $A = \mattwee{-1&5}{2&-3} $
 \ dan is $A^T = \mattwee{-1&2}{5&-3} $ en dus is:  \[|A^T| = -1\cdot -3-2\cdot 5 = -7 = |A|\] }
 
 \myeig[rijen gelijk]{Als een matrix twee of meer gelijke rijen (of kolommen) heeft dan is de determinant gelijk aan $0$:} 
-\mybv[gelijke rijen]{\raggedright We nemen  als voorbeeld de matrix: $A = \mattwee{-1 & 5} {-1 & 5} $ en zien dat: \[|A| = -1\cdot 5 - -1\cdot 5 = 0\]}
+\mybv[gelijke rijen]{ We nemen  als voorbeeld de matrix: $A = \mattwee{-1 & 5} {-1 & 5} $ en zien dat: \[|A| = -1\cdot 5 - -1\cdot 5 = 0\]}
 
 \myeig[rij, kolom  = 0]{Als in een matrix een hele rij of kolom gelijk is $0$ dan is $|A| = 0$}
-\mybv[{kolom, rij = 0}]{\raggedright We nemen  als voorbeeld de matrix $A = \mattwee{0&5}{0&2} $ en zien dat: \[|A| = 0\cdot 2 - 0\cdot 5 = 0 \]}
+\mybv[{kolom, rij = 0}]{ We nemen  als voorbeeld de matrix $A = \mattwee{0&5}{0&2} $ en zien dat: \[|A| = 0\cdot 2 - 0\cdot 5 = 0 \]}
 
 \section{Ontwikkelen van een determinant}
 Natuurlijk willen we ook de determinant van $3\times3$ en $4\times4$ matrices (en hogere dimensies) uit kunnen rekenen. Daar bestaat een mooi recursief algoritme voor. Om te beginnen met een $3\times3$ determinant:
@@ -84,7 +84,7 @@ In woorden: Je ontwikkelt de determinant naar de $1^{e}$ rij door voor $ a_{11}$
                                                      { \red {a_{31}}    & \cancel{a_{32}} & \cancel{a_{33} } } 
 \end{align*}
 
-\mybv[determinant \RD]{\raggedright Voorbeeld van een $3\plh3$ determinant:}
+\mybv[determinant \RD]{ Voorbeeld van een $3\plh3$ determinant:}
 \begin{align*}
 	\text{als} \ A & = \matdrie{-5 & 0 & 3} {4 & 2 & -1} {1 & 6 & 2} \quad \text{dan is } |A| \text{:}\\ 
 	|A| & = -5\cdot \dettwee{2 & -1} {6 & 2 } 
@@ -143,7 +143,7 @@ $ \begin{matrix}
     \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
 \end{matrix}  $
 
-\mybv[ontwikkelen]{\raggedright Dus als je bijvoorbeeld naar de $2^e$ rij ontwikkelt dan begin je met een $-$, daarna $+$ en je wisselt de $-$ en $+$ af:}
+\mybv[ontwikkelen]{ Dus als je bijvoorbeeld naar de $2^e$ rij ontwikkelt dan begin je met een $-$, daarna $+$ en je wisselt de $-$ en $+$ af:}
 \begin{align*}
     	\text{Als } A &= \matdrie{-5 & 0 & 3}{4 & 2 & -1}{1 & 6 & 2} \quad \text{dan is} \\ 
     	         |A| &= \red{-}4\cdot  \dettwee{0 & 3}{6 & 2 }  
@@ -159,7 +159,7 @@ En dat is hetzelfde als we als antwoord kregen op de vorige bladzij.
 
 \myeig[optellen $det(A)$]{Als je een kolom (een aantal keer) bij een andere kolom optelt blijft de determinant hetzelfde. En omdat: $det(A^T) = det(A)$, geldt datzelfde dus ook voor rijen!} 
 
-\mybv[optellen $det(A)$]{\raggedright Bijvoorbeeld, stel we hebben de matrix $A$:}
+\mybv[optellen $det(A)$]{ Bijvoorbeeld, stel we hebben de matrix $A$:}
 \[
     A = \matvier{ 1 & -2 & 3 & 2 }{ 3 & -6 & 0 & 7 }{ -2 & 4 & 1 & 5 }{ -1 & 2 & 2 & -4 }
 \]
