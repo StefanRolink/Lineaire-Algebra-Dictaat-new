@@ -34,7 +34,7 @@
 
 \usepackage{marginnote} % Required for creating margin notes with \marginpar[]{}
 
-\usepackage{xcolor} % Required for specifying colors by name
+\usepackage[table]{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{38, 100, 168} % Define the bluecolor used for highlighting throughout the book
 % \definecolor{nhl_blue}{rgb}{0.17,0.41,0.69} 
 \definecolor{nhl_blue}{RGB}{24,91,162} 
@@ -46,12 +46,14 @@
 \usepackage{textcomp, gensymb}
 \usepackage{cancel} 
 \usepackage{parskip}
+\usepackage{nicematrix}
 
 \usepackage{tikz} % Required for drawing custom shapes
 \usetikzlibrary{angles,quotes} % for pic (angle labels)
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{calc}
 
+\newcolumntype{a}{ >{\color{white}} >{\columncolor{nhl_blue}} l }
 
 %----------------------------------------------------------------------------------------
 %	MARGINS
