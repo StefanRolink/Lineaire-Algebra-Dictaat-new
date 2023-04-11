@@ -137,18 +137,18 @@
 \subsubsection{antwoorden extra opgaven hoofdstuk \ref{chap: Spiegeling, translatie en samenstelling}}
 \begin{enumerate}
 	\item $   S_2 = \frac{1}{5} \cdot\matdrie{-3&4&0}{4&3&0}{0&0&5}  $ 
-	\item $   S_3 = \frac{1}{10} \cdot\matdrie{10&0&0}{0&8&-6}{0&-6&28}  
-	= \frac{1}{5} \cdot \matdrie{5&0&0}{0&4&-3}{0&-3&14}  $ 
+	\item $   S_3 = \frac{1}{10} \cdot\matdrie{10&0&0}{0&8&-6}{0&-6&-8}  
+	= \frac{1}{5} \cdot \matdrie{5&0&0}{0&4&-3}{0&-3&-4}  $ 
 	
 	\item $T_{1a} = \matvier{1&0&0&-5}{0&1&0&0}{0&0&1&4}{0&0&0&1} $
     	\item $ T_{2a} = \matvier{1&0&0&3}{0&1&0&2}{0&0&1&-1}{0&0&0&1} $
     	\item 
         \begin{align*}
             S_3 \cdot T_{1a} \cdot S_2 &= \frac{1}{5} \cdot
-            \matvier{5&0&0&0}{0&4&-3&0}{0&-3&14&0}{0&0&0&5} \cdot 
+            \matvier{5&0&0&0}{0&4&-3&0}{0&-3&-4&0}{0&0&0&5} \cdot 
         	\matvier{1&0&0&-5}{0&1&0&0}{0&0&1&4}{0&0&0&1} \cdot 
         	\frac{1}{5} \cdot \matvier{-3&4&0&0}{4&3&0&0}{0&0&5&0} {0&0&0&5} \\
-        	&= \frac{1}{25} \cdot \matvier{-15&20&0&-125}{16&12&-15&-60}{-12&-9&70&280}{0&0&0&25} 
+        	&= \frac{1}{25} \cdot \matvier{-15&20&0&-125}{16&12&-15&-60}{-12&-9&-20&-80}{0&0&0&25} 
     	\end{align*}
 	
 \end{enumerate}
@@ -221,7 +221,7 @@
 		       2k     & -2k & 8j   & 0  & -4\\ 
 		\hline 
 	\end{NiceTabular}
-	\[c\cdot d = 16 +8  -4  -64i +2i +6i  +4j -3j +8j -32k -12k -2k =  20-56i+15j -46k \]
+	\[c\cdot d = 16 +8  -4  -64i +2i +6i  +4j -3j +8j -32k -12k -2k =  20-56i+9j -46k \]
 	
 	\item
     \begin{align*}
@@ -288,38 +288,36 @@
 	\[e\cdot f = -6+3+6i+6i+3i+9j-2j+9k-4k = -3 +15i + 7j + 5k \]
 	
 	\item 
-	\[\hat{v} = \frac{1}{7}\vecdrie{0}{1}{0} \qquad p  = -2i \]
-	\[q_r    =  \cos(30 \degree)  + \frac{1}{7}\sin(30 \degree) j  =  \cos(30 \degree) + \frac{1}{14}j\]
-	\[q^*_r  =  \cos(30 \degree)  - \frac{1}{7}\sin(30 \degree) j  =  \cos(30 \degree) - \frac{1}{14}j \]
+	\[\hat{v} = \vecdrie{0}{1}{0} \qquad p  = -2i \]
+	\[q_r    =  \cos(30 \degree)  + \sin(30 \degree) j  =  \cos(30 \degree) + \frac{1}{2}j\]
+	\[q^*_r  =  \cos(30 \degree)  - \sin(30 \degree) j  =  \cos(30 \degree) - \frac{1}{2}j \]
 	\begin{NiceTabular}{ | a | c | c | c | c |}
 		\hline
         \rowcolor{nhl_blue} \RowStyle{\color{white}} %
-		$ q_r\cdot p $ & 0 & -2i  & 0j       & 0k \\ \hline
+		$ q_r\cdot p $        & 0 & -2i  &   0j   & 0k \\ \hline
 		$\cos(30 \degree) $   & 0 & $ -2\cos(30 \degree) i  $ &   0    & 0  \\ \hline
-		0i         & 0 & 0   &   0    & 0 \\ \hline
-		$\nicefrac{1}{14}j$         & 0 &  $\nicefrac{1}{7}k$  &   0     & 0\\ \hline
-		0k         & 0  & 0 & 0      & 0 \\ 
+		0i                    & 0 & 0    &   0    & 0  \\ \hline
+		$\nicefrac{1}{2}j$    & 0 & $k$  &   0    & 0  \\ \hline
+		0k                    & 0 & 0    &   0    & 0  \\ 
 		\hline 
 	\end{NiceTabular}
-	\[q_r\cdot p = -2\cos(30 \degree) i + \frac{1}{7}k\]
+	\[q_r\cdot p = -2\cos(30 \degree) i + k\]
 	
 	\begin{NiceTabular}{ | a | c | c | c | c |}
 		\hline
         \rowcolor{nhl_blue} \RowStyle{\color{white}} %
-		$ (q_r\cdot p)\cdot q^*_r $ & $\cos(30 \degree)$  & 0i  & $-\nicefrac{1}{14}j$   & 0k \\ \hline
+		$ (q_r\cdot p)\cdot q^*_r $ & $\cos(30 \degree)$  & 0i  & $-\nicefrac{1}{2}j$   & 0k \\ \hline
 		0  & 0 & 0 &   0    & 0  \\ \hline
-		$ -2\cos(30 \degree)i  $   & $ \nicefrac{-3}{2} i  $ & 0 &   $ \nicefrac{1}{7}\cos(30 	\degree)k $    & 0 \\ \hline
-		0j         & 0 &  0  &   0     & 0\\ \hline
-		$\frac{1}{7}k$         &  $ \nicefrac{1}{7}\cos(30 	\degree) k $     & 0 & $\nicefrac{1}{98}i$      & 0 \\ 
+		$ -2\cos(30 \degree)i  $   & $ \nicefrac{-3}{2} i  $ & 0 &   $ \cos(30 	\degree)k $    & 0 \\ \hline
+		0j   & 0 &  0  &   0     & 0\\ \hline
+		$1k$ &  $ \cos(30 \degree) k $     & 0 & $\nicefrac{1}{2}i$      & 0 \\ 
 		\hline 
 	\end{NiceTabular}
     \begin{align*}
-        p' &= q_r\cdot p\cdot q^*_r  \\
-           &= -\frac{3}{2}i + \frac{1}{98}i + \frac{1}{7}\cos(30 \degree)  k+ \frac{1}{7}\cos(30 \degree)  k \\
-           &= -\frac{147}{98}i + \frac{1}{98}i  + \frac{2}{7}\cos(30 \degree)  k \\
-           &= -\frac{146}{98}i + \frac{2}{7}\cos(30 \degree)  k \\
-           &= -\frac{73}{49}i + \frac{2}{7}\cos(30 \degree)  k 
+        p' &= (q_r\cdot p)\cdot q^*_r  \\
+           &= -\frac{3}{2}i + \frac{1}{2}i + \cos(30 \degree)  k + \cos(30 \degree)  k \\
+           &= -i + 2\cos(30 \degree)  k 
     \end{align*}
-	en dus komt  punt $ P= \matdrie{2}{0}{0} $  terecht op punt $ P'= \matdrie{-\nicefrac{73}{49}}{0}{\nicefrac{2}{7}\cos(30 \degree)} = \frac{1}{49}\matdrie{-73}{0}{7\sqrt{3}}$ 
+	en dus komt  punt $ P= \matdrie{2}{0}{0} $  terecht op punt $ P'= \matdrie{-1}{0}{2\cos(30 \degree)} = \matdrie{-1}{0}{\sqrt{3}}$ 
 	
 \end{enumerate}

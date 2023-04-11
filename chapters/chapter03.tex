@@ -152,14 +152,17 @@ Dus: Als je projecteert op de x-as komen alle punten  op de x-as terecht, op de 
 Op zo'n manier kun je ook voor  matrix $A$ van hierboven uitrekenen waar een willekeurig punt $(v_1, v_2, v_3)$ in \RD uitkomt, namelijk door de matrix van $A$ te vermenigvuldigen met de vector $\vec{v}$:
 \begin{align*}
     A\cdot \vec{v}\ &=\matdrie{0&2&-1}{3&0&0}{1&1&1} \cdot\ \matdrie{v_1}{v_2}{v_3} \\
-                    &=\ \matdrie{0\cdot v_1 + 3\cdot v_2 + 1\cdot v_3}{2\cdot v_1 + 0\cdot v_2+ 1\cdot v_3}{-1\cdot v_1 + 0\cdot v_2 + 1\cdot v_3}  \\
-                    &=\ \matdrie{3v_2 + v_3}{2v_1 +  v_3}{-v_1 +  v_3} 
+                    &=\ \matdrie{0\cdot v_1 + 2\cdot v_2 - 1\cdot v_3}
+                    {3\cdot v_1 + 0\cdot v_2 + 0\cdot v_3}
+                    {1\cdot v_1 + 1\cdot v_2 + 1\cdot v_3}  \\
+                    &=\ \matdrie{2v_2 - v_3}{3v_1}{v_1 + v_2 + v_3} 
 \end{align*}
 En zo kun je ook  uitrekenen waar het punt $(3,2,-1)$ terecht komt als je $A$ er op toepast: $(v_1 = 3, v_2 = 2 ,  v_3=-1 )$: 
 \begin{align*}
-    A\cdot \vec{v}\ &=\ \matdrie{3\cdot 2 + -1}{2\cdot 3+  -1}{-3 +  -1} \\
-                    &=\ \matdrie{5}{5}{-4} \\
-    \text{en dus:} \ \ \matdrie{3}{2}{1}\ & \xrightarrow{A}\ \matdrie{5}{5}{-4}
+    A\cdot \vec{v}\ &=\ \matdrie{0&2&-1}{3&0&0}{1&1&1} \cdot  \matdrie{3}{2}{-1} \\
+                    &= \matdrie{2\cdot 2 - -1}{3\cdot 3}{3 + 2 + -1}  \\
+                    &=\ \matdrie{5}{9}{4} \\
+    \text{en dus:} \ \ \matdrie{3}{2}{1}\ & \xrightarrow{A}\ \matdrie{5}{9}{4}
 \end{align*}
 
 \section{Rotatie}		
@@ -296,7 +299,7 @@ Dit punt kunnen we uitrekenen door beide stellingen aan elkaar gelijk te stellen
     4\frac{1}{4}x &= \frac{1}{4} \\
     x &= \frac{1}{17}
 \end{align*}
-Dan hoeven we alleen nog maar een $y$-waarde te berekenen, door deze $x$-waarde in $y=4x$ te stoppen, hieruit volgt: $y=4\frac{1}{17}=\frac{4}{17}$. Het rode snijpunt ligt dus op: $(\red{\nicefrac{1}{17},\nicefrac{4}{17}})$.
+Dan hoeven we alleen nog maar een $y$-waarde te berekenen, door deze $x$-waarde in $y=4x$ te stoppen, hieruit volgt: $y=4\cdot\frac{1}{17}=\frac{4}{17}$. Het rode snijpunt ligt dus op: $(\red{\nicefrac{1}{17},\nicefrac{4}{17}})$.
 Op dezelfde manier reken het blauwe snijpunt van  $l$ en $ m_{01}$ uit. Hiervoor geldt:
 \[
     \begin{cases}
@@ -310,7 +313,7 @@ Waarmee het snijpunt ligt op:
     4\frac{1}{4}x &= 1 \\
     x &= \frac{4}{17}
 \end{align*}
-De bijbehorende $y$-waarde is dan te vinden door deze $x$-waarde weer in één van de formules in te vullen, bijv. $y=4x$, hieruit volgt dat $y=4\frac{4}{17}=\frac{16}{17}$.
+De bijbehorende $y$-waarde is dan te vinden door deze $x$-waarde weer in één van de formules in te vullen, bijv. $y=4x$, hieruit volgt dat $y=4\cdot\frac{4}{17}=\frac{16}{17}$.
 
 Het blauwe snijpunt ligt dus op $(\blu{\nicefrac{4}{17},\nicefrac{16}{17}})$. Met andere woorden:
 \[ 

@@ -72,35 +72,35 @@ Net zoals we bij een spiegeling in \RT gebruik maken van de projectie (op dezelf
 \mybv[spiegeling \RD] { Als voorbeeld nemen we de spiegeling in het vlak $W: 2x-3y+z = 0$.}
 Van de \textit{projectie op $W$} (zie: 'matrix van een projectie in \RD' op blz.\pageref{projectieR3}) weten we dat:
 \[
-    \vecdrie{1}{0}{0} \ \xrightarrow{P}\ \frac{1}{7}  \vecdrie{5}{3}{-1} \text{, } \quad 
-    \vecdrie{0}{1}{0} \ \xrightarrow{P}\ \frac{1}{14} \vecdrie{6}{5}{-3} \quad \text{ en } \quad 
-    \vecdrie{0}{0}{1} \ \xrightarrow{P}\ \frac{1}{14} \vecdrie{2}{-3}{15}
+    \vecdrie{1}{0}{0} \ \xrightarrow{P}\ \frac{1}{14} \vecdrie{10}{6}{-2} \text{, } \quad 
+    \vecdrie{0}{1}{0} \ \xrightarrow{P}\ \frac{1}{14} \vecdrie{6}{5}{3} \quad \text{ en } \quad 
+    \vecdrie{0}{0}{1} \ \xrightarrow{P}\ \frac{1}{14} \vecdrie{-2}{3}{13}
 \]
 
 dat betekent dat bij de spiegeling geldt:
 \[
-    \text{Voor } \hat{b}_x \text{ is } \vec{p} = \frac{1}{7}\ \vecdrie{5}{3}{-1} \quad \text{ en } \quad 
-    2\vec{p} - \hat{b}_x =\ 2\cdot \frac{1}{7} \vecdrie{5}{3}{-1} \ -\ \vecdrie{1}{0}{0} \ =\ \frac{1}{7}\ \vecdrie{3}{6}{-2} 
+    \text{Voor } \hat{b}_x \text{ is } \vec{p} = \frac{1}{14}\ \vecdrie{10}{6}{-2} \quad \text{ en } \quad 
+    2\vec{p} - \hat{b}_x =\ 2\cdot \frac{1}{14} \vecdrie{10}{6}{-2} \ -\ \vecdrie{1}{0}{0} \ =\ \frac{1}{7}\ \vecdrie{3}{6}{-2} 
 \]
 en dus $ \ \vecdrie{1}{0}{0}   \  \xrightarrow{S}  \  { \color{red}\frac{1}{7}} \  \vecdrie[red] {3 } {6}{-2} $
 
 \[
-    \text{Voor } \hat{b}_y \text{ geldt: } 2\vec{p} - \hat{b}_y =\ \frac{2}{14}\ \vecdrie{6}{5}{-3} \ -\ \vecdrie{0}{1}{0} \ 
-    =\ \frac{1}{7}\ \vecdrie{6}{-2}{-3}
+    \text{Voor } \hat{b}_y \text{ geldt: } 2\vec{p} - \hat{b}_y =\ \frac{2}{14}\ \vecdrie{6}{5}{3} \ -\ \vecdrie{0}{1}{0} \ 
+    =\ \frac{1}{7}\ \vecdrie{6}{-2}{3}
 \]
-en dus \quad $\vecdrie{0}{1}{0} \ \xrightarrow{S}\ {\color{blue}\frac{1}{7}}\ \vecdrie[blue]{6}{-2}{-3} $
+en dus \quad $\vecdrie{0}{1}{0} \ \xrightarrow{S}\ {\color{blue}\frac{1}{7}}\ \vecdrie[blue]{6}{-2}{3} $
 
 en voor $\hat{b}_z$ geldt: 
 \[
-    2\vec{p} -\hat{b}_z =\ \frac{2}{14}\ \vecdrie{2}{-3}{15} \ -\ \vecdrie{0}{0}{1} \ =\ \frac{1}{7}\ \vecdrie{2}{-3}{8}   
+    2\vec{p} -\hat{b}_z =\ \frac{2}{14}\ \vecdrie{-2}{3}{13} \ -\ \vecdrie{0}{0}{1} \ =\ \frac{1}{7}\ \vecdrie{-2}{3}{6}   
 \]
-en dus $\ \vecdrie{0}{0}{1} \ \rightarrow{S}\ {\color{olive}\frac{1}{7}} \ \vecdrie[olive]{2}{-3}{8} $
+en dus $\ \vecdrie{0}{0}{1} \ \rightarrow{S}\ {\color{olive}\frac{1}{7}} \ \vecdrie[olive]{-2}{3}{6} $
 
 Dan is de matrix van $S$:
 \[ 
-    S = \frac{1}{7} \matdrie{ \red{3}  & \blu{6}  & \gre{2}  }
-                            { \red{6}  & \blu{-2} & \gre{-3} }
-                            { \red{-2} & \blu{-3} & \gre{8}}
+    S = \frac{1}{7} \matdrie{ \red{3}  & \blu{6}  & \gre{-2} }
+                            { \red{6}  & \blu{-2} & \gre{3}  }
+                            { \red{-2} & \blu{3}  & \gre{6}  }
 \]
 
 \section{Translatie}		
@@ -243,7 +243,7 @@ Als we een translatie in \RT willen samenstellen met een andere afbeelding moete
 \mydeftekst[Als $A = \mattwee{a_{11} & a_{12}}{a_{21} & a_{22}} $]{affiene matrix}
 {dan is de affiene matrix daarvan, $A_a = \matdrie{a_{11} & a_{12} & 0}{a_{21} & a_{22} & 0}{0 & 0 & 1} $}
 
-\mybv[affiene samenst.]{ Stel $T$ is de translatie over $\vec{t} =\ \vectwee{4}{-3} $ en dat we daarnaast willen roteren met $R = \mattwee{1&-1}{1&1} $ en willen met $S = \mattwee{0&1}{1&0}$. Dan zijn de affiene matrices:}
+\mybv[affiene samenst.]{ Stel $T$ is de translatie over $\vec{t} =\ \vectwee{4}{-3} $ en dat we daarnaast willen roteren met $R = \mattwee{1&-1}{1&1} $ en willen met $S = \mattwee{0&1}{1&0}$ spiegelen. Dan zijn de affiene matrices:}
 \[
     T_a = \matdrie{1&0&4}{0&1&-3}{0&0&1} \qquad 
     R_a = \matdrie{1&-1&0}{1&1&0}{0&0&1} \qquad
